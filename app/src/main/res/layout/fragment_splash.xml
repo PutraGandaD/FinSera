@@ -9,10 +9,9 @@
 
     <ImageView
         android:id="@+id/iv_bca_logo_splash_overlay"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="325dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/iv_bca_splash_overlay"
+        android:src="@drawable/ic_bca_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -21,7 +20,7 @@
         android:id="@+id/iv_bca_logo_splash_main"
         android:layout_width="100dp"
         android:layout_height="45dp"
-        android:src="@drawable/ic_bca_splash_logo"
+        android:src="@drawable/ic_bca_labeled_white_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

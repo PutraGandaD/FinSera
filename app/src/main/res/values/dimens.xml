@@ -5,7 +5,7 @@
     <dimen name="heading_3">24sp</dimen>
     <dimen name="heading_4">20sp</dimen>
     
-    <dimen name="body_text1">16sp</dimen>
+    <dimen name="body_text1">18sp</dimen>
     <dimen name="body_text2">14sp</dimen>
 
     <dimen name="button_1">16sp</dimen>
