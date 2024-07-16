@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="16dp"
+    android:background="@color/neutral_01"
+    tools:context=".ui.fragments.transfer.antar_bank.TransferAntarBankHome">
+
+   <RelativeLayout
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       android:id="@+id/topmenu"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="32dp">
+       <ImageView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/ic_back_button"
+           android:layout_centerVertical="true"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/transfer_antarbank"
+           android:textSize="24sp"
+           android:textColor="@color/neutral_09"
+           android:layout_centerInParent="true"/>
+   </RelativeLayout>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintTop_toBottomOf="@id/topmenu"
+       android:layout_marginTop="18dp"
+       android:orientation="horizontal"
+       android:id="@+id/buttonmenu">
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="wrap_content"
+           android:background="@drawable/button_background_neutral3"
+           android:gravity="center"
+           android:paddingVertical="10dp"
+           android:id="@+id/btn_daftar_tersimpan"
+           android:layout_marginEnd="5dp">
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Daftar Tersimpan"
+              android:textColor="@color/neutral_01"/>
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="0dp"
+           android:layout_weight="1"
+           android:layout_height="wrap_content"
+           android:background="@drawable/button_background_primary"
+           android:orientation="horizontal"
+           android:gravity="center"
+           android:paddingVertical="10dp"
+           android:id="@+id/btn_input_baru"
+           android:layout_marginStart="5dp">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Input Baru"
+               android:textColor="@color/neutral_01"/>
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_circle_add"
+               android:layout_marginStart="10dp"/>
+
+       </LinearLayout>
+   </LinearLayout>
+
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_background_neutral2"
+        app:layout_constraintTop_toBottomOf="@id/buttonmenu"
+        android:drawableLeft="@drawable/ic_search"
+        android:paddingVertical="10dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="32dp"
+        android:hint="Cari Daftar Tersimpan"
+        android:singleLine="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/data_not_found"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/img_datanotfound"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Belum ada daftar tersimpan"
+        android:textColor="@color/primary_blue"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/img_datanotfound"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:id="@+id/textbelumtersimpan"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daftar penerima ke daftar tersimpan agar transaksi ke orang terdekat lebih mudah"
+        android:textColor="@color/neutral_04"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/textbelumtersimpan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
