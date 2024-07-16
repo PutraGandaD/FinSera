@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">FinSera</string>
     <string name="transfer_antarbank">Transfer Antarbank</string>
+    <string name="daftar_penerima">Daftar penerima ke daftar tersimpan agar transaksi ke orang terdekat lebih mudah</string>
+    <string name="belum_ada_daftar_tersimpan">Belum ada daftar tersimpan</string>
+    <string name="cari_daftar_tersimpan">Cari Daftar Tersimpan</string>
+    <string name="input_baru">Input Baru</string>
+    <string name="daftar_tersimpan">Daftar Tersimpan</string>
 </resources>

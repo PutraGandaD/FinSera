@@ -49,7 +49,7 @@
           <TextView
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:text="Daftar Tersimpan"
+              android:text="@string/daftar_tersimpan"
               android:textColor="@color/neutral_01"/>
        </LinearLayout>
 
@@ -66,7 +66,7 @@
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="Input Baru"
+               android:text="@string/input_baru"
                android:textColor="@color/neutral_01"/>
            <ImageView
                android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
         android:paddingVertical="10dp"
         android:gravity="center_vertical"
         android:layout_marginTop="32dp"
-        android:hint="Cari Daftar Tersimpan"
+        android:hint="@string/cari_daftar_tersimpan"
         android:singleLine="true" />
 
     <ImageView
@@ -103,7 +103,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Belum ada daftar tersimpan"
+        android:text="@string/belum_ada_daftar_tersimpan"
         android:textColor="@color/primary_blue"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/img_datanotfound"
@@ -116,7 +116,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Daftar penerima ke daftar tersimpan agar transaksi ke orang terdekat lebih mudah"
+        android:text="@string/daftar_penerima"
         android:textColor="@color/neutral_04"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/textbelumtersimpan"
