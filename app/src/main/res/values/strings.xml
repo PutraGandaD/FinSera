@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">FinSera</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="e_wallet">E-Wallet</string>
+    <string name="daftar_tersimpan">Daftar Tersimpan</string>
+    <string name="input_baru">Input Baru </string>
+    <string name="cari_daftar_tersimpan">Cari Daftar Tersimpan</string>
+    <string name="belum_ada_daftar_tersimpan">Belum Ada Daftar Tersimpan\n</string>
+    <string name="tambah_penerima_ke_daftar_tersimpan">Tambah penerima ke daftar tersimpan agar \ntransaksi ke orang terdekat lebih mudah</string>
+    <string name="empty_state_image">Empty List Image</string>
+    <string name="back_button">back button</string>
+    <string name="konfirmasi_transaksi">Konfirmasi Transaksi</string>
+    <string name="logo_gopay">logo gopay</string>
+    <string name="gopay">Gopay</string>
+    <string name="logo_dana">logo dana</string>
+    <string name="dana">Dana</string>
+    <string name="logo_ovo">logo ovo</string>
+    <string name="ovo">OVO</string>
+    <string name="logo_shopeepay">logo shopeepay</string>
+    <string name="shopeepay">ShopeePay</string>
+    <string name="nomor_e_wallet">Nomor E-Wallet</string>
+    <string name="nomor_e_wallet_user">081234567890</string>
+    <string name="nama">Nama</string>
+    <string name="nominal">Nominal</string>
+    <string name="masukkan_pin_pembayaran">Masukkan Pin Pembayaran</string>
+    <string name="simpan_ke_daftar_tersimpan">Simpan ke daftar tersimpan</string>
+    <string name="lanjut">Lanjut</string>
 </resources>
