@@ -40,7 +40,7 @@
         android:fontFamily="@font/calibri_regular"
         android:text="@string/amount_example"
         android:textSize="@dimen/body_text1"
-        android:textColor="@color/neutral_09"
+        android:textColor="@color/secondary_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_description"/>
 
