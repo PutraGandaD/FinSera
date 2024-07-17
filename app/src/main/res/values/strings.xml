@@ -28,4 +28,20 @@
     <string name="description_example">Transfer ke Rekening Admin</string>
     <string name="amount_example">+ Rp 500.000</string>
     <string name="datetime_example">09.24 WIB</string>
+    <string name="tv_header_login_screen">Login</string>
+    <string name="tv_hint_username_login">Username</string>
+    <string name="tv_hint_password_login">Password</string>
+    <string name="tv_btn_forget_password">Lupa Password ?</string>
+    <string name="tv_btn_login">Login</string>
+    <string name="tv_topbg_hello_placeholder">Halo,</string>
+    <string name="tv_topbg_account_name">Putra Ganda</string>
+    <string name="tv_saldo_card_rekening_home">Rp ********</string>
+    <string name="tv_rekening_placeholder">1234 567 897 890</string>
+    <string name="tv_nama_nasabah_placeholder">Putra Ganda Dewata</string>
+    <string name="tv_placeholder_cari_fitur">Cari Fitur</string>
+    <string name="tv_home_icon_transfersesama">Transfer\nsesama</string>
+    <string name="tv_home_icon_transferantarbank">Transfer\nAntar Bank</string>
+    <string name="tv_home_icon_virtualaccount">Virtual\nAccount</string>
+    <string name="tv_home_icon_ewallet">E-Wallet</string>
+    <string name="tv_home_icon_infosaldo">Info\nSaldo</string>
 </resources>
