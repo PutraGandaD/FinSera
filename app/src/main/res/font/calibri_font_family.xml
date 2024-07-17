@@ -10,7 +10,7 @@
         app:fontWeight="400"
         app:font="@font/calibri_italic" />
     <font
-        app:fontStyle="bold"
+        app:fontStyle="normal"
         app:fontWeight="700"
         app:font="@font/calibri_bold" />
 </font-family>
