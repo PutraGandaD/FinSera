@@ -26,4 +26,6 @@
     <string name="masukkan_pin_pembayaran">Masukkan Pin Pembayaran</string>
     <string name="simpan_ke_daftar_tersimpan">Simpan ke daftar tersimpan</string>
     <string name="lanjut">Lanjut</string>
+    <string name="logo_paypal">logo paypal</string>
+    <string name="paypal">Paypal</string>
 </resources>

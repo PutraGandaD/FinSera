@@ -12,4 +12,8 @@
     <color name="secondary_red">#CB3A31</color>
     <color name="secondary_green">#12D79C</color>
     <color name="secondary_yellow">#FFB831</color>
+
+    <!--  Night Mode Colors  -->
+    <color name="neutral_01_night">#1C1C1E</color>
+    <color name="neutral_09_night">#FFFFFF</color>
 </resources>

@@ -14,8 +14,7 @@
         android:src="@drawable/ic_back_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@android:color/transparent"
-        android:layout_margin="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/back_button" />
 
     <TextView
@@ -23,130 +22,58 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/e_wallet"
-        android:textColor="@color/neutral_09"
+        android:textColor="?android:attr/textColor"
         android:textSize="@dimen/heading_1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/btnBack"
         app:layout_constraintBottom_toBottomOf="@id/btnBack"/>
 
-    <LinearLayout
-        android:id="@+id/layoutGopay"
+    <include
+        android:id="@+id/btnEWalletGopay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
+        android:layout_marginTop="64dp"
+        layout="@layout/ic_e_wallet_gopay"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintTop_toBottomOf="@id/tvTitle"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="32dp">
+        app:layout_constraintEnd_toStartOf="@id/btnEWalletDana"/>
 
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@drawable/ic_gopay"
-            android:contentDescription="@string/logo_gopay"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gopay"
-            android:textSize="@dimen/body_text2"
-            android:layout_marginTop="4dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutDana"
+    <include
+        android:id="@+id/btnEWalletDana"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintTop_toTopOf="@id/layoutGopay"
-        app:layout_constraintStart_toEndOf="@id/layoutGopay"
-        android:layout_marginStart="8dp">
+        layout="@layout/ic_e_wallet_dana"
+        app:layout_constraintTop_toTopOf="@id/btnEWalletGopay"
+        app:layout_constraintStart_toEndOf="@id/btnEWalletGopay"
+        app:layout_constraintEnd_toStartOf="@id/btnEWalletOvo"/>
 
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@drawable/ic_dana"
-            android:contentDescription="@string/logo_dana"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/dana"
-            android:textSize="@dimen/body_text2"
-            android:layout_marginTop="4dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutOvo"
+    <include
+        android:id="@+id/btnEWalletOvo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintTop_toTopOf="@id/layoutDana"
-        app:layout_constraintStart_toEndOf="@id/layoutDana"
-        android:layout_marginStart="8dp">
+        layout="@layout/ic_e_wallet_ovo"
+        app:layout_constraintTop_toTopOf="@id/btnEWalletGopay"
+        app:layout_constraintStart_toEndOf="@id/btnEWalletDana"
+        app:layout_constraintEnd_toStartOf="@id/btnEWalletShopeePay"/>
 
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@drawable/ic_ovo"
-            android:contentDescription="@string/logo_ovo"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ovo"
-            android:textSize="@dimen/body_text2"
-            android:layout_marginTop="4dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutOvo"
+    <include
+        android:id="@+id/btnEWalletShopeePay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="8dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintTop_toTopOf="@id/layoutDana"
-        app:layout_constraintStart_toEndOf="@id/layoutDana"
-        android:layout_marginStart="8dp">
+        layout="@layout/ic_e_wallet_shopeepay"
+        app:layout_constraintTop_toTopOf="@id/btnEWalletGopay"
+        app:layout_constraintStart_toEndOf="@id/btnEWalletOvo"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@drawable/ic_ovo"
-            android:contentDescription="@string/logo_ovo"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ovo"
-            android:textSize="@dimen/body_text2"
-            android:layout_marginTop="4dp"/>
-
-    </LinearLayout>
-
-
+    <include
+        android:id="@+id/btnEWalletPaypal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/ic_e_wallet_paypal"
+        app:layout_constraintTop_toBottomOf="@id/btnEWalletGopay"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="24dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
