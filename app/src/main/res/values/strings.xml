@@ -6,4 +6,14 @@
     <string name="cari_daftar_tersimpan">Cari Daftar Tersimpan</string>
     <string name="input_baru">Input Baru</string>
     <string name="daftar_tersimpan">Daftar Tersimpan</string>
+    <string name="nama">Nama</string>
+    <string name="bank_tujuan">Bank Tujuan</string>
+    <string name="nomor_rekening_tujuan">Nomor Rekening Tujuan</string>
+    <string name="nominal">Nominal</string>
+    <string name="catatan">Catatan</string>
+    <string name="simpan_ke_daftar_tersimpan">Simpan ke daftar tersimpan</string>
+    <string name="konfirmasi_transaksi">Konfirmasi Transaksi</string>
+    <string name="rekening_tujuan">Rekening Tujuan</string>
+    <string name="pin">PIN</string>
+    <string name="masukkan_pin_pembayaran">Masukkan PIN Pembayaran</string>
 </resources>
