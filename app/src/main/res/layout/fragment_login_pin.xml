@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.auth.LoginPinFragment">
+
+    <ImageView
+        android:id="@+id/ic_bca_logo_colored"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_bca_labeled_colored_logo"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    
+    <EditText
+        android:id="@+id/et_pin_1"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:inputType="numberDecimal"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ic_bca_logo_colored"
+        app:layout_constraintEnd_toStartOf="@id/et_pin_2"/>
+
+    <EditText
+        android:id="@+id/et_pin_2"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/ic_bca_logo_colored"
+        app:layout_constraintStart_toEndOf="@id/et_pin_1"
+        app:layout_constraintEnd_toStartOf="@id/et_pin_3"/>
+
+    <EditText
+        android:id="@+id/et_pin_3"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/ic_bca_logo_colored"
+        app:layout_constraintStart_toEndOf="@id/et_pin_2"
+        app:layout_constraintEnd_toStartOf="@id/et_pin_4"/>
+
+    <EditText
+        android:id="@+id/et_pin_4"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/ic_bca_logo_colored"
+        app:layout_constraintStart_toEndOf="@id/et_pin_3"
+        app:layout_constraintEnd_toStartOf="@id/et_pin_5"/>
+
+    <EditText
+        android:id="@+id/et_pin_5"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/ic_bca_logo_colored"
+        app:layout_constraintStart_toEndOf="@id/et_pin_4"
+        app:layout_constraintEnd_toStartOf="@id/et_pin_6"/>
+
+    <EditText
+        android:id="@+id/et_pin_6"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:inputType="numberDecimal"
+        app:layout_constraintTop_toBottomOf="@id/ic_bca_logo_colored"
+        app:layout_constraintStart_toEndOf="@id/et_pin_5"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_1_unfilled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/et_for_pin_screen_unfilled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_1"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_1"
+        app:layout_constraintStart_toStartOf="@id/et_pin_1"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_1"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_2_unfilled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/et_for_pin_screen_unfilled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_2"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_2"
+        app:layout_constraintStart_toStartOf="@id/et_pin_2"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_2"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_3_unfilled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/et_for_pin_screen_unfilled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_3"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_3"
+        app:layout_constraintStart_toStartOf="@id/et_pin_3"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_3"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_4_unfilled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/et_for_pin_screen_unfilled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_4"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_4"
+        app:layout_constraintStart_toStartOf="@id/et_pin_4"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_4"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_5_unfilled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/et_for_pin_screen_unfilled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_5"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_5"
+        app:layout_constraintStart_toStartOf="@id/et_pin_5"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_5"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_6_unfilled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/et_for_pin_screen_unfilled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_6"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_6"
+        app:layout_constraintStart_toStartOf="@id/et_pin_6"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_6"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_1_filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:src="@drawable/et_for_pin_screen_filled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_1"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_1"
+        app:layout_constraintStart_toStartOf="@id/et_pin_1"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_1"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_2_filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:src="@drawable/et_for_pin_screen_filled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_2"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_2"
+        app:layout_constraintStart_toStartOf="@id/et_pin_2"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_2"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_3_filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:src="@drawable/et_for_pin_screen_filled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_3"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_3"
+        app:layout_constraintStart_toStartOf="@id/et_pin_3"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_3"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_4_filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:src="@drawable/et_for_pin_screen_filled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_4"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_4"
+        app:layout_constraintStart_toStartOf="@id/et_pin_4"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_4"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_5_filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:src="@drawable/et_for_pin_screen_filled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_5"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_5"
+        app:layout_constraintStart_toStartOf="@id/et_pin_5"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_5"/>
+
+    <ImageView
+        android:id="@+id/iv_pin_6_filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:src="@drawable/et_for_pin_screen_filled"
+        app:layout_constraintTop_toTopOf="@id/et_pin_6"
+        app:layout_constraintBottom_toBottomOf="@id/et_pin_6"
+        app:layout_constraintStart_toStartOf="@id/et_pin_6"
+        app:layout_constraintEnd_toEndOf="@id/et_pin_6"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test"
+        app:layout_constraintTop_toBottomOf="@id/et_pin_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        app:layout_constraintTop_toBottomOf="@id/btn_test"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
