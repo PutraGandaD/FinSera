@@ -13,7 +13,11 @@
     <color name="secondary_green">#12D79C</color>
     <color name="secondary_yellow">#FFB831</color>
 
-    <!--  Night Mode Colors  -->
-    <color name="neutral_01_night">#1C1C1E</color>
-    <color name="neutral_09_night">#FFFFFF</color>
+    <color name="et_text_hint">#D0D0D0</color>
+    <color name="et_icon_tint">#808080</color>
+    
+    <color name="ic_home_transfer_antarbank">#12D79C</color>
+    <color name="ic_home_virtual_account">#CB3B31</color>
+    <color name="ic_home_ewallet">#FFB831</color>
+    <color name="et_text_hint_2">#B3B3B3</color>
 </resources>

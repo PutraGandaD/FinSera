@@ -4,9 +4,5 @@
     <font
         app:fontStyle="normal"
         app:fontWeight="400"
-        app:font="@font/calibri_regular" />
-    <font
-        app:fontStyle="italic"
-        app:fontWeight="400"
-        app:font="@font/calibri_italic" />
+        app:font="@font/inter_regular" />
 </font-family>
