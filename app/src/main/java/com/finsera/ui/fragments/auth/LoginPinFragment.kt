@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.finsera.R
 import com.finsera.databinding.FragmentLoginPinBinding
+import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.delay
 
 class LoginPinFragment : Fragment() {
@@ -38,6 +39,16 @@ class LoginPinFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        init()
+        handleCustomKeyboard()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun init() {
         etPin1 = binding.etPin1
         etPin2 = binding.etPin2
         etPin3 = binding.etPin3
@@ -53,19 +64,42 @@ class LoginPinFragment : Fragment() {
         etPin6.addTextWatcher()
         currentFocusEditText = etPin1
         prevFilledEditText = etPin1
-
-        binding.btnTest.setOnClickListener {
-            currentFocusEditText.setText("4")
-        }
-
-        binding.btnDelete.setOnClickListener {
-            prevFilledEditText.setText("")
-        }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun handleCustomKeyboard() {
+        binding.btnPin0.setOnClickListener {
+            currentFocusEditText.setText("0")
+        }
+        binding.btnPin1.setOnClickListener {
+            currentFocusEditText.setText("1")
+        }
+        binding.btnPin2.setOnClickListener {
+            currentFocusEditText.setText("2")
+        }
+        binding.btnPin3.setOnClickListener {
+            currentFocusEditText.setText("3")
+        }
+        binding.btnPin4.setOnClickListener {
+            currentFocusEditText.setText("4")
+        }
+        binding.btnPin5.setOnClickListener {
+            currentFocusEditText.setText("5")
+        }
+        binding.btnPin6.setOnClickListener {
+            currentFocusEditText.setText("6")
+        }
+        binding.btnPin7.setOnClickListener {
+            currentFocusEditText.setText("7")
+        }
+        binding.btnPin8.setOnClickListener {
+            currentFocusEditText.setText("8")
+        }
+        binding.btnPin9.setOnClickListener {
+            currentFocusEditText.setText("9")
+        }
+        binding.btnDeletePin.setOnClickListener {
+            prevFilledEditText.setText("")
+        }
     }
 
     private fun EditText.addTextWatcher() {
@@ -112,6 +146,10 @@ class LoginPinFragment : Fragment() {
             val getPin = etPin1.text.toString() + etPin2.text.toString() + etPin3.text.toString() +
                     etPin4.text.toString() + etPin5.text.toString() + etPin6.text.toString()
             if (getPin == "444444") {
+                binding.tvLoginStatus.text = "Berhasil Login"
+                resetPinFields()
+            } else {
+                binding.tvLoginStatus.text = "PIN Salah. Coba lagi."
                 resetPinFields()
             }
         }

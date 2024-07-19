@@ -24,4 +24,16 @@
     <string name="tv_home_icon_virtualaccount">Virtual\nAccount</string>
     <string name="tv_home_icon_ewallet">E-Wallet</string>
     <string name="tv_home_icon_infosaldo">Info\nSaldo</string>
+    <string name="tv_welcome_back_pin_login_screen">Selamat Datang Kembali</string>
+    <string name="tv_btn_pin_screen_1">1</string>
+    <string name="tv_btn_pin_screen_2">2</string>
+    <string name="tv_ganti_akun">Ganti Akun</string>
+    <string name="tv_btn_pin_screen_3">3</string>
+    <string name="tv_btn_pin_screen_4">4</string>
+    <string name="tv_btn_pin_screen_5">5</string>
+    <string name="tv_btn_pin_screen_6">6</string>
+    <string name="tv_btn_pin_screen_7">7</string>
+    <string name="tv_btn_pin_screen_8">8</string>
+    <string name="tv_btn_pin_screen_9">9</string>
+    <string name="tv_btn_pin_screen_0">0</string>
 </resources>

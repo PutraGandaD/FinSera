@@ -19,4 +19,5 @@
     <color name="ic_home_transfer_antarbank">#12D79C</color>
     <color name="ic_home_virtual_account">#CB3B31</color>
     <color name="ic_home_ewallet">#FFB831</color>
+    <color name="et_text_hint_2">#B3B3B3</color>
 </resources>
