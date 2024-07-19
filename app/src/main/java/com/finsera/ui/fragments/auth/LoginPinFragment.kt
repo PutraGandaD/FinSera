@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityEvent
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.finsera.R
@@ -100,8 +102,10 @@ class LoginPinFragment : Fragment() {
         }
         binding.btnDeletePin.setOnClickListener {
             prevFilledEditText.setText("")
+            it.announceForAccessibility("Hapus PIN")
         }
     }
+
 
     private fun EditText.addTextWatcher() {
         this.addTextChangedListener(
@@ -111,6 +115,7 @@ class LoginPinFragment : Fragment() {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    this@addTextWatcher.announceForAccessibility(s.toString())
                     when (this@addTextWatcher) {
                         etPin1 -> handleInput(etPin1, etPin1, etPin2, binding.ivPin1Filled, binding.ivPin1Unfilled)
                         etPin2 -> handleInput(etPin1, etPin2, etPin3, binding.ivPin2Filled, binding.ivPin2Unfilled)
@@ -147,12 +152,13 @@ class LoginPinFragment : Fragment() {
             val getPin = etPin1.text.toString() + etPin2.text.toString() + etPin3.text.toString() +
                     etPin4.text.toString() + etPin5.text.toString() + etPin6.text.toString()
             if (getPin == "444444") {
-                binding.tvLoginStatus.text = "Berhasil Login"
                 resetPinFields()
+                binding.tvLoginStatus.text = "Berhasil Login"
                 Toast.makeText(requireActivity(), "Berhasil Login", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_loginPinFragment_to_homeFragment)
             } else {
                 binding.tvLoginStatus.text = "PIN Salah. Coba lagi."
+                Toast.makeText(requireActivity(), "PIN Salah. Silahkan coba lagi.", Toast.LENGTH_SHORT).show()
                 resetPinFields()
             }
         }
