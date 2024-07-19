@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_bca_labeled_colored_logo"
+        android:importantForAccessibility="no"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tv_header_login"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +51,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:hint="@string/tv_hint_username_login"
+            android:contentDescription="@string/tv_talkback_username_login"
             android:background="@drawable/et_textfield_background_1"
             android:textSize="@dimen/heading_3"
             android:inputType="text" />
@@ -64,6 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
         app:endIconMode="password_toggle"
+        app:endIconContentDescription="@string/tv_talkback_password_toggle_login"
         app:hintEnabled="false"
         android:textColorHint="@color/et_text_hint"
         app:layout_constraintTop_toBottomOf="@id/et_username"
@@ -75,6 +78,7 @@
             android:padding="16dp"
             android:background="@drawable/et_textfield_background_1"
             android:hint="@string/tv_hint_password_login"
+            android:contentDescription="@string/tv_talkback_password_login"
             android:textSize="@dimen/heading_3"
             android:inputType="textPassword" />
 

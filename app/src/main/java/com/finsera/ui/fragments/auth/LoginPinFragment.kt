@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.finsera.R
 import com.finsera.databinding.FragmentLoginPinBinding
 import com.google.android.material.button.MaterialButton
@@ -148,6 +149,8 @@ class LoginPinFragment : Fragment() {
             if (getPin == "444444") {
                 binding.tvLoginStatus.text = "Berhasil Login"
                 resetPinFields()
+                Toast.makeText(requireActivity(), "Berhasil Login", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_loginPinFragment_to_homeFragment)
             } else {
                 binding.tvLoginStatus.text = "PIN Salah. Coba lagi."
                 resetPinFields()

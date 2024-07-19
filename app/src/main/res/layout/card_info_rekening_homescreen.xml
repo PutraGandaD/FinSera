@@ -21,10 +21,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_saldo_visibility"
             android:layout_width="22dp"
             android:layout_height="18dp"
+            android:background="@color/primary_blue"
+            android:contentDescription="@string/tv_talkback_lihat_saldo"
             android:src="@drawable/ic_rekening_no_visibility"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/tv_saldo_rekening_card"
@@ -42,10 +44,12 @@
             app:layout_constraintTop_toBottomOf="@id/tv_saldo_rekening_card"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_norek_copy"
             android:layout_width="22dp"
             android:layout_height="18dp"
+            android:background="@color/primary_blue"
+            android:contentDescription="@string/tv_talkback_salin_norek"
             android:src="@drawable/ic_clipboard"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/tv_no_rekening_card"

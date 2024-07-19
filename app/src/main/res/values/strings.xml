@@ -36,4 +36,16 @@
     <string name="tv_btn_pin_screen_8">8</string>
     <string name="tv_btn_pin_screen_9">9</string>
     <string name="tv_btn_pin_screen_0">0</string>
+    <string name="tv_talkback_lihat_saldo">Lihat Saldo Rekening Anda</string>
+    <string name="tv_talkback_salin_norek">Salin Nomor Rekening Anda</string>
+    <string name="tv_talkback_notifikasi_btn">Notifikasi</string>
+    <string name="tv_talkback_logout_btn">Logout dari Akun Finsera Anda</string>
+    <string name="tv_talkback_tf_sesama_btn_home">Transfer Sesama</string>
+    <string name="tv_talkback_tf_antarbank_btn_home">Transfer Antar Bank</string>
+    <string name="tv_talkback_infosaldo_btn_home">Info Saldo Anda</string>
+    <string name="tv_talkback_ewallet_btn_home">Transaksi E-Wallet</string>
+    <string name="tv_talkback_va_btn_home">Transaksi Virtual Account</string>
+    <string name="tv_talkback_password_login">Kolom Password</string>
+    <string name="tv_talkback_username_login">Kolom Username</string>
+    <string name="tv_talkback_password_toggle_login">Lihat Password</string>
 </resources>
