@@ -5,6 +5,8 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:fontFamily">@font/calibri_font_family</item>
         <item name="fontFamily">@font/calibri_font_family</item>
+        <item name="android:textColor">@color/neutral_09</item>
+        <item name="android:windowBackground">@color/neutral_01</item>
     </style>
 
     <style name="Theme.FinSera" parent="Base.Theme.FinSera" />
