@@ -135,7 +135,7 @@
         app:layout_constraintBottom_toTopOf="@id/btn_download"
         app:layout_constraintEnd_toEndOf="@id/btn_filter"
         app:layout_constraintStart_toStartOf="@id/btn_history"
-        app:layout_constraintTop_toBottomOf="@id/btn_history" />
+        app:layout_constraintTop_toBottomOf="@id/tv_account_number_label" />
     <!--End Mutation Filter-->
 
 
