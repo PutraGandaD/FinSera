@@ -127,6 +127,7 @@
 
     <!--Start Mutation Filter-->
     <include
+        android:id="@+id/view_filter"
         layout="@layout/view_mutasi_filter"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -134,7 +135,7 @@
         app:layout_constraintBottom_toTopOf="@id/btn_download"
         app:layout_constraintEnd_toEndOf="@id/btn_filter"
         app:layout_constraintStart_toStartOf="@id/btn_history"
-        app:layout_constraintTop_toBottomOf="@id/btn_history" />
+        app:layout_constraintTop_toBottomOf="@id/tv_account_number_label" />
     <!--End Mutation Filter-->
 
 

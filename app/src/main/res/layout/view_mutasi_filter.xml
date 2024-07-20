@@ -2,31 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/cl_mutasi_filter"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/tv_account_number_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:fontFamily="@font/calibri_regular"
-        android:text="@string/account_number_label"
-        android:textColor="@color/neutral_09"
-        android:textSize="@dimen/body_text1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_account_number_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:fontFamily="@font/calibri_font_family"
-        android:text="@string/account_number_value"
-        android:textSize="@dimen/body_text1"
-        app:layout_constraintBottom_toBottomOf="@id/tv_account_number_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -41,7 +20,7 @@
         android:textSize="@dimen/body_text1"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_account_number_label" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <com.google.android.material.button.MaterialButton
@@ -103,17 +82,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_today" />
 
-    <TextView
-        android:id="@+id/tv_start_date_label"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_start_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/calibri_regular"
-        android:text="@string/start_date_label"
-        android:textColor="@color/neutral_03"
-        android:textSize="@dimen/body_text2"
-        app:layout_constraintStart_toEndOf="@id/ib_start_date"
-        app:layout_constraintTop_toBottomOf="@id/tv_period_of_time_label" />
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/tv_period_of_time_label"
+        app:layout_constraintStart_toStartOf="@id/tv_period_of_time_label">
 
+        <TextView
+            android:id="@+id/tv_start_date_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/calibri_regular"
+            android:layout_marginStart="5dp"
+            android:text="@string/start_date_label"
+            android:textColor="@color/neutral_03"
+            android:textSize="@dimen/body_text1"
+            app:layout_constraintStart_toEndOf="@id/ib_start_date"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tv_start_date_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/calibri_regular"
+            android:text="@string/start_date"
+            android:textColor="@color/neutral_09"
+            android:textSize="@dimen/body_text1"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/ib_start_date"
+            app:layout_constraintTop_toBottomOf="@id/tv_start_date_label" />
+
+        <ImageButton
+            android:id="@+id/ib_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/ic_calendar"
+            android:importantForAccessibility="no"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/tv_start_date_value"
+            app:layout_constraintTop_toTopOf="@id/tv_start_date_label" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:id="@+id/cle_end_date"
+    app:layout_constraintTop_toTopOf="@id/cl_start_date"
+    app:layout_constraintStart_toEndOf="@id/cl_start_date"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toBottomOf="@id/cl_start_date"
+    android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tv_end_date_label"
         android:layout_width="wrap_content"
@@ -121,22 +143,9 @@
         android:fontFamily="@font/calibri_regular"
         android:text="@string/end_date_label"
         android:textColor="@color/neutral_03"
-        android:textSize="@dimen/body_text2"
+        android:textSize="@dimen/body_text1"
         app:layout_constraintStart_toEndOf="@id/ib_end_date"
-        app:layout_constraintTop_toBottomOf="@id/tv_period_of_time_label" />
-
-    <ImageButton
-        android:id="@+id/ib_start_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/ic_calendar"
-        android:importantForAccessibility="no"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/tv_start_date_value"
-        app:layout_constraintTop_toTopOf="@id/tv_start_date_label" />
-
+        app:layout_constraintTop_toTopOf="parent" />
     <ImageButton
         android:id="@+id/ib_end_date"
         android:layout_width="wrap_content"
@@ -145,21 +154,9 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/ic_calendar"
         android:importantForAccessibility="no"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_start_date_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tv_end_date_value"
         app:layout_constraintTop_toTopOf="@id/tv_end_date_label" />
-
-    <TextView
-        android:id="@+id/tv_start_date_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/calibri_regular"
-        android:text="@string/start_date"
-        android:textColor="@color/neutral_09"
-        android:textSize="@dimen/body_text2"
-        app:layout_constraintStart_toEndOf="@id/ib_start_date"
-        app:layout_constraintTop_toBottomOf="@id/tv_start_date_label" />
-
     <TextView
         android:id="@+id/tv_end_date_value"
         android:layout_width="wrap_content"
@@ -167,9 +164,10 @@
         android:fontFamily="@font/calibri_regular"
         android:text="@string/end_date"
         android:textColor="@color/neutral_09"
-        android:textSize="@dimen/body_text2"
+        android:textSize="@dimen/body_text1"
         app:layout_constraintStart_toEndOf="@id/ib_end_date"
         app:layout_constraintTop_toBottomOf="@id/tv_end_date_label" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_next"

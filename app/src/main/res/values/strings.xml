@@ -28,4 +28,5 @@
     <string name="description_example">Transfer ke Rekening Admin</string>
     <string name="amount_example">+ Rp 500.000</string>
     <string name="datetime_example">09.24 WIB</string>
+    <string name="choose_date">Pilih Tanggal</string>
 </resources>
