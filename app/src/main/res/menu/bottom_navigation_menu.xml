@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_navbar_beranda"
+        android:enabled="true"
+        android:icon="@drawable/ic_beranda_navbar"
+        android:title="@string/tv_navbar_title_beranda"/>
+
+    <item
+        android:id="@+id/menu_navbar_mutasi"
+        android:enabled="true"
+        android:icon="@drawable/ic_mutasi_navbar"
+        android:title="@string/tv_navbar_title_mutasi"/>
+
+    <item
+        android:id="@+id/menu_navbar_qris"
+        android:enabled="true"
+        android:icon="@drawable/ic_qris_navbar"
+        android:title="@string/tv_navbar_title_qris"/>
+
+    <item
+        android:id="@+id/menu_navbar_favorit"
+        android:enabled="true"
+        android:icon="@drawable/ic_favorit_navbar"
+        android:title="@string/tv_navbar_title_favorit"/>
+
+    <item
+        android:id="@+id/menu_navbar_akun"
+        android:enabled="true"
+        android:icon="@drawable/ic_akun_navbar"
+        android:title="@string/tv_navbar_title_akun"/>
+
+</menu>

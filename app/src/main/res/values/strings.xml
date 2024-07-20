@@ -48,4 +48,9 @@
     <string name="tv_talkback_password_login">Kolom Password</string>
     <string name="tv_talkback_username_login">Kolom Username</string>
     <string name="tv_talkback_password_toggle_login">Lihat Password</string>
+    <string name="tv_navbar_title_beranda">Beranda</string>
+    <string name="tv_navbar_title_mutasi">Mutasi</string>
+    <string name="tv_navbar_title_qris">QRIS</string>
+    <string name="tv_navbar_title_favorit">Favorit</string>
+    <string name="tv_navbar_title_akun">Akun</string>
 </resources>
