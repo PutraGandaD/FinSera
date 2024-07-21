@@ -4,6 +4,13 @@
     <color name="neutral_02">#F5F5F5</color>
     <color name="neutral_03">#B3B3B3</color>
     <color name="neutral_09">#1C1C1E</color>
+    <color name="neutral_04">#8A8A8A</color>
+    <color name="neutral_05">#EFEFEF</color>
+
+    <color name="neutral_01_night">#FFFFFF</color>
+    <color name="neutral_02_night">#F5F5F5</color>
+    <color name="neutral_03_night">#B3B3B3</color>
+    <color name="neutral_09_night">#1C1C1E</color>
 
     <color name="primary_blue">#0066AE</color>
     <color name="primary_darkblue">#0A3967</color>

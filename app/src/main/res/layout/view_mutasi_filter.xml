@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_account_number_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/calibri_regular"
+        android:text="@string/account_number_label"
+        android:textColor="@color/neutral_09"
+        android:textSize="@dimen/body_text1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_account_number_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/calibri_font_family"
+        android:text="@string/account_number_value"
+        android:textSize="@dimen/body_text1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_account_number_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_period_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/calibri_regular"
+        android:text="@string/period_label"
+        android:textColor="@color/neutral_09"
+        android:textSize="@dimen/body_text1"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_account_number_label" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_today"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/today"
+        android:textColor="@color/primary_blue"
+        android:textSize="@dimen/button_1"
+        app:cornerRadius="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_period_label"
+        app:strokeColor="@color/primary_blue" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_week"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/week"
+        android:textColor="@color/primary_blue"
+        android:textSize="@dimen/button_1"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toStartOf="@id/btn_month"
+        app:layout_constraintStart_toEndOf="@id/btn_today"
+        app:layout_constraintTop_toBottomOf="@id/tv_period_label"
+        app:strokeColor="@color/primary_blue" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_month"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/month"
+        android:textColor="@color/primary_blue"
+        android:textSize="@dimen/button_1"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_period_label"
+        app:strokeColor="@color/primary_blue" />
+
+
+    <TextView
+        android:id="@+id/tv_period_of_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/calibri_regular"
+        android:text="@string/period_of_time_label"
+        android:textColor="@color/neutral_09"
+        android:textSize="@dimen/body_text1"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_today" />
+
+    <TextView
+        android:id="@+id/tv_start_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/calibri_regular"
+        android:text="@string/start_date_label"
+        android:textColor="@color/neutral_03"
+        android:textSize="@dimen/body_text2"
+        app:layout_constraintStart_toEndOf="@id/ib_start_date"
+        app:layout_constraintTop_toBottomOf="@id/tv_period_of_time_label" />
+
+    <TextView
+        android:id="@+id/tv_end_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/calibri_regular"
+        android:text="@string/end_date_label"
+        android:textColor="@color/neutral_03"
+        android:textSize="@dimen/body_text2"
+        app:layout_constraintStart_toEndOf="@id/ib_end_date"
+        app:layout_constraintTop_toBottomOf="@id/tv_period_of_time_label" />
+
+    <ImageButton
+        android:id="@+id/ib_start_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_calendar"
+        android:importantForAccessibility="no"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/tv_start_date_value"
+        app:layout_constraintTop_toTopOf="@id/tv_start_date_label" />
+
+    <ImageButton
+        android:id="@+id/ib_end_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_calendar"
+        android:importantForAccessibility="no"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_start_date_label"
+        app:layout_constraintTop_toTopOf="@id/tv_end_date_label" />
+
+    <TextView
+        android:id="@+id/tv_start_date_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/calibri_regular"
+        android:text="@string/start_date"
+        android:textColor="@color/neutral_09"
+        android:textSize="@dimen/body_text2"
+        app:layout_constraintStart_toEndOf="@id/ib_start_date"
+        app:layout_constraintTop_toBottomOf="@id/tv_start_date_label" />
+
+    <TextView
+        android:id="@+id/tv_end_date_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/calibri_regular"
+        android:text="@string/end_date"
+        android:textColor="@color/neutral_09"
+        android:textSize="@dimen/body_text2"
+        app:layout_constraintStart_toEndOf="@id/ib_end_date"
+        app:layout_constraintTop_toBottomOf="@id/tv_end_date_label" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/primary_blue"
+        android:padding="16dp"
+        android:text="@string/next"
+        android:textColor="@color/neutral_01"
+        android:textSize="18sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
