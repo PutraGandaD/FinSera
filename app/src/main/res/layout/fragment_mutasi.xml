@@ -127,6 +127,7 @@
 
     <!--Start Mutation Filter-->
     <include
+        android:id="@+id/view_filter"
         layout="@layout/view_mutasi_filter"
         android:layout_width="match_parent"
         android:layout_height="0dp"
