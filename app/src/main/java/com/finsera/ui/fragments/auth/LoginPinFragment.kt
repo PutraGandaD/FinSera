@@ -115,7 +115,7 @@ class LoginPinFragment : Fragment() {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    this@addTextWatcher.announceForAccessibility(s.toString())
+                    this@addTextWatcher.announceForAccessibility(s.toString()) // trigger talkback
                     when (this@addTextWatcher) {
                         etPin1 -> handleInput(etPin1, etPin1, etPin2, binding.ivPin1Filled, binding.ivPin1Unfilled)
                         etPin2 -> handleInput(etPin1, etPin2, etPin3, binding.ivPin2Filled, binding.ivPin2Unfilled)
