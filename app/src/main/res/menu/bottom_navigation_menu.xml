@@ -13,9 +13,7 @@
 
     <item
         android:id="@+id/menu_navbar_qris"
-        android:enabled="true"
-        android:icon="@drawable/ic_qris_navbar"
-        android:title="@string/tv_navbar_title_qris"/>
+        android:title=""/>
 
     <item
         android:id="@+id/menu_navbar_favorit"

@@ -28,29 +28,26 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when(item.itemId) {
+        setUpBottomNavBar()
+    }
+
+    private fun setUpBottomNavBar() {
+        // set background for bottomNavigationView to null
+        binding.bottomNavigationView.background = null
+        binding.bottomNavigationView.menu.getItem(0).isChecked = true
+        binding.bottomNavigationView.menu.getItem(1).isCheckable = false
+        binding.bottomNavigationView.menu.getItem(2).isEnabled = false
+        binding.bottomNavigationView.menu.getItem(3).isCheckable = false
+        binding.bottomNavigationView.menu.getItem(4).isCheckable = false
+
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
                 R.id.menu_navbar_beranda -> {
-                    Toast.makeText(requireActivity(), "Beranda", Toast.LENGTH_SHORT).show()
                     true
                 }
-                R.id.menu_navbar_mutasi -> {
-                    Toast.makeText(requireActivity(), "Mutasi", Toast.LENGTH_SHORT).show()
-                    true
+                else -> {
+                    false
                 }
-                R.id.menu_navbar_qris -> {
-                    Toast.makeText(requireActivity(), "QRIS", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.menu_navbar_favorit -> {
-                    Toast.makeText(requireActivity(), "Favorit", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.menu_navbar_akun -> {
-                    Toast.makeText(requireActivity(), "Akun", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                else -> false
             }
         }
     }
