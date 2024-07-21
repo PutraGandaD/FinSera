@@ -28,6 +28,8 @@ class SplashFragment : Fragment() {
             delay(3000)
             findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
         }
+
+        System.out.println("Test")
     }
 
 
