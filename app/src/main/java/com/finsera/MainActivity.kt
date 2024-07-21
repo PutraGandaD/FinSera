@@ -2,7 +2,7 @@ package com.finsera
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.finsera.databinding.ActivityMainBinding
+import androidx.navigation.findNavController
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,5 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        this.findNavController(R.id.NavHostFragment)
     }
 }

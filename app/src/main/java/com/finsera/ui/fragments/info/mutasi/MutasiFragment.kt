@@ -10,7 +10,6 @@ import com.finsera.R
 import com.finsera.databinding.FragmentMutasiBinding
 import com.finsera.util.DatePickerFragment
 
-
 class MutasiFragment : Fragment(),DatePickerFragment.DialogDateListener{
 
     private var _binding: FragmentMutasiBinding? = null
@@ -95,9 +94,3 @@ class MutasiFragment : Fragment(),DatePickerFragment.DialogDateListener{
     }
 
 }
-
-
-
-
-
-

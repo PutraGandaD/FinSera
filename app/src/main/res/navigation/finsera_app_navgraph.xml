@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/finsera_app_navgraph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/loginPinFragment"
+        android:name="com.finsera.ui.fragments.auth.LoginPinFragment"
+        android:label="fragment_login_pin"
+        tools:layout="@layout/fragment_login_pin" >
+        <action
+            android:id="@+id/action_loginPinFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.finsera.ui.fragments.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_mutasiFragment"
+            app:destination="@id/mutasiFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_infoSaldoFragment"
+            app:destination="@id/infoSaldoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.finsera.ui.fragments.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.finsera.ui.fragments.auth.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_loginPinFragment"
+            app:destination="@id/loginPinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mutasiFragment"
+        android:name="com.finsera.ui.fragments.info.mutasi.MutasiFragment"
+        android:label="fragment_mutasi"
+        tools:layout="@layout/fragment_mutasi" />
+    <fragment
+        android:id="@+id/infoSaldoFragment"
+        android:name="com.finsera.ui.fragments.info.saldo.InfoSaldoFragment"
+        android:label="fragment_info_saldo"
+        tools:layout="@layout/fragment_info_saldo" />
+</navigation>

@@ -5,8 +5,4 @@
         app:fontStyle="normal"
         app:fontWeight="400"
         app:font="@font/inter_regular" />
-    <font
-        app:fontStyle="normal"
-        app:fontWeight="400"
-        app:font="@font/inter_bold" />
 </font-family>

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
+        android:importantForAccessibility="no"
         android:src="@drawable/iv_topbg_homescreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_bca_background_home"
+        android:importantForAccessibility="no"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_topbg_homescreen"
@@ -42,6 +44,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="12dp"
+            android:importantForAccessibility="no"
             android:src="@drawable/ic_bca_labeled_white_logo"/>
 
         <TextView
@@ -70,20 +73,24 @@
             app:layout_constraintBottom_toBottomOf="@id/iv_bca_topbar_logo"
             android:textSize="16sp"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_btn_logout"
+            android:background="@color/primary_darkblue"
+            android:contentDescription="@string/tv_talkback_logout_btn"
             app:layout_constraintTop_toTopOf="@id/iv_bca_topbar_logo"
             app:layout_constraintBottom_toBottomOf="@id/iv_bca_topbar_logo"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/btn_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
+            android:background="@color/primary_darkblue"
+            android:contentDescription="@string/tv_talkback_notifikasi_btn"
             android:src="@drawable/ic_btn_notification_with_badge"
             app:layout_constraintTop_toTopOf="@id/iv_bca_topbar_logo"
             app:layout_constraintBottom_toBottomOf="@id/iv_bca_topbar_logo"

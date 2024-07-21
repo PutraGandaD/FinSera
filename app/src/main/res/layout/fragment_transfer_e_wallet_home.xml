@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.topup.ewallet.TransferEWalletHomeFragment"
+    android:padding="16dp">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/back_button" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/e_wallet"
+        android:textColor="?android:attr/textColor"
+        android:textSize="@dimen/heading_1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDaftarTersimpan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/daftar_tersimpan"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/neutral_03"
+        android:textColor="@color/neutral_01"
+        app:cornerRadius="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnInputBaru"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="4dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnInputBaru"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/input_baru"
+        android:textAllCaps="false"
+        android:backgroundTint="@color/primary_blue"
+        android:textColor="@color/neutral_01"
+        android:gravity="center"
+        app:icon="@drawable/ic_add"
+        app:iconGravity="textEnd"
+        app:iconPadding="10dp"
+        app:iconTint="@color/neutral_01"
+        app:cornerRadius="8dp"
+        app:layout_constraintTop_toTopOf="@id/btnDaftarTersimpan"
+        app:layout_constraintStart_toEndOf="@id/btnDaftarTersimpan"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="4dp" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/cari_daftar_tersimpan"
+        android:textColorHint="@color/neutral_03"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="8dp"
+        android:background="@drawable/search_background"
+        app:layout_constraintTop_toBottomOf="@id/btnDaftarTersimpan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:padding="12dp"/>
+
+    <ImageView
+        android:id="@+id/ivEmptyState"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:contentDescription="@string/empty_state_image"
+        android:src="@drawable/ic_empty_state"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSearch" />
+
+    <TextView
+        android:id="@+id/tvEmptyState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/belum_ada_daftar_tersimpan"
+        android:textAlignment="center"
+        android:textSize="@dimen/heading_2"
+        android:textColor="@color/primary_blue"
+        app:layout_constraintTop_toBottomOf="@id/ivEmptyState"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tambah_penerima_ke_daftar_tersimpan"
+        android:textAlignment="center"
+        android:textSize="@dimen/body_text1"
+        android:textColor="@color/neutral_03"
+        app:layout_constraintTop_toBottomOf="@id/tvEmptyState"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
