@@ -133,7 +133,7 @@
                     android:inputType="text"
                     android:padding="16dp"
                     android:paddingStart="48dp"
-                    android:textSize="@dimen/heading_4" />
+                    android:textSize="@dimen/heading_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

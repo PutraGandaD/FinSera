@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.fragment.findNavController
 import com.finsera.R
 import com.finsera.databinding.FragmentHomeBinding
 import com.finsera.databinding.FragmentLoginBinding
@@ -29,7 +31,13 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpBottomNavBar()
+
+        val btnInfoSaldo = view.findViewById<ConstraintLayout>(R.id.btn_menu_infosaldo)
+        btnInfoSaldo?.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
+        }
     }
+
 
     private fun setUpBottomNavBar() {
         // set background for bottomNavigationView to null
@@ -44,6 +52,19 @@ class HomeFragment : Fragment() {
             when (item.itemId) {
                 R.id.menu_navbar_beranda -> {
                     true
+                }
+                R.id.menu_navbar_mutasi -> {
+                    findNavController().navigate(R.id.action_homeFragment_to_mutasiFragment)
+                    false
+                }
+                R.id.menu_navbar_qris -> {
+                    false
+                }
+                R.id.menu_navbar_favorit -> {
+                    false
+                }
+                R.id.menu_navbar_akun -> {
+                    false
                 }
                 else -> {
                     false

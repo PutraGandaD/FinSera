@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.topup.ewallet.TransferEWalletFormKonfirmasiFragment"
-    android:padding="20dp">
+    android:padding="20dp"
+    tools:context=".ui.fragments.transfer.va.TransferVirtualAccountFormKonfirmasi">
 
     <RelativeLayout
         app:layout_constraintStart_toStartOf="parent"
@@ -34,64 +34,12 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/topmenu"
         android:layout_marginTop="48dp"
-        android:id="@+id/layoutjenisewallet">
+        android:id="@+id/layoutnomorva">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="E-Wallet"
-            android:textColor="@color/neutral_09"
-            android:textSize="16sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="@string/gopay"
-            android:textStyle="bold"
-            android:id="@+id/tvJenisEWallet"
-            android:textColor="@color/neutral_09"
-            android:textSize="16sp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/layoutjenisewallet"
-        android:layout_marginTop="24dp"
-        android:id="@+id/layoutnamapengguna">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama Pengguna"
-            android:textColor="@color/neutral_09"
-            android:textSize="16sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="Putra Ganda Dewata"
-            android:textStyle="bold"
-            android:id="@+id/tvNamaPengguna"
-            android:textColor="@color/neutral_09"
-            android:textSize="16sp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/layoutnamapengguna"
-        android:layout_marginTop="24dp"
-        android:id="@+id/layoutnomorewallet">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No.Handphone E-Wallet"
+            android:text="Nomor Virtual Account"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
 
@@ -101,7 +49,111 @@
             android:layout_alignParentEnd="true"
             android:text="1234567890"
             android:textStyle="bold"
-            android:id="@+id/tvNomorEWallet"
+            android:id="@+id/tvNoVA"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutnomorva"
+        android:layout_marginTop="24dp"
+        android:id="@+id/layoutnamava">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Tokopedia Merchant"
+            android:textStyle="bold"
+            android:id="@+id/tvNamaVA"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutnamava"
+        android:layout_marginTop="24dp"
+        android:id="@+id/layoutnominal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nominal Transfer"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Rp100.000"
+            android:textStyle="bold"
+            android:id="@+id/tvNominalAwal"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutnominal"
+        android:layout_marginTop="24dp"
+        android:id="@+id/layoutbiayaadmin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Biaya Admin"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Rp100.000"
+            android:textStyle="bold"
+            android:id="@+id/tvBiayaAdmin"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutbiayaadmin"
+        android:layout_marginTop="24dp"
+        android:id="@+id/layoutnominaltotal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nominal Total Transfer"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Rp100.000"
+            android:textStyle="bold"
+            android:id="@+id/tvNominalTotal"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
 
@@ -111,58 +163,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/layoutmasukkannominal"
-        app:layout_constraintTop_toBottomOf="@id/layoutnomorewallet"
-        android:layout_marginTop="14dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/nominal"
-            android:textSize="16sp"
-            android:textColor="@color/neutral_09"
-            android:layout_marginTop="32dp"/>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etNominal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp"
-            app:endIconMode="clear_text"
-            app:endIconContentDescription="Kolom Nominal Pengisian E-Wallet"
-            app:hintEnabled="false"
-            android:textColorHint="@color/et_text_hint">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:background="@drawable/edit_text_background_neutral5"
-                android:hint="@string/nominal"
-                android:contentDescription="Kolom Nominal Pengisian E-Wallet"
-                android:textSize="@dimen/heading_5"
-                android:inputType="numberDecimal" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:id="@+id/layoutmasukkanpin"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/layoutmasukkannominal">
+        app:layout_constraintTop_toBottomOf="@id/layoutnominaltotal"
+        android:layout_marginTop="14dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/masukkan_pin_pembayaran"
             android:textSize="16sp"
-            android:textColor="@color/neutral_09" />
+            android:textColor="@color/neutral_09"
+            android:layout_marginTop="32dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etPinTransaksi"
@@ -181,7 +192,8 @@
                 android:layout_height="wrap_content"
                 android:padding="16dp"
                 android:background="@drawable/edit_text_background_neutral5"
-                android:hint="@string/pin"
+                android:hint="@string/tv_hint_password_login"
+                android:contentDescription="@string/tv_talkback_password_login"
                 android:textSize="@dimen/heading_5"
                 android:inputType="numberDecimal" />
 

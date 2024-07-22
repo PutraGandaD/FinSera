@@ -2,11 +2,17 @@
 <font-family xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <font
+        android:fontStyle="normal"
+        android:fontWeight="500"
+        android:font="@font/calibri_regular"
         app:fontStyle="normal"
-        app:fontWeight="400"
-        app:font="@font/calibri_regular" />
+        app:fontWeight="500"
+        app:font="@font/calibri_regular"/>
     <font
+        android:fontStyle="italic"
+        android:fontWeight="500"
+        android:font="@font/calibri_italic"
         app:fontStyle="italic"
-        app:fontWeight="400"
-        app:font="@font/calibri_italic" />
+        app:fontWeight="500"
+        app:font="@font/calibri_italic"/>
 </font-family>

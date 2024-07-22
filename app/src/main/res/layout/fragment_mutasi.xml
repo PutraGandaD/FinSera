@@ -4,16 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="20dp"
     tools:context=".ui.fragments.info.mutasi.MutasiFragment">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_title_label"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title_label"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/back_button" />
 
     <TextView
         android:id="@+id/tv_title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/calibri_regular"
         android:text="@string/transaction_mutation_label"
         android:textSize="@dimen/heading_3"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,8 +33,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_history"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/primary_blue"
         android:padding="10dp"
         android:text="@string/saved_history_label"
@@ -32,13 +44,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title_label" />
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_filter"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
         android:backgroundTint="@color/neutral_03"
         android:padding="10dp"
         android:text="@string/mutation_filter_label"
@@ -49,7 +59,8 @@
         app:iconGravity="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_history"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_label" />
+        app:layout_constraintTop_toTopOf="@id/btn_history"
+        app:layout_constraintBottom_toBottomOf="@id/btn_history"/>
 
 
 
@@ -118,7 +129,7 @@
         android:padding="16dp"
         android:text="@string/download"
         android:textColor="@color/neutral_01"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,12 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.finsera.R
+import com.finsera.common.utils.DatePickerFragment
 import com.finsera.databinding.FragmentMutasiBinding
-import com.finsera.util.DatePickerFragment
 
-class MutasiFragment : Fragment(),DatePickerFragment.DialogDateListener{
+class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener{
 
     private var _binding: FragmentMutasiBinding? = null
     private val binding get() = _binding!!
@@ -37,7 +36,6 @@ class MutasiFragment : Fragment(),DatePickerFragment.DialogDateListener{
             showHistory()
         }
 
-
         binding.viewFilter.clStartDate.setOnClickListener {
             showDatePicker("starDatePicker")
         }
@@ -58,7 +56,7 @@ class MutasiFragment : Fragment(),DatePickerFragment.DialogDateListener{
     }
 
     private fun showDatePicker(tag: String?) {
-        val newFragment = DatePickerFragment()
+        val newFragment = com.finsera.common.utils.DatePickerFragment()
         newFragment.setDialogDateListener(this)
         newFragment.show(parentFragmentManager, tag)
     }
@@ -78,7 +76,6 @@ class MutasiFragment : Fragment(),DatePickerFragment.DialogDateListener{
         binding.viewFilter.clMutasiFilter.visibility = View.VISIBLE
         binding.rvMutasi.visibility = View.GONE
         binding.btnDownload.visibility = View.GONE
-
 
         //set color
         binding.btnFilter.setBackgroundColor(resources.getColor(R.color.primary_blue))

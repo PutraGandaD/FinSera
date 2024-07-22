@@ -101,7 +101,7 @@
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:text="@string/tv_btn_login"
-        android:textSize="@dimen/heading_3"
+        android:textSize="@dimen/heading_4"
         android:textStyle="bold"
         android:padding="18dp"
         app:cornerRadius="12dp"

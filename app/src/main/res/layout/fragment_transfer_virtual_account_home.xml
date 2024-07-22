@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.topup.ewallet.TransferEWalletHomeFragment"
-    android:padding="20dp">
+    android:padding="20dp"
+    tools:context=".ui.fragments.transfer.va.TransferVirtualAccountHome">
 
     <ImageButton
         android:id="@+id/btnBack"
@@ -22,7 +22,7 @@
         android:id="@+id/tv_title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/e_wallet"
+        android:text="Virtual Account"
         android:textSize="@dimen/heading_3"
         android:textColor="@android:color/black"
         android:layout_marginTop="16dp"
@@ -40,12 +40,12 @@
         android:text="@string/daftar_tersimpan"
         android:textSize="@dimen/button_1"
         app:cornerRadius="8dp"
-        app:layout_constraintEnd_toStartOf="@id/btn_input_baru"
+        app:layout_constraintEnd_toStartOf="@id/btn_filter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title_label" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_input_baru"
+        android:id="@+id/btn_filter"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="10dp"
@@ -72,7 +72,7 @@
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_input_baru"
+        app:layout_constraintTop_toBottomOf="@id/btn_filter"
         app:startIconDrawable="@drawable/ic_search_textfield"
         app:startIconTint="@color/et_icon_tint">
 
@@ -107,5 +107,4 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
