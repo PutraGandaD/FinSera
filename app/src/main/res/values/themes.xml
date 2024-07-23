@@ -5,6 +5,29 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:fontFamily">@font/calibri_font_family</item>
         <item name="fontFamily">@font/calibri_font_family</item>
+        <item name="bottomNavigationStyle">@style/Widget.App.BottomNavigationView</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemTextAppearanceActive">@style/ThemeOverlay.App.BottomNavigationView.LabelActiveState</item>
+        <item name="itemTextAppearanceInactive">@style/ThemeOverlay.App.BottomNavigationView.LabelInactiveState</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView.LabelActiveState" parent="">
+        <item name="fontFamily">@font/calibri_font_family</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView.LabelInactiveState" parent="">
+        <item name="fontFamily">@font/calibri_font_family</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="SquareFAB" parent="">
+        <item name="android:shape">oval</item>
+        <item name="cornerSize">100dp</item>
     </style>
 
     <style name="Theme.FinSera" parent="Base.Theme.FinSera" />

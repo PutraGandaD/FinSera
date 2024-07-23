@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".ui.fragments.info.mutasi.MutasiFragment">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_title_label"
+        app:layout_constraintBottom_toBottomOf="@id/tv_title_label"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/back_button" />
+
+    <TextView
+        android:id="@+id/tv_title_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/transaction_mutation_label"
+        android:textSize="@dimen/heading_3"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_history"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/primary_blue"
+        android:padding="10dp"
+        android:text="@string/saved_history_label"
+        android:textSize="@dimen/button_1"
+        app:cornerRadius="8dp"
+        app:layout_constraintEnd_toStartOf="@id/btn_filter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_label" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_filter"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@color/neutral_03"
+        android:padding="10dp"
+        android:text="@string/mutation_filter_label"
+        android:textColor="@color/neutral_02"
+        android:textSize="@dimen/button_1"
+        app:cornerRadius="8dp"
+        app:icon="@drawable/ic_add_circle"
+        app:iconGravity="textEnd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_history"
+        app:layout_constraintTop_toTopOf="@id/btn_history"
+        app:layout_constraintBottom_toBottomOf="@id/btn_history"/>
+
+
+
+    <!--Start Empty Mutation-->
+    <include
+        android:id="@+id/view_empty"
+        layout="@layout/view_mutasi_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btn_download"
+        app:layout_constraintTop_toBottomOf="@id/btn_history" />
+    <!--End Empty Mutation-->
+
+    <TextView
+        android:id="@+id/tv_account_number_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/calibri_regular"
+        android:text="@string/account_number_label"
+        android:textStyle="bold"
+        android:textColor="@color/neutral_09"
+        android:textSize="@dimen/body_text1"
+        app:layout_constraintStart_toStartOf="@id/btn_history"
+        app:layout_constraintTop_toBottomOf="@id/btn_history"  />
+
+    <TextView
+        android:id="@+id/tv_account_number_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/calibri_font_family"
+        android:text="@string/account_number_value"
+        android:textSize="@dimen/body_text1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_account_number_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_account_number_label" />
+
+    <!--Start Recycler View-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_mutasi"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/btn_download"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_account_number_label"
+        app:layout_constraintVertical_bias="0.066"
+        tools:itemCount="10"
+        tools:listitem="@layout/mutasi_item" />
+    <!--End Recycler View-->
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_download"
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/primary_blue"
+        android:padding="16dp"
+        android:text="@string/download"
+        android:textColor="@color/neutral_01"
+        android:textSize="20sp"
+        app:cornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <!--Start Mutation Filter-->
+    <include
+        android:id="@+id/view_filter"
+        layout="@layout/view_mutasi_filter"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/btn_download"
+        app:layout_constraintEnd_toEndOf="@id/btn_filter"
+        app:layout_constraintStart_toStartOf="@id/btn_history"
+        app:layout_constraintTop_toBottomOf="@id/tv_account_number_label" />
+    <!--End Mutation Filter-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
