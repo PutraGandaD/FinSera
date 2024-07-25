@@ -2,24 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:contentDescription="@string/belum_ada_daftar_tersimpan_empty"
+    android:contentDescription="@string/failed_transfer"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/iv_empty_state"
+        android:id="@+id/iv_failed_transfer"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/ic_empty_state"
+        android:src="@drawable/ic_failed_tf"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_belum_ada_daftar_tersimpan"
+        android:id="@+id/tv_trouble"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/belum_ada_daftar_tersimpan"
-        app:layout_constraintTop_toBottomOf="@id/iv_empty_state"
+        android:text="@string/trouble"
+        app:layout_constraintTop_toBottomOf="@id/iv_failed_transfer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:textAlignment="center"
@@ -31,7 +31,7 @@
         android:id="@+id/tv_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tambah_penerima_ke_daftar_tersimpan"
+        android:text="@string/network_error_message"
         android:textAlignment="center"
         android:textSize="@dimen/heading_5"
         android:textColor="#8A8A8A"
@@ -39,6 +39,6 @@
         android:layout_marginTop="6dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_belum_ada_daftar_tersimpan"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_trouble"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

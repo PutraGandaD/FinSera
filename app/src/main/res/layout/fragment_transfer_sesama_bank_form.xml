@@ -17,6 +17,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/back"
             android:src="@drawable/ic_back_button"
             android:layout_centerVertical="true"/>
 
@@ -24,7 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Transfer Sesama Bank"
+            android:contentDescription="@string/transfer_sesama_bank"
+            android:text="@string/transfer_sesama_bank"
             android:textColor="@android:color/black"
             android:textSize="24sp" />
     </RelativeLayout>
@@ -53,6 +55,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/nomor_rekening_tujuan"
                     android:text="@string/nomor_rekening_tujuan"
                     android:textSize="16sp"
                     android:textColor="@color/neutral_09" />
@@ -64,6 +67,7 @@
                     android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="10dp"
+                    android:contentDescription="@string/input_rekening"
                     android:hint="@string/nomor_rekening_tujuan"
                     android:singleLine="true" />
 
@@ -80,6 +84,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/nominal"
                     android:text="@string/nominal"
                     android:textSize="16sp"
                     android:textColor="@color/neutral_09" />
@@ -91,6 +96,7 @@
                     android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="10dp"
+                    android:contentDescription="@string/input_nominal"
                     android:hint="@string/nominal"
                     android:singleLine="true" />
 
@@ -107,6 +113,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/catatan"
                     android:text="@string/catatan"
                     android:textSize="16sp"
                     android:textColor="@color/neutral_09" />
@@ -118,6 +125,7 @@
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="10dp"
                     android:inputType="text|textMultiLine"
+                    android:contentDescription="@string/input_catatan"
                     android:hint="@string/catatan" />
 
             </LinearLayout>
@@ -134,6 +142,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/simpan_ke_daftar_tersimpan_klik_untuk_simpan"
                     android:text="Simpan ke daftar tersimpan"
                     android:textSize="16sp"/>
             </LinearLayout>
@@ -147,6 +156,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_background_primary"
         app:backgroundTint="@color/primary_blue"
+        android:contentDescription="@string/lanjut"
         android:text="Lanjut"
         android:textSize="20sp"
         android:layout_marginBottom="40dp"
