@@ -21,7 +21,7 @@
     <string name="e_wallet">E-Wallet</string>
     <string name="tambah_penerima_ke_daftar_tersimpan">Tambah penerima ke daftar tersimpan agar \ntransaksi ke orang terdekat lebih mudah</string>
     <string name="empty_state_image">Empty List Image</string>
-    <string name="back_button">back button</string>
+    <string name="btn_back">Kembali</string>
     <string name="logo_gopay">logo gopay</string>
     <string name="gopay">GoPay</string>
     <string name="logo_dana">logo dana</string>
@@ -40,7 +40,7 @@
     <string name="back">Kembali</string>
     <string name="rp_10_000_000">Rp 10.000.000</string>
     <string name="account_number_value">1234 567 897 890</string>
-    <string name="copy_account_number">Copy nomor rekening</string>
+    <string name="copy_account_number">Salin nomor rekening</string>
     <string name="transaction_mutation_label">Mutasi Transaksi</string>
     <string name="saved_history_label">Riwayat Tersimpan</string>
     <string name="mutation_filter_label">Filter Mutasi</string>
@@ -107,4 +107,28 @@
     <string name="tv_navbar_title_qris">QRIS</string>
     <string name="tv_navbar_title_favorit">Favorit</string>
     <string name="tv_navbar_title_akun">Akun</string>
+    <string name="tv_title_isi_e_wallet">Isi E-Wallet</string>
+    <string name="tv_no_handphone_atau_nama">Masukkan no.handphone/nama</string>
+    <string name="tv_desc_input_no_hp_atau_nama">Masukkan nomor handphone atau nama</string>
+    <string name="desc_empty_list">Belum ada daftar tersimpan. tambah penerima ke daftar tersimpan agar transaksi ke orang terdekat lebih mudah</string>
+    <string name="no_handphone_nama">No. Handphone / Nama</string>
+    <string name="input_nomor_handphone_atau_nama">Input Nomor Handphone atau Nama</string>
+    <string name="nama_pengguna">Nama Pengguna</string>
+    <string name="username">Putra Ganda Dewata</string>
+    <string name="input_nominal_transaksi">Input Nominal Transaksi</string>
+    <string name="saldo_disembunyikan">Saldo Disembunyikan</string>
+    <string name="btn_download_mutasi">Unduh Mutasi Transaksi</string>
+    <string name="pilih_tanggal_awal">Pilih Tanggal Awal</string>
+    <string name="pilih_tanggal_akhir">Pilih Tanggal Akhir</string>
+    <string name="pilih_periode_di_bawah">Pilih Periode di Bawah</string>
+    <string name="masukkan_jangka_waktu_di_bawah">Masukkan Jangka Waktu di Bawah</string>
+    <string name="screen_beranda">Halaman Beranda</string>
+    <string name="screen_login">Halaman Login</string>
+    <string name="screen_lupa_password">Halaman Lupa Password</string>
+    <string name="screen_mutasi_transaksi">Halaman Mutasi Transaksi</string>
+    <string name="screen_transfer_sesama_bank">Halaman Transfer Sesama Bank</string>
+    <string name="screen_transfer_antar_bank">Halaman Transfer Antar Bank</string>
+    <string name="screen_virtual_account">Halaman Virtual Account</string>
+    <string name="screen_e_wallet">Halaman E-Wallet</string>
+    <string name="screen_informasi_saldo">Halaman Informasi Saldo</string>
 </resources>

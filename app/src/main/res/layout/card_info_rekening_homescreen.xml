@@ -19,7 +19,8 @@
             android:textSize="18sp"
             android:textColor="@color/neutral_02"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/saldo_disembunyikan"/>
 
         <ImageButton
             android:id="@+id/btn_saldo_visibility"
