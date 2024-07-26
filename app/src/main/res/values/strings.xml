@@ -16,10 +16,12 @@
     <string name="rekening_tujuan">Rekening Tujuan</string>
     <string name="pin">PIN</string>
     <string name="masukkan_pin_pembayaran">Masukkan PIN Pembayaran</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="e_wallet">E-Wallet</string>
-    <string name="tambah_penerima_ke_daftar_tersimpan">Tambah penerima ke daftar tersimpan agar \ntransaksi ke orang terdekat lebih mudah</string>
+    <string name="tambah_penerima_ke_daftar_tersimpan">Tambah penerima ke daftar tersimpan agar transaksi ke orang terdekat lebih mudah</string>
     <string name="empty_state_image">Empty List Image</string>
     <string name="btn_back">Kembali</string>
     <string name="logo_gopay">logo gopay</string>
@@ -131,4 +133,5 @@
     <string name="screen_virtual_account">Halaman Virtual Account</string>
     <string name="screen_e_wallet">Halaman E-Wallet</string>
     <string name="screen_informasi_saldo">Halaman Informasi Saldo</string>
+
 </resources>
