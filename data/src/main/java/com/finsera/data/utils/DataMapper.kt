@@ -4,6 +4,7 @@ import com.finsera.data.source.remote.response.detail_user.DetailUserResponse
 import com.finsera.data.source.remote.response.error.AuthErrorResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.login.LoginData
+import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.CekRekeningResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
@@ -15,12 +16,13 @@ import com.finsera.domain.model.Saldo
 import com.finsera.domain.model.TransferSesama
 
 object DataMapper {
-
-    fun loginDataToDomain(response: LoginData): Login? {
+    fun loginDataToDomain(response: LoginResponse): Login {
         return Login(
-            token = response.token,
-            username = response.username,
-            status = response.status
+            code = response?.code,
+            message = response.message,
+            username = response.data?.username,
+            status = response.data?.status,
+            token = response.data?.token
         )
     }
 

@@ -20,7 +20,5 @@ class MainApplication : Application() {
             androidContext(this@MainApplication)
             modules(appModule, networkModule, repositoryModule, viewModelModule, useCaseModule)
         }
-
-        SharedPreferenceManager.init(this)
     }
 }
