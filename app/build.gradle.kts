@@ -63,6 +63,7 @@ dependencies {
     // Lifecycle utilities for Compose
     //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
 
     // Saved state module for ViewModel
     //noinspection GradleDependency
