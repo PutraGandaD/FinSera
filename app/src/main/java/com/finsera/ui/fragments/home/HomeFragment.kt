@@ -36,6 +36,11 @@ class HomeFragment : Fragment() {
         btnInfoSaldo?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
         }
+
+        val btnEWallet = view.findViewById<ConstraintLayout>(R.id.btn_menu_ewallet)
+        btnEWallet?.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_transferEWalletHomeFragment)
+        }
     }
 
 
