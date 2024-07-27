@@ -127,5 +127,15 @@
     <string name="input_nomor_va">input nomor virtual account</string>
     <string name="nomor_VA">Nomor VA</string>
     <string name="virtual_account">Virtual Account</string>
+    <string name="ubah_mpin">Ubah MPIN</string>
+    <string name="password_id">Password ID</string>
+    <string name="password">Password</string>
+    <string name="input_password">input password</string>
+    <string name="pin_baru">PIN Baru</string>
+    <string name="konfitmasi_pin_baru">Konfitmasi PIN Baru</string>
+    <string name="konfirmasi">Konfirmasi</string>
+    <string name="kembali_ke_aplikasi">Kembali ke Aplikasi</string>
+    <string name="silakan_login_dengan_pin_yang_baru">Silakan login dengan PIN yang baru!</string>
+    <string name="pin_berhasil_diubah">PIN Berhasil Diubah</string>
 
 </resources>
