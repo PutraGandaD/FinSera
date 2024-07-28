@@ -26,15 +26,15 @@ object DataMapper {
         )
     }
 
-//    fun infoSaldoResponseToDomain(response: InfoSaldoResponse): Saldo {
-//        return Saldo(
-//            amount = response.data.amount.amount,
-//            currency = response.data.amount.currency,
-//            customerId = response.data.customerId,
-//            accountNumber = response.data.accountNumber,
-//            username = response.data.username
-//        )
-//    }
+    fun infoSaldoResponseToDomain(response: InfoSaldoResponse): Saldo {
+        return Saldo(
+            amount = response.data.amount.amount,
+            currency = response.data.amount.currency,
+            customerId = response.data.customerId,
+            accountNumber = response.data.accountNumber,
+            username = response.data.username
+        )
+    }
 //
 //    fun reloginResponseToDomain(response: ReloginResponse): Relogin {
 //        return Relogin(

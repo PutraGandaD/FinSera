@@ -17,7 +17,7 @@ import com.finsera.databinding.FragmentLoginPinBinding
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.delay
 
-class LoginPinFragment : Fragment() {
+class   LoginPinFragment : Fragment() {
     private var _binding: FragmentLoginPinBinding? = null
     private val binding get() = _binding!!
 

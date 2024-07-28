@@ -10,7 +10,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 class LoginUserUseCase(private val repository: IAuthRepository) {
-    operator suspend fun invoke(username: String, password: String) : Flow<Resource<String>> = flow {
+    suspend operator fun invoke(username: String, password: String) : Flow<Resource<String>> = flow {
         emit(Resource.Loading())
         try {
             val response = repository.login(username, password)

@@ -127,5 +127,6 @@
     <string name="input_nomor_va">input nomor virtual account</string>
     <string name="nomor_VA">Nomor VA</string>
     <string name="virtual_account">Virtual Account</string>
+    <string name="rama">Rama</string>
 
 </resources>
