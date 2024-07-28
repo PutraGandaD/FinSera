@@ -16,10 +16,6 @@
     <string name="rekening_tujuan">Rekening Tujuan</string>
     <string name="pin">PIN</string>
     <string name="masukkan_pin_pembayaran">Masukkan PIN Pembayaran</string>
-
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="e_wallet">E-Wallet</string>
     <string name="tambah_penerima_ke_daftar_tersimpan">Tambah penerima ke daftar tersimpan agar transaksi ke orang terdekat lebih mudah</string>
     <string name="empty_state_image">Empty List Image</string>
@@ -109,6 +105,34 @@
     <string name="tv_navbar_title_qris">QRIS</string>
     <string name="tv_navbar_title_favorit">Favorit</string>
     <string name="tv_navbar_title_akun">Akun</string>
+    <string name="pilih_bank">pilih bank</string>
+    <string name="input_rekening">input rekening</string>
+    <string name="input_nominal">input nominal</string>
+    <string name="input_catatan">input catatan</string>
+    <string name="simpan_ke_daftar_tersimpan_klik_untuk_simpan">simpan ke daftar tersimpan klik untuk simpan</string>
+    <string name="input_pin">input pin</string>
+    <string name="input_baru_klik_untuk_transfer">input baru klik untuk transfer</string>
+    <string name="belum_ada_daftar_tersimpan_empty">Belum ada daftar tersimpan tambah penerima ke daftar tersimpan agar transaksi ke orang terdekat lebih mudah</string>
+    <string name="transfer_sesama_bank">Transfer Sesama Bank</string>
+    <string name="Pilih_Bank">Pilih Bank</string>
+    <string name="trouble">Oops! Sepertinya ada masalah</string>
+    <string name="network_error_message">Pastikan perangkat anda terhubung pada jaringan. Tunggu beberapa saat dan coba lagi buka aplikasi.</string>
+    <string name="failed_transfer">oops, sepertinya ada masalah pastikan perangkat anda terhubung pada jaringan. tunggu beberapa saat dan coba lagi buka aplikasi</string>
+    <string name="transfer_virtual_account">Transfer Virtual Account</string>
+    <string name="nomor_va">Nomor Virtual Account</string>
+    <string name="input_nomor_va">input nomor virtual account</string>
+    <string name="nomor_VA">Nomor VA</string>
+    <string name="virtual_account">Virtual Account</string>
+    <string name="ubah_mpin">Ubah MPIN</string>
+    <string name="password_id">Password ID</string>
+    <string name="password">Password</string>
+    <string name="input_password">input password</string>
+    <string name="pin_baru">PIN Baru</string>
+    <string name="konfitmasi_pin_baru">Konfitmasi PIN Baru</string>
+    <string name="konfirmasi">Konfirmasi</string>
+    <string name="kembali_ke_aplikasi">Kembali ke Aplikasi</string>
+    <string name="silakan_login_dengan_pin_yang_baru">Silakan login dengan PIN yang baru!</string>
+    <string name="pin_berhasil_diubah">PIN Berhasil Diubah</string>
     <string name="tv_title_isi_e_wallet">Isi E-Wallet</string>
     <string name="tv_no_handphone_atau_nama">Masukkan no.handphone/nama</string>
     <string name="tv_desc_input_no_hp_atau_nama">Masukkan nomor handphone atau nama</string>
