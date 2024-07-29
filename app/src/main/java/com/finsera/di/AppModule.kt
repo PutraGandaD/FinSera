@@ -11,6 +11,7 @@ import com.finsera.domain.usecase.auth.LoginUserUseCase
 import com.finsera.domain.usecase.infosaldo.InfoSaldoUseCase
 import com.finsera.ui.fragments.auth.viewmodels.LoginViewModel
 import com.finsera.ui.fragments.home.viewmodel.HomeViewModel
+import com.finsera.ui.fragments.info.saldo.viewmodel.InfoSaldoViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -32,6 +33,7 @@ object AppModule {
     val viewModelModule = module {
         viewModel { LoginViewModel(get(), get()) }
         viewModel { HomeViewModel(get()) }
+        viewModel { InfoSaldoViewModel(get()) }
     }
 
     val useCaseModule = module {
