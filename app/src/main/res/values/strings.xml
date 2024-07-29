@@ -58,6 +58,7 @@
     <string name="date_example">12 Juli 2024</string>
     <string name="description_example">Transfer ke Rekening Admin</string>
     <string name="amount_example">+ Rp 500.000</string>
+    <string name="amount_placholder">Rp 300.000</string>
     <string name="datetime_example">09.24 WIB</string>
     <string name="tv_header_login_screen">Login</string>
     <string name="tv_hint_username_login">Username</string>
@@ -123,6 +124,7 @@
     <string name="input_nomor_va">input nomor virtual account</string>
     <string name="nomor_VA">Nomor VA</string>
     <string name="virtual_account">Virtual Account</string>
+    <string name="rama">Rama</string>
     <string name="ubah_mpin">Ubah MPIN</string>
     <string name="password_id">Password ID</string>
     <string name="password">Password</string>
