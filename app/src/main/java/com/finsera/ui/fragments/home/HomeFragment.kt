@@ -57,15 +57,18 @@ class HomeFragment : Fragment() {
                 binding.cardNasabahInfo.tvNamaNasabah.text = it.username
                 binding.cardNasabahInfo.tvNoRekeningCard.text = it.accountNumber
                 if (homeViewModel.isSaldoVisible.value == true) {
-                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ").append(CurrencyFormatter.formatCurrency(it.amount))
+                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ")
+                        .append(CurrencyFormatter.formatCurrency(it.amount))
                 } else {
-                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = this.getString(R.string.tv_saldo_card_rekening_home)
+                    binding.cardNasabahInfo.tvSaldoRekeningCard.text =
+                        this.getString(R.string.tv_saldo_card_rekening_home)
                 }
             } else {
                 binding.tvTopbgAccountName.text = "Rama"
                 binding.cardNasabahInfo.tvNamaNasabah.text = "Rama"
                 binding.cardNasabahInfo.tvNoRekeningCard.text = "0859313131732"
-                binding.cardNasabahInfo.tvSaldoRekeningCard.text = getString(R.string.tv_saldo_card_rekening_home)
+                binding.cardNasabahInfo.tvSaldoRekeningCard.text =
+                    getString(R.string.tv_saldo_card_rekening_home)
             }
 
         }
@@ -74,14 +77,22 @@ class HomeFragment : Fragment() {
     private fun showLoadingInfoSaldo() {
         homeViewModel.loading.observe(viewLifecycleOwner) {
             if (it) {
-                binding.progressBarCard.visibility = View.VISIBLE
+                binding.cardNasabahInfo.pbNoRekeningCard.visibility = View.VISIBLE
+                binding.cardNasabahInfo.pbNamaNasabah.visibility = View.VISIBLE
+                binding.cardNasabahInfo.pbSaldoRekeningCard.visibility = View.VISIBLE
                 binding.progressBarTopName.visibility = View.VISIBLE
+
+                binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.GONE
                 binding.cardNasabahInfo.btnNorekCopy.visibility = View.GONE
                 binding.cardNasabahInfo.btnSaldoVisibility.visibility = View.GONE
                 binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.GONE
             } else {
-                binding.progressBarCard.visibility = View.GONE
+                binding.cardNasabahInfo.pbNoRekeningCard.visibility = View.GONE
+                binding.cardNasabahInfo.pbNamaNasabah.visibility = View.GONE
+                binding.cardNasabahInfo.pbSaldoRekeningCard.visibility = View.GONE
                 binding.progressBarTopName.visibility = View.GONE
+
+                binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.VISIBLE
                 binding.cardNasabahInfo.btnNorekCopy.visibility = View.VISIBLE
                 binding.cardNasabahInfo.btnSaldoVisibility.visibility = View.VISIBLE
                 binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.VISIBLE
@@ -97,11 +108,13 @@ class HomeFragment : Fragment() {
         homeViewModel.isSaldoVisible.observe(viewLifecycleOwner) { isVisible ->
             if (isVisible) {
                 homeViewModel.saldo.value?.let {
-                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ").append(CurrencyFormatter.formatCurrency(it.amount))
+                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ")
+                        .append(CurrencyFormatter.formatCurrency(it.amount))
                 }
                 binding.cardNasabahInfo.btnSaldoVisibility.setImageResource(R.drawable.ic_rekening_no_visibility)
             } else {
-                binding.cardNasabahInfo.tvSaldoRekeningCard.text = getString(R.string.tv_saldo_card_rekening_home)
+                binding.cardNasabahInfo.tvSaldoRekeningCard.text =
+                    getString(R.string.tv_saldo_card_rekening_home)
                 binding.cardNasabahInfo.btnSaldoVisibility.setImageResource(R.drawable.ic_rekening_visibility)
             }
         }
