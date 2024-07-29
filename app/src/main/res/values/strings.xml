@@ -62,6 +62,7 @@
     <string name="date_example">12 Juli 2024</string>
     <string name="description_example">Transfer ke Rekening Admin</string>
     <string name="amount_example">+ Rp 500.000</string>
+    <string name="amount_placholder">Rp 300.000</string>
     <string name="datetime_example">09.24 WIB</string>
     <string name="tv_header_login_screen">Login</string>
     <string name="tv_hint_username_login">Username</string>

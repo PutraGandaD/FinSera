@@ -8,8 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.finsera.R
+import com.finsera.common.utils.Resource
 import com.finsera.databinding.FragmentHomeBinding
 import com.finsera.databinding.FragmentLoginBinding
 import com.finsera.ui.fragments.home.viewmodel.HomeViewModel
@@ -17,6 +21,8 @@ import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.shape.MaterialShapeDrawable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.finsera.common.utils.format.CurrencyFormatter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -44,60 +50,74 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
         }
 
-
         getInfoSaldo()
-        showLoadingInfoSaldo()
         visibiliySaldo()
     }
 
     private fun getInfoSaldo() {
-        homeViewModel.saldo.observe(viewLifecycleOwner) {
-            if (it != null) {
-                binding.tvTopbgAccountName.text = it.username
-                binding.cardNasabahInfo.tvNamaNasabah.text = it.username
-                binding.cardNasabahInfo.tvNoRekeningCard.text = it.accountNumber
-                if (homeViewModel.isSaldoVisible.value == true) {
-                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ")
-                        .append(CurrencyFormatter.formatCurrency(it.amount))
-                } else {
-                    binding.cardNasabahInfo.tvSaldoRekeningCard.text =
-                        this.getString(R.string.tv_saldo_card_rekening_home)
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.saldoUiState.collectLatest { uiState ->
+                    if (uiState.isLoading) {
+                        showLoadingInfoSaldo()
+                    } else {
+                        hideLoadingInfoSaldo()
+                        uiState.data?.let { saldo ->
+                            binding.tvTopbgAccountName.text = saldo.username
+                            binding.cardNasabahInfo.tvNamaNasabah.text = saldo.username
+                            binding.cardNasabahInfo.tvNoRekeningCard.text = saldo.accountNumber
+                            if (homeViewModel.isSaldoVisible.value == true) {
+                                binding.cardNasabahInfo.tvSaldoRekeningCard.text =
+                                    StringBuilder().append("Rp ")
+                                        .append(CurrencyFormatter.formatCurrency(saldo.amount))
+                            } else {
+                                binding.cardNasabahInfo.tvSaldoRekeningCard.text =
+                                    getString(R.string.tv_saldo_card_rekening_home)
+                            }
+                        } ?: run {
+                            binding.tvTopbgAccountName.text =
+                                getString(R.string.tv_topbg_account_name)
+                            binding.cardNasabahInfo.tvNamaNasabah.text =
+                                getString(R.string.tv_nama_nasabah_placeholder)
+                            binding.cardNasabahInfo.tvNoRekeningCard.text =
+                                getString(R.string.tv_rekening_placeholder)
+                            binding.cardNasabahInfo.tvSaldoRekeningCard.text =
+                                getString(R.string.tv_saldo_card_rekening_home)
+                        }
+                        uiState.message?.let {message->
+                            Log.d("HomeFragment", message)
+                        }
+                    }
                 }
-            } else {
-                binding.tvTopbgAccountName.text = "Rama"
-                binding.cardNasabahInfo.tvNamaNasabah.text = "Rama"
-                binding.cardNasabahInfo.tvNoRekeningCard.text = "0859313131732"
-                binding.cardNasabahInfo.tvSaldoRekeningCard.text =
-                    getString(R.string.tv_saldo_card_rekening_home)
+
             }
 
         }
     }
 
     private fun showLoadingInfoSaldo() {
-        homeViewModel.loading.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.cardNasabahInfo.pbNoRekeningCard.visibility = View.VISIBLE
-                binding.cardNasabahInfo.pbNamaNasabah.visibility = View.VISIBLE
-                binding.cardNasabahInfo.pbSaldoRekeningCard.visibility = View.VISIBLE
-                binding.progressBarTopName.visibility = View.VISIBLE
+        binding.cardNasabahInfo.pbNoRekeningCard.visibility = View.VISIBLE
+        binding.cardNasabahInfo.pbNamaNasabah.visibility = View.VISIBLE
+        binding.cardNasabahInfo.pbSaldoRekeningCard.visibility = View.VISIBLE
+        binding.progressBarTopName.visibility = View.VISIBLE
 
-                binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.GONE
-                binding.cardNasabahInfo.btnNorekCopy.visibility = View.GONE
-                binding.cardNasabahInfo.btnSaldoVisibility.visibility = View.GONE
-                binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.GONE
-            } else {
-                binding.cardNasabahInfo.pbNoRekeningCard.visibility = View.GONE
-                binding.cardNasabahInfo.pbNamaNasabah.visibility = View.GONE
-                binding.cardNasabahInfo.pbSaldoRekeningCard.visibility = View.GONE
-                binding.progressBarTopName.visibility = View.GONE
+        binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.GONE
+        binding.cardNasabahInfo.btnNorekCopy.visibility = View.GONE
+        binding.cardNasabahInfo.btnSaldoVisibility.visibility = View.GONE
+        binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.GONE
+    }
 
-                binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.VISIBLE
-                binding.cardNasabahInfo.btnNorekCopy.visibility = View.VISIBLE
-                binding.cardNasabahInfo.btnSaldoVisibility.visibility = View.VISIBLE
-                binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.VISIBLE
-            }
-        }
+
+    private fun hideLoadingInfoSaldo() {
+        binding.cardNasabahInfo.pbNoRekeningCard.visibility = View.GONE
+        binding.cardNasabahInfo.pbNamaNasabah.visibility = View.GONE
+        binding.cardNasabahInfo.pbSaldoRekeningCard.visibility = View.GONE
+        binding.progressBarTopName.visibility = View.GONE
+
+        binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.VISIBLE
+        binding.cardNasabahInfo.btnNorekCopy.visibility = View.VISIBLE
+        binding.cardNasabahInfo.btnSaldoVisibility.visibility = View.VISIBLE
+        binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.VISIBLE
     }
 
     private fun visibiliySaldo() {
@@ -107,7 +127,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.isSaldoVisible.observe(viewLifecycleOwner) { isVisible ->
             if (isVisible) {
-                homeViewModel.saldo.value?.let {
+                homeViewModel.saldoUiState.value.data?.let {
                     binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ")
                         .append(CurrencyFormatter.formatCurrency(it.amount))
                 }
