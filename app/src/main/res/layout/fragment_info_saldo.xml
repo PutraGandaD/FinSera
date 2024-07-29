@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".ui.fragments.info.saldo.InfoSaldoFragment">
+    tools:context=".ui.fragments.info.saldo.InfoSaldoFragment"
+    android:contentDescription="@string/screen_informasi_saldo">
 
 
     <TextView
@@ -20,7 +21,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/balance_information"/>
 
 
     <com.google.android.material.card.MaterialCardView
@@ -159,6 +161,7 @@
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/back"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
