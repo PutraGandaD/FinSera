@@ -16,6 +16,7 @@ import com.finsera.ui.fragments.home.viewmodel.HomeViewModel
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.shape.MaterialShapeDrawable
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.finsera.common.utils.format.CurrencyFormatter
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -56,7 +57,7 @@ class HomeFragment : Fragment() {
                 binding.cardNasabahInfo.tvNamaNasabah.text = it.username
                 binding.cardNasabahInfo.tvNoRekeningCard.text = it.accountNumber
                 if (homeViewModel.isSaldoVisible.value == true) {
-                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ").append(it.amount)
+                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ").append(CurrencyFormatter.formatCurrency(it.amount))
                 } else {
                     binding.cardNasabahInfo.tvSaldoRekeningCard.text = this.getString(R.string.tv_saldo_card_rekening_home)
                 }
@@ -96,7 +97,7 @@ class HomeFragment : Fragment() {
         homeViewModel.isSaldoVisible.observe(viewLifecycleOwner) { isVisible ->
             if (isVisible) {
                 homeViewModel.saldo.value?.let {
-                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ").append(it.amount)
+                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ").append(CurrencyFormatter.formatCurrency(it.amount))
                 }
                 binding.cardNasabahInfo.btnSaldoVisibility.setImageResource(R.drawable.ic_rekening_no_visibility)
             } else {
