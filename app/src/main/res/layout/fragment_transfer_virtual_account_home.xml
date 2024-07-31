@@ -19,11 +19,13 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/btn_back" />
 
+
     <TextView
         android:id="@+id/tv_title_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Virtual Account"
+        android:contentDescription="@string/virtual_account"
+        android:text="@string/virtual_account"
         android:textSize="@dimen/heading_3"
         android:textColor="@android:color/black"
         android:layout_marginTop="16dp"
@@ -38,6 +40,7 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/primary_blue"
         android:padding="10dp"
+        android:contentDescription="@string/daftar_tersimpan"
         android:text="@string/daftar_tersimpan"
         android:textSize="@dimen/button_1"
         app:cornerRadius="8dp"
@@ -52,6 +55,7 @@
         android:layout_marginStart="10dp"
         android:backgroundTint="@color/neutral_03"
         android:padding="10dp"
+        android:contentDescription="@string/input_baru_klik_untuk_transfer"
         android:text="@string/input_baru"
         android:textColor="@color/neutral_02"
         android:textSize="@dimen/button_1"
@@ -81,6 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/et_textfield_background_2"
+            android:contentDescription="@string/cari_daftar_tersimpan"
             android:hint="@string/cari_daftar_tersimpan"
             android:inputType="text"
             android:padding="12dp"

@@ -17,12 +17,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/back"
             android:src="@drawable/ic_back_button"
             android:layout_centerVertical="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Transfer Virtual Account"
+            android:contentDescription="@string/transfer_virtual_account"
+            android:text="@string/transfer_virtual_account"
             android:textSize="24sp"
             android:textColor="@android:color/black"
             android:layout_centerInParent="true"/>
@@ -52,7 +54,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nomor Virtual Account"
+                    android:contentDescription="@string/nomor_va"
+                    android:text="@string/nomor_va"
                     android:textSize="16sp"
                     android:textColor="@color/neutral_09" />
                 <EditText
@@ -63,7 +66,8 @@
                     android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Nomor VA"
+                    android:contentDescription="@string/input_nomor_va"
+                    android:hint="@string/nomor_VA"
                     android:singleLine="true" />
 
             </LinearLayout>
@@ -80,6 +84,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/simpan_ke_daftar_tersimpan_klik_untuk_simpan"
                     android:text="Simpan ke daftar tersimpan"/>
             </LinearLayout>
 
@@ -93,6 +98,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_background_primary"
         app:backgroundTint="@color/primary_blue"
+        android:contentDescription="@string/lanjut"
         android:text="Lanjut"
         android:textSize="20sp"
         android:layout_marginBottom="40dp"

@@ -1,4 +1,4 @@
-package com.finsera.common.utils
+package com.finsera.common.utils.dialog
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
