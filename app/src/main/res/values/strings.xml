@@ -159,5 +159,17 @@
     <string name="screen_virtual_account">Halaman Virtual Account</string>
     <string name="screen_e_wallet">Halaman E-Wallet</string>
     <string name="screen_informasi_saldo">Halaman Informasi Saldo</string>
-
+    <string name="notifikasi">Notifikasi</string>
+    <string name="semua">Semua</string>
+    <string name="promo">Promo</string>
+    <string name="transaksi">Transaksi</string>
+    <string name="info">Info</string>
+    <string name="empty_notif">Sepertinya belum ada notifikasi</string>
+    <string name="monolog_promo">Hadiah Berlimpah TopUp Paket Data di Finsera!</string>
+    <string name="time_date_promo">11 Juli 2024 14:04</string>
+    <string name="caption_promo">Dapatkan Iphone dan tabungan emas dengan topup paket data Telkomsel atau XL</string>
+    <string name="desc_all_notif">Pilih filter notifikasi tipe semua</string>
+    <string name="desc_promo">Pilih filter notifikasi tipe promo</string>
+    <string name="desc_transaction">Pilih filter notifikasi tipe transaksi</string>
+    <string name="desc_info">Pilih filter notifikasi tipe info</string>
 </resources>
