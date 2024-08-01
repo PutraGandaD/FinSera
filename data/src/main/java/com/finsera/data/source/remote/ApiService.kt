@@ -29,5 +29,7 @@ interface ApiService {
     ) : RefreshTokenResponse
 
     @GET("amount")
-    suspend fun getSaldo(): InfoSaldoResponse
+    suspend fun getSaldo(
+        @Header("Authorization") accessToken: String
+    ): InfoSaldoResponse
 }

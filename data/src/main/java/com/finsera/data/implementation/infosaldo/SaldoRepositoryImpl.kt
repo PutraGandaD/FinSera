@@ -19,7 +19,8 @@ class SaldoRepositoryImpl(
     private val remoteDataSource: RemoteDataSource
 ): ISaldoRepository {
     override suspend fun getSaldo(): Saldo {
-        val response = remoteDataSource.getSaldo()
+        val accessToken = localDataSource.getAccessToken() // get access Token
+        val response = remoteDataSource.getSaldo(accessToken)
         return DataMapper.infoSaldoResponseToDomain(response)
     }
 }
