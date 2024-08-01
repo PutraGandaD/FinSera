@@ -17,8 +17,7 @@
         <ImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/ic_ovo"
-            android:contentDescription="@string/logo_ovo"/>
+            android:src="@drawable/ic_ovo" />
 
         <TextView
             android:layout_width="wrap_content"

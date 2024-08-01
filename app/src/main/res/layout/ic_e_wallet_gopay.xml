@@ -17,8 +17,7 @@
         <ImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/ic_gopay"
-            android:contentDescription="@string/logo_gopay"/>
+            android:src="@drawable/ic_gopay"/>
 
         <TextView
             android:layout_width="wrap_content"

@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/transfer_antarbank"
-        android:text="Transfer Antarbank"
+        android:text="@string/transfer_antar_bank"
         android:textSize="@dimen/heading_3"
         android:textColor="@android:color/black"
         android:layout_marginTop="16dp"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_history"
+        android:id="@+id/btn_saved_list"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
@@ -46,12 +46,12 @@
         android:text="@string/daftar_tersimpan"
         android:textSize="@dimen/button_1"
         app:cornerRadius="8dp"
-        app:layout_constraintEnd_toStartOf="@id/btn_filter"
+        app:layout_constraintEnd_toStartOf="@id/btn_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title_label" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_filter"
+        android:id="@+id/btn_input"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="10dp"
@@ -65,9 +65,9 @@
         app:icon="@drawable/ic_add_circle"
         app:iconGravity="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_history"
-        app:layout_constraintTop_toTopOf="@id/btn_history"
-        app:layout_constraintBottom_toBottomOf="@id/btn_history"/>
+        app:layout_constraintStart_toEndOf="@id/btn_saved_list"
+        app:layout_constraintTop_toTopOf="@id/btn_saved_list"
+        app:layout_constraintBottom_toBottomOf="@id/btn_saved_list"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_cari_daftar_tersimpan"
@@ -79,7 +79,7 @@
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_filter"
+        app:layout_constraintTop_toBottomOf="@id/btn_input"
         app:startIconDrawable="@drawable/ic_search_textfield"
         app:startIconTint="@color/et_icon_tint">
 
