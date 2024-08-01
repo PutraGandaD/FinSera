@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-class LoginPinFragment : Fragment() {
+class   LoginPinFragment : Fragment() {
     private var _binding: FragmentLoginPinBinding? = null
     private val binding get() = _binding!!
 

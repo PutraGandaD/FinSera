@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/neutral_01"
     android:padding="16dp"
-    tools:context=".ui.fragments.auth.LoginFragment">
+    tools:context=".ui.fragments.auth.LoginFragment"
+    android:contentDescription="@string/screen_login">
 
     <ImageView
         android:id="@+id/iv_bca_logo"

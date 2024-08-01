@@ -34,7 +34,7 @@ class LoginViewModel(
     private val checkLoggedInUseCase: CheckLoggedInUseCase
 ) : AndroidViewModel(app) {
 
-    private val _loginScreenUIState = MutableStateFlow(LoginUiState())
+        private val _loginScreenUIState = MutableStateFlow(LoginUiState())
     val loginScreenUIState = _loginScreenUIState.asStateFlow()
 
     private val _userLoggedInStatus = MutableLiveData<Boolean>()
