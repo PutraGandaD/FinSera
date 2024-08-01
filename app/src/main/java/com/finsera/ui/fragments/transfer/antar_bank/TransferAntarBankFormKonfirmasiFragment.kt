@@ -1,16 +1,13 @@
 package com.finsera.ui.fragments.transfer.antar_bank
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.finsera.R
 import com.finsera.databinding.FragmentTransferAntarBankFormKonfirmasiBinding
-import com.finsera.databinding.FragmentTransferVirtualAccountFormKonfirmasiBinding
 
-class TransferAntarbankKonfirmasiFragment : Fragment() {
+class TransferAntarBankFormKonfirmasiFragment : Fragment() {
     private var _binding: FragmentTransferAntarBankFormKonfirmasiBinding? = null
     private val binding get() = _binding!!
 
