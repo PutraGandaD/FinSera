@@ -11,79 +11,62 @@ import android.net.NetworkCapabilities.TRANSPORT_WIFI
 import android.os.Build
 import android.provider.ContactsContract.CommonDataKinds.Email.TYPE_MOBILE
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.finsera.MainApplication
-import com.finsera.common.utils.Constant.Companion.USER_LOGGED_IN_STATUS
 import com.finsera.common.utils.Resource
-import com.finsera.common.utils.sharedpref.SharedPreferenceManager
-import com.finsera.domain.usecase.auth.CheckLoggedInUseCase
-import com.finsera.domain.usecase.auth.LoginUserUseCase
-import com.finsera.ui.fragments.auth.uistate.LoginUiState
+import com.finsera.domain.usecase.auth.LoginPinUserUseCase
+import com.finsera.ui.fragments.auth.uistate.LoginPinUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.io.IOException
 
-class LoginViewModel(
+class LoginPinViewModel(
     app: Application,
-    private val loginUserUseCase: LoginUserUseCase,
-    private val checkLoggedInUseCase: CheckLoggedInUseCase
+    private val loginPinUserUseCase: LoginPinUserUseCase
 ) : AndroidViewModel(app) {
+    private val _loginPinScreenUIState = MutableStateFlow(LoginPinUiState())
+    val loginPinScreenUIState = _loginPinScreenUIState.asStateFlow()
 
-    private val _loginScreenUIState = MutableStateFlow(LoginUiState())
-    val loginScreenUIState = _loginScreenUIState.asStateFlow()
-
-    private val _userLoggedInStatus = MutableLiveData<Boolean>()
-    val userLoggedInStatus = _userLoggedInStatus
-
-    init {
-        checkUserLoggedInStatus()
-    }
-
-    fun userLogin(username: String, password: String) {
+    fun loginWithMpin(mpin: String) {
         viewModelScope.launch {
             if(hasInternetConnection()) {
-                loginUserUseCase.invoke(username, password).collectLatest { result ->
-                    when (result) {
+                loginPinUserUseCase.invoke(mpin).collectLatest { result ->
+                    when(result) {
                         is Resource.Loading -> {
-                            _loginScreenUIState.update { uiState ->
-                                uiState.copy(isLoading = true, message = null, isUserLoggedIn = false)
+                            _loginPinScreenUIState.update { uiState ->
+                                uiState.copy(isLoading = true, message = null, isPinCorrect = false)
                             }
                         }
+
                         is Resource.Success -> {
-                            _loginScreenUIState.update { uiState ->
-                                uiState.copy(isLoading = false, message = result.data.toString(), isUserLoggedIn = true)
+                            _loginPinScreenUIState.update { uiState ->
+                                uiState.copy(isLoading = false, message = result.data, isPinCorrect = true)
                             }
                         }
+
                         is Resource.Error -> {
-                            _loginScreenUIState.update { uiState ->
-                                uiState.copy(isLoading = false, message = result.message, isUserLoggedIn = false)
+                            _loginPinScreenUIState.update { uiState ->
+                                uiState.copy(isLoading = false, message = result.message, isPinCorrect = false)
                             }
                         }
                     }
                 }
             } else {
-                _loginScreenUIState.update { uiState ->
+                _loginPinScreenUIState.update { uiState ->
                     uiState.copy(
                         isLoading = false,
-                        message = "Tidak Ada Koneksi Internet",
-                        isUserLoggedIn = false
+                        message = "Tidak ada Koneksi Internet",
+                        isPinCorrect = false
                     )
                 }
             }
         }
     }
 
-    private fun checkUserLoggedInStatus()  {
-        _userLoggedInStatus.value = checkLoggedInUseCase.invoke()
-    }
-
     fun userMessageShown() {
-        _loginScreenUIState.update { currentUiState ->
+        _loginPinScreenUIState.update { currentUiState ->
             currentUiState.copy(message = null)
         }
     }
@@ -113,4 +96,6 @@ class LoginViewModel(
         }
         return false
     }
+
+
 }

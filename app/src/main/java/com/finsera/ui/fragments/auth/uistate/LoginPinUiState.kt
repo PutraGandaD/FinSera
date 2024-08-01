@@ -1,7 +1,7 @@
 package com.finsera.ui.fragments.auth.uistate
 
-data class LoginUiState(
+data class LoginPinUiState(
     val isLoading: Boolean = false,
     val message: String? = null,
-    val isUserLoggedIn: Boolean = false
+    val isPinCorrect: Boolean = false
 )

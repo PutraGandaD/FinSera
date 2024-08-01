@@ -1,6 +1,8 @@
 package com.finsera.data.source.remote
 
 import com.finsera.data.source.remote.response.login.LoginResponse
+import com.finsera.data.source.remote.response.refresh_token.RefreshTokenResponse
+import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.google.gson.JsonObject
 
 class RemoteDataSource(private val apiService: ApiService) {
@@ -12,4 +14,23 @@ class RemoteDataSource(private val apiService: ApiService) {
 
         return apiService.loginUser(param)
     }
+
+    suspend fun reloginUser(token: String, mpin: String) : ReloginResponse {
+        val param = JsonObject().apply {
+            addProperty("mpinAuth", mpin)
+        }
+
+        val accessToken = "Bearer $token"
+
+        return apiService.reloginUser(accessToken, param)
+    }
+
+    suspend fun refreshAccessToken(token: String) : RefreshTokenResponse {
+        val param = JsonObject().apply {
+            addProperty("refreshToken", token)
+        }
+
+        return apiService.refreshToken(param)
+    }
+
 }

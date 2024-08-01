@@ -3,7 +3,6 @@ package com.finsera.data.utils
 import com.finsera.data.source.remote.response.detail_user.DetailUserResponse
 import com.finsera.data.source.remote.response.error.AuthErrorResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
-import com.finsera.data.source.remote.response.login.LoginData
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.CekRekeningResponse
@@ -18,11 +17,19 @@ import com.finsera.domain.model.TransferSesama
 object DataMapper {
     fun loginDataToDomain(response: LoginResponse): Login {
         return Login(
-            code = response?.code,
+            code = response.code,
             message = response.message,
-            username = response.data?.username,
-            status = response.data?.status,
-            token = response.data?.token
+            accessToken = response.data.accessToken,
+            refreshToken = response.data.refreshToken,
+            status = response.data.status,
+            userId = response.data.userId
+        )
+    }
+
+    fun reloginResponseToDomain(response: ReloginResponse) : Relogin {
+        return Relogin(
+            data = response.data,
+            message = response.message
         )
     }
 
