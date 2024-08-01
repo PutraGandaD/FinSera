@@ -9,22 +9,14 @@ import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 
-class LoginUserUseCase(private val repository: IAuthRepository) {
-    suspend operator fun invoke(username: String, password: String) : Flow<Resource<String>> = flow {
+class LoginPinUserUseCase(private val repository: IAuthRepository) {
+    suspend operator fun invoke(mpin: String) : Flow<Resource<String>> = flow {
         emit(Resource.Loading())
         try {
-            val response = repository.login(username, password)
-
-            when(response.status) {
-                "ACTIVE" -> {
-                    repository.setLoginStatus(true)
-                    emit(Resource.Success("Login Berhasil"))
-                }
-                "INACTIVE" -> {
-                    repository.setLoginStatus(false)
-                    emit(Resource.Error("Akun anda nonaktif / dinonaktifkan. Silahkan hubungi Pusat Bantuan atau kunjungi kantor Bank BCA terdekat."))
-                }
-            }
+            repository.relogin(mpin)
+            val getRefreshToken = repository.getRefreshToken()
+            repository.refreshAccessToken(getRefreshToken) // refresh access token if login pin success
+            emit(Resource.Success("Berhasil Login"))
         } catch (t: Throwable) {
             when (t) {
                 is HttpException -> {
@@ -34,8 +26,8 @@ class LoginUserUseCase(private val repository: IAuthRepository) {
                         val jsonObject = JSONObject(response)
                         val error = jsonObject.getString("message")
 
-                        if (error == "username or password invalid") {
-                            emit(Resource.Error("Username atau Password Anda Salah"))
+                        if (error == "Pin is invalid") {
+                            emit(Resource.Error("PIN Anda invalid. Silahkan coba lagi."))
                         } else {
                             emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
                         }

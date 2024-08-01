@@ -17,6 +17,7 @@ import com.finsera.ui.fragments.auth.viewmodels.LoginViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
@@ -37,6 +38,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeLoggedInStatus()
+
         binding.btnLogin.setOnClickListener {
             val username = binding.etUsername.editText?.text.toString()
             val password = binding.etPassword.editText?.text.toString()
@@ -50,9 +53,9 @@ class LoginFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                loginViewModel.loginScreenUIState.collect { uiState ->
-                    uiState.errorMessage?.let { errorMessage ->
-                        Snackbar.make(requireView(), errorMessage, Snackbar.LENGTH_SHORT).show()
+                loginViewModel.loginScreenUIState.collectLatest { uiState ->
+                    uiState.message?.let { message ->
+                        Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
                         loginViewModel.userMessageShown()
                     }
 
@@ -70,7 +73,9 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+    }
 
+    private fun observeLoggedInStatus() {
         loginViewModel.userLoggedInStatus.observe(viewLifecycleOwner) {
             if(it) {
                 findNavController().navigate(R.id.action_loginFragment_to_loginPinFragment)

@@ -7,8 +7,11 @@ import com.finsera.data.source.local.LocalDataSource
 import com.finsera.data.source.remote.RemoteDataSource
 import com.finsera.domain.repository.IAuthRepository
 import com.finsera.domain.repository.ISaldoRepository
+import com.finsera.domain.usecase.auth.CheckLoggedInUseCase
+import com.finsera.domain.usecase.auth.LoginPinUserUseCase
 import com.finsera.domain.usecase.auth.LoginUserUseCase
 import com.finsera.domain.usecase.infosaldo.InfoSaldoUseCase
+import com.finsera.ui.fragments.auth.viewmodels.LoginPinViewModel
 import com.finsera.ui.fragments.auth.viewmodels.LoginViewModel
 import com.finsera.ui.fragments.home.viewmodel.HomeViewModel
 import com.finsera.ui.fragments.info.saldo.viewmodel.InfoSaldoViewModel
@@ -31,13 +34,16 @@ object AppModule {
     }
 
     val viewModelModule = module {
-        viewModel { LoginViewModel(get(), get()) }
+        viewModel { LoginViewModel(get(), get(), get()) }
+        viewModel { LoginPinViewModel(get(), get()) }
         viewModel { HomeViewModel(get()) }
         viewModel { InfoSaldoViewModel(get()) }
     }
 
     val useCaseModule = module {
         factory { LoginUserUseCase(get()) }
+        factory { CheckLoggedInUseCase(get()) }
+        factory { LoginPinUserUseCase(get()) }
         factory { InfoSaldoUseCase(get()) }
     }
 }
