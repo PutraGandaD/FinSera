@@ -2,6 +2,7 @@ package com.finsera.data.source.remote
 
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
+import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.refresh_token.RefreshTokenResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.google.gson.JsonObject
@@ -32,4 +33,11 @@ interface ApiService {
     suspend fun getSaldo(
         @Header("Authorization") accessToken: String
     ): InfoSaldoResponse
+
+    @GET("mutasi")
+    suspend fun getMutasi(
+        @Header("Authorization") accessToken: String,
+        @Body raw: JsonObject
+    ):MutasiResponse
+
 }
