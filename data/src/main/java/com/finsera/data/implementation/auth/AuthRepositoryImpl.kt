@@ -7,7 +7,7 @@ import com.finsera.domain.model.Login
 import com.finsera.domain.model.Relogin
 import com.finsera.domain.repository.IAuthRepository
 
-class           AuthRepositoryImpl(
+class AuthRepositoryImpl(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) : IAuthRepository {

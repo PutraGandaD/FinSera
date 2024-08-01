@@ -28,7 +28,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-
     private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(
@@ -51,7 +50,7 @@ class HomeFragment : Fragment() {
         }
 
         getInfoSaldo()
-        visibiliySaldo()
+        visibilitySaldo()
     }
 
     private fun getInfoSaldo() {
@@ -120,7 +119,7 @@ class HomeFragment : Fragment() {
         binding.cardNasabahInfo.tvSaldoRekeningCard.visibility = View.VISIBLE
     }
 
-    private fun visibiliySaldo() {
+    private fun visibilitySaldo() {
         binding.cardNasabahInfo.btnSaldoVisibility.setOnClickListener {
             homeViewModel.toggleSaldoVisibility()
         }
@@ -137,13 +136,13 @@ class HomeFragment : Fragment() {
                     getString(R.string.tv_saldo_card_rekening_home)
                 binding.cardNasabahInfo.btnSaldoVisibility.setImageResource(R.drawable.ic_rekening_visibility)
             }
+        }
 
-        val btnEWallet = view.findViewById<ConstraintLayout>(R.id.btn_menu_ewallet)
+        val btnEWallet = view?.findViewById<ConstraintLayout>(R.id.btn_menu_ewallet)
         btnEWallet?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_transferEWalletHomeFragment)
         }
     }
-
 
     private fun setUpBottomNavBar() {
         // set background for bottomNavigationView to null
@@ -184,4 +183,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+
 }

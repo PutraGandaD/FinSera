@@ -40,7 +40,8 @@ class RemoteDataSource(private val apiService: ApiService) {
         return apiService.refreshToken(param)
     }
 
-    suspend fun getSaldo() : InfoSaldoResponse {
-        return apiService.getSaldo()
+    suspend fun getSaldo(token: String) : InfoSaldoResponse {
+        val accessToken = "Bearer $token"
+        return apiService.getSaldo(accessToken)
     }
 }
