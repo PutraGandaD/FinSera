@@ -31,13 +31,21 @@ class LoginUserUseCase(private val repository: IAuthRepository) {
                     val response =
                         t.response()?.errorBody()?.source()?.buffer?.snapshot()?.utf8()
                     if (response != null) {
-                        val jsonObject = JSONObject(response)
-                        val error = jsonObject.getString("message")
+                        try {
+                            val jsonObject = JSONObject(response)
+                            val error = jsonObject.getString("message")
 
-                        if (error == "username or password invalid") {
-                            emit(Resource.Error("Username atau Password Anda Salah"))
-                        } else {
-                            emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
+                            if (error == "username or password invalid") {
+                                emit(Resource.Error("Username atau Password Anda Salah"))
+                            } else {
+                                emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
+                            }
+                        } catch (e: Exception) {
+                            when(e) {
+                                is JSONException -> {
+                                    emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
+                                }
+                            }
                         }
                     } else {
                         emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
