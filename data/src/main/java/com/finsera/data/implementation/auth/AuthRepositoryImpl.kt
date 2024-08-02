@@ -25,9 +25,9 @@ class AuthRepositoryImpl(
     }
 
     override suspend fun relogin(mpin: String): Relogin {
-            val accessToken = getAccessToken()
-            val response = remoteDataSource.reloginUser(accessToken, mpin)
-           return DataMapper.reloginResponseToDomain(response)
+        val accessToken = getAccessToken()
+        val response = remoteDataSource.reloginUser(accessToken, mpin)
+        return DataMapper.reloginResponseToDomain(response)
     }
 
     override suspend fun refreshAccessToken(accessToken: String) {
