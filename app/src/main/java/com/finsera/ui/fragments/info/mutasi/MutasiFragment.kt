@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finsera.R
 import com.finsera.common.utils.Resource
@@ -15,6 +18,8 @@ import com.finsera.common.utils.dialog.DatePickerFragment
 import com.finsera.databinding.FragmentMutasiBinding
 import com.finsera.ui.adapters.MutasiAdapter
 import com.finsera.ui.fragments.info.mutasi.viewmodel.MutasiViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -146,6 +151,24 @@ class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
 
                 is Resource.Error -> {
                     // Show the error message
+                }
+            }
+        }
+
+
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mutasiViewModel.mutasiUiState.collectLatest { uiState ->
+                    if (uiState.isLoading) {
+                        binding.progressBar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressBar.visibility = View.GONE
+                    }
+
+                    if (uiState.message != null) {
+                        Toast.makeText(requireContext(), uiState.message, Toast.LENGTH_SHORT).show()
+                    }
+                    mutasiAdapter.submitList(uiState.mutasi)
                 }
             }
         }
