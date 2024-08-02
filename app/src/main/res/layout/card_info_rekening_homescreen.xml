@@ -43,9 +43,6 @@
         </com.facebook.shimmer.ShimmerFrameLayout>
 
 
-
-
-
         <ImageButton
             android:id="@+id/btn_saldo_visibility"
             android:layout_width="22dp"

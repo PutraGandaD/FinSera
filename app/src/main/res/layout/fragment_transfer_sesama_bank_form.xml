@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
-    tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankFormFragment">
+    tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankFormFragment"
+    android:contentDescription="@string/screen_transfer_bank_sama">
 
     <RelativeLayout
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +56,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/nomor_rekening_tujuan"
+                    android:contentDescription="@string/desc_input_nomor_rekening"
                     android:text="@string/nomor_rekening_tujuan"
                     android:textSize="16sp"
                     android:textColor="@color/neutral_09" />
@@ -67,7 +68,6 @@
                     android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="10dp"
-                    android:contentDescription="@string/input_rekening"
                     android:hint="@string/nomor_rekening_tujuan"
                     android:singleLine="true" />
 
@@ -84,7 +84,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/nominal"
+                    android:contentDescription="@string/desc_input_nominal"
                     android:text="@string/nominal"
                     android:textSize="16sp"
                     android:textColor="@color/neutral_09" />
@@ -96,7 +96,6 @@
                     android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="10dp"
-                    android:contentDescription="@string/input_nominal"
                     android:hint="@string/nominal"
                     android:singleLine="true" />
 
@@ -113,7 +112,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/catatan"
+                    android:contentDescription="@string/desc_input_catatan"
                     android:text="@string/catatan"
                     android:textSize="16sp"
                     android:textColor="@color/neutral_09" />
@@ -125,7 +124,6 @@
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="10dp"
                     android:inputType="text|textMultiLine"
-                    android:contentDescription="@string/input_catatan"
                     android:hint="@string/catatan" />
 
             </LinearLayout>
@@ -135,15 +133,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginTop="4dp">
+                android:layout_marginTop="4dp"
+                android:contentDescription="@string/desc_simpan_ke_daftar_tersimpan">
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/simpan_ke_daftar_tersimpan_klik_untuk_simpan"
-                    android:text="Simpan ke daftar tersimpan"
+                    android:text="@string/simpan_ke_daftar_tersimpan"
                     android:textSize="16sp"/>
             </LinearLayout>
 
@@ -157,7 +155,7 @@
         android:background="@drawable/button_background_primary"
         app:backgroundTint="@color/primary_blue"
         android:contentDescription="@string/lanjut"
-        android:text="Lanjut"
+        android:text="@string/lanjut"
         android:textSize="20sp"
         android:layout_marginBottom="40dp"
         app:layout_constraintStart_toStartOf="parent"
