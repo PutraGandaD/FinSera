@@ -17,8 +17,7 @@
         <ImageView
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/ic_dana"
-            android:contentDescription="@string/logo_dana"/>
+            android:src="@drawable/ic_dana"/>
 
         <TextView
             android:layout_width="wrap_content"

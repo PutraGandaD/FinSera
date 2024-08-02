@@ -33,7 +33,7 @@
         android:contentDescription="@string/e_wallet"/>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_history"
+        android:id="@+id/btn_saved_list"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginTop="16dp"
@@ -61,9 +61,9 @@
         app:icon="@drawable/ic_add_circle"
         app:iconGravity="textEnd"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_history"
-        app:layout_constraintTop_toTopOf="@id/btn_history"
-        app:layout_constraintBottom_toBottomOf="@id/btn_history"
+        app:layout_constraintStart_toEndOf="@id/btn_saved_list"
+        app:layout_constraintTop_toTopOf="@id/btn_saved_list"
+        app:layout_constraintBottom_toBottomOf="@id/btn_saved_list"
         android:contentDescription="@string/input_baru"/>
 
     <com.google.android.material.textfield.TextInputLayout
