@@ -4,6 +4,7 @@ import android.util.Log
 import com.finsera.common.utils.Resource
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
+import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.refresh_token.RefreshTokenResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.google.gson.JsonObject
@@ -44,4 +45,10 @@ class RemoteDataSource(private val apiService: ApiService) {
         val accessToken = "Bearer $token"
         return apiService.getSaldo(accessToken)
     }
+
+    suspend fun getMutasi(token: String, startDate: String?, endDate: String?, page: Int, size: Int) : MutasiResponse{
+        val accessToken = "Bearer $token"
+        return apiService.getMutasi(accessToken, startDate, endDate, page, size)
+    }
+
 }

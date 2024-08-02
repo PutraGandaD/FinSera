@@ -16,7 +16,7 @@ class LoginPinUserUseCase(private val repository: IAuthRepository) {
             repository.relogin(mpin)
             val getRefreshToken = repository.getRefreshToken()
             repository.refreshAccessToken(getRefreshToken) // refresh access token if login pin success
-            emit(Resource.Success("Berhasil Login"))
+                emit(Resource.Success("Berhasil Login"))
         } catch (t: Throwable) {
             when (t) {
                 is HttpException -> {

@@ -39,7 +39,7 @@ class InfoSaldoViewModel(private val infoSaldoUseCase: InfoSaldoUseCase) : ViewM
 
                     is Resource.Error -> {
                         _saldoUIState.value =
-                            currentState.copy(isLoading = false, data = null, message = it.message)
+                            currentState.copy(isLoading = true, data = null, message = it.message)
                     }
                 }
             }

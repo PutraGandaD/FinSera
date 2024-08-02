@@ -1,5 +1,9 @@
 package com.finsera.domain.repository
 
-interface IMutasiIRepository {
-    suspend fun getMutasi(startDate: String ?, endDate: String?,page: Int,size: Int?)
+import com.finsera.common.utils.Resource
+import com.finsera.domain.model.Mutasi
+import kotlinx.coroutines.flow.Flow
+
+interface IMutasiRepository {
+    suspend fun getMutasi(startDate: String?, endDate: String?, page: Int = 1, size: Int = 10) : Flow<Resource<List<Mutasi>>>
 }
