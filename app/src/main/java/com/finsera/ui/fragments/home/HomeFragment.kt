@@ -42,8 +42,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val btnInfoSaldo = view?.findViewById<ConstraintLayout>(R.id.btn_menu_infosaldo)
-        btnInfoSaldo?.setOnClickListener {
+        val btnInfoSaldo = view.findViewById<ConstraintLayout>(R.id.btn_menu_infosaldo)
+        btnInfoSaldo.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
         }
 
