@@ -45,7 +45,7 @@ class MutasiViewModel(
 
                         is Resource.Success -> {
                             _mutasiUiState.update { uiState ->
-                                uiState.copy(isLoading = false, message = null, mutasi = result.data ?: emptyList())
+                                uiState.copy(isLoading = false, message = "Riwayat transaksi berhasil dimuat", mutasi = result.data ?: emptyList())
                             }
                         }
 

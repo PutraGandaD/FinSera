@@ -16,4 +16,6 @@
     <dimen name="caption_1">14sp</dimen>
     <dimen name="caption_2">12sp</dimen>
     <dimen name="caption_3">10sp</dimen>
+
+    <dimen name="tv_pin_size">35sp</dimen>
 </resources>

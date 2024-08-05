@@ -28,7 +28,7 @@ class MutasiUseCase (private val mutasiRepository: IMutasiRepository) {
                             val error = jsonObject.getString("message")
 
                             when (error) {
-                                "Transaction not found" -> emit(Resource.Error("Transaksi tidak ditemukan."))
+                                "Transaction not found" -> emit(Resource.Error("Riwayat transaksi tidak ditemukan."))
                                 "JWT Token has expired" -> emit(Resource.Error("Sesi Anda Habis"))
                                 else -> emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
                             }

@@ -13,7 +13,7 @@
         <ImageView
             android:id="@+id/iv_topbg_homescreen"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_140sdp"
             android:importantForAccessibility="no"
             android:scaleType="fitXY"
             android:src="@drawable/iv_topbg_homescreen"
@@ -35,7 +35,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp"
+            android:padding="@dimen/_20sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -45,11 +45,11 @@
 
             <ImageView
                 android:id="@+id/iv_bca_topbar_logo"
-                android:layout_width="60dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="12dp"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:importantForAccessibility="no"
-                android:src="@drawable/ic_bca_labeled_white_logo"
+                android:src="@drawable/ic_finsera_putih"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,10 +57,10 @@
                 android:id="@+id/tv_topbg_hello_placeholder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="@dimen/_14sdp"
                 android:text="@string/tv_topbg_hello_placeholder"
                 android:textColor="@color/neutral_02"
-                android:textSize="18sp"
+                android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toTopOf="@id/tv_topbg_account_name"
                 app:layout_constraintStart_toEndOf="@id/iv_bca_topbar_logo"
                 app:layout_constraintTop_toTopOf="@id/iv_bca_topbar_logo"
@@ -70,10 +70,10 @@
                 android:id="@+id/tv_topbg_account_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginStart="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_6sdp"
                 android:textColor="@color/neutral_02"
-                android:textSize="18sp"
+                android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_bca_topbar_logo"
                 app:layout_constraintStart_toEndOf="@id/iv_bca_topbar_logo"
                 app:layout_constraintTop_toBottomOf="@id/tv_topbg_hello_placeholder"
@@ -81,20 +81,20 @@
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/progress_bar_top_name"
-                android:layout_width="100dp"
+                android:layout_width="@dimen/_100sdp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginStart="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_6sdp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_bca_topbar_logo"
                 app:layout_constraintStart_toEndOf="@id/iv_bca_topbar_logo"
                 app:layout_constraintTop_toBottomOf="@id/tv_topbg_hello_placeholder"
                 app:shimmer_auto_start="true">
 
                 <TextView
-                    android:layout_width="100dp"
+                    android:layout_width="@dimen/_100sdp"
                     android:layout_height="wrap_content"
                     android:background="@color/neutral_03"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/_12ssp"
                     tools:text="@string/tv_topbg_account_name" />
 
             </com.facebook.shimmer.ShimmerFrameLayout>
@@ -114,7 +114,7 @@
                 android:id="@+id/btn_notification"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="@dimen/_16sdp"
                 android:background="@color/primary_darkblue"
                 android:contentDescription="@string/tv_talkback_notifikasi_btn"
                 android:src="@drawable/ic_btn_notification_with_badge"
@@ -127,7 +127,7 @@
                 layout="@layout/card_info_rekening_homescreen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="@dimen/_22sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_bca_topbar_logo" />
@@ -136,7 +136,7 @@
                 android:id="@+id/et_cari_fitur"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:textColorHint="@color/et_text_hint"
                 app:endIconMode="clear_text"
                 app:hintEnabled="false"
@@ -152,9 +152,9 @@
                     android:background="@drawable/et_textfield_background_2"
                     android:hint="@string/tv_placeholder_cari_fitur"
                     android:inputType="text"
-                    android:padding="16dp"
-                    android:paddingStart="48dp"
-                    android:textSize="18sp" />
+                    android:padding="@dimen/_12sdp"
+                    android:paddingStart="@dimen/_40sdp"
+                    android:textSize="@dimen/_14ssp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,7 +163,7 @@
                 layout="@layout/ic_home_menu_transfer_sesama"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 app:layout_constraintEnd_toStartOf="@id/btn_menu_transfer_antarbank"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +174,7 @@
                 layout="@layout/ic_home_menu_transfer_antarbank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 app:layout_constraintEnd_toStartOf="@id/btn_menu_virtual_account"
                 app:layout_constraintStart_toEndOf="@id/btn_menu_transfer_sesama"
                 app:layout_constraintTop_toBottomOf="@id/et_cari_fitur" />
@@ -184,7 +184,7 @@
                 layout="@layout/ic_home_menu_virtual_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 app:layout_constraintEnd_toStartOf="@id/btn_menu_ewallet"
                 app:layout_constraintStart_toEndOf="@id/btn_menu_transfer_antarbank"
                 app:layout_constraintTop_toBottomOf="@id/et_cari_fitur" />
@@ -194,7 +194,7 @@
                 layout="@layout/ic_home_menu_ewallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_20sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/btn_menu_virtual_account"
                 app:layout_constraintTop_toBottomOf="@id/et_cari_fitur" />
@@ -204,7 +204,7 @@
                 layout="@layout/ic_home_menu_infosaldo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/_14sdp"
                 app:layout_constraintStart_toStartOf="@id/btn_menu_transfer_sesama"
                 app:layout_constraintTop_toBottomOf="@id/btn_menu_transfer_sesama" />
 
