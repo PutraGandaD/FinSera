@@ -45,19 +45,18 @@ object DataMapper {
         )
     }
 
-    fun mutasiResponseToDomain(response: MutasiResponse): List<Mutasi>{
-        return response.data.map{
-            Mutasi(
-                code = response.code,
-                message = response.message,
-                transactionInformation = it.transactionInformation,
-                transactionId = it.transactionId,
-                amount = it.amountTransfer.amount,
-                currency = it.amountTransfer.currency,
-                accountNumber = it.accountNumber,
-                noTransaction = it.noTransaction,
-                transactionDate = it.transactionDate
-            )
+    fun mutasiResponseToDomain(response: MutasiResponse): List<Mutasi>? {
+        return response.data?.let {
+            it.map {
+                Mutasi(
+                    amount = it.amountTransfer.amount,
+                    destinationName = it.destinationNameAccountNumber,
+                    noTransaction = it.noTransaction,
+                    transactionDate = it.transactionDate,
+                    transactionInformation = it.transactionInformation,
+                    transactionType = it.transactionsType
+                )
+            }
         }
     }
 

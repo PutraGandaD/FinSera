@@ -7,7 +7,7 @@ data class MutasiResponse(
     @SerializedName("code")
     val code: Int,
     @SerializedName("data")
-    val `data`: List<MutasiData>,
+    val data: List<MutasiData>?,
     @SerializedName("message")
     val message: String,
     @SerializedName("status")

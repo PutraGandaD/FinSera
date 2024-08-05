@@ -42,13 +42,12 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpBottomNavBar()
-
-        val btnInfoSaldo = view.findViewById<ConstraintLayout>(R.id.btn_menu_infosaldo)
+        val btnInfoSaldo = view?.findViewById<ConstraintLayout>(R.id.btn_menu_infosaldo)
         btnInfoSaldo?.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
         }
 
+        setUpBottomNavBar()
         getInfoSaldo()
         visibilitySaldo()
     }
@@ -136,11 +135,6 @@ class HomeFragment : Fragment() {
                     getString(R.string.tv_saldo_card_rekening_home)
                 binding.cardNasabahInfo.btnSaldoVisibility.setImageResource(R.drawable.ic_rekening_visibility)
             }
-        }
-
-        val btnEWallet = view?.findViewById<ConstraintLayout>(R.id.btn_menu_ewallet)
-        btnEWallet?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_transferEWalletHomeFragment)
         }
     }
 

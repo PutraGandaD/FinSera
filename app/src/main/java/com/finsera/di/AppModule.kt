@@ -43,7 +43,7 @@ object AppModule {
         viewModel { LoginPinViewModel(get(), get()) }
         viewModel { HomeViewModel(get()) }
         viewModel { InfoSaldoViewModel(get()) }
-        viewModel { MutasiViewModel(get()) }
+        viewModel { MutasiViewModel(get(), get()) }
     }
 
     val useCaseModule = module {

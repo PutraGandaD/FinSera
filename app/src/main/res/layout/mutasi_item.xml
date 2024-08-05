@@ -2,69 +2,78 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="18dp"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="16dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tv_date"
-        android:fontFamily="@font/calibri_regular"
+        android:textStyle="bold"
         tools:text="@string/date_example"
-        android:textSize="@dimen/body_text1"
+        android:textSize="16sp"
         android:textColor="@color/neutral_09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-
+    <ImageView
+        android:id="@+id/ic_status_uang"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_uangmasuk_mutasi"
+        app:layout_constraintTop_toBottomOf="@id/tv_date"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_detail_mutasi"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_description"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/calibri_regular"
-        tools:text="@string/description_example"
-        android:textSize="@dimen/body_text1"
-        android:maxEms="9"
+        android:text="@string/placeholder_detail_mutasi"
+        android:textSize="18sp"
+        android:maxLines="3"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
         android:textColor="@color/neutral_09"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_date"/>
-
+        app:layout_constraintStart_toEndOf="@id/ic_status_uang"
+        app:layout_constraintTop_toTopOf="@id/ic_status_uang"
+        app:layout_constraintEnd_toStartOf="@id/tv_nominal_uang"
+        app:layout_constraintBottom_toBottomOf="@id/ic_status_uang"/>
 
     <TextView
+        android:id="@+id/tv_nominal_uang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_amount"
-        android:fontFamily="@font/calibri_regular"
-        tools:text="@string/amount_example"
-        android:textSize="@dimen/body_text1"
+        android:text="+ Rp500.000"
+        android:textSize="18sp"
         android:textColor="@color/secondary_green"
+        android:textStyle="bold"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_description"/>
+        app:layout_constraintTop_toTopOf="@id/tv_detail_mutasi"
+        app:layout_constraintBottom_toTopOf="@id/tv_waktu_transaksi"/>
 
     <TextView
+        android:id="@+id/tv_waktu_transaksi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_date_time"
-        android:fontFamily="@font/calibri_regular"
-        android:text="@string/datetime_example"
-        tools:textSize="@dimen/body_text1"
-        android:layout_marginTop="15dp"
+        android:text="00:00 WIB"
+        android:textSize="14sp"
         android:textColor="@color/neutral_09"
+        app:layout_constraintTop_toBottomOf="@id/tv_nominal_uang"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/tv_description"
-        app:layout_constraintTop_toBottomOf="@id/tv_amount"/>
+        app:layout_constraintBottom_toBottomOf="@id/tv_detail_mutasi"/>
 
     <View
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="1dp"
+        android:background="@color/et_text_hint"
         android:layout_marginTop="16dp"
-        android:background="@color/neutral_03"
-        app:layout_constraintTop_toBottomOf="@id/tv_date_time"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/ic_status_uang"
+        app:layout_constraintTop_toBottomOf="@id/tv_waktu_transaksi"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
