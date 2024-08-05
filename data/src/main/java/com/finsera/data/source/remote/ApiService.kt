@@ -21,7 +21,7 @@ interface ApiService {
 
     @POST("auth/relogin")
     suspend fun reloginUser(
-        @Header("Authorization") refreshToken: String,
+        @Header("Authorization") accessToken: String,
         @Body raw: JsonObject
     ): ReloginResponse
 
@@ -40,8 +40,6 @@ interface ApiService {
         @Header("Authorization") accessToken: String,
         @Query("startDate") startDate: String?,
         @Query("endDate") endDate: String?,
-        @Query("page") page: Int =1,
-        @Query("size") size: Int =10,
-    ):MutasiResponse
+    ): MutasiResponse
 
 }

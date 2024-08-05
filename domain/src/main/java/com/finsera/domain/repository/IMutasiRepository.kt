@@ -5,5 +5,5 @@ import com.finsera.domain.model.Mutasi
 import kotlinx.coroutines.flow.Flow
 
 interface IMutasiRepository {
-    suspend fun getMutasi(startDate: String?, endDate: String?, page: Int = 1, size: Int = 10) : Flow<Resource<List<Mutasi>>>
+    suspend fun getMutasi(startDate: String?, endDate: String?) : List<Mutasi>?
 }

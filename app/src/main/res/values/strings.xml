@@ -172,4 +172,5 @@
     <string name="desc_promo">Pilih filter notifikasi tipe promo</string>
     <string name="desc_transaction">Pilih filter notifikasi tipe transaksi</string>
     <string name="desc_info">Pilih filter notifikasi tipe info</string>
+    <string name="placeholder_detail_mutasi">Transfer ke Rekening Admin</string>
 </resources>
