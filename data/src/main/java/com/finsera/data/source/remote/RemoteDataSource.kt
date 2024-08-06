@@ -8,6 +8,9 @@ import com.finsera.data.source.remote.response.refresh_token.RefreshTokenRespons
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
 import com.google.gson.JsonObject
+import okhttp3.ResponseBody
+import retrofit2.HttpException
+import java.io.IOException
 
 class RemoteDataSource(private val apiService: ApiService) {
     suspend fun authLoginUser(username: String, password: String) : LoginResponse {
@@ -68,6 +71,17 @@ class RemoteDataSource(private val apiService: ApiService) {
         val accessToken = "Bearer $token"
 
         return apiService.transferSesamaBank(accessToken, param)
+    }
+
+    suspend fun downloadMutasi(token: String, startDate: String, endDate: String): ResponseBody {
+        val accessToken = "Bearer $token"
+        return try {
+            apiService.getDownloadMutasi(accessToken, startDate, endDate)
+        } catch (e: HttpException) {
+            throw IOException("Server error")
+        } catch (e: IOException) {
+            throw IOException("Network error")
+        }
     }
 
 }

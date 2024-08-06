@@ -18,6 +18,7 @@ import androidx.lifecycle.viewModelScope
 import com.finsera.MainApplication
 import com.finsera.common.utils.Resource
 import com.finsera.domain.model.Mutasi
+import com.finsera.domain.usecase.mutasi.DownloadMutasiUseCase
 import com.finsera.domain.usecase.mutasi.MutasiUseCase
 import com.finsera.ui.fragments.info.mutasi.uistate.MutasiUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,10 +26,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 
 class MutasiViewModel(
     app: Application,
-    private val mutasiUseCase: MutasiUseCase
+    private val mutasiUseCase: MutasiUseCase,
+    private val downloadMutasiFileUseCase: DownloadMutasiUseCase
 ) : AndroidViewModel(app) {
     private val _mutasiUiState = MutableStateFlow(MutasiUiState())
     val mutasiUiState = _mutasiUiState.asStateFlow()
@@ -67,6 +70,22 @@ class MutasiViewModel(
                 }
             }
 
+        }
+    }
+
+    private val _downloadState = MutableLiveData<Resource<ResponseBody>>()
+    val downloadState: LiveData<Resource<ResponseBody>> = _downloadState
+
+    fun downloadMutasiFile(startDate: String, endDate: String) {
+        viewModelScope.launch {
+            _downloadState.postValue(Resource.Loading())
+            try {
+                downloadMutasiFileUseCase(startDate, endDate).collect { resource ->
+                    _downloadState.postValue(resource)
+                }
+            } catch (t: Throwable) {
+                _downloadState.postValue(Resource.Error("An unexpected error occurred"))
+            }
         }
     }
 

@@ -15,6 +15,7 @@ import com.finsera.domain.usecase.auth.CheckLoggedInUseCase
 import com.finsera.domain.usecase.auth.LoginPinUserUseCase
 import com.finsera.domain.usecase.auth.LoginUserUseCase
 import com.finsera.domain.usecase.infosaldo.InfoSaldoUseCase
+import com.finsera.domain.usecase.mutasi.DownloadMutasiUseCase
 import com.finsera.domain.usecase.mutasi.MutasiUseCase
 import com.finsera.domain.usecase.transfer_sesama.CekRekeningSesamaUseCase
 import com.finsera.domain.usecase.transfer_sesama.TransferSesamaBankUseCase
@@ -50,7 +51,7 @@ object AppModule {
         viewModel { LoginPinViewModel(get(), get()) }
         viewModel { HomeViewModel(get()) }
         viewModel { InfoSaldoViewModel(get()) }
-        viewModel { MutasiViewModel(get(), get()) }
+        viewModel { MutasiViewModel(get(), get(),get()) }
         viewModel { TransferSesamaBankViewModel(get(), get()) }
         viewModel { CekRekeningSesamaViewModel(get(), get()) }
     }
@@ -63,6 +64,7 @@ object AppModule {
         factory { MutasiUseCase(get(), get()) }
         factory { TransferSesamaBankUseCase(get(), get()) }
         factory { CekRekeningSesamaUseCase(get(), get()) }
+        factory { DownloadMutasiUseCase(get()) }
     }
 
     val databaseModule = module {
