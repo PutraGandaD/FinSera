@@ -28,9 +28,10 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/transfer_sesama_bank"
         android:text="Transfer Sesama Bank"
-        android:textSize="@dimen/heading_3"
+        android:textSize="@dimen/_18ssp"
         android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,12 +47,12 @@
         android:text="@string/daftar_tersimpan"
         android:textSize="@dimen/button_1"
         app:cornerRadius="8dp"
-        app:layout_constraintEnd_toStartOf="@id/btn_filter"
+        app:layout_constraintEnd_toStartOf="@id/btn_transfer_baru"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_title_label" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_filter"
+        android:id="@+id/btn_transfer_baru"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="10dp"
@@ -79,7 +80,7 @@
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_filter"
+        app:layout_constraintTop_toBottomOf="@id/btn_transfer_baru"
         app:startIconDrawable="@drawable/ic_search_textfield"
         app:startIconTint="@color/et_icon_tint">
 

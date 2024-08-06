@@ -5,56 +5,89 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.finsera.R
+import com.finsera.common.utils.Constant
+import com.finsera.databinding.FragmentTransferSesamaBankFormBinding
+import com.finsera.ui.fragments.transfer.sesama_bank.data.CekRekening
+import com.finsera.ui.fragments.transfer.sesama_bank.viewmodel.CekRekeningSesamaViewModel
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [TransferSesamaBankFormFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class TransferSesamaBankFormFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentTransferSesamaBankFormBinding? = null
+    private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private val cekRekeningSesamaViewModel : CekRekeningSesamaViewModel by inject()
+
+    private lateinit var dataTransferBundle : CekRekening
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_transfer_sesama_bank_form, container, false)
+        _binding = FragmentTransferSesamaBankFormBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment TransferSesamaBankForm.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TransferSesamaBankFormFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        observer()
+
+        binding.checkboxSimpanKeDaftarTersimpan.isEnabled = false
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.btnLanjut.setOnClickListener {
+            val noRekening = binding.nomorEditText.text.toString()
+            val nominal = binding.nominalEditText.text.toString().toDoubleOrNull()
+            val catatan = binding.catatanEditText.text.toString()
+
+            if(noRekening != null && nominal != null) {
+                dataTransferBundle = CekRekening(noRekening, nominal, catatan)
+                cekRekeningSesamaViewModel.cekRekeningSesama(noRekening)
+            } else {
+                Snackbar.make(requireView(), "Mohon isi kolom No Rekening dan nominal terlebih dahulu!", Snackbar.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun observer() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                cekRekeningSesamaViewModel.cekRekeningSesamaUiState.collectLatest { uiState ->
+                    uiState.message?.let { message ->
+                        Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+                        cekRekeningSesamaViewModel.messageShown()
+                    }
+
+                    if(uiState.isLoading) {
+                        binding.progressBar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressBar.visibility = View.GONE
+                    }
+
+                    if(uiState.isValid) {
+                        if(findNavController().currentDestination?.id == R.id.transferSesamaBankForm) {
+                            val bundle = Bundle().apply {
+                                putParcelable(Constant.TRANSFER_SESAMA_BUNDLE, dataTransferBundle)
+                            }
+
+                            findNavController().navigate(R.id.action_transferSesamaBankForm_to_transferSesamaBankFormKonfirmasi, bundle)
+                            cekRekeningSesamaViewModel.redirectedToKonfirmasiForm()
+                        }
+                    }
                 }
             }
+        }
     }
 }

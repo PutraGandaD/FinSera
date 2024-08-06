@@ -6,6 +6,8 @@ class Constant {
         const val USER_ACCESS_TOKEN_KEY = "USER_ACCESS_TOKEN"
         const val USER_REFRESH_TOKEN_KEY = "USER_REFRESH_TOKEN"
         const val USER_LOGGED_IN_STATUS = "USER_LOGGED_IN_STATUS"
+
+        const val TRANSFER_SESAMA_BUNDLE = "TRANSFER_SESAMA_BUNDLE"
     }
 }
 

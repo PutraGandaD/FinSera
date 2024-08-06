@@ -1,24 +1,26 @@
-package com.finsera.domain.usecase.mutasi
+package com.finsera.domain.usecase.transfer_sesama
 
 import com.finsera.common.utils.Resource
-import com.finsera.domain.model.Mutasi
+import com.finsera.domain.model.TransferSesama
 import com.finsera.domain.repository.IAuthRepository
-import com.finsera.domain.repository.IMutasiRepository
+import com.finsera.domain.repository.ITransferRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 
-class MutasiUseCase (
+class TransferSesamaBankUseCase(
     private val authRepository: IAuthRepository,
-    private val mutasiRepository: IMutasiRepository) {
-    suspend operator fun invoke(startDate: String?, endDate: String?) : Flow<Resource<List<Mutasi>?>> = flow {
+    private val transferRepository: ITransferRepository
+) {
+    suspend operator fun invoke(noRekTujuan: String, nominal: Double, note: String, mpin: String) : Flow<Resource<TransferSesama>> = flow {
         emit(Resource.Loading())
         try {
-            val response = mutasiRepository.getMutasi(startDate, endDate)
+            val response = transferRepository.transferSesamaBank(
+                noRekTujuan, nominal, note, mpin
+            )
             emit(Resource.Success(response))
         } catch (t: Throwable) {
             when (t) {
@@ -31,13 +33,16 @@ class MutasiUseCase (
                             val error = jsonObject.getString("message")
 
                             when (error) {
-                                "Transaction not found" -> emit(Resource.Error("Riwayat transaksi tidak ditemukan."))
+                                "Nomor Rekening Tidak Ditemukan" -> emit(Resource.Error("Nomor Rekening Tidak Ditemukan"))
                                 "JWT Token has expired" -> {
                                     val getRefreshToken = authRepository.getRefreshToken()
                                     authRepository.refreshAccessToken(getRefreshToken)
-                                    val response = mutasiRepository.getMutasi(startDate, endDate)
+                                    val response = transferRepository.transferSesamaBank(
+                                        noRekTujuan, nominal, note, mpin
+                                    )
                                     emit(Resource.Success(response))
                                 }
+                                "Pin Anda Salah" -> emit(Resource.Error("PIN Anda Salah. Silahkan input ulang PIN anda."))
                                 else -> emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
                             }
                         } catch (e: Exception) {

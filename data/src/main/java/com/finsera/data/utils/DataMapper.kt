@@ -1,15 +1,14 @@
 package com.finsera.data.utils
 
+import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningResponse
 import com.finsera.data.source.remote.response.detail_user.DetailUserResponse
 import com.finsera.data.source.remote.response.error.AuthErrorResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
-import com.finsera.data.source.remote.response.transfer_sesama_bank.CekRekeningResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
 import com.finsera.domain.model.CekRekening
-import com.finsera.domain.model.DetailUser
 import com.finsera.domain.model.Login
 import com.finsera.domain.model.Mutasi
 import com.finsera.domain.model.Relogin
@@ -68,27 +67,25 @@ object DataMapper {
 //        )
 //    }
 //
-//    fun cekRekeningResponseToDomain(response: CekRekeningResponse): CekRekening {
-//        return CekRekening(
-//            note = response.data.note,
-//            nominal = response.data.nominal,
-//            transactionNum = response.data.transactionNum,
-//            accountnumRecipient = response.data.accountnumRecipient
-//        )
-//    }
+    fun cekRekeningResponseToDomain(response: CekRekeningResponse): CekRekening {
+        return CekRekening(
+            accountnumRecipient = response.data?.accountnumRecipient,
+            recipientName = response.data?.nameRecipient,
+            message = response.message
+        )
+    }
 //
-//    fun transferSesamaResponseToDomain(response: TransferSesamaResponse): TransferSesama {
-//        return TransferSesama(
-//            transactionDate = response.data.transactionDate,
-//            note = response.data.note,
-//            nominal = response.data.nominal,
-//            nameRecipient = response.data.nameRecipient,
-//            transactionNum = response.data.transactionNum,
-//            accountnumRecipient = response.data.accountnumRecipient,
-//            nameSender = response.data.nameSender,
-//            accountnumSender = response.data.accountnumSender
-//        )
-//    }
+    fun transferSesamaResponseToDomain(response: TransferSesamaResponse): TransferSesama {
+        return TransferSesama(
+            transactionDate = response.data?.transactionDate,
+            note = response.data?.note,
+            nominal = response.data?.nominal,
+            nameRecipient = response.data?.nameRecipient,
+            transactionNum = response.data?.transactionNum,
+            accountnumRecipient = response.data?.accountnumRecipient,
+            message = response.message
+        )
+    }
 //
 //    fun detailUserToDomain(response: DetailUserResponse): DetailUser {
 //        return DetailUser(
