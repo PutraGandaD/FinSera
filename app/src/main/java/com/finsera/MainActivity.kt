@@ -1,7 +1,11 @@
 package com.finsera
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.finsera.databinding.ActivityMainBinding
 
@@ -13,6 +17,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        this.findNavController(R.id.NavHostFragment)
+        findNavController(R.id.NavHostFragment)
+    }
+
+    override fun attachBaseContext(newBase: Context?) {
+        val newOverride = Configuration(newBase?.resources?.configuration)
+
+        newOverride.fontScale = 1.0f
+        applyOverrideConfiguration(newOverride)
+
+        super.attachBaseContext(newBase)
     }
 }

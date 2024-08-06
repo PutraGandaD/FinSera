@@ -27,10 +27,15 @@ class LoginPinUserUseCase(private val repository: IAuthRepository) {
                             val jsonObject = JSONObject(response)
                             val error = jsonObject.getString("message")
 
-                            if (error == "Pin is invalid") {
-                                emit(Resource.Error("PIN Anda invalid. Silahkan coba lagi."))
-                            } else {
-                                emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
+                            when(error) {
+                                "Pin is invalid" -> emit(Resource.Error("PIN Anda invalid. Silahkan coba lagi."))
+                                "JWT Token has expired" -> {
+                                    val getRefreshToken = repository.getRefreshToken()
+                                    repository.refreshAccessToken(getRefreshToken)
+                                    repository.relogin(mpin)
+                                    emit(Resource.Success("Berhasil Login"))
+                                }
+                                else -> emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
                             }
                         } catch (e: Exception) {
                             when(e) {
@@ -46,10 +51,6 @@ class LoginPinUserUseCase(private val repository: IAuthRepository) {
 
                 is IOException -> {
                     emit(Resource.Error("Ada masalah pada koneksi internet anda. Silahkan coba lagi."))
-                }
-
-                is JSONException -> {
-                    emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
                 }
             }
         }

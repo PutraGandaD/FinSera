@@ -47,30 +47,13 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
         super.onViewCreated(view, savedInstanceState)
 
         tts = TextToSpeech(requireContext(), this)
-
-        setUpBottomNavBar()
-
-        val btnTransferSesama = view.findViewById<ConstraintLayout>(R.id.btn_menu_transfer_sesama)
-        btnTransferSesama?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_transferSesamaBankHome)
-        }
-        val btnTransferAntarBank = view.findViewById<ConstraintLayout>(R.id.btn_menu_transfer_antarbank)
-        btnTransferAntarBank?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_transferAntarBankHome)
-        }
-        val btnVirtualAccount = view.findViewById<ConstraintLayout>(R.id.btn_menu_virtual_account)
-        btnVirtualAccount?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_transferVirtualAccountHome)
-        }
-        val btnEWallet = view.findViewById<ConstraintLayout>(R.id.btn_menu_ewallet)
-        btnEWallet?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_transferEWalletHomeFragment)
-        }
+        
         val btnInfoSaldo = view.findViewById<ConstraintLayout>(R.id.btn_menu_infosaldo)
-        btnInfoSaldo?.setOnClickListener {
+        btnInfoSaldo.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
         }
 
+        setUpBottomNavBar()
         getInfoSaldo()
         visibilitySaldo()
     }
@@ -179,11 +162,6 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
         binding.cardNasabahInfo.tvSaldoRekeningCard.setOnClickListener {
             speakBalance()
-        }
-
-        val btnEWallet = view?.findViewById<ConstraintLayout>(R.id.btn_menu_ewallet)
-        btnEWallet?.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_transferEWalletHomeFragment)
         }
     }
 

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class InfoSaldoUseCase (private val repository: ISaldoRepository) {
-    suspend fun invoke(): Flow<Resource<Saldo>> = flow {
+    suspend operator fun invoke(): Flow<Resource<Saldo>> = flow {
         emit(Resource.Loading())
         try {
             val saldo = repository.getSaldo()
