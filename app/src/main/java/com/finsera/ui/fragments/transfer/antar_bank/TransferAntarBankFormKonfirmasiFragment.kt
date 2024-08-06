@@ -1,22 +1,18 @@
 package com.finsera.ui.fragments.transfer.antar_bank
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.finsera.R
-import com.finsera.databinding.FragmentTransferAntarBankHomeBinding
-import com.finsera.databinding.FragmentTransferVirtualAccountHomeBinding
+import com.finsera.databinding.FragmentTransferAntarBankFormKonfirmasiBinding
 
-class TransferAntarBankHomeFragment : Fragment() {
-    private var _binding: FragmentTransferAntarBankHomeBinding? = null
+class TransferAntarBankFormKonfirmasiFragment : Fragment() {
+    private var _binding: FragmentTransferAntarBankFormKonfirmasiBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentTransferAntarBankHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentTransferAntarBankFormKonfirmasiBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -26,9 +22,7 @@ class TransferAntarBankHomeFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        binding.btnInput.setOnClickListener {
-            findNavController().navigate(R.id.action_transferAntarBankHome_to_transferAntarBankForm)
-        }
+        // TODO
     }
 
     override fun onDestroyView() {
@@ -38,10 +32,10 @@ class TransferAntarBankHomeFragment : Fragment() {
 }
 
 //    companion object {
-//        fun newInstance() = TransferAntarBankHomeFragment()
+//        fun newInstance() = TransferAntarbankKonfirmasiFragment()
 //    }
 //
-//    private val viewModel: TransferAntarBankHomeViewModel by viewModels()
+//    private val viewModel: TransferAntarbankFormKonfirmasiViewModel by viewModels()
 //
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -53,6 +47,10 @@ class TransferAntarBankHomeFragment : Fragment() {
 //        inflater: LayoutInflater, container: ViewGroup?,
 //        savedInstanceState: Bundle?
 //    ): View {
-//        return inflater.inflate(R.layout.fragment_transfer_antar_bank_home, container, false)
+//        return inflater.inflate(
+//            R.layout.fragment_transfer_antar_bank_form_konfirmasi,
+//            container,
+//            false
+//        )
 //    }
 //}
