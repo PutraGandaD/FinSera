@@ -1,11 +1,11 @@
-package com.finsera.data.source.remote.response.transfer_sesama_bank
+package com.finsera.data.source.remote.response.cek_rekening_sesama_bank
 
 
 import com.google.gson.annotations.SerializedName
 
-data class TransferSesamaResponse(
+data class CekRekeningResponse(
     @SerializedName("data")
-    val data: TransferSesamaData?,
+    val data: CekRekeningData?,
     @SerializedName("message")
     val message: String,
     @SerializedName("status")

@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="20dp"
-    tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankFormFragment"
-    android:contentDescription="@string/screen_transfer_bank_sama">
+    android:padding="@dimen/_16sdp"
+    tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankFormFragment">
 
     <RelativeLayout
         app:layout_constraintStart_toStartOf="parent"
@@ -15,9 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp">
-        <ImageView
+        <ImageButton
+            android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:contentDescription="@string/back"
             android:src="@drawable/ic_back_button"
             android:layout_centerVertical="true"/>
@@ -29,7 +30,8 @@
             android:contentDescription="@string/transfer_sesama_bank"
             android:text="@string/transfer_sesama_bank"
             android:textColor="@android:color/black"
-            android:textSize="24sp" />
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold"/>
     </RelativeLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -64,6 +66,7 @@
                     android:id="@+id/nomorEditText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:inputType="number"
                     android:background="@drawable/edit_text_background_neutral5"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
@@ -92,6 +95,7 @@
                     android:id="@+id/nominalEditText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:inputType="number"
                     android:background="@drawable/edit_text_background_neutral5"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
@@ -136,9 +140,11 @@
                 android:layout_marginTop="4dp"
                 android:contentDescription="@string/desc_simpan_ke_daftar_tersimpan">
                 <CheckBox
+                    android:id="@+id/checkbox_simpan_ke_daftar_tersimpan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/tv_simpan_ke_daftar_tersimpan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/simpan_ke_daftar_tersimpan"
@@ -161,4 +167,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

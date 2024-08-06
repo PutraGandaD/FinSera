@@ -1,4 +1,4 @@
-package com.finsera.ui.fragments.info.mutasi.viewmodel
+package com.finsera.ui.fragments.transfer.sesama_bank.viewmodel
 
 import android.app.Application
 import android.content.Context
@@ -11,74 +11,71 @@ import android.net.NetworkCapabilities.TRANSPORT_WIFI
 import android.os.Build
 import android.provider.ContactsContract.CommonDataKinds.Email.TYPE_MOBILE
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.finsera.MainApplication
 import com.finsera.common.utils.Resource
-import com.finsera.domain.model.Mutasi
-import com.finsera.domain.usecase.mutasi.MutasiUseCase
-import com.finsera.ui.fragments.info.mutasi.uistate.MutasiUiState
+import com.finsera.domain.usecase.transfer_sesama.CekRekeningSesamaUseCase
+import com.finsera.ui.fragments.transfer.sesama_bank.uistate.CekRekeningSesamaUiState
+import com.finsera.ui.fragments.transfer.sesama_bank.uistate.TransferSesamaBankUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MutasiViewModel(
+class CekRekeningSesamaViewModel(
     app: Application,
-    private val mutasiUseCase: MutasiUseCase
+    private val cekRekeningSesamaUseCase: CekRekeningSesamaUseCase
 ) : AndroidViewModel(app) {
-    private val _mutasiUiState = MutableStateFlow(MutasiUiState())
-    val mutasiUiState = _mutasiUiState.asStateFlow()
+    private val _cekRekeningSesamaUiState = MutableStateFlow(CekRekeningSesamaUiState())
+    val cekRekeningSesamaUiState = _cekRekeningSesamaUiState.asStateFlow()
 
-    fun getMutasi(startDate: String?, endDate: String?) {
+    fun cekRekeningSesama(norek: String) {
         viewModelScope.launch {
             if(hasInternetConnection()) {
-                mutasiUseCase.invoke(startDate, endDate).collectLatest { result ->
-                    when (result) {
+                cekRekeningSesamaUseCase.invoke(norek).collectLatest { result ->
+                    when(result) {
                         is Resource.Loading -> {
-                            _mutasiUiState.update { uiState ->
-                                uiState.copy(isLoading = true, message = null, mutasi = emptyList())
+                            _cekRekeningSesamaUiState.update { uiState ->
+                                uiState.copy(isLoading = true, message = null, isValid = false)
                             }
                         }
 
                         is Resource.Success -> {
-                            _mutasiUiState.update { uiState ->
-                                uiState.copy(isLoading = false, message = "Riwayat transaksi berhasil dimuat", mutasi = result.data ?: emptyList())
+                            _cekRekeningSesamaUiState.update { uiState ->
+                                uiState.copy(isLoading = true, message = result.message, isValid = true)
                             }
                         }
 
                         is Resource.Error -> {
-                            _mutasiUiState.update { uiState ->
-                                uiState.copy(isLoading = false, message = result.message, mutasi = emptyList())
+                            _cekRekeningSesamaUiState.update { uiState ->
+                                uiState.copy(isLoading = false, message = result.message, isValid = false)
                             }
                         }
                     }
                 }
             } else {
-                _mutasiUiState.update { uiState ->
+                _cekRekeningSesamaUiState.update { uiState ->
                     uiState.copy(
                         isLoading = false,
-                        mutasi = emptyList(),
-                        message = "Tidak ada koneksi Internet."
+                        message = "Tidak ada koneksi internet.",
+                        isValid = false
                     )
                 }
             }
-
-        }
-    }
-
-    fun dataSubmittedToAdapter() {
-        _mutasiUiState.update { currentUiState ->
-            currentUiState.copy(mutasi = emptyList())
         }
     }
 
     fun messageShown() {
-        _mutasiUiState.update { currentUiState ->
+        _cekRekeningSesamaUiState.update { currentUiState ->
             currentUiState.copy(message = null)
+        }
+    }
+
+    fun redirectedToKonfirmasiForm() {
+        _cekRekeningSesamaUiState.update { currentUiState ->
+            currentUiState.copy(isLoading = false, isValid = false)
         }
     }
 

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_12sdp"
     android:background="@color/neutral_01"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.auth.LoginPinFragment">
@@ -13,7 +12,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_finsera_biru"
-        android:layout_marginTop="@dimen/_18sdp"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +22,7 @@
         android:id="@+id/tv_login_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_14sdp"
         android:text="@string/tv_welcome_back_pin_login_screen"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
@@ -32,14 +30,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ic_bca_logo_colored"
         app:layout_constraintBottom_toTopOf="@id/et_pin_1"/>
-    
+
     <EditText
         android:id="@+id/et_pin_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:visibility="invisible"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_login_status"
@@ -235,7 +233,7 @@
         android:textSize="@dimen/_16ssp"
         android:textColor="@color/et_text_hint_2"
         android:textStyle="bold"
-        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/et_pin_1"
@@ -245,10 +243,10 @@
         android:id="@+id/keypad_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/_4sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_pin_1"
@@ -308,7 +306,7 @@
             android:textFontWeight="900"
             android:textSize="@dimen/_25ssp"
             android:textColor="@color/neutral_09"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintTop_toBottomOf="@id/btn_pin_1"
             app:layout_constraintStart_toStartOf="parent"
@@ -355,7 +353,7 @@
             android:textFontWeight="900"
             android:textSize="@dimen/_25ssp"
             android:textColor="@color/neutral_09"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintTop_toBottomOf="@id/btn_pin_4"
             app:layout_constraintStart_toStartOf="parent"
@@ -402,7 +400,7 @@
             android:textFontWeight="900"
             android:textSize="@dimen/_25ssp"
             android:textColor="@color/neutral_09"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             app:layout_constraintTop_toBottomOf="@id/btn_pin_7"
             app:layout_constraintStart_toStartOf="@id/btn_pin_8"
             app:layout_constraintEnd_toEndOf="@id/btn_pin_8"
@@ -429,7 +427,6 @@
             android:textColor="@color/primary_blue"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintTop_toBottomOf="@id/btn_pin_0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

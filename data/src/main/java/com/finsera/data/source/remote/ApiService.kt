@@ -1,10 +1,12 @@
 package com.finsera.data.source.remote
 
+import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.refresh_token.RefreshTokenResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
+import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
 import com.google.gson.JsonObject
 import retrofit2.Response
 import retrofit2.http.Body
@@ -42,4 +44,15 @@ interface ApiService {
         @Query("endDate") endDate: String?,
     ): MutasiResponse
 
+    @POST("transaction/transaction-intra/check")
+    suspend fun cekRekeningSesamaBank(
+        @Header("Authorization") accessToken: String,
+        @Body raw: JsonObject
+    ) : CekRekeningResponse
+
+    @POST("transaction/transaction-intra/create")
+    suspend fun transferSesamaBank(
+        @Header("Authorization") accessToken: String,
+        @Body raw: JsonObject
+    ) : TransferSesamaResponse
 }

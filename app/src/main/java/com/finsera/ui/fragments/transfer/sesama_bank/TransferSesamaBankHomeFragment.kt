@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.finsera.R
-import com.finsera.databinding.FragmentTransferEWalletHomeBinding
+import com.finsera.databinding.FragmentHomeBinding
 import com.finsera.databinding.FragmentTransferSesamaBankHomeBinding
 
 class TransferSesamaBankHomeFragment : Fragment() {
@@ -21,17 +21,13 @@ class TransferSesamaBankHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupListeners()
-    }
 
-    private fun setupListeners() {
-        binding.btnInput.setOnClickListener {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.btnTransferBaru.setOnClickListener {
             findNavController().navigate(R.id.action_transferSesamaBankHome_to_transferSesamaBankForm)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

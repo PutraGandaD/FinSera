@@ -4,16 +4,11 @@ import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.TransferSesama
 
 interface ITransferRepository {
-
-    suspend fun cekDataRekening(
-        token: String,
+    suspend fun cekDataRekeningSesama(
         accountNumRecipient: String,
-        nominal: Double,
-        note: String
     ): CekRekening
+
     suspend fun transferSesamaBank(
-        token: String,
-        idUser: Int,
         accountNumRecipient: String,
         nominal: Double,
         note: String,

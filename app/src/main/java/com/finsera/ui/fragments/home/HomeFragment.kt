@@ -53,6 +53,11 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
             findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
         }
 
+        val btnTransferSesama = view.findViewById<ConstraintLayout>(R.id.btn_menu_transfer_sesama)
+        btnTransferSesama.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_transferSesamaBankHome)
+        }
+
         setUpBottomNavBar()
         getInfoSaldo()
         visibilitySaldo()
