@@ -16,10 +16,12 @@
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <ImageView
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/back"
+            android:background="@android:color/white"
+            android:id="@+id/btn_back"
             android:src="@drawable/ic_back_button"
             android:layout_centerVertical="true"/>
 
@@ -64,35 +66,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layoutnomorrekening"
         android:layout_marginTop="24dp"
-        android:id="@+id/layoutnamapenerima">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama Penerima"
-            android:textColor="@color/neutral_09"
-            android:textSize="16sp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="Budhi Darma"
-            android:textStyle="bold"
-            android:id="@+id/tvNamaPenerima"
-            android:textColor="@color/neutral_09"
-            android:textSize="16sp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/layoutnamapenerima"
-        android:layout_marginTop="24dp"
         android:id="@+id/layoutcatatan">
 
         <TextView
+            android:id="@+id/tv_catatan_tf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Catatan"
@@ -221,6 +198,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/et_pin"
                 android:padding="16dp"
                 android:background="@drawable/edit_text_background_neutral5"
                 android:hint="@string/pin"
@@ -231,6 +209,7 @@
 
     </LinearLayout>
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/button_background_primary"
@@ -239,4 +218,15 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="40dp"/>
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress_bar"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

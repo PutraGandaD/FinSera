@@ -91,7 +91,7 @@
         style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:backgroundTint="@color/primary_blue"
         android:padding="16dp"
         android:text="@string/download"
