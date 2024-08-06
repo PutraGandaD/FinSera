@@ -5,6 +5,7 @@ import com.finsera.data.source.remote.RemoteDataSource
 import com.finsera.data.utils.DataMapper
 import com.finsera.domain.model.Mutasi
 import com.finsera.domain.repository.IMutasiRepository
+import okhttp3.ResponseBody
 
 class MutasiRepositoryImpl(
     private val localDataSource: LocalDataSource,
@@ -18,5 +19,10 @@ class MutasiRepositoryImpl(
         val response = remoteDataSource.getMutasi(accessToken,startDate, endDate)
         val data = DataMapper.mutasiResponseToDomain(response)
         return data
+    }
+
+    override suspend fun downloadMutasiFile(startDate: String, endDate: String): ResponseBody {
+        val accessToken = localDataSource.getAccessToken()
+        return remoteDataSource.downloadMutasi(accessToken, startDate, endDate)
     }
 }
