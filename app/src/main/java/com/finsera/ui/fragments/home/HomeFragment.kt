@@ -1,6 +1,7 @@
 package com.finsera.ui.fragments.home
 
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,12 +24,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.finsera.common.utils.format.CurrencyFormatter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.util.Locale
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
     private val homeViewModel: HomeViewModel by viewModel()
+
+    private lateinit var tts: TextToSpeech
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +46,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        tts = TextToSpeech(requireContext(), this)
+        
         val btnInfoSaldo = view.findViewById<ConstraintLayout>(R.id.btn_menu_infosaldo)
         btnInfoSaldo.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
@@ -50,6 +56,18 @@ class HomeFragment : Fragment() {
         setUpBottomNavBar()
         getInfoSaldo()
         visibilitySaldo()
+    }
+
+    override fun onInit(status: Int) {
+        if (status == TextToSpeech.SUCCESS) {
+            val result = tts.setLanguage(Locale("id", "ID"))
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                // Handle language not supported
+                Log.e("TTS", "Indonesian language is not supported")
+            }
+        } else {
+            Log.e("TTS", "Initialization failed")
+        }
     }
 
     private fun getInfoSaldo() {
@@ -126,16 +144,30 @@ class HomeFragment : Fragment() {
         homeViewModel.isSaldoVisible.observe(viewLifecycleOwner) { isVisible ->
             if (isVisible) {
                 homeViewModel.saldoUiState.value.data?.let {
-                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = StringBuilder().append("Rp ")
-                        .append(CurrencyFormatter.formatCurrency(it.amount))
+                    val balanceText = StringBuilder().append("Rp ")
+                        .append(CurrencyFormatter.formatCurrency(it.amount)).toString()
+                    binding.cardNasabahInfo.tvSaldoRekeningCard.text = balanceText
+                    binding.cardNasabahInfo.tvSaldoRekeningCard.contentDescription =
+                        getString(R.string.balance_description, balanceText)
                 }
                 binding.cardNasabahInfo.btnSaldoVisibility.setImageResource(R.drawable.ic_rekening_no_visibility)
             } else {
                 binding.cardNasabahInfo.tvSaldoRekeningCard.text =
                     getString(R.string.tv_saldo_card_rekening_home)
+                binding.cardNasabahInfo.tvSaldoRekeningCard.contentDescription =
+                    getString(R.string.saldo_disembunyikan)
                 binding.cardNasabahInfo.btnSaldoVisibility.setImageResource(R.drawable.ic_rekening_visibility)
             }
         }
+
+        binding.cardNasabahInfo.tvSaldoRekeningCard.setOnClickListener {
+            speakBalance()
+        }
+    }
+
+    private fun speakBalance() {
+        val textToSpeak = binding.cardNasabahInfo.tvSaldoRekeningCard.contentDescription.toString()
+        tts.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
     private fun setUpBottomNavBar() {
@@ -176,6 +208,12 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        tts.stop()
+        tts.shutdown()
+        super.onDestroy()
     }
 
 

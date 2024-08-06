@@ -83,7 +83,6 @@
             android:gravity="center_vertical"
             android:paddingHorizontal="16dp"
             android:layout_marginTop="10dp"
-            android:contentDescription="@string/input_pin"
             android:hint="@string/pin"
             android:singleLine="true" />
 
@@ -112,7 +111,6 @@
             android:gravity="center_vertical"
             android:paddingHorizontal="16dp"
             android:layout_marginTop="10dp"
-            android:contentDescription="@string/input_pin"
             android:hint="@string/pin"
             android:singleLine="true" />
 
