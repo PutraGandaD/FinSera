@@ -220,4 +220,5 @@
     <string name="desc_input_catatan">Input Catatan Opsional di bawah</string>
     <string name="screen_transfer_antarbank_form">Transfer Antar Bank</string>
     <string name="placeholder_detail_mutasi">Transfer ke Rekening Admin</string>
+    <string name="back_button">Kembali</string>
 </resources>
