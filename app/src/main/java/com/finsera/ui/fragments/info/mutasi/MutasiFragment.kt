@@ -1,12 +1,16 @@
 package com.finsera.ui.fragments.info.mutasi
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +18,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finsera.R
+import com.finsera.common.utils.Resource
 import com.finsera.common.utils.dialog.DatePickerFragment
 import com.finsera.databinding.FragmentMutasiBinding
 import com.finsera.databinding.ViewMutasiFilterBinding
@@ -22,7 +27,12 @@ import com.finsera.ui.fragments.info.mutasi.viewmodel.MutasiViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -62,8 +72,9 @@ class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
         handleBackButton()
         filterButtonOnClick()
 
+
         binding.btnDownload.setOnClickListener {
-            Snackbar.make(requireView(), "Fitur download mutasi belum tersedia.", Snackbar.LENGTH_SHORT).show()
+            requestStoragePermission()
         }
 
     }
@@ -140,6 +151,9 @@ class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
                 "yyyy-MM-dd",
                 Locale.getDefault()
             ).format(System.currentTimeMillis())
+
+            startDate = date
+            endDate = date
             mutasiViewModel.getMutasi(date, date)
             showResultOfFilter()
         }
@@ -150,10 +164,10 @@ class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
 
             // get start date to 7 days earlier from current date
             calendar.add(Calendar.DAY_OF_YEAR, -7) // get 7 days ago date (current date - 7 days)
-            val startDate = dateFormat.format(calendar.time)
+            startDate = dateFormat.format(calendar.time)
 
             calendar.add(Calendar.DAY_OF_YEAR, 7) // reset to today's date (current date + 7 days)
-            val endDate = dateFormat.format(calendar.time)
+            endDate = dateFormat.format(calendar.time)
 
             mutasiViewModel.getMutasi(startDate, endDate)
             showResultOfFilter()
@@ -172,9 +186,13 @@ class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
             )
             val lastDayOfMonth = dateFormat.format(calendar.time)
 
+            startDate = firstDayOfMonth
+            endDate = lastDayOfMonth
+
             mutasiViewModel.getMutasi(firstDayOfMonth, lastDayOfMonth)
             showResultOfFilter()
         }
+
 
         binding.viewFilter.clStartDate.setOnClickListener {
             showDatePicker("startDatePicker")
@@ -192,7 +210,7 @@ class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
                     Snackbar.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener
-            } else if (startDate > endDate) {
+            } else if (formatDateString(startDate) > formatDateString(endDate)) {
                 Snackbar.make(
                     requireView(),
                     "Tanggal awal harus lebih awal dari tanggal akhir",
@@ -234,6 +252,106 @@ class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
         } else {
             binding.viewFilter.tvEndDateValue.text = "$day-${month + 1}-$year"
             endDate = "$year-${month + 1}-$day"
+        }
+    }
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // Permission is granted. Continue with the operation
+            downloadFile()
+        } else {
+            // Explain to the user that the feature is unavailable because the
+            // features require a permission that the user has denied.
+            Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun requestStoragePermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                // You can use the API that requires the permission.
+                downloadFile()
+            }
+
+            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                // Provide an additional rationale to the user if the permission was not granted
+                // and the user would benefit from additional context for the use of the permission.
+                Toast.makeText(requireContext(), "Storage permission is required to save files.", Toast.LENGTH_LONG).show()
+            }
+
+            else -> {
+                // Request the permission
+                requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }
+    }
+
+    private fun downloadFile() {
+        mutasiViewModel.downloadMutasiFile(startDate, endDate)
+
+        mutasiViewModel.downloadState.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+
+                is Resource.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    saveFileToDisk(resource.data)
+                }
+
+                is Resource.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    Snackbar.make(requireView(), resource.message!!, Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+    }
+
+    private fun saveFileToDisk(body: ResponseBody?) {
+        if (body == null) return
+
+        try {
+            val file = File(
+                context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
+                "mutasi_${System.currentTimeMillis()}.pdf"
+            )
+
+            var inputStream: InputStream? = null
+            var outputStream: OutputStream? = null
+
+            try {
+                inputStream = body.byteStream()
+                outputStream = FileOutputStream(file)
+
+                val buffer = ByteArray(4096)
+                var bytesRead: Int
+
+                while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+                    outputStream.write(buffer, 0, bytesRead)
+                }
+
+                outputStream.flush()
+                // Notify the user of success
+                Toast.makeText(requireContext(), "File berhasil terdownload ${file.absolutePath}", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Notify the user of error
+                Toast.makeText(requireContext(), "Gagal menyimpan file", Toast.LENGTH_SHORT).show()
+            } finally {
+                inputStream?.close()
+                outputStream?.close()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Notify the user of error
+            Toast.makeText(requireContext(), "Gagal menyimpan file", Toast.LENGTH_SHORT).show()
         }
     }
 

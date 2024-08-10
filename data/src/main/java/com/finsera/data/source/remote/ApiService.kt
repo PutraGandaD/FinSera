@@ -8,6 +8,7 @@ import com.finsera.data.source.remote.response.refresh_token.RefreshTokenRespons
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
 import com.google.gson.JsonObject
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -55,4 +56,11 @@ interface ApiService {
         @Header("Authorization") accessToken: String,
         @Body raw: JsonObject
     ) : TransferSesamaResponse
+
+    @GET("mutasi/download")
+    suspend fun getDownloadMutasi(
+        @Header("Authorization") accessToken: String,
+        @Query("startDate") startDate: String?,
+        @Query("endDate") endDate: String?,
+    ): ResponseBody
 }
