@@ -64,4 +64,8 @@ object AppModule {
         factory { TransferSesamaBankUseCase(get(), get()) }
         factory { CekRekeningSesamaUseCase(get(), get()) }
     }
+
+    val databaseModule = module {
+
+    }
 }

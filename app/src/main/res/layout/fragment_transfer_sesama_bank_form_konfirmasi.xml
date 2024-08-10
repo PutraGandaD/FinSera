@@ -6,34 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankFormKonfirmasiFragment"
-    android:padding="20dp"
+    android:padding="@dimen/_16sdp"
     android:contentDescription="@string/screen_confirm_transaction">
 
-    <RelativeLayout
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/topmenu"
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/back"
-            android:background="@android:color/white"
-            android:id="@+id/btn_back"
-            android:src="@drawable/ic_back_button"
-            android:layout_centerVertical="true"/>
+        <RelativeLayout
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/topmenu"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/back"
+                android:background="@android:color/white"
+                android:id="@+id/btn_back"
+                android:src="@drawable/ic_back_button"
+                android:layout_centerVertical="true"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:contentDescription="@string/konfirmasi_transaksi"
-            android:text="@string/konfirmasi_transaksi"
-            android:textColor="@color/neutral_09"
-            android:textSize="26sp" />
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/konfirmasi_transaksi"
+                android:text="@string/konfirmasi_transaksi"
+                android:textColor="@color/neutral_09"
+                android:textSize="@dimen/_18ssp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -65,6 +66,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layoutnomorrekening"
+        android:layout_marginTop="24dp"
+        android:id="@+id/layoutnamapemilikrekening">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nama_penerima"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="1234567890"
+            android:textStyle="bold"
+            android:id="@+id/tvNamaPemilikRekeningTujuan"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layoutnamapemilikrekening"
         android:layout_marginTop="24dp"
         android:id="@+id/layoutcatatan">
 
@@ -203,7 +230,7 @@
                 android:background="@drawable/edit_text_background_neutral5"
                 android:hint="@string/pin"
                 android:textSize="@dimen/heading_5"
-                android:inputType="numberDecimal" />
+                android:inputType="numberPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -215,6 +242,7 @@
         android:background="@drawable/button_background_primary"
         app:backgroundTint="@color/primary_blue"
         android:text="@string/lanjut"
+        android:padding="16dp"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="40dp"/>

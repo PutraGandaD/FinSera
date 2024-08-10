@@ -14,10 +14,10 @@ class AuthRepositoryImpl(
     override suspend fun login(username: String, password: String): Login {
         val response = remoteDataSource.authLoginUser(username, password)
 
-        response.data.accessToken?.let {
+        response.data?.accessToken?.let {
             setAccessToken(it)
         }
-        response.data.refreshToken?.let {
+        response.data?.refreshToken?.let {
             setRefreshToken(it)
         }
 

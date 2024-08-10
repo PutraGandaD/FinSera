@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.finsera.R
 import com.finsera.common.utils.Constant
 import com.finsera.databinding.FragmentTransferSesamaBankFormKonfirmasiBinding
-import com.finsera.ui.fragments.transfer.sesama_bank.data.CekRekening
+import com.finsera.ui.fragments.transfer.sesama_bank.bundle.CekRekeningSesama
 import com.finsera.ui.fragments.transfer.sesama_bank.viewmodel.TransferSesamaBankViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -38,21 +38,15 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
         handleBackButton()
         observer()
 
-        val bundle = arguments?.getParcelable<CekRekening>(Constant.TRANSFER_SESAMA_BUNDLE)
+        val bundle = arguments?.getParcelable<CekRekeningSesama>(Constant.TRANSFER_SESAMA_BUNDLE)
         if(bundle != null) {
             val noRekening = bundle.noRekening
-            val nominal = bundle.nominal
-            val catatan = bundle.catatan
+            val namaPemilikRekening = bundle.namaPemilikRekening
 
-            binding.tvRekeningTujuan.setText(noRekening)
-            binding.tvCatatan.setText(catatan)
-            binding.tvNominalAwal.setText(nominal.toString())
-            binding.tvBiayaAdmin.setText("-")
-            binding.tvNominalTotal.setText(nominal.toString())
 
             binding.btnNext.setOnClickListener {
                 if(binding.etPin != null) {
-                    transferSesamaBankViewModel.transferSesama(noRekening, nominal, catatan!!, binding.etPinTransaksi.editText?.text.toString())
+                    //transferSesamaBankViewModel.transferSesama(noRekening, nominal, catatan!!, binding.etPinTransaksi.editText?.text.toString())
                 }
             }
         }
@@ -67,7 +61,7 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
                     dialog.dismiss()
                 }
                 .setPositiveButton("Ya") { dialog, _ ->
-                    findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasi_to_homeFragment)
+                    //findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasi_to_homeFragment)
                 }
                 .show()
         }
@@ -81,7 +75,7 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
                     dialog.dismiss()
                 }
                 .setPositiveButton("Ya") { dialog, _ ->
-                    findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasi_to_homeFragment)
+                    //findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasi_to_homeFragment)
                 }
                 .show()
         }
@@ -103,11 +97,11 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
                     }
 
                     if (uiState.isSuccess) {
-                        if (findNavController().currentDestination?.id == R.id.transferSesamaBankFormKonfirmasi) {
+                        if (findNavController().currentDestination?.id == R.id.transferSesamaBankFormKonfirmasiFragment) {
                             Snackbar.make(requireView(), "Transfer berhasil", Snackbar.LENGTH_SHORT)
                                 .show()
 
-                            findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasi_to_homeFragment)
+                            //findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasi_to_homeFragment)
                         }
                     }
                 }
