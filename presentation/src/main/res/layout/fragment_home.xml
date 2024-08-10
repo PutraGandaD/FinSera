@@ -152,7 +152,6 @@
                     android:hint="@string/tv_placeholder_cari_fitur"
                     android:inputType="text"
                     android:padding="@dimen/_12sdp"
-                    android:paddingStart="@dimen/_40sdp"
                     android:textSize="@dimen/_14ssp" />
 
             </com.google.android.material.textfield.TextInputLayout>
