@@ -1,4 +1,24 @@
 package com.finsera.di
 
+import com.finsera.domain.usecase.auth.CheckLoggedInUseCase
+import com.finsera.domain.usecase.auth.LoginPinUserUseCase
+import com.finsera.domain.usecase.auth.LoginUserUseCase
+import com.finsera.domain.usecase.infosaldo.InfoSaldoUseCase
+import com.finsera.domain.usecase.mutasi.DownloadMutasiUseCase
+import com.finsera.domain.usecase.mutasi.MutasiUseCase
+import com.finsera.domain.usecase.transfer_sesama.CekRekeningSesamaUseCase
+import com.finsera.domain.usecase.transfer_sesama.TransferSesamaBankUseCase
+import org.koin.dsl.module
+
 object DomainModule {
+    val useCaseModule = module {
+        factory { LoginUserUseCase(get()) }
+        factory { CheckLoggedInUseCase(get()) }
+        factory { LoginPinUserUseCase(get()) }
+        factory { InfoSaldoUseCase(get()) }
+        factory { MutasiUseCase(get(), get()) }
+        factory { TransferSesamaBankUseCase(get(), get()) }
+        factory { CekRekeningSesamaUseCase(get(), get()) }
+        factory { DownloadMutasiUseCase(get()) }
+    }
 }
