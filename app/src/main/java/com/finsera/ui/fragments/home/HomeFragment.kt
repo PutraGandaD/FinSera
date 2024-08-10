@@ -22,6 +22,7 @@ import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.shape.MaterialShapeDrawable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.finsera.common.utils.format.CurrencyFormatter
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -57,6 +58,22 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
         btnTransferSesama.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_transferSesamaBankHome)
         }
+
+        val btnVirtualAccount = view.findViewById<ConstraintLayout>(R.id.btn_menu_virtual_account)
+        btnVirtualAccount.setOnClickListener {
+            Snackbar.make(requireView(), "Fitur belum tersedia", Snackbar.LENGTH_SHORT).show()
+        }
+
+        val btnEWallet = view.findViewById<ConstraintLayout>(R.id.btn_menu_ewallet)
+        btnEWallet.setOnClickListener {
+            Snackbar.make(requireView(), "Fitur belum tersedia", Snackbar.LENGTH_SHORT).show()
+        }
+
+        val btnTransferAntarBank = view.findViewById<ConstraintLayout>(R.id.btn_menu_transfer_antarbank)
+        btnTransferAntarBank.setOnClickListener {
+            Snackbar.make(requireView(), "Fitur belum tersedia", Snackbar.LENGTH_SHORT).show()
+        }
+
 
         setUpBottomNavBar()
         getInfoSaldo()

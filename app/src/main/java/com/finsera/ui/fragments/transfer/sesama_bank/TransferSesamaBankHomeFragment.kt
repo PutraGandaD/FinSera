@@ -27,7 +27,7 @@ class TransferSesamaBankHomeFragment : Fragment() {
         }
 
         binding.btnTransferBaru.setOnClickListener {
-            findNavController().navigate(R.id.action_transferSesamaBankHome_to_transferSesamaBankForm)
+            findNavController().navigate(R.id.action_transferSesamaBankHome_to_cekRekeningSesamaBankFormFragment)
         }
     }
 }

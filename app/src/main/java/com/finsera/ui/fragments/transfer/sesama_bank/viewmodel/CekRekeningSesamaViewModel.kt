@@ -38,19 +38,19 @@ class CekRekeningSesamaViewModel(
                     when(result) {
                         is Resource.Loading -> {
                             _cekRekeningSesamaUiState.update { uiState ->
-                                uiState.copy(isLoading = true, message = null, isValid = false)
+                                uiState.copy(isLoading = true, message = null, isValid = false, data = null)
                             }
                         }
 
                         is Resource.Success -> {
                             _cekRekeningSesamaUiState.update { uiState ->
-                                uiState.copy(isLoading = true, message = result.message, isValid = true)
+                                uiState.copy(isLoading = false, message = result.message, isValid = true, data = result.data)
                             }
                         }
 
                         is Resource.Error -> {
                             _cekRekeningSesamaUiState.update { uiState ->
-                                uiState.copy(isLoading = false, message = result.message, isValid = false)
+                                uiState.copy(isLoading = false, message = result.message, isValid = false, data = null)
                             }
                         }
                     }

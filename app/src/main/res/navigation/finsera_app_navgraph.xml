@@ -95,6 +95,9 @@
         <action
             android:id="@+id/action_transferSesamaBankHome_to_transferSesamaBankForm"
             app:destination="@id/transferSesamaBankForm" />
+        <action
+            android:id="@+id/action_transferSesamaBankHome_to_cekRekeningSesamaBankFormFragment"
+            app:destination="@id/cekRekeningSesamaBankFormFragment" />
     </fragment>
     <fragment
         android:id="@+id/transferAntarBankForm"
@@ -110,20 +113,6 @@
         android:name="com.finsera.ui.fragments.transfer.antar_bank.TransferAntarBankFormKonfirmasiFragment"
         android:label="fragment_transfer_antar_bank_form_konfirmasi"
         tools:layout="@layout/fragment_transfer_antar_bank_form_konfirmasi" />
-    <fragment
-        android:id="@+id/transferSesamaBankForm"
-        android:name="com.finsera.ui.fragments.transfer.sesama_bank.TransferSesamaBankFormFragment"
-        android:label="fragment_transfer_sesama_bank_form"
-        tools:layout="@layout/fragment_transfer_sesama_bank_form" >
-        <action
-            android:id="@+id/action_transferSesamaBankForm_to_transferSesamaBankFormKonfirmasi"
-            app:destination="@id/transferSesamaBankFormKonfirmasi" />
-    </fragment>
-    <fragment
-        android:id="@+id/transferSesamaBankFormKonfirmasi"
-        android:name="com.finsera.ui.fragments.transfer.sesama_bank.TransferSesamaBankFormKonfirmasiFragment"
-        android:label="fragment_transfer_sesama_bank_form_konfirmasi"
-        tools:layout="@layout/fragment_transfer_sesama_bank_form_konfirmasi" />
     <fragment
         android:id="@+id/transferEWalletHomeFragment"
         android:name="com.finsera.ui.fragments.topup.ewallet.TransferEWalletHomeFragment"
@@ -179,4 +168,27 @@
         android:name="com.finsera.ui.fragments.transfer.va.TransferVirtualAccountFormKonfirmasi"
         android:label="fragment_transfer_virtual_account_form_konfirmasi"
         tools:layout="@layout/fragment_transfer_virtual_account_form_konfirmasi" />
+    <fragment
+        android:id="@+id/cekRekeningSesamaBankFormFragment"
+        android:name="com.finsera.ui.fragments.transfer.sesama_bank.CekRekeningSesamaBankFormFragment"
+        android:label="fragment_cek_rekening_sesama_bank"
+        tools:layout="@layout/fragment_cek_rekening_sesama_bank" >
+        <action
+            android:id="@+id/action_cekRekeningSesamaBankFormFragment_to_transferSesamaBankFormFragment"
+            app:destination="@id/transferSesamaBankFormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferSesamaBankFormFragment"
+        android:name="com.finsera.ui.fragments.transfer.sesama_bank.TransferSesamaBankFormFragment"
+        android:label="fragment_transfer_sesama_bank_form"
+        tools:layout="@layout/fragment_transfer_sesama_bank_form" >
+        <action
+            android:id="@+id/action_transferSesamaBankFormFragment_to_transferSesamaBankFormKonfirmasiFragment"
+            app:destination="@id/transferSesamaBankFormKonfirmasiFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/transferSesamaBankFormKonfirmasiFragment"
+        android:name="com.finsera.ui.fragments.transfer.sesama_bank.TransferSesamaBankFormKonfirmasiFragment"
+        android:label="fragment_transfer_sesama_bank_form_konfirmasi"
+        tools:layout="@layout/fragment_transfer_sesama_bank_form_konfirmasi" />
 </navigation>

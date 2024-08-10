@@ -3,23 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/_16sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankFormFragment">
 
     <RelativeLayout
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/topmenu"
+        android:layout_marginTop="@dimen/_12sdp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        android:layout_height="wrap_content">
         <ImageButton
-            android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
             android:contentDescription="@string/back"
+            android:background="@android:color/white"
+            android:id="@+id/btn_back"
             android:src="@drawable/ic_back_button"
             android:layout_centerVertical="true"/>
 
@@ -27,155 +27,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/transfer_sesama_bank"
-            android:text="@string/transfer_sesama_bank"
-            android:textColor="@android:color/black"
+            android:contentDescription="@string/konfirmasi_transaksi"
+            android:text="@string/konfirmasi_transaksi"
+            android:textColor="@color/neutral_09"
             android:textSize="@dimen/_18ssp"
             android:textStyle="bold"/>
     </RelativeLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topmenu"
-        app:layout_constraintBottom_toTopOf="@+id/btn_lanjut">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/layoutrekeningtujuan">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/desc_input_nomor_rekening"
-                    android:text="@string/nomor_rekening_tujuan"
-                    android:textSize="16sp"
-                    android:textColor="@color/neutral_09" />
-                <EditText
-                    android:id="@+id/nomorEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:inputType="number"
-                    android:background="@drawable/edit_text_background_neutral5"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/nomor_rekening_tujuan"
-                    android:singleLine="true" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/layoutnominal"
-                app:layout_constraintTop_toBottomOf="@id/layoutnomorrekening"
-                android:layout_marginTop="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/desc_input_nominal"
-                    android:text="@string/nominal"
-                    android:textSize="16sp"
-                    android:textColor="@color/neutral_09" />
-                <EditText
-                    android:id="@+id/nominalEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:inputType="number"
-                    android:background="@drawable/edit_text_background_neutral5"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="16dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="@string/nominal"
-                    android:singleLine="true" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/layoutcatatan"
-                app:layout_constraintTop_toBottomOf="@id/layoutnominal"
-                android:layout_marginTop="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="@string/desc_input_catatan"
-                    android:text="@string/catatan"
-                    android:textSize="16sp"
-                    android:textColor="@color/neutral_09" />
-                <EditText
-                    android:id="@+id/catatanEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:background="@drawable/edit_text_background_neutral5"
-                    android:paddingHorizontal="16dp"
-                    android:layout_marginTop="10dp"
-                    android:inputType="text|textMultiLine"
-                    android:hint="@string/catatan" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="4dp"
-                android:contentDescription="@string/desc_simpan_ke_daftar_tersimpan">
-                <CheckBox
-                    android:id="@+id/checkbox_simpan_ke_daftar_tersimpan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/tv_simpan_ke_daftar_tersimpan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/simpan_ke_daftar_tersimpan"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_lanjut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background_primary"
-        app:backgroundTint="@color/primary_blue"
-        android:contentDescription="@string/lanjut"
-        android:text="@string/lanjut"
-        android:textSize="20sp"
-        android:layout_marginBottom="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/progress_bar"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

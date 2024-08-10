@@ -47,6 +47,7 @@ dependencies {
 
     val lifecycle_version = "2.7.0"
     val koin_version = "3.5.6"
+    val room_version = "2.6.1"
 
     // ViewModel
     //noinspection GradleDependency
@@ -121,6 +122,13 @@ dependencies {
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
 
+    // Intuit SDP and SSP
     implementation("com.intuit.sdp:sdp-android:1.1.1")
     implementation("com.intuit.ssp:ssp-android:1.1.1")
+
+    // Room Database
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
 }

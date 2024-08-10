@@ -55,10 +55,6 @@ class LoginUserUseCase(private val repository: IAuthRepository) {
                 is IOException -> {
                     emit(Resource.Error("Ada masalah pada koneksi internet anda. Silahkan coba lagi."))
                 }
-
-                is JSONException -> {
-                    emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
-                }
             }
         }
     }
