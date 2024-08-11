@@ -3,9 +3,11 @@ package com.finsera.presentation.fragments.transfer.sesama_bank
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -29,6 +31,8 @@ import java.io.OutputStream
 class TransferSesamaBankSuksesFragment : Fragment() {
     private var _binding: FragmentTransferSesamaBankSuksesBinding? = null
     private val binding get() = _binding!!
+
+    private var imageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,9 +73,20 @@ class TransferSesamaBankSuksesFragment : Fragment() {
 
         val captureButton = binding.cardTransaksiBerhasil.btnDownload
         captureButton.setOnClickListener {
-            saveToGalleryMode()
-            val bitmap = getBitmapFromUiView(requireActivity(), binding.transferSesamaBankBerhasil)
-            saveBitmapImage(bitmap)
+            saveToGallery()
+        }
+
+        val shareButton = binding.cardTransaksiBerhasil.btnShare
+        shareButton.setOnClickListener {
+            saveToGallery()
+
+            val shareIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                // Example: content://com.google.android.apps.photos.contentprovider/...
+                putExtra(Intent.EXTRA_STREAM, imageUri)
+                type = "image/jpeg"
+            }
+            startActivity(Intent.createChooser(shareIntent, null))
         }
     }
 
@@ -90,18 +105,19 @@ class TransferSesamaBankSuksesFragment : Fragment() {
 
     /**Save Bitmap To Gallery
      * @param bitmap The bitmap to be saved in Storage/Gallery*/
-    private fun saveBitmapImage(bitmap: Bitmap) {
+    private fun saveBitmapImage(bitmap: Bitmap) : Uri? {
         val timestamp = System.currentTimeMillis()
 
         //Tell the media scanner about the new file so that it is immediately available to the user.
         val values = ContentValues()
+        var uri : Uri? = null
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/png")
         values.put(MediaStore.Images.Media.DATE_ADDED, timestamp)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             values.put(MediaStore.Images.Media.DATE_TAKEN, timestamp)
             values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/" + getString(R.string.app_name))
             values.put(MediaStore.Images.Media.IS_PENDING, true)
-            val uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+            uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
             if (uri != null) {
                 try {
                     val outputStream = requireActivity().contentResolver.openOutputStream(uri)
@@ -137,7 +153,7 @@ class TransferSesamaBankSuksesFragment : Fragment() {
                     Log.e(TAG, "saveBitmapImage: ", e)
                 }
                 values.put(MediaStore.Images.Media.DATA, imageFile.absolutePath)
-                requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
 
                 Snackbar.make(requireView(), "Bukti Transaksi berhasil disimpan di Galeri.", Toast.LENGTH_SHORT).show()
                 normalMode()
@@ -145,6 +161,14 @@ class TransferSesamaBankSuksesFragment : Fragment() {
                 Log.e(TAG, "saveBitmapImage: ", e)
             }
         }
+
+        return uri
+    }
+
+    private fun saveToGallery() {
+        saveToGalleryMode()
+        val bitmap = getBitmapFromUiView(requireActivity(), binding.transferSesamaBankBerhasil)
+        imageUri = saveBitmapImage(bitmap)
     }
 
     private fun saveToGalleryMode() {
