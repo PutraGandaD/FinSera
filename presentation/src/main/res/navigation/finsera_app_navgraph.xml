@@ -95,6 +95,9 @@
         <action
             android:id="@+id/action_transferSesamaBankHome_to_cekRekeningSesamaBankFormFragment"
             app:destination="@id/cekRekeningSesamaBankFormFragment" />
+        <action
+            android:id="@+id/action_transferSesamaBankHome_to_transferSesamaBankFormFragment"
+            app:destination="@id/transferSesamaBankFormFragment" />
     </fragment>
     <fragment
         android:id="@+id/transferAntarBankForm"
@@ -187,5 +190,15 @@
         android:id="@+id/transferSesamaBankFormKonfirmasiFragment"
         android:name="com.finsera.presentation.fragments.transfer.sesama_bank.TransferSesamaBankFormKonfirmasiFragment"
         android:label="fragment_transfer_sesama_bank_form_konfirmasi"
-        tools:layout="@layout/fragment_transfer_sesama_bank_form_konfirmasi" />
+        tools:layout="@layout/fragment_transfer_sesama_bank_form_konfirmasi" >
+        <action
+            android:id="@+id/action_transferSesamaBankFormKonfirmasiFragment_to_transferSesamaBankSuksesFragment"
+            app:destination="@id/transferSesamaBankSuksesFragment"
+            app:popUpTo="@id/transferSesamaBankHome"
+            app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/transferSesamaBankSuksesFragment"
+        android:name="com.finsera.presentation.fragments.transfer.sesama_bank.TransferSesamaBankSuksesFragment"
+        android:label="TransferSesamaBankSuksesFragment" />
 </navigation>

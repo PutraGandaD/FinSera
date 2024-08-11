@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class CekRekeningSesama(
+data class CekRekeningSesamaBundle(
     val namaPemilikRekening: String,
-    val noRekening: String,
+    val noRekening: String
 ) : Parcelable

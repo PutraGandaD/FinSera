@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.finsera.common.utils.Constant
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentCekRekeningSesamaBankBinding
+import com.finsera.presentation.fragments.transfer.sesama_bank.bundle.CekRekeningSesamaBundle
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.CekRekeningSesamaViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
@@ -69,14 +72,14 @@ class CekRekeningSesamaBankFormFragment : Fragment() {
 
                     if(uiState.isValid) {
                         if(findNavController().currentDestination?.id == R.id.cekRekeningSesamaBankFormFragment) {
+                            val dataRekening = CekRekeningSesamaBundle(uiState.data?.recipientName!!, uiState.data?.accountnumRecipient!!)
                             val bundle = Bundle().apply {
-                                putString("recipientName", uiState.data?.recipientName)
-                                putString("accountnumRecipient", uiState.data?.accountnumRecipient)
+                                putParcelable(Constant.DATA_REKENING_SESAMA_BUNDLE, dataRekening)
                             }
 
                             findNavController().navigate(R.id.action_cekRekeningSesamaBankFormFragment_to_transferSesamaBankFormFragment, bundle)
-
                             cekRekeningSesamaViewModel.redirectedToKonfirmasiForm()
+                            Snackbar.make(requireView(), "Rekening ditemukan", Snackbar.LENGTH_SHORT).show()
                         }
                     }
                 }

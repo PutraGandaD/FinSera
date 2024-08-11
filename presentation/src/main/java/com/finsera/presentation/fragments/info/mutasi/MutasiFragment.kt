@@ -84,8 +84,10 @@ class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
                 mutasiViewModel.mutasiUiState.collectLatest { uiState ->
                     if (uiState.isLoading) {
                         binding.progressBar.visibility = View.VISIBLE
+                        binding.btnBack.isEnabled = false
                     } else {
                         binding.progressBar.visibility = View.GONE
+                        binding.btnBack.isEnabled = true
                     }
 
                     if (uiState.message != null) {

@@ -6,6 +6,8 @@
 
     <application
         android:theme="@style/Theme.FinSera"
+        android:supportsRtl="true"
+        android:windowSoftInputMode="stateHidden"
         tools:targetApi="31">
     </application>
 

@@ -38,7 +38,7 @@
         android:textColor="@color/neutral_09"
         app:layout_constraintStart_toEndOf="@id/ic_status_uang"
         app:layout_constraintTop_toTopOf="@id/ic_status_uang"
-        app:layout_constraintEnd_toStartOf="@id/tv_nominal_uang"
+        app:layout_constraintEnd_toStartOf="@id/tv_waktu_transaksi"
         app:layout_constraintBottom_toBottomOf="@id/ic_status_uang"/>
 
     <TextView
@@ -49,7 +49,6 @@
         android:textSize="@dimen/_14ssp"
         android:textColor="@color/secondary_green"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/tv_detail_mutasi"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_detail_mutasi"

@@ -78,7 +78,7 @@
         android:text="@string/lanjut"
         android:textSize="20sp"
         android:padding="16dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

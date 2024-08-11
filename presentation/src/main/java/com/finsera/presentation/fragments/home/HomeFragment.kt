@@ -46,7 +46,9 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
         
         val btnInfoSaldo = view.findViewById<ConstraintLayout>(R.id.btn_menu_infosaldo)
         btnInfoSaldo.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
+            if(findNavController().currentDestination?.id == R.id.homeFragment) {
+                findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
+            }
         }
 
         val btnTransferSesama = view.findViewById<ConstraintLayout>(R.id.btn_menu_transfer_sesama)

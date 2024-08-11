@@ -44,9 +44,11 @@
         android:id="@+id/layoutnomorrekening">
 
         <TextView
+            android:id="@+id/tvRekeningTujuanHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/rekening_tujuan"
+            android:layout_marginEnd="12dp"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
 
@@ -54,8 +56,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@id/tvRekeningTujuanHeader"
             android:text="1234567890"
             android:textStyle="bold"
+            android:textAlignment="textEnd"
             android:id="@+id/tvRekeningTujuan"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
@@ -70,9 +74,11 @@
         android:id="@+id/layoutnamapemilikrekening">
 
         <TextView
+            android:id="@+id/tvNamaPemilikHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nama_penerima"
+            android:layout_marginEnd="12dp"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
 
@@ -81,6 +87,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:text="1234567890"
+            android:layout_toRightOf="@id/tvNamaPemilikHeader"
+            android:textAlignment="textEnd"
             android:textStyle="bold"
             android:id="@+id/tvNamaPemilikRekeningTujuan"
             android:textColor="@color/neutral_09"
@@ -96,22 +104,26 @@
         android:id="@+id/layoutcatatan">
 
         <TextView
-            android:id="@+id/tv_catatan_tf"
+            android:id="@+id/tvCatatanHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Catatan"
+            android:layout_marginEnd="12dp"
             android:textColor="@color/neutral_09"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <TextView
+            android:id="@+id/tvCatatanTf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:textAlignment="textEnd"
+            android:layout_toRightOf="@id/tvCatatanHeader"
+            android:maxLines="2"
             android:text="Placeholder Catatan"
-            android:textStyle="bold"
-            android:id="@+id/tvCatatan"
             android:textColor="@color/neutral_09"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

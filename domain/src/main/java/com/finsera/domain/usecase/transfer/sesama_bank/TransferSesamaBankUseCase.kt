@@ -1,4 +1,4 @@
-package com.finsera.domain.usecase.transfer_sesama
+package com.finsera.domain.usecase.transfer.sesama_bank
 
 import com.finsera.common.utils.Resource
 import com.finsera.domain.model.TransferSesama

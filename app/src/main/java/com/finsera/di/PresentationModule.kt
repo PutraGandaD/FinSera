@@ -17,7 +17,7 @@ object PresentationModule {
         viewModel { HomeViewModel(get()) }
         viewModel { InfoSaldoViewModel(get()) }
         viewModel { MutasiViewModel(get(), get(),get()) }
-        viewModel { TransferSesamaBankViewModel(get(), get()) }
+        viewModel { TransferSesamaBankViewModel(get(), get(), get(), get(), get()) }
         viewModel { CekRekeningSesamaViewModel(get(), get()) }
     }
 }

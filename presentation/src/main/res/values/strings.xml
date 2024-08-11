@@ -108,7 +108,7 @@
     <string name="tv_navbar_title_akun">Akun</string>
     <string name="desc_pilih_bank">pilih bank tujuan di bawah</string>
     <string name="input_rekening">input rekening</string>
-    <string name="desc_input_nominal">input nominal anda di bawah</string>
+    <string name="desc_input_nominal">Nominal Transfer</string>
     <string name="input_catatan">input catatan</string>
     <string name="desc_simpan_ke_daftar_tersimpan">Tekan untuk menyimpan ke daftar tersimpan</string>
     <string name="desc_input_pin">input pin anda di bawah</string>
@@ -221,4 +221,6 @@
     <string name="screen_transfer_antarbank_form">Transfer Antar Bank</string>
     <string name="placeholder_detail_mutasi">Transfer ke Rekening Admin</string>
     <string name="back_button">Kembali</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

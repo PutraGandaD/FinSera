@@ -232,27 +232,30 @@
                 android:layout_width="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:layout_height="42dp"
+                android:layout_weight="1"
                 android:backgroundTint="@color/neutral_01"
                 android:text="@string/download"
+                android:visibility="gone"
                 android:contentDescription="@string/download"
                 android:textSize="@dimen/button_2"
-                android:textColor="@color/neutral_04"
+                android:textColor="@color/neutral_09"
                 app:cornerRadius="8dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_share"
                 android:layout_width="wrap_content"
-                android:layout_marginStart="12dp"
                 android:layout_height="42dp"
+                android:layout_weight="1"
                 android:backgroundTint="@color/neutral_01"
-                android:text="@string/share"
                 android:contentDescription="@string/share"
-                app:icon="@drawable/ic_share"
-                app:iconTint="@color/neutral_04"
-                app:iconGravity="textStart"
+                android:text="@string/share"
+                android:visibility="gone"
+                android:textColor="@color/neutral_09"
                 android:textSize="@dimen/button_2"
-                android:textColor="@color/neutral_04"
-                app:cornerRadius="8dp" />
+                app:cornerRadius="8dp"
+                app:icon="@drawable/ic_share"
+                app:iconGravity="textStart"
+                app:iconTint="@color/neutral_09" />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -260,13 +263,13 @@
             android:layout_marginBottom="40dp"
             android:id="@+id/btn_back_to_menu"
             android:layout_width="match_parent"
-            android:layout_marginEnd="12dp"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:backgroundTint="@color/neutral_01"
             android:text="@string/kembali_ke_menu"
+            android:visibility="gone"
             android:contentDescription="@string/kembali_ke_menu"
             android:textSize="20sp"
-            android:textColor="@color/neutral_04"
+            android:textColor="@color/neutral_09"
             app:cornerRadius="8dp" />
     </LinearLayout>
 

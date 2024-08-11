@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -13,9 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentTransferSesamaBankFormKonfirmasiBinding
-import com.finsera.presentation.fragments.transfer.sesama_bank.bundle.CekRekeningSesama
+import com.finsera.presentation.fragments.transfer.sesama_bank.bundle.CekRekeningSesamaBundle
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.TransferSesamaBankViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -27,6 +26,10 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
 
     private val transferSesamaBankViewModel : TransferSesamaBankViewModel by inject()
 
+    private var namaPemilikRekening: String? = null
+    private var nomorRekening: String? = null
+    private var addToDaftarTersimpan: Boolean = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTransferSesamaBankFormKonfirmasiBinding.inflate(inflater, container, false)
         return binding.root
@@ -35,56 +38,40 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        handleBackButton()
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
+
         observer()
 
-        val bundle = arguments?.getParcelable<CekRekeningSesama>(Constant.TRANSFER_SESAMA_BUNDLE)
-        if(bundle != null) {
-            val noRekening = bundle.noRekening
-            val namaPemilikRekening = bundle.namaPemilikRekening
+        val dataRekeningBundle = arguments?.getParcelable<CekRekeningSesamaBundle>(Constant.DATA_REKENING_SESAMA_BUNDLE)
+        val nominalTransfer = arguments?.getString(Constant.NOMINAL_TRANSFER_EXTRA)
+        val catatanTransfer = arguments?.getString(Constant.CATATAN_TRANSFER_EXTRA)
+        addToDaftarTersimpan = requireArguments().getBoolean(Constant.DAFTAR_TERSIMPAN_CHECKED_EXTRA)
 
+        Toast.makeText(requireActivity(), addToDaftarTersimpan.toString(), Toast.LENGTH_SHORT).show()
+
+        if(dataRekeningBundle != null && nominalTransfer != null) {
+            namaPemilikRekening = dataRekeningBundle.namaPemilikRekening
+            nomorRekening = dataRekeningBundle.noRekening
+
+            binding.tvNamaPemilikRekeningTujuan.setText(namaPemilikRekening)
+            binding.tvRekeningTujuan.setText(nomorRekening)
+            binding.tvCatatanTf.setText(catatanTransfer ?: "-")
+            binding.tvNominalAwal.setText("Rp $nominalTransfer")
+            binding.tvBiayaAdmin.setText("Gratis")
+            binding.tvNominalTotal.setText("Rp $nominalTransfer")
 
             binding.btnNext.setOnClickListener {
                 if(binding.etPin != null) {
-                    //transferSesamaBankViewModel.transferSesama(noRekening, nominal, catatan!!, binding.etPinTransaksi.editText?.text.toString())
+                    transferSesamaBankViewModel.transferSesama(nomorRekening!!, nominalTransfer.toDouble()!!, catatanTransfer!!, binding.etPinTransaksi.editText?.text.toString())
                 }
             }
-        }
-    }
-
-    private fun handleBackButton() {
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            MaterialAlertDialogBuilder(requireActivity())
-                .setTitle("Konfirmasi")
-                .setMessage("Apakah anda ingin keluar dari halaman ini? Apabila anda keluar dari halaman ini, anda harus mengulang input data transaksi dari awal.")
-                .setNeutralButton("Tidak") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .setPositiveButton("Ya") { dialog, _ ->
-                    //findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasi_to_homeFragment)
-                }
-                .show()
-        }
-
-
-        binding.btnBack.setOnClickListener {
-            MaterialAlertDialogBuilder(requireActivity())
-                .setTitle("Konfirmasi")
-                .setMessage("Apakah anda ingin keluar dari halaman ini? Apabila anda keluar dari halaman ini, anda harus mengulang input data transaksi dari awal.")
-                .setNegativeButton("Tidak") { dialog, _ ->
-                    dialog.dismiss()
-                }
-                .setPositiveButton("Ya") { dialog, _ ->
-                    //findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasi_to_homeFragment)
-                }
-                .show()
         }
     }
 
     private fun observer() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                transferSesamaBankViewModel.transferSesamaUiState.collectLatest { uiState ->
+                transferSesamaBankViewModel.transferSesamaFormUiState.collectLatest { uiState ->
                     uiState.message?.let { message ->
                         Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
                         transferSesamaBankViewModel.messageShown()
@@ -97,11 +84,18 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
                     }
 
                     if (uiState.isSuccess) {
-                        if (findNavController().currentDestination?.id == R.id.transferSesamaBankFormKonfirmasiFragment) {
-                            Snackbar.make(requireView(), "Transfer berhasil", Snackbar.LENGTH_SHORT)
-                                .show()
+                        if(addToDaftarTersimpan) {
+                            transferSesamaBankViewModel.simpanKeDaftarTersimpanSesama(namaPemilikRekening!!, nomorRekening!!)
+                        }
 
-                            //findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasi_to_homeFragment)
+                        if (findNavController().currentDestination?.id == R.id.transferSesamaBankFormKonfirmasiFragment) {
+                            val bundle = Bundle().apply {
+                                putParcelable(Constant.TRANSFER_SESAMA_BERHASIL_BUNDLE, uiState.data)
+                                Snackbar.make(requireView(), "Rekening berhasil disimpan ke Daftar Tersimpan!", Snackbar.LENGTH_SHORT).show()
+                            }
+                            Snackbar.make(requireView(), "Transfer Berhasil", Snackbar.LENGTH_SHORT).show()
+                            findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasiFragment_to_transferSesamaBankSuksesFragment, bundle)
+                            transferSesamaBankViewModel.transferSesamaBerhasil()
                         }
                     }
                 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.finsera.common.utils.Resource
 import com.finsera.common.utils.network.ConnectivityManager
-import com.finsera.domain.usecase.transfer_sesama.CekRekeningSesamaUseCase
+import com.finsera.domain.usecase.transfer.sesama_bank.CekRekeningSesamaUseCase
 import com.finsera.presentation.fragments.transfer.sesama_bank.uistate.CekRekeningSesamaUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
