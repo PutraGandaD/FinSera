@@ -8,6 +8,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
+import java.net.SocketTimeoutException
 
 class LoginPinUserUseCase(private val repository: IAuthRepository) {
     suspend operator fun invoke(mpin: String) : Flow<Resource<String>> = flow {
@@ -51,6 +52,10 @@ class LoginPinUserUseCase(private val repository: IAuthRepository) {
 
                 is IOException -> {
                     emit(Resource.Error("Ada masalah pada koneksi internet anda. Silahkan coba lagi."))
+                }
+
+                is SocketTimeoutException -> {
+
                 }
             }
         }

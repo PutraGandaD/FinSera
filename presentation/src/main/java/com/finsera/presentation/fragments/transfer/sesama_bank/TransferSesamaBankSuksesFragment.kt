@@ -1,9 +1,11 @@
 package com.finsera.presentation.fragments.transfer.sesama_bank
 
+import android.Manifest
 import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -18,11 +20,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
+import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
 import com.finsera.domain.model.TransferSesama
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentTransferSesamaBankSuksesBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.io.FileOutputStream
@@ -73,20 +79,12 @@ class TransferSesamaBankSuksesFragment : Fragment() {
 
         val captureButton = binding.cardTransaksiBerhasil.btnDownload
         captureButton.setOnClickListener {
-            saveToGallery()
+            safeSaveToGallery()
         }
 
         val shareButton = binding.cardTransaksiBerhasil.btnShare
         shareButton.setOnClickListener {
-            saveToGallery()
-
-            val shareIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                // Example: content://com.google.android.apps.photos.contentprovider/...
-                putExtra(Intent.EXTRA_STREAM, imageUri)
-                type = "image/jpeg"
-            }
-            startActivity(Intent.createChooser(shareIntent, null))
+            safeShareImageTo()
         }
     }
 
@@ -156,12 +154,12 @@ class TransferSesamaBankSuksesFragment : Fragment() {
                 uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
 
                 Snackbar.make(requireView(), "Bukti Transaksi berhasil disimpan di Galeri.", Toast.LENGTH_SHORT).show()
-                normalMode()
             } catch (e: Exception) {
                 Log.e(TAG, "saveBitmapImage: ", e)
             }
         }
 
+        normalMode()
         return uri
     }
 
@@ -169,6 +167,17 @@ class TransferSesamaBankSuksesFragment : Fragment() {
         saveToGalleryMode()
         val bitmap = getBitmapFromUiView(requireActivity(), binding.transferSesamaBankBerhasil)
         imageUri = saveBitmapImage(bitmap)
+    }
+
+    private fun shareImageTo() {
+        safeSaveToGallery()
+        val shareIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            // Example: content://com.google.android.apps.photos.contentprovider/...
+            putExtra(Intent.EXTRA_STREAM, imageUri)
+            type = "image/jpeg"
+        }
+        startActivity(Intent.createChooser(shareIntent, null))
     }
 
     private fun saveToGalleryMode() {
@@ -183,6 +192,86 @@ class TransferSesamaBankSuksesFragment : Fragment() {
             binding.cardTransaksiBerhasil.root.visibility = View.VISIBLE
             binding.cardTransaksiBerhasilScreenshot.root.visibility = View.INVISIBLE
         }
+    }
+
+    private fun safeSaveToGallery() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                saveToGallery()
+            }
+
+            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                // Provide an additional rationale to the user if the permission was not granted
+                // and the user would benefit from additional context for the use of the permission.
+                permissionStorageDialog()
+            }
+
+            else -> {
+                // Request the permission
+                requestPermissionSafeSaveToGallery.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }
+    }
+
+    private fun safeShareImageTo() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                shareImageTo()
+            }
+
+            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                // Provide an additional rationale to the user if the permission was not granted
+                // and the user would benefit from additional context for the use of the permission.
+                permissionStorageDialog()
+            }
+
+            else -> {
+                // Request the permission
+                requestPermissionSafeShareImageTo.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }
+    }
+
+    private val requestPermissionSafeSaveToGallery = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            saveToGallery()
+        } else {
+            permissionStorageDialog()
+        }
+    }
+
+    private val requestPermissionSafeShareImageTo = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            shareImageTo()
+        } else {
+            // Explain to the user that the feature is unavailable because the
+            // features require a permission that the user has denied.
+            permissionStorageDialog()
+        }
+    }
+
+    private fun permissionStorageDialog() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Izin Aplikasi FinSera")
+            .setMessage(resources.getString(R.string.izin_aplikasi_finsera_desc))
+            .setNegativeButton("Tidak") { dialog, which ->
+                dialog.dismiss()
+                Snackbar.make(requireView(), "Fitur tidak dapat dijalankan karena izin penyimpanan file pada aplikasi FinSera tidak diizinkan", Snackbar.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("Ya") { dialog, which ->
+                requireActivity().openAppPermissionSettings()
+            }
+            .show()
     }
 
 }

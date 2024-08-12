@@ -283,7 +283,7 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
         } else {
             // Explain to the user that the feature is unavailable because the
             // features require a permission that the user has denied.
-            Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), "Izin penyimpanan file pada aplikasi FinSera belum diizinkan. Silahkan hidupkan izin penyimpanan file pada aplikasi FinSera di pengaturan handphone anda.", Snackbar.LENGTH_SHORT).show()
         }
     }
 

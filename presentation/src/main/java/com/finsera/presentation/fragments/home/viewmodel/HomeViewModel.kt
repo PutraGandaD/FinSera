@@ -26,7 +26,7 @@ class HomeViewModel(private val infoSaldoUseCase: InfoSaldoUseCase) : ViewModel(
         getSaldo()
     }
 
-    private fun getSaldo(){
+     fun getSaldo(){
         viewModelScope.launch {
             infoSaldoUseCase.invoke().collect {
                 val currentState= _saldoUIState.value

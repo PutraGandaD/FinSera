@@ -93,6 +93,7 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
     }
 
     private fun getInfoSaldo() {
+        homeViewModel.getSaldo()
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 homeViewModel.saldoUiState.collectLatest { uiState ->
