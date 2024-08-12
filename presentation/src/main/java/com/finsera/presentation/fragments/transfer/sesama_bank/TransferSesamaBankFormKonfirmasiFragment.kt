@@ -71,10 +71,10 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
     private fun observer() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                transferSesamaBankViewModel.transferSesamaFormUiState.collectLatest { uiState ->
+                transferSesamaBankViewModel.transferSesamaFormKonfirmasiUiState.collectLatest { uiState ->
                     uiState.message?.let { message ->
                         Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
-                        transferSesamaBankViewModel.messageShown()
+                        transferSesamaBankViewModel.messageFormKonfirmasiShown()
                     }
 
                     if (uiState.isLoading) {

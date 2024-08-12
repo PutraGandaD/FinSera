@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.format.CurrencyFormatter
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentInfoSaldoBinding
@@ -54,6 +55,10 @@ class InfoSaldoFragment : Fragment() {
 
         binding.accountInfoContainer.setOnClickListener {
             speakAccountInfo()
+        }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
 
     }
