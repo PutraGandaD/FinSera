@@ -2,6 +2,7 @@ package com.finsera.data.source.remote
 
 import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
+import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.refresh_token.RefreshTokenResponse
@@ -63,4 +64,9 @@ interface ApiService {
         @Query("startDate") startDate: String?,
         @Query("endDate") endDate: String?,
     ): ResponseBody
+
+    @GET("bank/get-all")
+    suspend fun getListBank(
+        @Header("Authorization") accessToken: String
+    ) : ListBankResponse
 }

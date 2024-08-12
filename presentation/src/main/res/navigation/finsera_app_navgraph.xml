@@ -84,8 +84,8 @@
         android:label="fragment_transfer_antar_bank_home"
         tools:layout="@layout/fragment_transfer_antar_bank_home" >
         <action
-            android:id="@+id/action_transferAntarBankHome_to_transferAntarBankForm"
-            app:destination="@id/transferAntarBankForm" />
+            android:id="@+id/action_transferAntarBankHome_to_cekRekeningAntarBankFormFragment"
+            app:destination="@id/cekRekeningAntarBankFormFragment" />
     </fragment>
     <fragment
         android:id="@+id/transferSesamaBankHome"
@@ -201,4 +201,13 @@
         android:id="@+id/transferSesamaBankSuksesFragment"
         android:name="com.finsera.presentation.fragments.transfer.sesama_bank.TransferSesamaBankSuksesFragment"
         android:label="TransferSesamaBankSuksesFragment" />
+    <fragment
+        android:id="@+id/cekRekeningAntarBankFormFragment"
+        android:name="com.finsera.presentation.fragments.transfer.antar_bank.CekRekeningAntarBankFormFragment"
+        android:label="fragment_cek_rekening_antar_bank_form"
+        tools:layout="@layout/fragment_cek_rekening_antar_bank_form" >
+        <action
+            android:id="@+id/action_cekRekeningAntarBankFormFragment_to_transferAntarBankForm"
+            app:destination="@id/transferAntarBankForm" />
+    </fragment>
 </navigation>

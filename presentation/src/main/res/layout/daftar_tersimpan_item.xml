@@ -12,6 +12,7 @@
         android:text="Nama Pemilik Rekening"
         android:textColor="@color/neutral_09"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -20,11 +21,19 @@
         android:id="@+id/tv_daftartersimpan_norekening"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:text="1234567890"
         android:textColor="@color/neutral_09"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/shadow_navbar"
         app:layout_constraintTop_toBottomOf="@id/tv_daftartersimpan_namapemilik"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <View
+        android:id="@+id/shadow_navbar"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/shadow_bottom_navbar"
+        app:layout_constraintTop_toBottomOf="@id/tv_daftartersimpan_norekening"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,7 +53,9 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
         val btnTransferSesama = view.findViewById<ConstraintLayout>(R.id.btn_menu_transfer_sesama)
         btnTransferSesama.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_transferSesamaBankHome)
+            if(findNavController().currentDestination?.id == R.id.homeFragment) {
+                findNavController().navigate(R.id.action_homeFragment_to_transferSesamaBankHome)
+            }
         }
 
         val btnVirtualAccount = view.findViewById<ConstraintLayout>(R.id.btn_menu_virtual_account)
@@ -68,9 +70,10 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
         val btnTransferAntarBank = view.findViewById<ConstraintLayout>(R.id.btn_menu_transfer_antarbank)
         btnTransferAntarBank.setOnClickListener {
-            Snackbar.make(requireView(), "Fitur belum tersedia", Snackbar.LENGTH_SHORT).show()
+            if(findNavController().currentDestination?.id == R.id.homeFragment) {
+                findNavController().navigate(R.id.action_homeFragment_to_transferAntarBankHome)
+            }
         }
-
 
         setUpBottomNavBar()
         getInfoSaldo()

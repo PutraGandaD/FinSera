@@ -49,10 +49,11 @@ class TransferSesamaBankFormFragment : Fragment() {
         }
 
         if(savedItemMode == true) {
-            binding.checkboxDaftarTersimpanSesama.apply {
-                isEnabled = false
-                isChecked = false
-            }
+//            binding.checkboxDaftarTersimpanSesama.apply {
+//                isEnabled = false
+//                isChecked = false
+//            }
+            binding.layoutdaftartersimpan.visibility = View.GONE
         }
 
         val dataRekening = CekRekeningSesamaBundle(namaPemilikRekening, noRekening)

@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.finsera.common.utils.Resource
 import com.finsera.common.utils.dialog.DatePickerFragment
+import com.finsera.common.utils.network.ConnectivityManager
 import com.finsera.presentation.adapters.MutasiAdapter
 import com.finsera.presentation.databinding.FragmentMutasiBinding
 import com.finsera.presentation.databinding.ViewMutasiFilterBinding
@@ -27,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.io.FileOutputStream
@@ -36,14 +38,14 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
-
+class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
     private var _binding: FragmentMutasiBinding? = null
     private var _filterViewBinding : ViewMutasiFilterBinding? = null
     private val binding get() = _binding!!
     private val filterViewBinding get() = _filterViewBinding!!
 
     private val mutasiViewModel: MutasiViewModel by viewModel()
+    private val connectivityManager: ConnectivityManager by inject()
 
     private var startDate : String = ""
     private var endDate : String = ""
@@ -148,50 +150,62 @@ class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
 
     private fun filterButtonOnClick() {
         binding.viewFilter.btnToday.setOnClickListener {
-            val date = SimpleDateFormat(
-                "yyyy-MM-dd",
-                Locale.getDefault()
-            ).format(System.currentTimeMillis())
+            if(connectivityManager.hasInternetConnection()) {
+                val date = SimpleDateFormat(
+                    "yyyy-MM-dd",
+                    Locale.getDefault()
+                ).format(System.currentTimeMillis())
 
-            startDate = date
-            endDate = date
-            mutasiViewModel.getMutasi(date, date)
-            showResultOfFilter()
+                startDate = date
+                endDate = date
+                mutasiViewModel.getMutasi(date, date)
+                showResultOfFilter()
+            } else {
+                Snackbar.make(requireView(), "Tidak ada koneksi internet", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         binding.viewFilter.btnWeek.setOnClickListener {
-            val calendar = Calendar.getInstance() // get current device date
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            if(connectivityManager.hasInternetConnection()) {
+                val calendar = Calendar.getInstance() // get current device date
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-            // get start date to 7 days earlier from current date
-            calendar.add(Calendar.DAY_OF_YEAR, -7) // get 7 days ago date (current date - 7 days)
-            startDate = dateFormat.format(calendar.time)
+                // get start date to 7 days earlier from current date
+                calendar.add(Calendar.DAY_OF_YEAR, -7) // get 7 days ago date (current date - 7 days)
+                startDate = dateFormat.format(calendar.time)
 
-            calendar.add(Calendar.DAY_OF_YEAR, 7) // reset to today's date (current date + 7 days)
-            endDate = dateFormat.format(calendar.time)
+                calendar.add(Calendar.DAY_OF_YEAR, 7) // reset to today's date (current date + 7 days)
+                endDate = dateFormat.format(calendar.time)
 
-            mutasiViewModel.getMutasi(startDate, endDate)
-            showResultOfFilter()
+                mutasiViewModel.getMutasi(startDate, endDate)
+                showResultOfFilter()
+            } else {
+                Snackbar.make(requireView(), "Tidak ada koneksi internet", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         binding.viewFilter.btnMonth.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            if(connectivityManager.hasInternetConnection()) {
+                val calendar = Calendar.getInstance()
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-            calendar.set(Calendar.DAY_OF_MONTH, 1)
-            val firstDayOfMonth = dateFormat.format(calendar.time)
+                calendar.set(Calendar.DAY_OF_MONTH, 1)
+                val firstDayOfMonth = dateFormat.format(calendar.time)
 
-            calendar.set(
-                Calendar.DAY_OF_MONTH,
-                calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
-            )
-            val lastDayOfMonth = dateFormat.format(calendar.time)
+                calendar.set(
+                    Calendar.DAY_OF_MONTH,
+                    calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+                )
+                val lastDayOfMonth = dateFormat.format(calendar.time)
 
-            startDate = firstDayOfMonth
-            endDate = lastDayOfMonth
+                startDate = firstDayOfMonth
+                endDate = lastDayOfMonth
 
-            mutasiViewModel.getMutasi(firstDayOfMonth, lastDayOfMonth)
-            showResultOfFilter()
+                mutasiViewModel.getMutasi(firstDayOfMonth, lastDayOfMonth)
+                showResultOfFilter()
+            } else {
+                Snackbar.make(requireView(), "Tidak ada koneksi internet", Snackbar.LENGTH_SHORT).show()
+            }
         }
 
 
@@ -204,30 +218,34 @@ class MutasiFragment : Fragment(), DatePickerFragment.DialogDateListener {
         }
 
         filterViewBinding.btnNext.setOnClickListener {
-            if (startDate.isEmpty() || endDate.isEmpty()) {
-                Snackbar.make(
-                    requireView(),
-                    "Silahkan atur tanggal awal dan tanggal akhir terlebih dahulu",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            } else if (formatDateString(startDate) > formatDateString(endDate)) {
-                Snackbar.make(
-                    requireView(),
-                    "Tanggal awal harus lebih awal dari tanggal akhir",
-                    Snackbar.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            } else if (startDate.isNotEmpty() && endDate.isNotEmpty()) {
-                mutasiViewModel.getMutasi(
-                    formatDateString(startDate), formatDateString(endDate)
-                )
-                showResultOfFilter()
+            if(connectivityManager.hasInternetConnection()) {
+                if (startDate.isEmpty() || endDate.isEmpty()) {
+                    Snackbar.make(
+                        requireView(),
+                        "Silahkan atur tanggal awal dan tanggal akhir terlebih dahulu",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                } else if (formatDateString(startDate) > formatDateString(endDate)) {
+                    Snackbar.make(
+                        requireView(),
+                        "Tanggal awal harus lebih awal dari tanggal akhir",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                } else if (startDate.isNotEmpty() && endDate.isNotEmpty()) {
+                    mutasiViewModel.getMutasi(
+                        formatDateString(startDate), formatDateString(endDate)
+                    )
+                    showResultOfFilter()
+                } else {
+                    mutasiViewModel.getMutasi(
+                        "", ""
+                    )
+                    showResultOfFilter()
+                }
             } else {
-                mutasiViewModel.getMutasi(
-                    "", ""
-                )
-                showResultOfFilter()
+                Snackbar.make(requireView(), "Tidak ada koneksi internet", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

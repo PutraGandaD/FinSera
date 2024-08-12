@@ -26,7 +26,7 @@ class TransferAntarBankHomeFragment : Fragment() {
 
     private fun setupListeners() {
         binding.btnInput.setOnClickListener {
-            findNavController().navigate(R.id.action_transferAntarBankHome_to_transferAntarBankForm)
+            findNavController().navigate(R.id.action_transferAntarBankHome_to_cekRekeningAntarBankFormFragment)
         }
     }
 
@@ -35,23 +35,3 @@ class TransferAntarBankHomeFragment : Fragment() {
         _binding = null
     }
 }
-
-//    companion object {
-//        fun newInstance() = TransferAntarBankHomeFragment()
-//    }
-//
-//    private val viewModel: TransferAntarBankHomeViewModel by viewModels()
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        // TODO: Use the ViewModel
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View {
-//        return inflater.inflate(R.layout.fragment_transfer_antar_bank_home, container, false)
-//    }
-//}

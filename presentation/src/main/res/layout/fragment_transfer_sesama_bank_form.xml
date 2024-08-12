@@ -116,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
+                android:id="@+id/layoutdaftartersimpan"
                 android:layout_marginTop="6dp"
                 android:contentDescription="@string/desc_simpan_ke_daftar_tersimpan">
                 <CheckBox
