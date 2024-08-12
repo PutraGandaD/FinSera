@@ -42,9 +42,13 @@ android {
 
 dependencies {
     implementation(project(":common"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":presentation"))
 
     val lifecycle_version = "2.7.0"
     val koin_version = "3.5.6"
+    val room_version = "2.6.1"
 
     // ViewModel
     //noinspection GradleDependency
@@ -61,6 +65,7 @@ dependencies {
     // Lifecycle utilities for Compose
     //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
 
     // Saved state module for ViewModel
     //noinspection GradleDependency
@@ -86,18 +91,6 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
-    // Glide
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-
-    // CircleImageView
-    implementation("de.hdodenhof:circleimageview:3.1.0")
-
-    // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
-
-    // Facebook Shimmer Loading
-    implementation("com.facebook.shimmer:shimmer:0.5.0")
-
     // Koin (Dependency Injection)
     // Declare koin-bom version
     implementation(platform("io.insert-koin:koin-bom:$koin_version"))
@@ -117,4 +110,10 @@ dependencies {
     // Chucker
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+    // Room Database
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
 }
