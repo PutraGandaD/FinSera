@@ -5,10 +5,12 @@ import androidx.lifecycle.viewModelScope
 import com.finsera.common.utils.Resource
 import com.finsera.common.utils.network.ConnectivityManager
 import com.finsera.domain.model.DaftarTersimpan
+import com.finsera.domain.usecase.infosaldo.InfoSaldoUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.CariDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.GetDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TambahDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TransferSesamaBankUseCase
+import com.finsera.presentation.fragments.transfer.sesama_bank.uistate.TransferSesamaFormKonfirmasiUiState
 import com.finsera.presentation.fragments.transfer.sesama_bank.uistate.TransferSesamaFormUiState
 import com.finsera.presentation.fragments.transfer.sesama_bank.uistate.TransferSesamaHomeUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,13 +24,14 @@ class TransferSesamaBankViewModel(
     private val transferSesamaBankUseCase: TransferSesamaBankUseCase,
     private val tambahDaftarTersimpanSesamaUseCase: TambahDaftarTersimpanSesamaUseCase,
     private val getDaftarTersimpanSesamaUseCase: GetDaftarTersimpanSesamaUseCase,
-    private val cariDaftarTersimpanSesamaUseCase: CariDaftarTersimpanSesamaUseCase
+    private val cariDaftarTersimpanSesamaUseCase: CariDaftarTersimpanSesamaUseCase,
+    private val getInfoSaldoUseCase: InfoSaldoUseCase
 ) : ViewModel() {
-    private val _transferSesamaFormUiState = MutableStateFlow(TransferSesamaFormUiState())
-    val transferSesamaFormUiState = _transferSesamaFormUiState.asStateFlow()
-
     private val _transferSesamaHomeUiState = MutableStateFlow(TransferSesamaHomeUiState())
     val transferSesamaHomeUiState = _transferSesamaHomeUiState.asStateFlow()
+
+    private val _transferSesamaFormKonfirmasiUiState = MutableStateFlow(TransferSesamaFormKonfirmasiUiState())
+    val transferSesamaFormKonfirmasiUiState = _transferSesamaFormKonfirmasiUiState.asStateFlow()
 
     init {
         getDaftarTersimpanSesama()
@@ -40,26 +43,26 @@ class TransferSesamaBankViewModel(
                 transferSesamaBankUseCase.invoke(norek, nominal, note, mpin).collectLatest { result ->
                     when(result) {
                         is Resource.Loading -> {
-                            _transferSesamaFormUiState.update { uiState ->
+                            _transferSesamaFormKonfirmasiUiState.update { uiState ->
                                 uiState.copy(isLoading = true, message = null, isSuccess = false, data = null)
                             }
                         }
 
                         is Resource.Success -> {
-                            _transferSesamaFormUiState.update { uiState ->
+                            _transferSesamaFormKonfirmasiUiState.update { uiState ->
                                 uiState.copy(isLoading = false, message = result.message, isSuccess = true, data = result.data)
                             }
                         }
 
                         is Resource.Error -> {
-                            _transferSesamaFormUiState.update { uiState ->
+                            _transferSesamaFormKonfirmasiUiState.update { uiState ->
                                 uiState.copy(isLoading = false, message = result.message, isSuccess = false, data = null)
                             }
                         }
                     }
                 }
             } else {
-                _transferSesamaFormUiState.update { uiState ->
+                _transferSesamaFormKonfirmasiUiState.update { uiState ->
                     uiState.copy(
                         isLoading = false,
                         message = "Tidak ada koneksi internet.",
@@ -92,14 +95,15 @@ class TransferSesamaBankViewModel(
         }
     }
 
-    fun messageShown() {
-        _transferSesamaFormUiState.update { currentUiState ->
+    fun messageFormKonfirmasiShown() {
+        _transferSesamaFormKonfirmasiUiState.update { currentUiState ->
             currentUiState.copy(message = null)
         }
     }
 
+
     fun transferSesamaBerhasil() {
-        _transferSesamaFormUiState.update { currentUiState ->
+        _transferSesamaFormKonfirmasiUiState.update { currentUiState ->
             currentUiState.copy(isLoading = false, isSuccess = false, message = null, data = null)
         }
     }

@@ -1,10 +1,11 @@
 package com.finsera.presentation.fragments.transfer.sesama_bank.uistate
 
-import com.finsera.domain.model.TransferSesama
+import com.finsera.domain.model.Saldo
 
 data class TransferSesamaFormUiState(
-    val isLoading: Boolean = false,
-    val message: String? = null,
-    val isSuccess: Boolean = false,
-    val data: TransferSesama? = null
+    val dataSaldo: Saldo? = null,
+    val isDataSaldoLoading: Boolean = false,
+    val isDataSaldoReady: Boolean = false,
+    val hasInternet: Boolean = true,
+    val message: String? = null
 )
