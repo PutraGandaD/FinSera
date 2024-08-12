@@ -3,6 +3,7 @@ package com.finsera.di
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.finsera.common.utils.Constant.Companion.BASE_URL
 import com.finsera.common.utils.network.AuthInterceptor
+import com.finsera.common.utils.network.ConnectivityManager
 import com.finsera.data.source.remote.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,6 +20,7 @@ object NetworkModule {
         factory { provideOkHttpClient(get(), get(), get()) }
         single { provideRetrofit(get()) }
         single { provideRetrofitApi(get()) }
+        factory { ConnectivityManager(get()) }
     }
 
     private fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {

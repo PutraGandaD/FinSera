@@ -1,5 +1,9 @@
 package com.finsera.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class TransferSesama(
     val transactionDate: String?,
     val note: String?,
@@ -8,6 +12,6 @@ data class TransferSesama(
     val transactionNum: String?,
     val accountnumRecipient: String?,
     val message: String
-)
+) : Parcelable
 
 

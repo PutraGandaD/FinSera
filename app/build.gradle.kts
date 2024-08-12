@@ -44,6 +44,7 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":data"))
     implementation(project(":domain"))
+    implementation(project(":presentation"))
 
     val lifecycle_version = "2.7.0"
     val koin_version = "3.5.6"
@@ -90,18 +91,6 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
-    // Glide
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-
-    // CircleImageView
-    implementation("de.hdodenhof:circleimageview:3.1.0")
-
-    // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
-
-    // Facebook Shimmer Loading
-    implementation("com.facebook.shimmer:shimmer:0.5.0")
-
     // Koin (Dependency Injection)
     // Declare koin-bom version
     implementation(platform("io.insert-koin:koin-bom:$koin_version"))
@@ -121,10 +110,6 @@ dependencies {
     // Chucker
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
-
-    // Intuit SDP and SSP
-    implementation("com.intuit.sdp:sdp-android:1.1.1")
-    implementation("com.intuit.ssp:ssp-android:1.1.1")
 
     // Room Database
     implementation("androidx.room:room-runtime:$room_version")

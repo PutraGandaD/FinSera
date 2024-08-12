@@ -2,11 +2,13 @@ package com.finsera
 
 import android.app.Application
 import com.finsera.common.utils.sharedpref.SharedPreferenceManager
-import com.finsera.di.AppModule.appModule
-import com.finsera.di.AppModule.repositoryModule
-import com.finsera.di.AppModule.useCaseModule
-import com.finsera.di.AppModule.viewModelModule
+import com.finsera.di.DataModule.dataModule
+import com.finsera.di.DataModule.databaseDaoModule
+import com.finsera.di.DataModule.databaseInitModule
+import com.finsera.di.DataModule.repositoryModule
+import com.finsera.di.DomainModule.useCaseModule
 import com.finsera.di.NetworkModule.networkModule
+import com.finsera.di.PresentationModule.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -18,7 +20,14 @@ class MainApplication : Application() {
         startKoin {
             androidLogger()
             androidContext(this@MainApplication)
-            modules(appModule, networkModule, repositoryModule, viewModelModule, useCaseModule)
+            modules(
+                dataModule,
+                databaseInitModule,
+                databaseDaoModule,
+                networkModule,
+                repositoryModule,
+                viewModelModule,
+                useCaseModule)
         }
     }
 }
