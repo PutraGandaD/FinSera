@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         findNavController(R.id.NavHostFragment)
+
     }
 
     override fun attachBaseContext(newBase: Context?) {

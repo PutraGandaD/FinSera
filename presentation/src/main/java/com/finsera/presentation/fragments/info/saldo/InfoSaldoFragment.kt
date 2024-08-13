@@ -86,9 +86,7 @@ class InfoSaldoFragment : Fragment() {
                                 .append(CurrencyFormatter.formatCurrency(saldo.amount))
 
                         } ?: run {
-                            binding.tvAccountNumberValue.text =
-                                getString(R.string.tv_rekening_placeholder)
-                            binding.tvBalanceValue.text = getString(R.string.amount_placholder)
+                            showLoadingInfoSaldo()
                         }
                         uiState.message?.let {message->
                             Log.d("InfoSaldoFragment", message)
