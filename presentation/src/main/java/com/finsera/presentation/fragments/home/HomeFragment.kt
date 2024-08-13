@@ -130,8 +130,8 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
     private fun clipBoardCardNumber(){
         binding.cardNasabahInfo.btnNorekCopy.setOnClickListener {
-            var cardNumber = binding.cardNasabahInfo.tvNoRekeningCard.text.toString()
-            var cardNumberLabel = binding.cardNasabahInfo.tvNamaNasabah.text.toString()
+            val cardNumber = binding.cardNasabahInfo.tvNoRekeningCard.text.toString()
+            val cardNumberLabel = binding.cardNasabahInfo.tvNamaNasabah.text.toString()
 
             requireContext().copyToClipboard(
                 getString(
