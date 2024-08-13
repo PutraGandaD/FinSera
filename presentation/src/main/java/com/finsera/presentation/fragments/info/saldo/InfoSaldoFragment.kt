@@ -11,10 +11,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.finsera.common.utils.extension.copyToClipboard
 import com.finsera.common.utils.format.CurrencyFormatter
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentInfoSaldoBinding
 import com.finsera.presentation.fragments.info.saldo.viewmodel.InfoSaldoViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,6 +31,8 @@ class InfoSaldoFragment : Fragment() {
     private val infoSaldoViewModel: InfoSaldoViewModel by viewModel()
 
     private lateinit var tts: TextToSpeech
+
+    private lateinit var accountName : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,11 +60,15 @@ class InfoSaldoFragment : Fragment() {
         binding.accountInfoContainer.setOnClickListener {
             speakAccountInfo()
         }
+        buttonBack()
+        clipBoardCardNumber()
+    }
 
+
+    private fun buttonBack(){
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
-
     }
 
     private fun showLoadingInfoSaldo() {
@@ -89,11 +97,10 @@ class InfoSaldoFragment : Fragment() {
                             binding.tvAccountNumberValue.text = saldo.accountNumber
                             binding.tvBalanceValue.text = StringBuilder().append("Rp ")
                                 .append(CurrencyFormatter.formatCurrency(saldo.amount))
+                            accountName = saldo.username
 
                         } ?: run {
-                            binding.tvAccountNumberValue.text =
-                                getString(R.string.tv_rekening_placeholder)
-                            binding.tvBalanceValue.text = getString(R.string.amount_placholder)
+                            showLoadingInfoSaldo()
                         }
                         uiState.message?.let {message->
                             Log.d("InfoSaldoFragment", message)
@@ -101,6 +108,22 @@ class InfoSaldoFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun clipBoardCardNumber(){
+        binding.ibClipboard.setOnClickListener {
+            val cardNumber = binding.tvAccountNumberValue.text.toString()
+            val cardNumberLabel = accountName
+
+            requireContext().copyToClipboard(
+                getString(
+                    R.string.copy_to_clipboard,
+                    cardNumberLabel,
+                    cardNumber
+                ))
+            Snackbar.make(requireView(),
+                getString(R.string.succes_clipboard_card_number), Snackbar.LENGTH_SHORT).show()
         }
     }
 
