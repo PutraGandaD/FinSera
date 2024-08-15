@@ -121,8 +121,8 @@
     <string name="failed_transfer">oops, sepertinya ada masalah pastikan perangkat anda terhubung pada jaringan. tunggu beberapa saat dan coba lagi buka aplikasi</string>
     <string name="transfer_virtual_account">Transfer Virtual Account</string>
     <string name="nomor_va">Nomor Virtual Account</string>
+    <string name="recipient">Penerima</string>
     <string name="desc_input_nomor_va">input nomor virtual account di bawah</string>
-    <string name="nomor_VA">Nomor Virtual Account</string>
     <string name="virtual_account">Virtual Account</string>
     <string name="rama">Rama</string>
     <string name="ubah_mpin">Ubah MPIN</string>
@@ -231,4 +231,8 @@
     <string name="alert_empty_va">Nomor Virtual Account tidak boleh kosong</string>
     <string name="success_va_account_message">Nomor Virtual Account ditemukan</string>
     <string name="pin_empty">Pin harus diisi</string>
+    <string name="free">Gratis</string>
+    <string name="nomor_virtual_account">Nomor Virtual Account</string>
+    <string name="success_transfer_label">Bukti Transaksi berhasil disimpan di Galeri.</string>
+    <string name="success_transfer_save_to_galery">Bukti Transaksi berhasil disimpan di Galeri.</string>
 </resources>

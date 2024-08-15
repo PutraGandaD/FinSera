@@ -68,7 +68,7 @@
                     android:inputType="number"
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="10dp"
-                    android:hint="@string/nomor_VA"
+                    android:hint="@string/nomor_va"
                     android:singleLine="true" />
 
             </LinearLayout>

@@ -19,6 +19,7 @@ class Constant {
 
 
         const val DATA_VA_BUNDLE = "DATA_VA_BUNDLE"
+        const val DATA_TF_VA_BUNDLE = "DATA_TF_VA_BUNDLE"
 
         const val TRANSFER_SESAMA_BERHASIL_BUNDLE = "TRANSFER_SESAMA_BERHASIL_BUNDLE"
     }

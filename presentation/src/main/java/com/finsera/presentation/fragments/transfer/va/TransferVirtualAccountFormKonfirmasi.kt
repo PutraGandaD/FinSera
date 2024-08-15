@@ -14,6 +14,7 @@ import com.finsera.common.utils.format.CurrencyFormatter
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentTransferVirtualAccountFormKonfirmasiBinding
 import com.finsera.presentation.fragments.transfer.va.bundle.CekVaBundle
+import com.finsera.presentation.fragments.transfer.va.bundle.SuccesVaBundle
 import com.finsera.presentation.fragments.transfer.va.viewmodel.TransferVaFormViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
@@ -95,7 +96,20 @@ class TransferVirtualAccountFormKonfirmasi : Fragment() {
                         viewModel.messageShown()
 
                         if(findNavController().currentDestination?.id == R.id.transferVirtualAccountFormKonfirmasi) {
-                            findNavController().navigate(R.id.action_transferVirtualAccountFormKonfirmasi_to_transferVirtualAccountSuccessFragment)
+
+
+                            val dataTransferVa = SuccesVaBundle(
+                                transactionDate = uiState.data?.transactionDate!!,
+                                recipientVirtualAccountNum = uiState.data.recipientVirtualAccountNum!!,
+                                type = uiState.data.type!!,
+                                nominal = uiState.data.nominal!!,
+                                transactionNum = uiState.data.transactionNum!!,
+                                recipientName = uiState.data.recipientName!!
+                            )
+                            val bundle = Bundle().apply {
+                                putParcelable(Constant.DATA_TF_VA_BUNDLE, dataTransferVa)
+                            }
+                            findNavController().navigate(R.id.action_transferVirtualAccountFormKonfirmasi_to_transferVirtualAccountSuccessFragment,bundle)
                         }
                     }
 
