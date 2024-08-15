@@ -61,7 +61,9 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
         val btnVirtualAccount = view.findViewById<ConstraintLayout>(R.id.btn_menu_virtual_account)
         btnVirtualAccount.setOnClickListener {
-            Snackbar.make(requireView(), "Fitur belum tersedia", Snackbar.LENGTH_SHORT).show()
+            if(findNavController().currentDestination?.id == R.id.homeFragment) {
+                findNavController().navigate(R.id.action_homeFragment_to_transferVirtualAccountHome)
+            }
         }
 
         val btnEWallet = view.findViewById<ConstraintLayout>(R.id.btn_menu_ewallet)

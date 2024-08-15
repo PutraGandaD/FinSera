@@ -8,6 +8,8 @@ import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.refresh_token.RefreshTokenResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
+import com.finsera.data.source.remote.response.virtual_account.CheckVaResponse
+import com.finsera.data.source.remote.response.virtual_account.TransferVaResponse
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -57,6 +59,18 @@ interface ApiService {
         @Header("Authorization") accessToken: String,
         @Body raw: JsonObject
     ) : TransferSesamaResponse
+
+    @POST("va/check-virtual-account")
+    suspend fun cekVirtualAccount(
+        @Header("Authorization") accessToken: String,
+        @Body raw: JsonObject
+    ) : CheckVaResponse
+
+    @POST("va/transfer-va")
+    suspend fun transferVirtualAccount(
+        @Header("Authorization") accessToken: String,
+        @Body raw: JsonObject
+    ) : TransferVaResponse
 
     @GET("mutasi/download")
     suspend fun getDownloadMutasi(

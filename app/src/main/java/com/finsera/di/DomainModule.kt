@@ -11,6 +11,7 @@ import com.finsera.domain.usecase.transfer.sesama_bank.CekRekeningSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.GetDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TambahDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TransferSesamaBankUseCase
+import com.finsera.domain.usecase.transfer.virtual_account.CekVirtualAccountUseCase
 import org.koin.dsl.module
 
 object DomainModule {
@@ -23,6 +24,7 @@ object DomainModule {
         factory { TransferSesamaBankUseCase(get(), get()) }
         factory { CekRekeningSesamaUseCase(get(), get()) }
         factory { DownloadMutasiUseCase(get()) }
+        factory { CekVirtualAccountUseCase(get()) }
 
         factory { GetDaftarTersimpanSesamaUseCase(get()) }
         factory { TambahDaftarTersimpanSesamaUseCase(get()) }

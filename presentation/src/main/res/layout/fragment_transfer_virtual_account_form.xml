@@ -65,6 +65,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/edit_text_background_neutral5"
                     android:gravity="center_vertical"
+                    android:inputType="number"
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="10dp"
                     android:hint="@string/nomor_VA"
@@ -91,17 +92,35 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_lanjut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background_primary"
-        app:backgroundTint="@color/primary_blue"
-        android:contentDescription="@string/lanjut"
-        android:text="@string/lanjut"
-        android:textSize="20sp"
+    
+    
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="0dp"
         android:layout_marginBottom="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_lanjut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background_primary"
+            app:backgroundTint="@color/primary_blue"
+            android:contentDescription="@string/lanjut"
+            android:text="@string/lanjut"
+            android:textSize="20sp"
+            />
+
+        <ProgressBar
+            style="?android:progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </ViewFlipper>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
