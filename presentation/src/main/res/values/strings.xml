@@ -230,4 +230,5 @@
     </string>
     <string name="alert_empty_va">Nomor Virtual Account tidak boleh kosong</string>
     <string name="success_va_account_message">Nomor Virtual Account ditemukan</string>
+    <string name="pin_empty">Pin harus diisi</string>
 </resources>

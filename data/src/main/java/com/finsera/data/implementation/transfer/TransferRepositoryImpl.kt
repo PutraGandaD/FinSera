@@ -61,7 +61,20 @@ class TransferRepositoryImpl(
         vaAccountNum: String,
         pin: String
     ): Flow<Resource<TransferVa>> {
-        TODO("Not yet implemented")
+        val accessToken = localDataSource.getAccessToken()
+
+        return remoteDataSource.transferVirtualAccount(accessToken, vaAccountNum, pin).map {
+            when (it) {
+                is Resource.Success -> Resource.Success(
+                    DataMapper.transferVirtualAccountToDomain(
+                        it.data!!
+                    )
+                )
+
+                is Resource.Error -> Resource.Error(it.message.toString())
+                is Resource.Loading -> Resource.Loading()
+            }
+        }
     }
 
 

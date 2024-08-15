@@ -6,19 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
-import com.finsera.common.utils.Resource
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentTransferVirtualAccountFormBinding
-import com.finsera.presentation.fragments.transfer.sesama_bank.bundle.CekRekeningSesamaBundle
 import com.finsera.presentation.fragments.transfer.va.bundle.CekVaBundle
-import com.finsera.presentation.fragments.transfer.va.uistate.TransferVirtualAccountUiState
-import com.finsera.presentation.fragments.transfer.va.viewmodel.TransferVaViewModel
+import com.finsera.presentation.fragments.transfer.va.viewmodel.CheckVaViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -28,7 +24,7 @@ class TransferVirtualAccountForm : Fragment() {
     private var _binding: FragmentTransferVirtualAccountFormBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TransferVaViewModel by viewModel()
+    private val viewModel: CheckVaViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

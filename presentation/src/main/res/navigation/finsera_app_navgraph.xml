@@ -167,7 +167,13 @@
         android:id="@+id/transferVirtualAccountFormKonfirmasi"
         android:name="com.finsera.presentation.fragments.transfer.va.TransferVirtualAccountFormKonfirmasi"
         android:label="fragment_transfer_virtual_account_form_konfirmasi"
-        tools:layout="@layout/fragment_transfer_virtual_account_form_konfirmasi" />
+        tools:layout="@layout/fragment_transfer_virtual_account_form_konfirmasi" >
+        <action
+            android:id="@+id/action_transferVirtualAccountFormKonfirmasi_to_transferVirtualAccountSuccessFragment"
+            app:destination="@id/transferVirtualAccountSuccessFragment"
+            app:popUpTo="@id/transferVirtualAccountHome"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/cekRekeningSesamaBankFormFragment"
         android:name="com.finsera.presentation.fragments.transfer.sesama_bank.CekRekeningSesamaBankFormFragment"
@@ -210,4 +216,9 @@
             android:id="@+id/action_cekRekeningAntarBankFormFragment_to_transferAntarBankForm"
             app:destination="@id/transferAntarBankForm" />
     </fragment>
+    <fragment
+        android:id="@+id/transferVirtualAccountSuccessFragment"
+        android:name="com.finsera.presentation.fragments.transfer.va.TransferVirtualAccountSuccessFragment"
+        android:label="fragment_transfer_virtual_account_success"
+        tools:layout="@layout/fragment_transfer_virtual_account_success" />
 </navigation>

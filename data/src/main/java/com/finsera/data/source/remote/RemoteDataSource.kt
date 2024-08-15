@@ -9,6 +9,7 @@ import com.finsera.data.source.remote.response.refresh_token.RefreshTokenRespons
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
 import com.finsera.data.source.remote.response.virtual_account.CheckVaResponse
+import com.finsera.data.source.remote.response.virtual_account.TransferVaResponse
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -108,8 +109,6 @@ class RemoteDataSource(private val apiService: ApiService) {
                         "JWT Token has expired" -> {
                             emit(Resource.Error("JWT Token has expired"))
                         }
-
-
                         else -> emit(Resource.Error("Error"))
                     }
                 }
@@ -120,9 +119,19 @@ class RemoteDataSource(private val apiService: ApiService) {
                             400 -> {
                                 emit(Resource.Error("Virtual Account tidak ditemukan"))
                             }
+
                             401 -> {
                                 emit(Resource.Error("Sesi telah habis"))
                             }
+
+                            403 -> {
+                                emit(Resource.Error("Kesalahan pada server"))
+                            }
+
+                            500 -> {
+                                emit(Resource.Error("Terjadi Kesalahan pada server"))
+                            }
+
                             else -> {
                                 emit(Resource.Error(e.message()))
                             }
@@ -134,6 +143,70 @@ class RemoteDataSource(private val apiService: ApiService) {
                     }
                 }
             }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun transferVirtualAccount(
+        token: String,
+        vaAccountNum: String,
+        pin: String
+    ): Flow<Resource<TransferVaResponse>> {
+        return flow<Resource<TransferVaResponse>> {
+            emit(Resource.Loading())
+            try {
+                val param = JsonObject().apply {
+                    addProperty("virtualAccountNumber", vaAccountNum)
+                    addProperty("mpinAccount", pin)
+                }
+
+                val accessToken = "Bearer $token"
+                val response = apiService.transferVirtualAccount(accessToken, param)
+                val message = response.message
+
+                if (response.data != null) {
+                    emit(Resource.Success(response))
+                } else {
+                    when (message) {
+                        "Pin is Invalid" -> emit(Resource.Error("Pin yang dimasukkan salah"))
+                        "JWT Token has expired" -> {
+                            emit(Resource.Error("JWT Token has expired"))
+                        }
+
+                        else -> emit(Resource.Error("Error"))
+                    }
+                }
+            } catch (e: Exception) {
+                when (e) {
+                    is HttpException -> {
+                        when (e.code()) {
+                            400 -> {
+                                emit(Resource.Error("Pin yang dimasukkan salah"))
+                            }
+
+                            401 -> {
+                                emit(Resource.Error("Sesi telah habis"))
+                            }
+
+                            403 -> {
+                                emit(Resource.Error("Virtual Account tidak ditemukan"))
+                            }
+
+                            500 -> {
+                                emit(Resource.Error("Terjadi Kesalahan pada server"))
+                            }
+
+                            else -> {
+                                emit(Resource.Error(e.message()))
+                            }
+                        }
+                    }
+
+                    is IOException -> {
+                        emit(Resource.Error(e.message.toString()))
+                    }
+                }
+            }
+
         }.flowOn(Dispatchers.IO)
     }
 
