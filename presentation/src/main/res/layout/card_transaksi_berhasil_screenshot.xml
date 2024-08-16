@@ -140,6 +140,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_bank_tujuan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
@@ -166,6 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
             <TextView
+                android:id="@+id/tv_nama_penerima_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nama_penerima"
@@ -188,6 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
             <TextView
+                android:id="@+id/tv_rekening_tujuan_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/rekening_tujuan"
@@ -206,6 +209,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_catatan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">

@@ -2,6 +2,7 @@ package com.finsera.data.utils
 
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_antar.TransferAntarTersimpanEntity
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanEntity
+import com.finsera.data.source.local.entities.daftar_tersimpan.virtual_account.TransferVaTersimpanEntity
 import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.list_bank.ListBankResponse
@@ -9,14 +10,18 @@ import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
+import com.finsera.data.source.remote.response.virtual_account.CheckVaResponse
+import com.finsera.data.source.remote.response.virtual_account.TransferVaResponse
 import com.finsera.domain.model.Bank
 import com.finsera.domain.model.CekRekening
+import com.finsera.domain.model.CekVa
 import com.finsera.domain.model.DaftarTersimpan
 import com.finsera.domain.model.Login
 import com.finsera.domain.model.Mutasi
 import com.finsera.domain.model.Relogin
 import com.finsera.domain.model.Saldo
 import com.finsera.domain.model.TransferSesama
+import com.finsera.domain.model.TransferVa
 
 object DataMapper {
     fun loginDataToDomain(response: LoginResponse): Login {
@@ -100,6 +105,38 @@ object DataMapper {
                 kodeBank = it.bankCode
             )
         }
+    }
+
+    fun daftarTersimpanVaToDomain(data: List<TransferVaTersimpanEntity>):List<DaftarTersimpan>{
+        return data.map {
+            DaftarTersimpan(
+                id = it.id,
+                namaPemilikRekening = it.namaVa,
+                noRekening = it.nomorVa
+            )
+        }
+    }
+
+    fun cekVirtualAccountResponseToDomain(response: CheckVaResponse): CekVa {
+        return CekVa(
+            accountName = response.data?.accountName,
+            accountNum = response.data?.accountNum,
+            nominal = response.data?.nominal,
+            message = response.message
+        )
+    }
+
+    fun transferVirtualAccountToDomain(response: TransferVaResponse): TransferVa {
+        return TransferVa(
+            transactionNum = response.data?.transactionNum,
+            nominal = response.data?.nominal,
+            recipientName = response.data?.recipientName,
+            adminFee = response.data?.adminFee,
+            transactionDate = response.data?.transactionDate,
+            type = response.data?.type,
+            recipientVirtualAccountNum = response.data?.recipientVirtualAccountNum,
+            message = response.message
+        )
     }
 
 //    fun daftarTersimpanAntarToDomain(data: TransferAntarTersimpanEntity) : DaftarTersimpan {

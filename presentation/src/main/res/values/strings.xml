@@ -223,8 +223,21 @@
     <string name="back_button">Kembali</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="succes_clipboard_card_number">Nomor rekening telah di-copy</string>
+    <string name="copy_to_clipboard">%1$s \n Finsera \n %2$s</string>
     <string name="izin_aplikasi_finsera_desc">
         "Anda belum mengizinkan izin penyimpanan file pada aplikasi FinSera.\n\nFitur ini hanya dapat digunakan jika Anda memberikan izin penyimpanan file pada aplikasi FinSera di ponsel Anda.\n\nTekan 'Ya' untuk mengaktifkan izin penyimpanan file untuk aplikasi FinSera di pengaturan ponsel Anda (Anda akan diarahkan ke halaman pengaturan aplikasi FinSera).\n\nTekan 'Tidak' jika Anda tidak ingin memberikan izin penyimpanan file."
     </string>
+    <string name="alert_empty_va">Nomor Virtual Account tidak boleh kosong</string>
+    <string name="success_va_account_message">Nomor Virtual Account ditemukan</string>
+    <string name="pin_empty">Pin harus diisi</string>
+    <string name="free">Gratis</string>
+    <string name="nomor_virtual_account">Nomor Virtual Account</string>
+    <string name="success_transfer_label">Bukti Transaksi berhasil disimpan di Galeri.</string>
+    <string name="success_transfer_save_to_galery">Bukti Transaksi berhasil disimpan di Galeri.</string>
     <string name="cari_bank">Cari Bank</string>
+
+    <string name="recipient">Penerima</string>
+
+
 </resources>

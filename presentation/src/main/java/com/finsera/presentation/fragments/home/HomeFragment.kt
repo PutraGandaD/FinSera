@@ -12,6 +12,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.finsera.common.utils.extension.copyToClipboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.finsera.common.utils.format.CurrencyFormatter
 import com.finsera.presentation.R
@@ -60,7 +61,9 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
         val btnVirtualAccount = view.findViewById<ConstraintLayout>(R.id.btn_menu_virtual_account)
         btnVirtualAccount.setOnClickListener {
-            Snackbar.make(requireView(), "Fitur belum tersedia", Snackbar.LENGTH_SHORT).show()
+            if(findNavController().currentDestination?.id == R.id.homeFragment) {
+                findNavController().navigate(R.id.action_homeFragment_to_transferVirtualAccountHome)
+            }
         }
 
         val btnEWallet = view.findViewById<ConstraintLayout>(R.id.btn_menu_ewallet)
@@ -78,6 +81,7 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
         setUpBottomNavBar()
         getInfoSaldo()
         visibilitySaldo()
+        clipBoardCardNumber()
     }
 
     override fun onInit(status: Int) {
@@ -114,14 +118,7 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
                                     getString(R.string.tv_saldo_card_rekening_home)
                             }
                         } ?: run {
-                            binding.tvTopbgAccountName.text =
-                                getString(R.string.tv_topbg_account_name)
-                            binding.cardNasabahInfo.tvNamaNasabah.text =
-                                getString(R.string.tv_nama_nasabah_placeholder)
-                            binding.cardNasabahInfo.tvNoRekeningCard.text =
-                                getString(R.string.tv_rekening_placeholder)
-                            binding.cardNasabahInfo.tvSaldoRekeningCard.text =
-                                getString(R.string.tv_saldo_card_rekening_home)
+                            showLoadingInfoSaldo()
                         }
                         uiState.message?.let {message->
                             Log.d("HomeFragment", message)
@@ -131,6 +128,22 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
             }
 
+        }
+    }
+
+    private fun clipBoardCardNumber(){
+        binding.cardNasabahInfo.btnNorekCopy.setOnClickListener {
+            val cardNumber = binding.cardNasabahInfo.tvNoRekeningCard.text.toString()
+            val cardNumberLabel = binding.cardNasabahInfo.tvNamaNasabah.text.toString()
+
+            requireContext().copyToClipboard(
+                getString(
+                    R.string.copy_to_clipboard,
+                    cardNumberLabel,
+                    cardNumber
+                ))
+            Snackbar.make(requireView(),
+                getString(R.string.succes_clipboard_card_number), Snackbar.LENGTH_SHORT).show()
         }
     }
 
