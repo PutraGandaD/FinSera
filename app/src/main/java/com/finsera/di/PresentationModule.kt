@@ -9,7 +9,7 @@ import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.CekReke
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.TransferSesamaBankFormViewModel
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.TransferSesamaBankViewModel
 import com.finsera.presentation.fragments.transfer.va.viewmodel.CheckVaViewModel
-import com.finsera.presentation.fragments.transfer.va.viewmodel.TransferVaFormViewModel
+import com.finsera.presentation.fragments.transfer.va.viewmodel.TransferVaViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -24,6 +24,6 @@ object PresentationModule {
         viewModel { TransferSesamaBankViewModel(get(), get(), get(), get(), get(), get()) }
         viewModel { CekRekeningSesamaViewModel(get(), get()) }
         viewModel { CheckVaViewModel(get(), get()) }
-        viewModel { TransferVaFormViewModel(get(), get()) }
+        viewModel { TransferVaViewModel(get(), get(),get(),get(),get()) }
     }
 }

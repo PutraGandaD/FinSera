@@ -153,6 +153,9 @@
         <action
             android:id="@+id/action_transferVirtualAccountHome_to_transferVirtualAccountForm"
             app:destination="@id/transferVirtualAccountForm" />
+        <action
+            android:id="@+id/action_transferVirtualAccountHome_to_transferVirtualAccountFormKonfirmasi"
+            app:destination="@id/transferVirtualAccountFormKonfirmasi" />
     </fragment>
     <fragment
         android:id="@+id/transferVirtualAccountForm"

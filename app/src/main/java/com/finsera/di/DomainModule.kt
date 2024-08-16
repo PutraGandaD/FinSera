@@ -12,7 +12,10 @@ import com.finsera.domain.usecase.transfer.sesama_bank.CekRekeningSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.GetDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TambahDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TransferSesamaBankUseCase
+import com.finsera.domain.usecase.transfer.virtual_account.CariDaftarVaTersimpanUseCase
 import com.finsera.domain.usecase.transfer.virtual_account.CekVirtualAccountUseCase
+import com.finsera.domain.usecase.transfer.virtual_account.GetDaftarTersimpanVaUseCase
+import com.finsera.domain.usecase.transfer.virtual_account.TambahDaftarTersimpanVaUseCase
 import com.finsera.domain.usecase.transfer.virtual_account.TransferVaUseCase
 import org.koin.dsl.module
 
@@ -32,5 +35,9 @@ object DomainModule {
         factory { GetDaftarTersimpanSesamaUseCase(get()) }
         factory { TambahDaftarTersimpanSesamaUseCase(get()) }
         factory { CariDaftarTersimpanSesamaUseCase(get()) }
+
+        factory { GetDaftarTersimpanVaUseCase(get()) }
+        factory { TambahDaftarTersimpanVaUseCase(get()) }
+        factory { CariDaftarVaTersimpanUseCase(get()) }
     }
 }

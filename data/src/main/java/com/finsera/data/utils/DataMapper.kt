@@ -2,6 +2,7 @@ package com.finsera.data.utils
 
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_antar.TransferAntarTersimpanEntity
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanEntity
+import com.finsera.data.source.local.entities.daftar_tersimpan.virtual_account.TransferVaTersimpanEntity
 import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
@@ -90,6 +91,16 @@ object DataMapper {
                 id = it.id,
                 namaPemilikRekening = it.namaPemilikRekening,
                 noRekening = it.nomorRekening
+            )
+        }
+    }
+
+    fun daftarTersimpanVaToDomain(data: List<TransferVaTersimpanEntity>):List<DaftarTersimpan>{
+        return data.map {
+            DaftarTersimpan(
+                id = it.id,
+                namaPemilikRekening = it.namaVa,
+                noRekening = it.nomorVa
             )
         }
     }

@@ -23,8 +23,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class TransferVirtualAccountForm : Fragment() {
     private var _binding: FragmentTransferVirtualAccountFormBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: CheckVaViewModel by viewModel()
+
+    private var addToDaftarTersimpan: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,6 +39,18 @@ class TransferVirtualAccountForm : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val savedItemMode = arguments?.getBoolean(Constant.DAFTAR_TERSIMPAN_SELECTED_MODE)
+        val noVa = arguments?.getString(Constant.DATA_NO_VA_STRING)
+
+        if (savedItemMode == true) {
+            binding.llSave.visibility = View.GONE
+        }
+
+        if (noVa != null) {
+            binding.banktujuanEditText.setText(
+                noVa
+            )
+        }
 
         viewModel.resetState()
 
@@ -54,6 +68,17 @@ class TransferVirtualAccountForm : Fragment() {
                 ).show()
             }
         }
+
+
+
+
+
+
+
+        binding.cbSave.setOnCheckedChangeListener { _, isChecked ->
+            addToDaftarTersimpan = isChecked
+        }
+
     }
 
 
@@ -74,9 +99,10 @@ class TransferVirtualAccountForm : Fragment() {
                     }
 
                     if (uiState.isValid) {
-                        Toast.makeText(
-                            requireContext(),
-                            getString(R.string.success_va_account_message), Toast.LENGTH_SHORT
+                        Snackbar.make(
+                            requireView(),
+                            getString(R.string.success_va_account_message),
+                            Snackbar.LENGTH_SHORT
                         ).show()
                         if (findNavController().currentDestination?.id == R.id.transferVirtualAccountForm) {
 
@@ -87,8 +113,15 @@ class TransferVirtualAccountForm : Fragment() {
                             )
                             val bundle = Bundle().apply {
                                 putParcelable(Constant.DATA_VA_BUNDLE, dataVa)
+                                putBoolean(
+                                    Constant.DAFTAR_TERSIMPAN_CHECKED_EXTRA,
+                                    addToDaftarTersimpan
+                                )
                             }
-                            findNavController().navigate(R.id.action_transferVirtualAccountForm_to_transferVirtualAccountFormKonfirmasi,bundle)
+                            findNavController().navigate(
+                                R.id.action_transferVirtualAccountForm_to_transferVirtualAccountFormKonfirmasi,
+                                bundle
+                            )
                         }
                     }
 
