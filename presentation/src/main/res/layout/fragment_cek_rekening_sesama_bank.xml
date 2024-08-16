@@ -23,10 +23,7 @@
             android:background="@android:color/white"
             android:contentDescription="@string/back"
             android:src="@drawable/ic_back_button"
-<<<<<<< HEAD
-=======
             android:layout_marginStart="12dp"
->>>>>>> 54384fb459ee1d2caf963c2f896c06ccc91df2e5
             android:layout_centerVertical="true"/>
 
         <TextView
@@ -36,12 +33,6 @@
             android:contentDescription="@string/transfer_sesama_bank"
             android:text="@string/transfer_sesama_bank"
             android:textColor="@android:color/black"
-<<<<<<< HEAD
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold"/>
-    </RelativeLayout>
-
-=======
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold"/>
     </RelativeLayout>
@@ -54,17 +45,12 @@
         android:background="@drawable/shadow_bottom_navbar"
         app:layout_constraintTop_toBottomOf="@id/topmenu"/>
 
->>>>>>> 54384fb459ee1d2caf963c2f896c06ccc91df2e5
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="@dimen/_24sdp"
-<<<<<<< HEAD
-        app:layout_constraintTop_toBottomOf="@id/topmenu"
-=======
         app:layout_constraintTop_toBottomOf="@id/anchor_shadow_topmenu"
->>>>>>> 54384fb459ee1d2caf963c2f896c06ccc91df2e5
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/layoutrekeningtujuan">
