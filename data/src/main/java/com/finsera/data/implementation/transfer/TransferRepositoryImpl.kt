@@ -3,6 +3,7 @@ package com.finsera.data.implementation.transfer
 import com.finsera.data.source.local.LocalDataSource
 import com.finsera.data.source.remote.RemoteDataSource
 import com.finsera.data.utils.DataMapper
+import com.finsera.domain.model.Bank
 import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.TransferSesama
 import com.finsera.domain.repository.ITransferRepository
@@ -33,5 +34,12 @@ class TransferRepositoryImpl(
             pin
         )
         return DataMapper.transferSesamaResponseToDomain(request)
+    }
+
+    override suspend fun getListBank(): List<Bank> {
+        val accessToken = localDataSource.getAccessToken()
+        val request = remoteDataSource.getListBank(accessToken)
+
+        return DataMapper.listBankToDomain(request)
     }
 }

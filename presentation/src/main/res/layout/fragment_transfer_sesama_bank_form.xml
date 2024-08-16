@@ -8,38 +8,49 @@
     tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankFormFragment">
 
     <RelativeLayout
+        android:id="@+id/topmenu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/topmenu"
-        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp">
+
         <ImageButton
+            android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/back"
             android:background="@android:color/white"
-            android:id="@+id/btn_back"
+            android:contentDescription="@string/back"
             android:src="@drawable/ic_back_button"
+            android:layout_marginStart="12dp"
             android:layout_centerVertical="true"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/konfirmasi_transaksi"
+            android:contentDescription="@string/transfer_sesama_bank"
             android:text="@string/transfer_sesama_bank"
-            android:textColor="@color/neutral_09"
-            android:textSize="@dimen/_18ssp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_16ssp"
             android:textStyle="bold"/>
     </RelativeLayout>
+
+    <View
+        android:id="@+id/anchor_shadow_topmenu"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shadow_bottom_navbar"
+        app:layout_constraintTop_toBottomOf="@id/topmenu"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toBottomOf="@id/topmenu"
+        app:layout_constraintTop_toBottomOf="@id/anchor_shadow_topmenu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_next">

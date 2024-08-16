@@ -1,6 +1,7 @@
 package com.finsera.data.source.local
 
 import com.finsera.common.utils.Constant.Companion.USER_ACCESS_TOKEN_KEY
+import com.finsera.common.utils.Constant.Companion.USER_APPLICATION_PIN
 import com.finsera.common.utils.Constant.Companion.USER_LOGGED_IN_STATUS
 import com.finsera.common.utils.Constant.Companion.USER_REFRESH_TOKEN_KEY
 import com.finsera.common.utils.sharedpref.SharedPreferenceManager
@@ -30,5 +31,13 @@ class LocalDataSource(
 
     fun getLoginStatus() : Boolean {
         return sharedPreferencesManager.getBoolean(USER_LOGGED_IN_STATUS, false)
+    }
+
+    fun setApplicationPin(pin: String) {
+        return sharedPreferencesManager.saveString(USER_APPLICATION_PIN, pin)
+    }
+
+    fun getApplicationPin() : String {
+        return sharedPreferencesManager.getString(USER_APPLICATION_PIN, "")
     }
 }

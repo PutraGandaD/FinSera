@@ -6,25 +6,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.finsera.common.utils.Constant
 import com.finsera.domain.model.DaftarTersimpan
 import com.finsera.presentation.R
 import com.finsera.presentation.adapters.DaftarTersimpanSesamaAdapter
-import com.finsera.presentation.adapters.OnItemClickListener
+import com.finsera.presentation.adapters.OnSavedItemClickListener
 import com.finsera.presentation.databinding.FragmentTransferSesamaBankHomeBinding
 import com.finsera.presentation.fragments.transfer.sesama_bank.bundle.CekRekeningSesamaBundle
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.TransferSesamaBankViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-class TransferSesamaBankHomeFragment : Fragment(), OnItemClickListener {
+class TransferSesamaBankHomeFragment : Fragment(), OnSavedItemClickListener {
     private var _binding: FragmentTransferSesamaBankHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -39,6 +40,7 @@ class TransferSesamaBankHomeFragment : Fragment(), OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.viewDaftarTersimpanEmpty.root.visibility = View.GONE
         binding.rvDaftartersimpan.adapter = daftarTersimpanSesamaAdapter
 
         observer()
@@ -56,21 +58,21 @@ class TransferSesamaBankHomeFragment : Fragment(), OnItemClickListener {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 transferSesamaBankViewModel.transferSesamaHomeUiState.collectLatest { uiState ->
-                    if(uiState.data.isNotEmpty()) {
+                    uiState.data?.let {
                         daftarTersimpanSesamaAdapter.submitList(uiState.data)
                         binding.viewDaftarTersimpanEmpty.root.visibility = View.GONE
-                        Toast.makeText(requireActivity(), "Daftar tersimpan ditemukan", Toast.LENGTH_SHORT).show()
-                    } else {
-                        daftarTersimpanSesamaAdapter.submitList(emptyList())
+                    }
+
+                    if(uiState.data.isNullOrEmpty()) {
+                        daftarTersimpanSesamaAdapter.submitList(null)
                         binding.viewDaftarTersimpanEmpty.root.visibility = View.VISIBLE
-                        Toast.makeText(requireActivity(), "Daftar tersimpan tidak ditemukan", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
 
-        binding.etCariDaftarTersimpan.editText?.doOnTextChanged { inputText, _, _, _ ->
-             transferSesamaBankViewModel.cariDaftarTersimpanSesama(inputText.toString())
+        binding.etCariDaftarTersimpan.editText?.doAfterTextChanged { inputText ->
+            transferSesamaBankViewModel.cariDaftarTersimpanSesama(inputText.toString())
         }
     }
 

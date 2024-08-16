@@ -226,4 +226,5 @@
     <string name="izin_aplikasi_finsera_desc">
         "Anda belum mengizinkan izin penyimpanan file pada aplikasi FinSera.\n\nFitur ini hanya dapat digunakan jika Anda memberikan izin penyimpanan file pada aplikasi FinSera di ponsel Anda.\n\nTekan 'Ya' untuk mengaktifkan izin penyimpanan file untuk aplikasi FinSera di pengaturan ponsel Anda (Anda akan diarahkan ke halaman pengaturan aplikasi FinSera).\n\nTekan 'Tidak' jika Anda tidak ingin memberikan izin penyimpanan file."
     </string>
+    <string name="cari_bank">Cari Bank</string>
 </resources>

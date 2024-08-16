@@ -13,4 +13,6 @@ interface IAuthRepository {
     fun getRefreshToken() : String
     fun setLoginStatus(status: Boolean)
     fun getLoginStatus() : Boolean
+    fun setAppLockPin(newPin: String)
+    fun getAppLockPin() : String
 }

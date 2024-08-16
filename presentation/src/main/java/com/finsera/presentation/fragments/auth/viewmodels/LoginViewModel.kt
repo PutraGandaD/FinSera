@@ -8,6 +8,7 @@ import com.finsera.common.utils.Constant.Companion.USER_LOGGED_IN_STATUS
 import com.finsera.common.utils.Resource
 import com.finsera.common.utils.network.ConnectivityManager
 import com.finsera.common.utils.sharedpref.SharedPreferenceManager
+import com.finsera.domain.usecase.auth.CheckAppPinCreatedUseCase
 import com.finsera.domain.usecase.auth.CheckLoggedInUseCase
 import com.finsera.domain.usecase.auth.LoginUserUseCase
 import com.finsera.presentation.fragments.auth.uistate.LoginUiState
@@ -21,7 +22,8 @@ import java.io.IOException
 class LoginViewModel(
     private val connectivityManager: ConnectivityManager,
     private val loginUserUseCase: LoginUserUseCase,
-    private val checkLoggedInUseCase: CheckLoggedInUseCase
+    private val checkLoggedInUseCase: CheckLoggedInUseCase,
+    private val checkAppPinCreatedUseCase: CheckAppPinCreatedUseCase
 ) : ViewModel() {
     private val _loginScreenUIState = MutableStateFlow(LoginUiState())
     val loginScreenUIState = _loginScreenUIState.asStateFlow()
@@ -29,8 +31,13 @@ class LoginViewModel(
     private val _userLoggedInStatus = MutableLiveData<Boolean>()
     val userLoggedInStatus = _userLoggedInStatus
 
+    private var _userCreatedAppPinStatus : Boolean = false
+    val userCreatedAppPin : Boolean
+        get() = _userCreatedAppPinStatus
+
     init {
         checkUserLoggedInStatus()
+        checkUserCreatedAppPinStatus()
     }
 
     fun userLogin(username: String, password: String) {
@@ -45,7 +52,7 @@ class LoginViewModel(
                         }
                         is Resource.Success -> {
                             _loginScreenUIState.update { uiState ->
-                                uiState.copy(isLoading = false, message = result.data.toString(), isUserLoggedIn = true)
+                                uiState.copy(isLoading = false, message = null, isUserLoggedIn = true)
                             }
                         }
                         is Resource.Error -> {
@@ -69,6 +76,10 @@ class LoginViewModel(
 
     private fun checkUserLoggedInStatus()  {
         _userLoggedInStatus.value = checkLoggedInUseCase.invoke()
+    }
+
+    private fun checkUserCreatedAppPinStatus()  {
+        _userCreatedAppPinStatus = checkAppPinCreatedUseCase.invoke()
     }
 
     fun userMessageShown() {

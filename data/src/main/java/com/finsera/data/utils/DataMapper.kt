@@ -4,10 +4,12 @@ import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_antar.Tr
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanEntity
 import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
+import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
+import com.finsera.domain.model.Bank
 import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.DaftarTersimpan
 import com.finsera.domain.model.Login
@@ -86,6 +88,16 @@ object DataMapper {
                 id = it.id,
                 namaPemilikRekening = it.namaPemilikRekening,
                 noRekening = it.nomorRekening
+            )
+        }
+    }
+
+    fun listBankToDomain(response: ListBankResponse) : List<Bank> {
+        return response.data.map {
+            Bank(
+                idBank = it.bankId,
+                namaBank = it.bankName,
+                kodeBank = it.bankCode
             )
         }
     }
