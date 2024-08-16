@@ -3,7 +3,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:focusable="true"
-    android:focusableInTouchMode="true"
     android:importantForAccessibility="yes"
     android:contentDescription="@string/tv_talkback_tf_antarbank_btn_home"
     xmlns:app="http://schemas.android.com/apk/res-auto">

@@ -1,5 +1,6 @@
 package com.finsera.presentation.fragments.info.saldo
 
+import android.content.Context
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
@@ -7,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -33,11 +35,10 @@ class InfoSaldoFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        tts = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                tts.language = Locale.getDefault()
-            }
+        if (isTalkBackEnabled()) {
+            initializeTTS()
         }
+
     }
 
     override fun onCreateView(
@@ -53,9 +54,7 @@ class InfoSaldoFragment : Fragment() {
 
         getInfoSaldo()
 
-        binding.accountInfoContainer.setOnClickListener {
-            speakAccountInfo()
-        }
+        setupAccessibility()
 
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
@@ -89,11 +88,12 @@ class InfoSaldoFragment : Fragment() {
                             binding.tvAccountNumberValue.text = saldo.accountNumber
                             binding.tvBalanceValue.text = StringBuilder().append("Rp ")
                                 .append(CurrencyFormatter.formatCurrency(saldo.amount))
-
+                            updateAccessibilityInfo()
                         } ?: run {
                             binding.tvAccountNumberValue.text =
                                 getString(R.string.tv_rekening_placeholder)
                             binding.tvBalanceValue.text = getString(R.string.amount_placholder)
+                            updateAccessibilityInfo()
                         }
                         uiState.message?.let {message->
                             Log.d("InfoSaldoFragment", message)
@@ -104,19 +104,52 @@ class InfoSaldoFragment : Fragment() {
         }
     }
 
-    private fun speakAccountInfo() {
+
+    private fun setupAccessibility() {
+        binding.accountInfoContainer.setOnClickListener {
+            if (isTalkBackEnabled()) {
+                speakAccountInfo()
+            }
+        }
+        updateAccessibilityInfo()
+    }
+
+    private fun updateAccessibilityInfo() {
         val balance = binding.tvBalanceValue.text.toString()
         val accountNumber = binding.tvAccountNumberValue.text.toString()
+        val textToSpeak = accountNumber.replace("".toRegex(), " ")
+        val accessibilityText = getString(R.string.account_info_speech, balance, textToSpeak)
+        binding.accountInfoContainer.contentDescription = accessibilityText
+    }
 
-        val formattedBalance = balance.removePrefix("Rp ")
+    private fun initializeTTS() {
+        tts = TextToSpeech(context) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                tts.language = Locale("id", "ID")
+                Log.d("TTS", "TextToSpeech initialized successfully")
+            } else {
+                Log.e("TTS", "TextToSpeech initialization failed with status: $status")
+            }
+        }
+    }
 
-        val fullText = getString(R.string.account_info_speech, formattedBalance, accountNumber)
+    private fun isTalkBackEnabled(): Boolean {
+        val accessibilityManager = context?.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
+        return accessibilityManager?.isEnabled == true && accessibilityManager.isTouchExplorationEnabled
+    }
+
+    private fun speakAccountInfo() {
+        if (!isTalkBackEnabled()) return
+
+        val fullText = binding.accountInfoContainer.contentDescription.toString()
         tts.speak(fullText, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        tts.shutdown()
+        if (::tts.isInitialized) {
+            tts.shutdown()
+        }
     }
 
 }

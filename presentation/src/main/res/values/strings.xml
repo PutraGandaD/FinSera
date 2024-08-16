@@ -103,7 +103,7 @@
     <string name="tv_talkback_password_toggle_login">Lihat Password</string>
     <string name="tv_navbar_title_beranda">Beranda</string>
     <string name="tv_navbar_title_mutasi">Mutasi</string>
-    <string name="tv_navbar_title_qris">QRIS</string>
+    <string name="tv_navbar_title_qris">QiuRIS</string>
     <string name="tv_navbar_title_favorit">Favorit</string>
     <string name="tv_navbar_title_akun">Akun</string>
     <string name="desc_pilih_bank">pilih bank tujuan di bawah</string>
@@ -226,4 +226,9 @@
     <string name="izin_aplikasi_finsera_desc">
         "Anda belum mengizinkan izin penyimpanan file pada aplikasi FinSera.\n\nFitur ini hanya dapat digunakan jika Anda memberikan izin penyimpanan file pada aplikasi FinSera di ponsel Anda.\n\nTekan 'Ya' untuk mengaktifkan izin penyimpanan file untuk aplikasi FinSera di pengaturan ponsel Anda (Anda akan diarahkan ke halaman pengaturan aplikasi FinSera).\n\nTekan 'Tidak' jika Anda tidak ingin memberikan izin penyimpanan file."
     </string>
+    <string name="tv_talkback_sembunyikan_saldo">Sembunyikan Saldo Rekening Anda</string>
+    <string name="account_number_prefix">Nomor Rekening Anda Adalah</string>
+    <string name="account_number_content_confirmation">Cek Nomor Rekening Anda</string>
+    <string name="account_name_prefix">Nama Akun Rekening Anda Adalah</string>
+    <string name="account_name_content_confirmation">Cek Nama Akun Rekening Anda</string>
 </resources>

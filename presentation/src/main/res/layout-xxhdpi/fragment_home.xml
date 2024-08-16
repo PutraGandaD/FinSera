@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:contentDescription="@string/screen_beranda">
+    android:contentDescription="">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -256,6 +256,7 @@
         app:fabCustomSize="80dp"
         app:shapeAppearanceOverlay="@style/SquareFAB"
         app:srcCompat="@drawable/ic_qris_navbar"
-        app:tint="@android:color/white" />
+        app:tint="@android:color/white"
+        android:contentDescription="@string/tv_navbar_title_qris"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
