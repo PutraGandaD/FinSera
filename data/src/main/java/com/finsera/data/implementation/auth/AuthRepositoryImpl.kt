@@ -61,4 +61,12 @@ class AuthRepositoryImpl(
     override fun getLoginStatus(): Boolean {
         return localDataSource.getLoginStatus()
     }
+
+    override fun setAppLockPin(newPin: String) {
+        localDataSource.setApplicationPin(newPin)
+    }
+
+    override fun getAppLockPin(): String {
+        return localDataSource.getApplicationPin()
+    }
 }

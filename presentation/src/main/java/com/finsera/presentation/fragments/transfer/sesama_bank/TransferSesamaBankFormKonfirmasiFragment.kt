@@ -47,8 +47,6 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
         val catatanTransfer = arguments?.getString(Constant.CATATAN_TRANSFER_EXTRA)
         addToDaftarTersimpan = requireArguments().getBoolean(Constant.DAFTAR_TERSIMPAN_CHECKED_EXTRA)
 
-        Toast.makeText(requireActivity(), addToDaftarTersimpan.toString(), Toast.LENGTH_SHORT).show()
-
         if(dataRekeningBundle != null && nominalTransfer != null) {
             namaPemilikRekening = dataRekeningBundle.namaPemilikRekening
             nomorRekening = dataRekeningBundle.noRekening
@@ -84,16 +82,18 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
                     }
 
                     if (uiState.isSuccess) {
-                        if(addToDaftarTersimpan) {
-                            transferSesamaBankViewModel.simpanKeDaftarTersimpanSesama(namaPemilikRekening!!, nomorRekening!!)
-                        }
-
                         if (findNavController().currentDestination?.id == R.id.transferSesamaBankFormKonfirmasiFragment) {
                             val bundle = Bundle().apply {
                                 putParcelable(Constant.TRANSFER_SESAMA_BERHASIL_BUNDLE, uiState.data)
-                                Snackbar.make(requireView(), "Rekening berhasil disimpan ke Daftar Tersimpan!", Snackbar.LENGTH_SHORT).show()
                             }
-                            Snackbar.make(requireView(), "Transfer Berhasil", Snackbar.LENGTH_SHORT).show()
+
+                            if(addToDaftarTersimpan) {
+                                transferSesamaBankViewModel.simpanKeDaftarTersimpanSesama(namaPemilikRekening!!, nomorRekening!!)
+                                Snackbar.make(requireView(), "Transfer Berhasil dan Rekening berhasil ditambahkan ke Daftar Tersimpan.", Snackbar.LENGTH_SHORT).show()
+                            } else {
+                                Snackbar.make(requireView(), "Transfer Berhasil.", Snackbar.LENGTH_SHORT).show()
+                            }
+
                             findNavController().navigate(R.id.action_transferSesamaBankFormKonfirmasiFragment_to_transferSesamaBankSuksesFragment, bundle)
                             transferSesamaBankViewModel.transferSesamaBerhasil()
                         }

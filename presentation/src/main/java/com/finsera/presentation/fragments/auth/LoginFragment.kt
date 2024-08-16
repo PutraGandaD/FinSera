@@ -59,7 +59,7 @@ class LoginFragment : Fragment() {
 
                     if(uiState.isUserLoggedIn) {
                         if (findNavController().currentDestination?.id == R.id.loginFragment) {
-                            findNavController().navigate(R.id.action_loginFragment_to_loginPinFragment)
+                            handleAppPinCreated()
                         }
                     }
 
@@ -73,10 +73,22 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun handleAppPinCreated() {
+        val userCreatedAppPinStatus = loginViewModel.userCreatedAppPin
+        //Toast.makeText(requireActivity(), userCreatedAppPinStatus.toString(), Toast.LENGTH_SHORT).show()
+        if(userCreatedAppPinStatus) {
+            // user login and already created pin, straight to login pin screen
+            findNavController().navigate(R.id.action_loginFragment_to_loginPinFragment)
+        } else {
+            // otherwise create pin first
+            findNavController().navigate(R.id.action_loginFragment_to_createPinFragment)
+        }
+    }
+
     private fun observeLoggedInStatus() {
         loginViewModel.userLoggedInStatus.observe(viewLifecycleOwner) {
             if(it) {
-                findNavController().navigate(R.id.action_loginFragment_to_loginPinFragment)
+                handleAppPinCreated()
             }
         }
     }

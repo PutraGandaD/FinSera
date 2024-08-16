@@ -67,6 +67,9 @@
             app:destination="@id/loginPinFragment"
             app:popUpTo="@id/finsera_app_navgraph"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_loginFragment_to_createPinFragment"
+            app:destination="@id/createPinFragment" />
     </fragment>
     <fragment
         android:id="@+id/mutasiFragment"
@@ -209,5 +212,16 @@
         <action
             android:id="@+id/action_cekRekeningAntarBankFormFragment_to_transferAntarBankForm"
             app:destination="@id/transferAntarBankForm" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPinFragment"
+        android:name="com.finsera.presentation.fragments.auth.CreatePinFragment"
+        android:label="fragment_create_pin"
+        tools:layout="@layout/fragment_create_pin" >
+        <action
+            android:id="@+id/action_createPinFragment_to_loginPinFragment"
+            app:destination="@id/loginPinFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

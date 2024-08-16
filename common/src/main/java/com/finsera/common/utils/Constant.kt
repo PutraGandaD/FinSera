@@ -6,6 +6,8 @@ class Constant {
         const val USER_ACCESS_TOKEN_KEY = "USER_ACCESS_TOKEN"
         const val USER_REFRESH_TOKEN_KEY = "USER_REFRESH_TOKEN"
         const val USER_LOGGED_IN_STATUS = "USER_LOGGED_IN_STATUS"
+        const val USER_APPLICATION_PIN = "APP_PIN"
+        const val USER_CREATED_APPLICATION_PIN = "CREATED_APP_PIN_STATUS"
 
         const val NOMOR_REKENING_NASABAH = "NO_REK"
         const val SALDO_REKENING_NASABAH = "SALDO_REK"

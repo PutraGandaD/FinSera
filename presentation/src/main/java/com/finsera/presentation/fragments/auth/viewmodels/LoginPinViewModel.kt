@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.finsera.common.utils.Resource
 import com.finsera.common.utils.network.ConnectivityManager
-import com.finsera.domain.usecase.auth.LoginPinUserUseCase
+import com.finsera.domain.usecase.auth.CreateAppPinUseCase
+import com.finsera.domain.usecase.auth.LoginAppPinUserUseCase
 import com.finsera.presentation.fragments.auth.uistate.LoginPinUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,15 +15,16 @@ import kotlinx.coroutines.launch
 
 class LoginPinViewModel(
     private val connectivityManager: ConnectivityManager,
-    private val loginPinUserUseCase: LoginPinUserUseCase
+    private val loginAppPinUserUseCase: LoginAppPinUserUseCase,
+    private val createAppPinUseCase: CreateAppPinUseCase
 ) : ViewModel() {
     private val _loginPinScreenUIState = MutableStateFlow(LoginPinUiState())
     val loginPinScreenUIState = _loginPinScreenUIState.asStateFlow()
 
-    fun loginWithMpin(mpin: String) {
+    fun loginWithMpin(pin: String) {
         viewModelScope.launch {
             if(connectivityManager.hasInternetConnection()) {
-                loginPinUserUseCase.invoke(mpin).collectLatest { result ->
+                loginAppPinUserUseCase.invoke(pin).collectLatest { result ->
                     when(result) {
                         is Resource.Loading -> {
                             _loginPinScreenUIState.update { uiState ->
@@ -32,7 +34,7 @@ class LoginPinViewModel(
 
                         is Resource.Success -> {
                             _loginPinScreenUIState.update { uiState ->
-                                uiState.copy(isLoading = false, message = result.data, isPinCorrect = true)
+                                uiState.copy(isLoading = false, message = null, isPinCorrect = true)
                             }
                         }
 
@@ -59,5 +61,9 @@ class LoginPinViewModel(
         _loginPinScreenUIState.update { currentUiState ->
             currentUiState.copy(message = null)
         }
+    }
+
+    fun createAppPin(newPin: String, confirmNewPin: String) : Boolean {
+        return createAppPinUseCase.invoke(newPin, confirmNewPin)
     }
 }

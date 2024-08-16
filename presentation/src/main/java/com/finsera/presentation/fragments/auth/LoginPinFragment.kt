@@ -7,24 +7,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.EditText
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.finsera.common.utils.DisableTouchEvent
+import com.finsera.common.utils.DisableTouchEvent.setInteractionDisabled
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentLoginPinBinding
 import com.finsera.presentation.fragments.auth.viewmodels.LoginPinViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
+import org.koin.androidx.navigation.koinNavGraphViewModel
 
 class   LoginPinFragment : Fragment() {
     private var _binding: FragmentLoginPinBinding? = null
     private val binding get() = _binding!!
 
-    private val loginPinViewModel : LoginPinViewModel by inject()
+    private val loginPinViewModel by koinNavGraphViewModel<LoginPinViewModel>(R.id.finsera_app_navgraph)
 
     private lateinit var etPin1 : EditText
     private lateinit var etPin2 : EditText
@@ -202,11 +205,14 @@ class   LoginPinFragment : Fragment() {
 
                     if(uiState.isLoading) {
                         binding.tvLoginStatus.text = "Sedang autentikasi PIN..."
+                        setInteractionDisabled(requireActivity(), true)
                     } else {
                         binding.tvLoginStatus.text = "Selamat Datang Kembali"
+                        setInteractionDisabled(requireActivity(), false)
                     }
                 }
             }
         }
     }
+
 }

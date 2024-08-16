@@ -6,10 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.finsera.domain.model.DaftarTersimpan
-import com.finsera.domain.model.Mutasi
 import com.finsera.presentation.databinding.DaftarTersimpanItemBinding
 
-class DaftarTersimpanSesamaAdapter(val itemClickListener: OnItemClickListener) : ListAdapter<DaftarTersimpan, DaftarTersimpanSesamaAdapter.DaftarTersimpanSesamaViewHolder>(DIFF_CALLBACK) {
+class DaftarTersimpanSesamaAdapter(val itemClickListener: OnSavedItemClickListener) : ListAdapter<DaftarTersimpan, DaftarTersimpanSesamaAdapter.DaftarTersimpanSesamaViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -47,6 +46,6 @@ class DaftarTersimpanSesamaAdapter(val itemClickListener: OnItemClickListener) :
     }
 }
 
-interface OnItemClickListener {
+interface OnSavedItemClickListener {
     fun onSavedItemClicked(daftarTersimpan: DaftarTersimpan)
 }
