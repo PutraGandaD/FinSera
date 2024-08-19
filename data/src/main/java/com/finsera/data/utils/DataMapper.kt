@@ -1,10 +1,13 @@
 package com.finsera.data.utils
 
+import com.finsera.data.source.local.entities.daftar_tersimpan.ewallet.TransferEWalletTersimpanEntity
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_antar.TransferAntarTersimpanEntity
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanEntity
 import com.finsera.data.source.remote.response.cek_rekening_antar_bank.CekRekeningAntarResponse
 import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningSesamaResponse
 import com.finsera.data.source.local.entities.daftar_tersimpan.virtual_account.TransferVaTersimpanEntity
+import com.finsera.data.source.remote.response.ewallet.CheckEWalletResponse
+import com.finsera.data.source.remote.response.ewallet.TransferEWalletResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
@@ -15,16 +18,19 @@ import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesa
 import com.finsera.data.source.remote.response.virtual_account.CheckVaResponse
 import com.finsera.data.source.remote.response.virtual_account.TransferVaResponse
 import com.finsera.domain.model.Bank
+import com.finsera.domain.model.CekEWallet
 import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.DaftarTersimpanAntar
 import com.finsera.domain.model.DaftarTersimpanSesama
 import com.finsera.domain.model.CekVa
+import com.finsera.domain.model.DaftarTersimpanEWallet
 import com.finsera.domain.model.DaftarTersimpanVa
 import com.finsera.domain.model.Login
 import com.finsera.domain.model.Mutasi
 import com.finsera.domain.model.Relogin
 import com.finsera.domain.model.Saldo
 import com.finsera.domain.model.TransferAntar
+import com.finsera.domain.model.TransferEWallet
 import com.finsera.domain.model.TransferSesama
 import com.finsera.domain.model.TransferVa
 
@@ -159,6 +165,17 @@ object DataMapper {
             )
         }
     }
+    fun daftarTersimpanEWalletToDomain(data: List<TransferEWalletTersimpanEntity>): List<DaftarTersimpanEWallet> {
+        return data.map {
+            DaftarTersimpanEWallet(
+                id = it.id,
+                idAkunEWallet = it.idAkunEWallet,
+                namaEWallet = it.namaEWallet,
+                nomorEWallet = it.nomorEWallet,
+                namaAkunEWallet = it.namaAkunEWallet
+            )
+        }
+    }
 
     fun cekVirtualAccountResponseToDomain(response: CheckVaResponse): CekVa {
         return CekVa(
@@ -168,6 +185,7 @@ object DataMapper {
             message = response.message
         )
     }
+
 
     fun transferVirtualAccountToDomain(response: TransferVaResponse): TransferVa {
         return TransferVa(
@@ -181,4 +199,34 @@ object DataMapper {
             message = response.message
         )
     }
+
+    fun transferEWalletResponseToDomain(response :TransferEWalletResponse): TransferEWallet{
+        return TransferEWallet(
+            message = response.message,
+            nameSender = response.data?.nameSender,
+            nominal = response.data?.nominal,
+            transactionDate = response.data?.transactionDate,
+            note = response.data?.note,
+            transactionNum = response.data?.transactionNum,
+            accountSender = response.data?.accountSender,
+            ewalletName = response.data?.ewalletName,
+            ewalletAccountName = response.data?.ewalletAccountName,
+            ewalletAccount = response.data?.ewalletAccount,
+            feeAdmin = response.data?.feeAdmin
+        )
+    }
+
+    fun cekEWalletResponseToDomain(response: CheckEWalletResponse): CekEWallet {
+        return CekEWallet(
+            message = response.message,
+            idEwallet = response.data?.ewalletAccountId,
+            nomorAkunEwallet = response.data?.ewalletAccount,
+            namaEwallet = response.data?.ewalletName,
+            namaAkunEwallet = response.data?.ewalletAccountName
+        )
+    }
+
+
+
+
 }

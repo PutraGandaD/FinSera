@@ -5,9 +5,11 @@ import com.finsera.data.source.local.LocalDataSource
 import com.finsera.data.source.remote.RemoteDataSource
 import com.finsera.data.utils.DataMapper
 import com.finsera.domain.model.Bank
+import com.finsera.domain.model.CekEWallet
 import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.CekVa
+import com.finsera.domain.model.TransferEWallet
 import com.finsera.domain.model.TransferSesama
 import com.finsera.domain.model.TransferVa
 import com.finsera.domain.repository.ITransferRepository
@@ -79,6 +81,48 @@ class TransferRepositoryImpl(
         }
     }
 
+    override suspend fun cekDataEWallet(
+        eWalletId: Int,
+        eWalletAccountNum: String
+    ): Flow<Resource<CekEWallet>> {
+        val accessToken = localDataSource.getAccessToken()
+
+        return remoteDataSource.cekEWallet(accessToken, eWalletId, eWalletAccountNum).map {
+            when (it) {
+                is Resource.Success -> Resource.Success(
+                    DataMapper.cekEWalletResponseToDomain(
+                        it.data!!
+                    )
+                )
+
+                is Resource.Error -> Resource.Error(it.message.toString())
+                is Resource.Loading -> Resource.Loading()
+            }
+        }
+    }
+
+    override suspend fun transferEWallet(
+        eWalletId: Int,
+        eWalletAccountNum: String,
+        nominal: Double,
+        note: String,
+        pin: String
+    ): Flow<Resource<TransferEWallet>> {
+        val accessToken = localDataSource.getAccessToken()
+
+        return remoteDataSource.transferEWallet(accessToken, eWalletId, eWalletAccountNum, nominal, note, pin).map {
+            when (it) {
+                is Resource.Success -> Resource.Success(
+                    DataMapper.transferEWalletResponseToDomain(
+                        it.data!!
+                    )
+                )
+
+                is Resource.Error -> Resource.Error(it.message.toString())
+                is Resource.Loading -> Resource.Loading()
+            }
+        }
+    }
 
 
     override suspend fun getListBank(): List<Bank> {

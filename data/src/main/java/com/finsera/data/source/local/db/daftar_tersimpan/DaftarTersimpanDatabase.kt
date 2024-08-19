@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.finsera.data.source.local.dao.daftar_tersimpan.ewallet.TransferEWalletTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.transfer_antar.TransferAntarTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.virutal_account.TransferVaTersimpanDao
@@ -20,4 +21,5 @@ public abstract class DaftarTersimpanDatabase : RoomDatabase() {
     abstract fun transferSesamaTersimpanDao() : TransferSesamaTersimpanDao
     abstract fun transferAntarTersimpanDao() : TransferAntarTersimpanDao
     abstract fun transferVaTersimpanDao() : TransferVaTersimpanDao
+    abstract fun transferEWalletTersimpanDao() : TransferEWalletTersimpanDao
 }

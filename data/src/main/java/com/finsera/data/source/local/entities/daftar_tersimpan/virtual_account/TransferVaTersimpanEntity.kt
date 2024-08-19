@@ -16,6 +16,4 @@ data class TransferVaTersimpanEntity(
     @ColumnInfo(name = "nomor_virtual_account")
     val nomorVa: String,
 
-    @ColumnInfo(name = "nominal_virtual_account")
-    val nominalVa : Int
 )

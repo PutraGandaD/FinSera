@@ -62,6 +62,6 @@ object DataModule {
         factory<ISaldoRepository> { SaldoRepositoryImpl(get(), get()) }
         factory<IMutasiRepository>{ MutasiRepositoryImpl(get(), get()) }
         factory<ITransferRepository> { TransferRepositoryImpl(get(), get()) }
-        factory<IDaftarTersimpanRepository> { DaftarTersimpanRepositoryImpl(get(), get(),get()) }
+        factory<IDaftarTersimpanRepository> { DaftarTersimpanRepositoryImpl(get(), get(),get(),get()) }
     }
 }

@@ -3,6 +3,8 @@ package com.finsera.data.source.remote
 import com.finsera.data.source.remote.response.cek_rekening_antar_bank.CekRekeningAntarResponse
 import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningSesamaResponse
 import com.finsera.common.utils.Resource
+import com.finsera.data.source.remote.response.ewallet.CheckEWalletResponse
+import com.finsera.data.source.remote.response.ewallet.TransferEWalletResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
@@ -122,7 +124,6 @@ class RemoteDataSource(private val apiService: ApiService) {
                             400 -> {
                                 emit(Resource.Error("Virtual Account tidak ditemukan"))
                             }
-
                             401 -> {
                                 emit(Resource.Error("Sesi telah habis"))
                             }
@@ -212,6 +213,138 @@ class RemoteDataSource(private val apiService: ApiService) {
 
         }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun cekEWallet(
+        token: String,
+        eWalletId: Int,
+        eWalletAccountName: String
+    ): Flow<Resource<CheckEWalletResponse>> {
+        return flow {
+            emit(Resource.Loading())
+            try {
+                val param = JsonObject().apply {
+                    addProperty("ewalletId", eWalletId)
+                    addProperty("ewalletAccount", eWalletAccountName)
+                }
+
+                val accessToken = "Bearer $token"
+                val response = apiService.cekEWallet(accessToken, param)
+                val message = response.message
+                if (response.data != null) {
+                    emit(Resource.Success(response))
+                } else {
+                    when (message) {
+                        "Nomor e-wallet tidak ditemukkan" -> emit(Resource.Error("Virtual Account Tidak Ditemukan"))
+                        "JWT Token has expired" -> {
+                            emit(Resource.Error("JWT Token has expired"))
+                        }
+                        else -> emit(Resource.Error("Error"))
+                    }
+                }
+            } catch (e: Exception) {
+                when (e) {
+                    is HttpException -> {
+                        when (e.code()) {
+                            400 -> {
+                                emit(Resource.Error("Nomor e-wallet tidak ditemukkan"))
+                            }
+                            401 -> {
+                                emit(Resource.Error("Sesi telah habis"))
+                            }
+
+                            403 -> {
+                                emit(Resource.Error("Kesalahan pada server"))
+                            }
+
+                            500 -> {
+                                emit(Resource.Error("Terjadi Kesalahan pada server"))
+                            }
+
+                            else -> {
+                                emit(Resource.Error(e.message()))
+                            }
+                        }
+                    }
+
+                    is IOException -> {
+                        emit(Resource.Error(e.message.toString()))
+                    }
+                }
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun transferEWallet(
+        token: String,
+        eWalletId: Int,
+        eWalletAccountName: String,
+        nominal: Double,
+        note: String,
+        pin: String
+    ): Flow<Resource<TransferEWalletResponse>> {
+        return flow<Resource<TransferEWalletResponse>> {
+            emit(Resource.Loading())
+            try {
+                val param = JsonObject().apply {
+                    addProperty("ewalletId", eWalletId)
+                    addProperty("ewalletAccount", eWalletAccountName)
+                    addProperty("nominal", nominal)
+                    addProperty("note", note)
+                    addProperty("pin", pin)
+                }
+
+                val accessToken = "Bearer $token"
+                val response = apiService.transferEWallet(accessToken, param)
+                val message = response.message
+
+                if (response.data != null) {
+                    emit(Resource.Success(response))
+                } else {
+                    when (message) {
+                        "Pin is Invalid" -> emit(Resource.Error("Pin yang dimasukkan salah"))
+                        "JWT Token has expired" -> {
+                            emit(Resource.Error("JWT Token has expired"))
+                        }
+
+                        else -> emit(Resource.Error("Error"))
+                    }
+                }
+            } catch (e: Exception) {
+                when (e) {
+                    is HttpException -> {
+                        when (e.code()) {
+                            400 -> {
+                                emit(Resource.Error("Pin yang dimasukkan salah"))
+                            }
+
+                            401 -> {
+                                emit(Resource.Error("Sesi telah habis"))
+                            }
+
+                            403 -> {
+                                emit(Resource.Error("Virtual Account tidak ditemukan"))
+                            }
+
+                            500 -> {
+                                emit(Resource.Error("Terjadi Kesalahan pada server"))
+                            }
+
+                            else -> {
+                                emit(Resource.Error(e.message()))
+                            }
+                        }
+                    }
+
+                    is IOException -> {
+                        emit(Resource.Error(e.message.toString()))
+                    }
+                }
+            }
+
+        }.flowOn(Dispatchers.IO)
+    }
+
+
 
     suspend fun downloadMutasi(token: String, startDate: String, endDate: String): ResponseBody {
         val accessToken = "Bearer $token"
