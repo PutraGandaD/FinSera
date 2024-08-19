@@ -262,4 +262,5 @@
     <string name="bagikan">Bagikan</string>
     <string name="desc_input_bank_tujuan">Pilih bank tujuan di bawah</string>
     <string name="screen_pilih_bank">Halaman memilih bank tujuan</string>
+    <string name="scan_qr">Scan QR</string>
 </resources>
