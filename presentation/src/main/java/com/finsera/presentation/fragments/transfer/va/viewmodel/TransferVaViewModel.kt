@@ -4,7 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.finsera.common.utils.Resource
 import com.finsera.common.utils.network.ConnectivityManager
-import com.finsera.domain.model.DaftarTersimpan
+import com.finsera.domain.model.DaftarTersimpanSesama
+import com.finsera.domain.model.DaftarTersimpanVa
 import com.finsera.domain.usecase.transfer.sesama_bank.CariDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.GetDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TambahDaftarTersimpanSesamaUseCase
@@ -116,9 +117,9 @@ class TransferVaViewModel(
         }
     }
 
-    fun simpanKeDaftarTersimpanVa(namaPemilik: String, noRek: String, nominal : Int) {
+    fun simpanKeDaftarTersimpanVa(namaPemilik: String, noRek: String) {
         viewModelScope.launch {
-            val data = DaftarTersimpan(0, namaPemilik, noRek,nominal)
+            val data = DaftarTersimpanVa(0, namaPemilik, noRek)
             tambahDaftarTersimpanVaUseCase.invoke(data)
         }
     }

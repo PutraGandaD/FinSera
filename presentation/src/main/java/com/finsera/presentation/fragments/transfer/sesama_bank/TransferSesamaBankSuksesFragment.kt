@@ -186,7 +186,6 @@ class TransferSesamaBankSuksesFragment : Fragment() {
             tvNominal.contentDescription = getString(R.string.nominal_transfer_desc, tvNominal.text)
             tvBiayaAdmin.contentDescription = getString(R.string.biaya_admin_desc, tvBiayaAdmin.text)
             tvNomorTransaksi.contentDescription = getString(R.string.nomor_transaksi_desc, formattedDigitNumberTransaction)
-            tvFinSera.contentDescription = getString(R.string.akun_finsera_desc, tvFinSera.text)
             tvBankTujuan.contentDescription = getString(R.string.bank_tujuan_desc, tvBankTujuan.text)
             tvNamaPenerima.contentDescription = getString(R.string.nama_penerima_desc, tvNamaPenerima.text)
             tvRekeningTujuan.contentDescription = getString(R.string.rekening_tujuan_desc, formattedDigitNumberBankRecipient)

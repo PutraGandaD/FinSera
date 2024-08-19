@@ -35,10 +35,8 @@
             android:contentDescription="@string/transfer_sesama_bank"
             android:text="@string/transfer_antar_bank"
             android:importantForAccessibility="yes"
-            android:text="@string/transfer_antarbank"
-            android:contentDescription="@string/transfer_antarbank"
             android:textSize="@dimen/_18ssp"
-            android:textStyle="bold"
+            android:textStyle="bold"/>
     </RelativeLayout>
 
     <View

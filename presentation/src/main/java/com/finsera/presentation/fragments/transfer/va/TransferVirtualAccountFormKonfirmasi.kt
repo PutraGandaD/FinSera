@@ -106,7 +106,6 @@ class TransferVirtualAccountFormKonfirmasi : Fragment() {
                             viewModel.simpanKeDaftarTersimpanVa(
                                 namaPemilik = accountName,
                                 noRek = accountNum,
-                                nominal = nominal
                             )
                         }
                         if (findNavController().currentDestination?.id == R.id.transferVirtualAccountFormKonfirmasi) {
