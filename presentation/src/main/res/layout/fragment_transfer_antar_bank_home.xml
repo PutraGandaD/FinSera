@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/_16sdp"
     android:background="@color/neutral_01"
+    android:importantForAccessibility="no"
     tools:context=".ui.fragments.transfer.antar_bank.TransferAntarBankHomeFragment"
     android:contentDescription="@string/screen_transfer_antar_bank">
 
@@ -59,6 +60,7 @@
         android:text="@string/daftar_tersimpan"
         android:textSize="@dimen/button_1"
         app:cornerRadius="8dp"
+        android:importantForAccessibility="yes"
         app:layout_constraintEnd_toStartOf="@id/btn_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/anchor_shadow_topmenu" />
@@ -74,6 +76,7 @@
         android:text="@string/input_baru"
         android:textColor="@color/neutral_02"
         android:textSize="@dimen/button_1"
+        android:importantForAccessibility="yes"
         app:cornerRadius="8dp"
         app:icon="@drawable/ic_add_circle"
         app:iconGravity="textEnd"
@@ -102,6 +105,7 @@
             android:background="@drawable/et_textfield_background_2"
             android:contentDescription="@string/cari_daftar_tersimpan"
             android:hint="@string/cari_daftar_tersimpan"
+            android:importantForAccessibility="yes"
             android:inputType="text"
             android:padding="12dp"
             android:paddingStart="48dp"

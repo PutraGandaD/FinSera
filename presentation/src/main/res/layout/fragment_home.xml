@@ -254,6 +254,7 @@
         app:fabCustomSize="80dp"
         app:shapeAppearanceOverlay="@style/SquareFAB"
         app:srcCompat="@drawable/ic_qris_navbar"
-        app:tint="@android:color/white" />
+        app:tint="@android:color/white"
+        android:contentDescription="@string/tv_navbar_title_qris"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

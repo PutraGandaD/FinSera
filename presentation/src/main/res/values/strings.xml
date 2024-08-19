@@ -103,15 +103,17 @@
     <string name="tv_talkback_password_toggle_login">Lihat Password</string>
     <string name="tv_navbar_title_beranda">Beranda</string>
     <string name="tv_navbar_title_mutasi">Mutasi</string>
-    <string name="tv_navbar_title_qris">QRIS</string>
+    <string name="tv_navbar_title_qris">QiuRIS</string>
     <string name="tv_navbar_title_favorit">Favorit</string>
     <string name="tv_navbar_title_akun">Akun</string>
     <string name="desc_pilih_bank">pilih bank tujuan di bawah</string>
     <string name="input_rekening">input rekening</string>
-    <string name="desc_input_nominal">Nominal Transfer</string>
+    <string name="desc_input_nominal">Masukkan Nominal Transfer di bawah</string>
+    <string name="input_nominal">Nominal Transfer</string>
     <string name="input_catatan">input catatan</string>
-    <string name="desc_simpan_ke_daftar_tersimpan">Tekan untuk menyimpan ke daftar tersimpan</string>
-    <string name="desc_input_pin">input pin anda di bawah</string>
+    <string name="desc_simpan_ke_daftar_tersimpan">Tekan checkbox untuk menyimpan ke daftar tersimpan</string>
+    <string name="desc_input_pin">Masukkan pin anda di bawah</string>
+    <string name="desc_saldo_anda">Saldo Anda %s</string>
     <string name="input_baru_klik_untuk_transfer">input baru klik untuk transfer</string>
     <string name="belum_ada_daftar_tersimpan_empty">Belum ada daftar tersimpan tambah penerima ke daftar tersimpan agar transaksi ke orang terdekat lebih mudah</string>
     <string name="transfer_sesama_bank">Transfer Sesama Bank</string>
@@ -130,7 +132,7 @@
     <string name="password">Password</string>
     <string name="input_password">input password</string>
     <string name="pin_baru">PIN Baru</string>
-    <string name="konfitmasi_pin_baru">Konfitmasi PIN Baru</string>
+    <string name="konfirmasi_pin_baru">Konfirmasi PIN Baru</string>
     <string name="konfirmasi">Konfirmasi</string>
     <string name="kembali_ke_aplikasi">Kembali ke Aplikasi</string>
     <string name="silakan_login_dengan_pin_yang_baru">Silakan login dengan PIN yang baru!</string>
@@ -191,6 +193,8 @@
     <string name="screen_lupa_password">Halaman Lupa Password</string>
     <string name="screen_mutasi_transaksi">Halaman Mutasi Transaksi</string>
     <string name="screen_transfer_sesama_bank">Halaman Transfer Sesama Bank</string>
+    <string name="screen_cek_rekening">Halaman Entri Nomor Rekening</string>
+    <string name="screen_form_transfer">Transfer ke %1$s</string>
     <string name="screen_transfer_antar_bank">Halaman Transfer Antar Bank</string>
     <string name="screen_virtual_account">Halaman Virtual Account</string>
     <string name="screen_e_wallet">Halaman E-Wallet</string>
@@ -204,6 +208,7 @@
     <string name="monolog_promo">Hadiah Berlimpah TopUp Paket Data di Finsera!</string>
     <string name="time_date_promo">11 Juli 2024 14:04</string>
     <string name="caption_promo">Dapatkan Iphone dan tabungan emas dengan topup paket data Telkomsel atau XL</string>
+    <string name="desc_recipient_info">Penerima: %1$s, Bank: %2$s, Account number: %3$s</string>
     <string name="desc_all_notif">Pilih filter notifikasi tipe semua</string>
     <string name="desc_promo">Pilih filter notifikasi tipe promo</string>
     <string name="desc_transaction">Pilih filter notifikasi tipe transaksi</string>
@@ -217,11 +222,20 @@
     <string name="screen_transfer_ke_va">Transfer ke Virtual Account</string>
     <string name="screen_transfer_bank_sama">Transfer ke Bank yang Sama</string>
     <string name="desc_input_nomor_rekening">Masukkan nomor rekening tujuan di bawah</string>
-    <string name="desc_input_catatan">Input Catatan Opsional di bawah</string>
+    <string name="desc_input_catatan">Masukkan Catatan Opsional di bawah</string>
     <string name="screen_transfer_antarbank_form">Transfer Antar Bank</string>
     <string name="placeholder_detail_mutasi">Transfer ke Rekening Admin</string>
     <string name="back_button">Kembali</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="tanggal_transaksi_desc">Tanggal %s</string>
+    <string name="rekening_tujuan_desc">Rekening tujuan %s</string>
+    <string name="nama_penerima_desc">Nama penerima %s</string>
+    <string name="catatan_desc">Catatan %s</string>
+    <string name="nominal_transfer_desc">Nominal transfer %s</string>
+    <string name="biaya_admin_desc">Biaya admin %s</string>
+    <string name="nominal_total_desc">Nominal total transfer %s</string>
+    <string name="nomor_transaksi_desc">Nomor Transaksi: %s</string>
+    <string name="akun_finsera_desc">Nomor Akun Finsera %s</string>
+    <string name="bank_tujuan_desc">Bank Tujuan %s</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="succes_clipboard_card_number">Nomor rekening telah di-copy</string>
     <string name="copy_to_clipboard">%1$s \n Finsera \n %2$s</string>
@@ -239,4 +253,12 @@
     <string name="rekening_pengirim">Rekening Pengirim</string>
     <string name="nama_pengirim">Nama Pengirim</string>
     <string name="recipient">Penerima</string>
+    <string name="tv_talkback_sembunyikan_saldo">Sembunyikan Saldo Rekening Anda</string>
+    <string name="account_number_prefix">Nomor Rekening Anda Adalah</string>
+    <string name="account_number_content_confirmation">Cek Nomor Rekening Anda</string>
+    <string name="account_name_prefix">Nama Akun Rekening Anda Adalah</string>
+    <string name="account_name_content_confirmation">Cek Nama Akun Rekening Anda</string>
+    <string name="bagikan">Bagikan</string>
+    <string name="desc_input_bank_tujuan">Pilih bank tujuan di bawah</string>
+    <string name="screen_pilih_bank">Halaman memilih bank tujuan</string>
 </resources>

@@ -30,6 +30,7 @@ class TransferAntarBankHomeFragment : Fragment(), OnSavedItemAntarClickListener 
 
     private val transferAntarBankHomeViewModel: TransferAntarBankHomeViewModel by inject()
     private val daftarTersimpanAntarAdapter = DaftarTersimpanAntarAdapter(this)
+    private var hasAnnouncedScreen = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTransferAntarBankHomeBinding.inflate(inflater, container, false)
@@ -44,6 +45,11 @@ class TransferAntarBankHomeFragment : Fragment(), OnSavedItemAntarClickListener 
 
         setupListeners()
         observer()
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_transfer_antar_bank))
+            hasAnnouncedScreen = true
+        }
     }
 
     private fun setupListeners() {

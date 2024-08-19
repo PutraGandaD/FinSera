@@ -31,6 +31,7 @@ class CekRekeningAntarBankFormFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val cekRekeningAntarViewModel by koinNavGraphViewModel<CekRekeningAntarViewModel>(R.id.finsera_app_navgraph)
+    private var hasAnnouncedScreen = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +62,11 @@ class CekRekeningAntarBankFormFragment : Fragment() {
 
         binding.etPilihBank.setOnClickListener {
             pilihBankModalBottomSheet.show(childFragmentManager, PilihBankModalBottomSheet.TAG)
+        }
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_pilih_bank))
+            hasAnnouncedScreen = true
         }
     }
 
