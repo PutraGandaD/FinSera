@@ -2,20 +2,24 @@ package com.finsera.data.utils
 
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_antar.TransferAntarTersimpanEntity
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanEntity
-import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningResponse
+import com.finsera.data.source.remote.response.cek_rekening_antar_bank.CekRekeningAntarResponse
+import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningSesamaResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
+import com.finsera.data.source.remote.response.transfer_antar_bank.TransferAntarResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
 import com.finsera.domain.model.Bank
 import com.finsera.domain.model.CekRekening
-import com.finsera.domain.model.DaftarTersimpan
+import com.finsera.domain.model.DaftarTersimpanAntar
+import com.finsera.domain.model.DaftarTersimpanSesama
 import com.finsera.domain.model.Login
 import com.finsera.domain.model.Mutasi
 import com.finsera.domain.model.Relogin
 import com.finsera.domain.model.Saldo
+import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.TransferSesama
 
 object DataMapper {
@@ -62,10 +66,22 @@ object DataMapper {
         }
     }
 
-    fun cekRekeningResponseToDomain(response: CekRekeningResponse): CekRekening {
+    fun cekRekeningSesamaResponseToDomain(response: CekRekeningSesamaResponse): CekRekening {
         return CekRekening(
             accountnumRecipient = response.data?.accountnumRecipient,
             recipientName = response.data?.nameRecipient,
+            message = response.message,
+            namaBank = null,
+            idBank = null
+        )
+    }
+
+    fun cekRekeningAntarResponseToDomain(response: CekRekeningAntarResponse) : CekRekening {
+        return CekRekening(
+            accountnumRecipient = response.data?.accountnumRecipient,
+            recipientName = response.data?.nameRecipient,
+            namaBank = response.data?.bankName,
+            idBank = response.data?.bankId,
             message = response.message
         )
     }
@@ -82,10 +98,22 @@ object DataMapper {
         )
     }
 
-    fun daftarTersimpanSesamaToDomain(data: List<TransferSesamaTersimpanEntity>) : List<DaftarTersimpan> {
+    fun daftarTersimpanSesamaToDomain(data: List<TransferSesamaTersimpanEntity>) : List<DaftarTersimpanSesama> {
         return data.map {
-            DaftarTersimpan(
+            DaftarTersimpanSesama(
                 id = it.id,
+                namaPemilikRekening = it.namaPemilikRekening,
+                noRekening = it.nomorRekening
+            )
+        }
+    }
+
+    fun daftarTersimpanAntarToDomain(data: List<TransferAntarTersimpanEntity>) : List<DaftarTersimpanAntar> {
+        return data.map {
+            DaftarTersimpanAntar(
+                id = it.id,
+                idBank = it.idBank,
+                namaBank = it.namaBank,
                 namaPemilikRekening = it.namaPemilikRekening,
                 noRekening = it.nomorRekening
             )
@@ -102,13 +130,19 @@ object DataMapper {
         }
     }
 
-//    fun daftarTersimpanAntarToDomain(data: TransferAntarTersimpanEntity) : DaftarTersimpan {
-//        return DaftarTersimpan(
-//            id = data.id,
-//            namaPemilikRekening = data.namaPemilikRekening,
-//            noRekening = data.nomorRekening
-//        )
-//    }
+    fun transferAntarResponseToDomain(response: TransferAntarResponse): TransferAntar {
+        return TransferAntar(
+            transactionDate = response.data?.transactionDate,
+            note = response.data?.note,
+            nominal = response.data?.nominal,
+            adminFee = response.data?.adminFee,
+            nameRecipient = response.data?.nameRecipient,
+            transactionNum = response.data?.transactionNum,
+            bankName = response.data?.bankName,
+            accountnumRecipient = response.data?.accountnumRecipient,
+            message = response.message
+        )
+    }
 
 
 }

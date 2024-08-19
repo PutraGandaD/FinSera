@@ -36,7 +36,7 @@
             android:contentDescription="@string/transfer_sesama_bank"
             android:text="@string/transfer_sesama_bank"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/_16ssp"
+            android:textSize="@dimen/_18ssp"
             android:textStyle="bold"/>
     </RelativeLayout>
 

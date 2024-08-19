@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.finsera.domain.model.DaftarTersimpan
+import com.finsera.domain.model.DaftarTersimpanSesama
 import com.finsera.presentation.databinding.DaftarTersimpanItemBinding
 
-class DaftarTersimpanSesamaAdapter(val itemClickListener: OnSavedItemClickListener) : ListAdapter<DaftarTersimpan, DaftarTersimpanSesamaAdapter.DaftarTersimpanSesamaViewHolder>(DIFF_CALLBACK) {
+class DaftarTersimpanSesamaAdapter(val itemClickListener: OnSavedItemSesamaClickListener) : ListAdapter<DaftarTersimpanSesama, DaftarTersimpanSesamaAdapter.DaftarTersimpanSesamaViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -18,18 +18,18 @@ class DaftarTersimpanSesamaAdapter(val itemClickListener: OnSavedItemClickListen
     }
 
     class DaftarTersimpanSesamaViewHolder(private val binding: DaftarTersimpanItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: DaftarTersimpan) {
+        fun bind(data: DaftarTersimpanSesama) {
             binding.tvDaftartersimpanNamapemilik.text = data.namaPemilikRekening
             binding.tvDaftartersimpanNorekening.text = data.noRekening
         }
     }
 
     companion object{
-        val DIFF_CALLBACK=object : DiffUtil.ItemCallback<DaftarTersimpan>(){
-            override fun areItemsTheSame(oldItem: DaftarTersimpan, newItem: DaftarTersimpan): Boolean {
+        val DIFF_CALLBACK=object : DiffUtil.ItemCallback<DaftarTersimpanSesama>(){
+            override fun areItemsTheSame(oldItem: DaftarTersimpanSesama, newItem: DaftarTersimpanSesama): Boolean {
                 return oldItem==newItem
             }
-            override fun areContentsTheSame(oldItem: DaftarTersimpan, newItem: DaftarTersimpan): Boolean {
+            override fun areContentsTheSame(oldItem: DaftarTersimpanSesama, newItem: DaftarTersimpanSesama): Boolean {
                 return oldItem==newItem
             }
         }
@@ -41,11 +41,11 @@ class DaftarTersimpanSesamaAdapter(val itemClickListener: OnSavedItemClickListen
         holder.bind(data)
 
         holder.itemView.setOnClickListener {
-            itemClickListener.onSavedItemClicked(data)
+            itemClickListener.onSavedItemSesamaClicked(data)
         }
     }
 }
 
-interface OnSavedItemClickListener {
-    fun onSavedItemClicked(daftarTersimpan: DaftarTersimpan)
+interface OnSavedItemSesamaClickListener {
+    fun onSavedItemSesamaClicked(daftarTersimpan: DaftarTersimpanSesama)
 }

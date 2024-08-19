@@ -1,12 +1,14 @@
 package com.finsera.data.source.remote
 
-import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningResponse
+import com.finsera.data.source.remote.response.cek_rekening_antar_bank.CekRekeningAntarResponse
+import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningSesamaResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.refresh_token.RefreshTokenResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
+import com.finsera.data.source.remote.response.transfer_antar_bank.TransferAntarResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
@@ -51,7 +53,7 @@ class RemoteDataSource(private val apiService: ApiService) {
         return apiService.getMutasi(accessToken, startDate, endDate)
     }
 
-    suspend fun cekRekeningSesamaBank(token: String, norek: String) : CekRekeningResponse {
+    suspend fun cekRekeningSesamaBank(token: String, norek: String) : CekRekeningSesamaResponse {
         val param = JsonObject().apply {
             addProperty("accountnum_recipient", norek)
         }
@@ -88,5 +90,30 @@ class RemoteDataSource(private val apiService: ApiService) {
     suspend fun getListBank(token: String) : ListBankResponse {
         val accessToken = "Bearer $token"
         return apiService.getListBank(accessToken)
+    }
+
+    suspend fun cekRekeningAntarBank(token: String, idBank: Int, norek: String) : CekRekeningAntarResponse {
+        val param = JsonObject().apply {
+            addProperty("bank_id", idBank)
+            addProperty("accountnum_recipient", norek)
+        }
+
+        val accessToken = "Bearer $token"
+
+        return apiService.cekRekeningAntarBank(accessToken, param)
+    }
+
+    suspend fun transferAntarBank(token: String, idBank: Int, noRek: String, nominal: Double, note: String, pin: String) : TransferAntarResponse {
+        val param = JsonObject().apply {
+            addProperty("bank_id", idBank)
+            addProperty("accountnum_recipient", noRek)
+            addProperty("nominal", nominal)
+            addProperty("note", note)
+            addProperty("pin", pin)
+        }
+
+        val accessToken = "Bearer $token"
+
+        return apiService.transferAntarBank(accessToken, param)
     }
 }

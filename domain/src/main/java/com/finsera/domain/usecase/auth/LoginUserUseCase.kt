@@ -22,7 +22,7 @@ class LoginUserUseCase(private val repository: IAuthRepository) {
                 }
                 "INACTIVE" -> {
                     repository.setLoginStatus(false)
-                    emit(Resource.Error("Akun anda nonaktif / dinonaktifkan. Silahkan hubungi Pusat Bantuan atau kunjungi kantor Bank BCA terdekat."))
+                    emit(Resource.Error("Akun anda nonaktif / dinonaktifkan."))
                 }
             }
         } catch (t: Throwable) {

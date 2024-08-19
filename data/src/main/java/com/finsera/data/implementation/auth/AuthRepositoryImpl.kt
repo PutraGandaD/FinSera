@@ -69,4 +69,12 @@ class AuthRepositoryImpl(
     override fun getAppLockPin(): String {
         return localDataSource.getApplicationPin()
     }
+
+    override fun saveUserInfo(name: String, accountNum: String) {
+        localDataSource.saveUserInfo(name, accountNum)
+    }
+
+    override fun getUserInfo(): Pair<String, String> {
+        return localDataSource.getUserInfo()
+    }
 }

@@ -51,6 +51,9 @@ class TransferSesamaBankSuksesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val namaPengirim = arguments?.getString(Constant.NAMA_NASABAH)
+        val rekeningPengirim = arguments?.getString(Constant.NOMOR_REKENING_NASABAH)
+
         val dataTransferBerhasil = arguments?.getParcelable<TransferSesama>(Constant.TRANSFER_SESAMA_BERHASIL_BUNDLE)?.let {
             binding.cardTransaksiBerhasil.tvDate.text = it.transactionDate
             binding.cardTransaksiBerhasil.tvNominal.text = it.nominal
@@ -62,6 +65,9 @@ class TransferSesamaBankSuksesFragment : Fragment() {
             binding.cardTransaksiBerhasil.tvRekeningTujuan.text = it.accountnumRecipient
             binding.cardTransaksiBerhasil.tvCatatan.text = it.note
 
+            binding.cardTransaksiBerhasil.tvNamaPengirim.text = namaPengirim
+            binding.cardTransaksiBerhasil.tvRekeningPengirim.text = rekeningPengirim
+
             binding.cardTransaksiBerhasilScreenshot.tvDate.text = it.transactionDate
             binding.cardTransaksiBerhasilScreenshot.tvNominal.text = it.nominal
             binding.cardTransaksiBerhasilScreenshot.tvBiayaAdmin.text = "Gratis"
@@ -71,6 +77,9 @@ class TransferSesamaBankSuksesFragment : Fragment() {
             binding.cardTransaksiBerhasilScreenshot.tvNamaPenerima.text = it.nameRecipient
             binding.cardTransaksiBerhasilScreenshot.tvRekeningTujuan.text = it.accountnumRecipient
             binding.cardTransaksiBerhasilScreenshot.tvCatatan.text = it.note
+
+            binding.cardTransaksiBerhasilScreenshot.tvNamaPengirim.text = namaPengirim
+            binding.cardTransaksiBerhasilScreenshot.tvRekeningPengirim.text = rekeningPengirim
         }
 
         binding.cardTransaksiBerhasil.btnBackToMenu.setOnClickListener {

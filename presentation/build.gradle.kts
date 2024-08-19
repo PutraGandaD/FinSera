@@ -111,4 +111,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
     implementation("io.github.muddz:quickshot:1.4.0")
+
+    implementation("com.github.phannaly:emv-qr-code:0.0.5")
 }

@@ -1,14 +1,12 @@
 package com.finsera.presentation.adapters
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.finsera.domain.model.DaftarTersimpan
 import com.finsera.domain.model.Mutasi
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.MutasiItemBinding
