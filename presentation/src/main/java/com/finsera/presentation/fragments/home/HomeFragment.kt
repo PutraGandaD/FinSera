@@ -53,6 +53,14 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
         accessibilityManager = requireContext().getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
 
+        binding.cardNasabahInfo.tvNamaNasabah.setOnClickListener {
+            speakAccountName()
+        }
+
+        binding.cardNasabahInfo.tvNoRekeningCard.setOnClickListener {
+            speakAccountNumber()
+        }
+
         val btnInfoSaldo = view.findViewById<ConstraintLayout>(R.id.btn_menu_infosaldo)
         btnInfoSaldo.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
@@ -76,14 +84,6 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
         val btnTransferAntarBank = view.findViewById<ConstraintLayout>(R.id.btn_menu_transfer_antarbank)
         btnTransferAntarBank.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_transferAntarBankHome)
-        }
-
-        binding.cardNasabahInfo.tvNamaNasabah.setOnClickListener {
-            speakAccountName()
-        }
-
-        binding.cardNasabahInfo.tvNoRekeningCard.setOnClickListener {
-            speakAccountNumber()
         }
 
         setUpBottomNavBar()

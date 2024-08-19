@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:padding="@dimen/_16sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:importantForAccessibility="no"
+    android:background="@color/neutral_01"
     tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankFormFragment">
 
     <RelativeLayout
@@ -18,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/back"
+            android:importantForAccessibility="yes"
             android:background="@android:color/white"
             android:id="@+id/btn_back"
             android:src="@drawable/ic_back_button"
@@ -27,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/konfirmasi_transaksi"
+            android:importantForAccessibility="yes"
             android:text="@string/transfer_sesama_bank"
             android:textColor="@color/neutral_09"
             android:textSize="@dimen/_18ssp"
@@ -53,6 +56,7 @@
                 android:id="@+id/card_info_rekening"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:importantForAccessibility="yes"
                 android:layout_marginBottom="12dp"
                 layout="@layout/card_info_rekening_transfer" />
 
@@ -66,17 +70,20 @@
                 android:contentDescription="@string/desc_simpan_ke_daftar_tersimpan">
                 <CheckBox
                     android:id="@+id/checkbox_daftar_tersimpan_sesama"
+                    android:importantForAccessibility="yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:importantForAccessibility="yes"
                     android:textSize="16sp"
                     android:text="@string/simpan_ke_daftar_tersimpan"/>
             </LinearLayout>
 
             <include
                 android:id="@+id/card_info_saldo"
+                android:importantForAccessibility="no"
                 layout="@layout/card_info_saldo_transfer"/>
 
             <LinearLayout
@@ -89,6 +96,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:importantForAccessibility="yes"
                     android:contentDescription="@string/desc_input_nominal"
                     android:text="@string/nominal"
                     android:textSize="16sp"
@@ -103,7 +111,7 @@
                     android:gravity="center_vertical"
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="10dp"
-                    android:hint="@string/desc_input_nominal"
+                    android:hint="@string/input_nominal"
                     android:singleLine="true" />
 
             </LinearLayout>

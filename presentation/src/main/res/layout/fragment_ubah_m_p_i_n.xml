@@ -99,8 +99,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/konfitmasi_pin_baru"
-            android:text="@string/konfitmasi_pin_baru"
+            android:contentDescription="@string/konfirmasi_pin_baru"
+            android:text="@string/konfirmasi_pin_baru"
             android:textSize="16sp"
             android:textColor="@color/neutral_09" />
         <EditText

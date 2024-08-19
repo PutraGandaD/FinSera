@@ -56,7 +56,7 @@ class CekRekeningSesamaBankFormFragment : Fragment() {
         }
 
         if (!hasAnnouncedScreen) {
-            view.announceForAccessibility(getString(R.string.screen_transfer_sesama_bank))
+            view.announceForAccessibility(getString(R.string.screen_cek_rekening))
             hasAnnouncedScreen = true
         }
     }

@@ -5,6 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:importantForAccessibility="no"
+    android:background="@color/neutral_01"
     tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankFormKonfirmasiFragment"
     android:padding="@dimen/_16sdp"
     android:contentDescription="@string/screen_confirm_transaction">
@@ -21,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/back"
                 android:background="@android:color/white"
+                android:importantForAccessibility="yes"
                 android:id="@+id/btn_back"
                 android:src="@drawable/ic_back_button"
                 android:layout_centerVertical="true"/>
@@ -30,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:contentDescription="@string/konfirmasi_transaksi"
+                android:importantForAccessibility="yes"
                 android:text="@string/konfirmasi_transaksi"
                 android:textColor="@color/neutral_09"
                 android:textSize="@dimen/_18ssp"
@@ -41,6 +45,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/topmenu"
         android:layout_marginTop="48dp"
+        android:importantForAccessibility="yes"
         android:id="@+id/layoutnomorrekening">
 
         <TextView
@@ -48,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/rekening_tujuan"
+            android:importantForAccessibility="no"
             android:layout_marginEnd="12dp"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
@@ -60,6 +66,7 @@
             android:text="1234567890"
             android:textStyle="bold"
             android:textAlignment="textEnd"
+            android:importantForAccessibility="no"
             android:id="@+id/tvRekeningTujuan"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
@@ -71,6 +78,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layoutnomorrekening"
         android:layout_marginTop="24dp"
+        android:importantForAccessibility="yes"
         android:id="@+id/layoutnamapemilikrekening">
 
         <TextView
@@ -78,6 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/nama_penerima"
+            android:importantForAccessibility="no"
             android:layout_marginEnd="12dp"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
@@ -90,6 +99,7 @@
             android:layout_toRightOf="@id/tvNamaPemilikHeader"
             android:textAlignment="textEnd"
             android:textStyle="bold"
+            android:importantForAccessibility="no"
             android:id="@+id/tvNamaPemilikRekeningTujuan"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
@@ -101,6 +111,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layoutnamapemilikrekening"
         android:layout_marginTop="24dp"
+        android:importantForAccessibility="yes"
         android:id="@+id/layoutcatatan">
 
         <TextView
@@ -108,6 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Catatan"
+            android:importantForAccessibility="no"
             android:layout_marginEnd="12dp"
             android:textColor="@color/neutral_09"
             android:textSize="16sp" />
@@ -118,6 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:textAlignment="textEnd"
+            android:importantForAccessibility="no"
             android:layout_toRightOf="@id/tvCatatanHeader"
             android:maxLines="2"
             android:text="Placeholder Catatan"
@@ -132,12 +145,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layoutcatatan"
         android:layout_marginTop="24dp"
+        android:importantForAccessibility="yes"
         android:id="@+id/layoutnominal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nominal Transfer"
+            android:importantForAccessibility="no"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
 
@@ -145,6 +160,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:importantForAccessibility="no"
             android:text="Rp100.000"
             android:textStyle="bold"
             android:id="@+id/tvNominalAwal"
@@ -158,11 +174,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layoutnominal"
         android:layout_marginTop="24dp"
+        android:importantForAccessibility="yes"
         android:id="@+id/layoutbiayaadmin">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
             android:text="Biaya Admin"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
@@ -171,6 +189,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:importantForAccessibility="no"
             android:text="Rp100.000"
             android:textStyle="bold"
             android:id="@+id/tvBiayaAdmin"
@@ -184,12 +203,14 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layoutbiayaadmin"
         android:layout_marginTop="24dp"
+        android:importantForAccessibility="yes"
         android:id="@+id/layoutnominaltotal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nominal Total Transfer"
+            android:importantForAccessibility="no"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
 
@@ -199,6 +220,7 @@
             android:layout_alignParentEnd="true"
             android:text="Rp100.000"
             android:textStyle="bold"
+            android:importantForAccessibility="no"
             android:id="@+id/tvNominalTotal"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
@@ -217,6 +239,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/desc_input_pin"
+            android:importantForAccessibility="yes"
             android:text="@string/masukkan_pin_pembayaran"
             android:textSize="16sp"
             android:textColor="@color/neutral_09"
@@ -229,9 +252,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="12dp"
+            android:contentDescription="@string/pin"
             app:endIconMode="password_toggle"
-            app:endIconContentDescription="Kolom PIN Transaksi"
+            app:endIconContentDescription="PIN Disembunyikan"
             app:hintEnabled="false"
+            android:importantForAccessibility="yes"
             android:textColorHint="@color/et_text_hint">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -254,6 +279,7 @@
         android:background="@drawable/button_background_primary"
         app:backgroundTint="@color/primary_blue"
         android:text="@string/lanjut"
+        android:importantForAccessibility="yes"
         android:padding="14dp"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

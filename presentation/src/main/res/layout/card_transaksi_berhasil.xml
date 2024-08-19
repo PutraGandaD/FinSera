@@ -246,7 +246,7 @@
                 android:layout_height="42dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/neutral_01"
-                android:contentDescription="@string/share"
+                android:contentDescription="@string/bagikan"
                 android:text="@string/share"
                 android:textColor="@color/neutral_09"
                 android:textSize="@dimen/button_2"
