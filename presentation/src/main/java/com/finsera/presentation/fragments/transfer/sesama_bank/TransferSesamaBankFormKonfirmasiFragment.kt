@@ -32,6 +32,8 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
     private var nomorRekening: String? = null
     private var addToDaftarTersimpan: Boolean = false
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTransferSesamaBankFormKonfirmasiBinding.inflate(inflater, container, false)
         return binding.root
@@ -60,6 +62,8 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
             binding.tvBiayaAdmin.setText("Gratis")
             binding.tvNominalTotal.setText("Rp ${CurrencyFormatter.formatCurrency(nominalTransfer.toInt().toDouble())}")
 
+            setAccessibilityDescriptions()
+
             binding.btnNext.setOnClickListener {
                 if(binding.etPinTransaksi.editText?.text.toString().isNotEmpty()) {
                     transferSesamaBankViewModel.transferSesama(nomorRekening!!, nominalTransfer.toDouble()!!, catatanTransfer!!, binding.etPinTransaksi.editText?.text.toString())
@@ -67,6 +71,26 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
                     Snackbar.make(requireView(), "PIN Transaksi harus diisi!", Snackbar.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_confirm_transaction))
+            hasAnnouncedScreen = true
+        }
+    }
+
+    private fun formatAccountNumberForAccessibility(accountNumber: String): String {
+        return accountNumber.map { it.toString() }.joinToString(" ")
+    }
+    private fun setAccessibilityDescriptions() {
+        binding.apply {
+            val formattedAccountNumber = formatAccountNumberForAccessibility(tvRekeningTujuan.text.toString())
+            layoutnomorrekening.contentDescription = getString(R.string.rekening_tujuan_desc, formattedAccountNumber)
+            layoutnamapemilikrekening.contentDescription = getString(R.string.nama_penerima_desc, tvNamaPemilikRekeningTujuan.text)
+            layoutcatatan.contentDescription = getString(R.string.catatan_desc, tvCatatanTf.text)
+            layoutnominal.contentDescription = getString(R.string.nominal_transfer_desc, tvNominalAwal.text)
+            layoutbiayaadmin.contentDescription = getString(R.string.biaya_admin_desc, tvBiayaAdmin.text)
+            layoutnominaltotal.contentDescription = getString(R.string.nominal_total_desc, tvNominalTotal.text)
         }
     }
 

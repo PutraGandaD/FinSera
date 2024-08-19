@@ -37,6 +37,8 @@ class TransferSesamaBankFormFragment : Fragment() {
 
     private var saldoRekening: Double? = null
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,6 +67,8 @@ class TransferSesamaBankFormFragment : Fragment() {
             namaPemilikRekening = bundle.namaPemilikRekening
             binding.cardInfoRekening.tvNoRekening.text = noRekening
             binding.cardInfoRekening.tvNamaPenerima.text = namaPemilikRekening
+            setAccountNumberContentDescription(noRekening)
+            updateRecipientInfoAccessibility()
         }
 
         if(savedItemMode == true) {
@@ -83,6 +87,13 @@ class TransferSesamaBankFormFragment : Fragment() {
                 Snackbar.make(requireView(), "Tidak ada koneksi internet.", Snackbar.LENGTH_SHORT).show()
             }
         }
+
+        if (!hasAnnouncedScreen) {
+            val announcement = getString(R.string.screen_form_transfer, namaPemilikRekening)
+            view.announceForAccessibility(announcement)
+            hasAnnouncedScreen = true
+        }
+
     }
 
     private fun observeDataSaldo() {
@@ -112,7 +123,10 @@ class TransferSesamaBankFormFragment : Fragment() {
 
                     if(uiState.isDataSaldoReady) {
                         saldoRekening = uiState.dataSaldo?.amount
-                        binding.cardInfoSaldo.tvSaldoRekening.text = StringBuilder().append("Rp" + CurrencyFormatter.formatCurrency(saldoRekening!!))
+                        val formattedSaldo = "Rp" + CurrencyFormatter.formatCurrency(saldoRekening!!)
+                        binding.cardInfoSaldo.tvSaldoRekening.text = formattedSaldo
+
+                        updateSaldoAndaAccessibility(formattedSaldo)
                     }
 
                     if(!uiState.hasInternet) {
@@ -128,6 +142,27 @@ class TransferSesamaBankFormFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setAccountNumberContentDescription(accountNumber: String) {
+        val spaceDelimitedNumber = accountNumber.map { it.toString() }.joinToString(" ")
+        binding.cardInfoRekening.tvNoRekening.contentDescription = spaceDelimitedNumber
+    }
+
+    private fun updateSaldoAndaAccessibility(formattedSaldo: String) {
+        val fullDescription = getString(R.string.desc_saldo_anda, formattedSaldo)
+        binding.cardInfoSaldo.saldoAndaContainer.contentDescription = fullDescription
+    }
+
+    private fun updateRecipientInfoAccessibility() {
+        val spaceDelimitedNumber = noRekening.map { it.toString() }.joinToString(" ")
+        val fullDescription = getString(
+            R.string.desc_recipient_info,
+            namaPemilikRekening,
+            "BCA",
+            spaceDelimitedNumber
+        )
+        binding.cardInfoRekening.root.contentDescription = fullDescription
     }
 
     private fun navigateToFormKonfirmasi(dataRekening: CekRekeningSesamaBundle) {

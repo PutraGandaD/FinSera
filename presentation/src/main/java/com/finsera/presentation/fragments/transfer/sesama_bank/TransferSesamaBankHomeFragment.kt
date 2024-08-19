@@ -29,6 +29,8 @@ class TransferSesamaBankHomeFragment : Fragment(), OnSavedItemSesamaClickListene
     private val transferSesamaBankHomeViewModel : TransferSesamaBankHomeViewModel by inject()
     private val daftarTersimpanSesamaAdapter = DaftarTersimpanSesamaAdapter(this)
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentTransferSesamaBankHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -48,6 +50,11 @@ class TransferSesamaBankHomeFragment : Fragment(), OnSavedItemSesamaClickListene
 
         binding.btnTransferBaru.setOnClickListener {
             findNavController().navigate(R.id.action_transferSesamaBankHome_to_cekRekeningSesamaBankFormFragment)
+        }
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_transfer_sesama_bank))
+            hasAnnouncedScreen = true
         }
     }
 

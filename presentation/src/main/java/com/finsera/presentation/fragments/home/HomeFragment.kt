@@ -1,5 +1,6 @@
 package com.finsera.presentation.fragments.home
 
+import android.content.Context
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
@@ -7,11 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityManager
+import android.view.accessibility.AccessibilityNodeInfo
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.finsera.common.utils.extension.copyToClipboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.finsera.common.utils.format.CurrencyFormatter
 import com.finsera.presentation.R
@@ -30,6 +34,8 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
     private lateinit var tts: TextToSpeech
 
+    private lateinit var accessibilityManager: AccessibilityManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,24 +49,34 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
         super.onViewCreated(view, savedInstanceState)
 
         tts = TextToSpeech(requireContext(), this)
-        
+
+        setupAccessibility()
+
+        accessibilityManager = requireContext().getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
+
+        binding.cardNasabahInfo.tvNamaNasabah.setOnClickListener {
+            speakAccountName()
+        }
+
+        binding.cardNasabahInfo.tvNoRekeningCard.setOnClickListener {
+            speakAccountNumber()
+        }
+
         val btnInfoSaldo = view.findViewById<ConstraintLayout>(R.id.btn_menu_infosaldo)
         btnInfoSaldo.setOnClickListener {
-            if(findNavController().currentDestination?.id == R.id.homeFragment) {
-                findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
-            }
+            findNavController().navigate(R.id.action_homeFragment_to_infoSaldoFragment)
         }
 
         val btnTransferSesama = view.findViewById<ConstraintLayout>(R.id.btn_menu_transfer_sesama)
         btnTransferSesama.setOnClickListener {
-            if(findNavController().currentDestination?.id == R.id.homeFragment) {
-                findNavController().navigate(R.id.action_homeFragment_to_transferSesamaBankHome)
-            }
+            findNavController().navigate(R.id.action_homeFragment_to_transferSesamaBankHome)
         }
 
         val btnVirtualAccount = view.findViewById<ConstraintLayout>(R.id.btn_menu_virtual_account)
         btnVirtualAccount.setOnClickListener {
-            Snackbar.make(requireView(), "Fitur belum tersedia", Snackbar.LENGTH_SHORT).show()
+            if(findNavController().currentDestination?.id == R.id.homeFragment) {
+                findNavController().navigate(R.id.action_homeFragment_to_transferVirtualAccountHome)
+            }
         }
 
         val btnEWallet = view.findViewById<ConstraintLayout>(R.id.btn_menu_ewallet)
@@ -70,14 +86,13 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
         val btnTransferAntarBank = view.findViewById<ConstraintLayout>(R.id.btn_menu_transfer_antarbank)
         btnTransferAntarBank.setOnClickListener {
-            if(findNavController().currentDestination?.id == R.id.homeFragment) {
-                findNavController().navigate(R.id.action_homeFragment_to_transferAntarBankHome)
-            }
+            findNavController().navigate(R.id.action_homeFragment_to_transferAntarBankHome)
         }
 
         setUpBottomNavBar()
         getInfoSaldo()
         visibilitySaldo()
+        clipBoardCardNumber()
     }
 
     override fun onInit(status: Int) {
@@ -104,7 +119,12 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
                         uiState.data?.let { saldo ->
                             binding.tvTopbgAccountName.text = saldo.username
                             binding.cardNasabahInfo.tvNamaNasabah.text = saldo.username
+                            binding.cardNasabahInfo.tvNamaNasabah.contentDescription =
+                                getString(R.string.account_name_content_confirmation)
                             binding.cardNasabahInfo.tvNoRekeningCard.text = saldo.accountNumber
+                            binding.cardNasabahInfo.tvNoRekeningCard.contentDescription =
+                                getString(R.string.account_number_content_confirmation)
+                            setupAccessibility()
                             if (homeViewModel.isSaldoVisible.value == true) {
                                 binding.cardNasabahInfo.tvSaldoRekeningCard.text =
                                     StringBuilder().append("Rp ")
@@ -114,14 +134,7 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
                                     getString(R.string.tv_saldo_card_rekening_home)
                             }
                         } ?: run {
-                            binding.tvTopbgAccountName.text =
-                                getString(R.string.tv_topbg_account_name)
-                            binding.cardNasabahInfo.tvNamaNasabah.text =
-                                getString(R.string.tv_nama_nasabah_placeholder)
-                            binding.cardNasabahInfo.tvNoRekeningCard.text =
-                                getString(R.string.tv_rekening_placeholder)
-                            binding.cardNasabahInfo.tvSaldoRekeningCard.text =
-                                getString(R.string.tv_saldo_card_rekening_home)
+                            showLoadingInfoSaldo()
                         }
                         uiState.message?.let {message->
                             Log.d("HomeFragment", message)
@@ -131,6 +144,22 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
 
             }
 
+        }
+    }
+
+    private fun clipBoardCardNumber(){
+        binding.cardNasabahInfo.btnNorekCopy.setOnClickListener {
+            val cardNumber = binding.cardNasabahInfo.tvNoRekeningCard.text.toString()
+            val cardNumberLabel = binding.cardNasabahInfo.tvNamaNasabah.text.toString()
+
+            requireContext().copyToClipboard(
+                getString(
+                    R.string.copy_to_clipboard,
+                    cardNumberLabel,
+                    cardNumber
+                ))
+            Snackbar.make(requireView(),
+                getString(R.string.succes_clipboard_card_number), Snackbar.LENGTH_SHORT).show()
         }
     }
 
@@ -172,14 +201,18 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
                     binding.cardNasabahInfo.tvSaldoRekeningCard.text = balanceText
                     binding.cardNasabahInfo.tvSaldoRekeningCard.contentDescription =
                         getString(R.string.balance_description, balanceText)
+                    binding.cardNasabahInfo.tvSaldoRekeningCard.isClickable = false
                 }
                 binding.cardNasabahInfo.btnSaldoVisibility.setImageResource(R.drawable.ic_rekening_no_visibility)
+                binding.cardNasabahInfo.btnSaldoVisibility.contentDescription = getString(R.string.tv_talkback_sembunyikan_saldo)
             } else {
                 binding.cardNasabahInfo.tvSaldoRekeningCard.text =
                     getString(R.string.tv_saldo_card_rekening_home)
                 binding.cardNasabahInfo.tvSaldoRekeningCard.contentDescription =
                     getString(R.string.saldo_disembunyikan)
+                binding.cardNasabahInfo.tvSaldoRekeningCard.isClickable = false
                 binding.cardNasabahInfo.btnSaldoVisibility.setImageResource(R.drawable.ic_rekening_visibility)
+                binding.cardNasabahInfo.btnSaldoVisibility.contentDescription = getString(R.string.tv_talkback_lihat_saldo)
             }
         }
 
@@ -188,13 +221,51 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
         }
     }
 
+    private fun isTalkBackEnabled(): Boolean {
+        return accessibilityManager.isEnabled && accessibilityManager.isTouchExplorationEnabled
+    }
+
+    private fun setupAccessibility() {
+        val helloTextView = binding.tvTopbgHelloPlaceholder
+        val nameTextView = binding.tvTopbgAccountName
+
+        val accessibilityDelegate = object : View.AccessibilityDelegate() {
+            override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfo) {
+                super.onInitializeAccessibilityNodeInfo(host, info)
+                val greeting = "${helloTextView.text}, ${nameTextView.text}"
+                info.contentDescription = greeting
+            }
+        }
+
+        helloTextView.accessibilityDelegate = accessibilityDelegate
+        nameTextView.accessibilityDelegate = accessibilityDelegate
+    }
+
     private fun speakBalance() {
         val textToSpeak = binding.cardNasabahInfo.tvSaldoRekeningCard.contentDescription.toString()
         tts.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
+    private fun speakAccountName() {
+        if (isTalkBackEnabled()) {
+            val accountName = binding.cardNasabahInfo.tvNamaNasabah.text.toString()
+            val prefix = getString(R.string.account_name_prefix)
+            val textToSpeak = "$prefix $accountName"
+            tts.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
+        }
+    }
+
+    private fun speakAccountNumber() {
+        if (isTalkBackEnabled()) {
+            val accountNumber = binding.cardNasabahInfo.tvNoRekeningCard.text.toString()
+            val prefix = getString(R.string.account_number_prefix)
+            val digitsSpaced = accountNumber.replace("".toRegex(), " ")
+            val textToSpeak = "$prefix $digitsSpaced"
+            tts.speak(textToSpeak, TextToSpeech.QUEUE_FLUSH, null, "")
+        }
+    }
+
     private fun setUpBottomNavBar() {
-        // set background for bottomNavigationView to null
         binding.bottomNavigationView.background = null
         binding.bottomNavigationView.menu.getItem(0).isChecked = true
         binding.bottomNavigationView.menu.getItem(1).isCheckable = false

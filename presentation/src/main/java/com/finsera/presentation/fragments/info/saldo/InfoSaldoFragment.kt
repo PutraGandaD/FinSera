@@ -1,5 +1,6 @@
 package com.finsera.presentation.fragments.info.saldo
 
+import android.content.Context
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
@@ -7,14 +8,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityManager
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.finsera.common.utils.extension.copyToClipboard
 import com.finsera.common.utils.format.CurrencyFormatter
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentInfoSaldoBinding
 import com.finsera.presentation.fragments.info.saldo.viewmodel.InfoSaldoViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -30,14 +34,15 @@ class InfoSaldoFragment : Fragment() {
 
     private lateinit var tts: TextToSpeech
 
+    private lateinit var accountName : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        tts = TextToSpeech(context) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                tts.language = Locale.getDefault()
-            }
+        if (isTalkBackEnabled()) {
+            initializeTTS()
         }
+
     }
 
     override fun onCreateView(
@@ -56,11 +61,16 @@ class InfoSaldoFragment : Fragment() {
         binding.accountInfoContainer.setOnClickListener {
             speakAccountInfo()
         }
+        buttonBack()
+        clipBoardCardNumber()
+        setupAccessibility()
+    }
 
+
+    private fun buttonBack(){
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
-
     }
 
     private fun showLoadingInfoSaldo() {
@@ -89,11 +99,11 @@ class InfoSaldoFragment : Fragment() {
                             binding.tvAccountNumberValue.text = saldo.accountNumber
                             binding.tvBalanceValue.text = StringBuilder().append("Rp ")
                                 .append(CurrencyFormatter.formatCurrency(saldo.amount))
+                            accountName = saldo.username
 
                         } ?: run {
-                            binding.tvAccountNumberValue.text =
-                                getString(R.string.tv_rekening_placeholder)
-                            binding.tvBalanceValue.text = getString(R.string.amount_placholder)
+                            showLoadingInfoSaldo()
+                            updateAccessibilityInfo()
                         }
                         uiState.message?.let {message->
                             Log.d("InfoSaldoFragment", message)
@@ -104,19 +114,67 @@ class InfoSaldoFragment : Fragment() {
         }
     }
 
-    private fun speakAccountInfo() {
+    private fun clipBoardCardNumber(){
+        binding.ibClipboard.setOnClickListener {
+            val cardNumber = binding.tvAccountNumberValue.text.toString()
+            val cardNumberLabel = accountName
+
+            requireContext().copyToClipboard(
+                getString(
+                    R.string.copy_to_clipboard,
+                    cardNumberLabel,
+                    cardNumber
+                ))
+            Snackbar.make(requireView(),
+                getString(R.string.succes_clipboard_card_number), Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setupAccessibility() {
+        binding.accountInfoContainer.setOnClickListener {
+            if (isTalkBackEnabled()) {
+                speakAccountInfo()
+            }
+        }
+        updateAccessibilityInfo()
+    }
+
+    private fun updateAccessibilityInfo() {
         val balance = binding.tvBalanceValue.text.toString()
         val accountNumber = binding.tvAccountNumberValue.text.toString()
+        val textToSpeak = accountNumber.replace("".toRegex(), " ")
+        val accessibilityText = getString(R.string.account_info_speech, balance, textToSpeak)
+        binding.accountInfoContainer.contentDescription = accessibilityText
+    }
 
-        val formattedBalance = balance.removePrefix("Rp ")
+    private fun initializeTTS() {
+        tts = TextToSpeech(context) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                tts.language = Locale("id", "ID")
+                Log.d("TTS", "TextToSpeech initialized successfully")
+            } else {
+                Log.e("TTS", "TextToSpeech initialization failed with status: $status")
+            }
+        }
+    }
 
-        val fullText = getString(R.string.account_info_speech, formattedBalance, accountNumber)
+    private fun isTalkBackEnabled(): Boolean {
+        val accessibilityManager = context?.getSystemService(Context.ACCESSIBILITY_SERVICE) as? AccessibilityManager
+        return accessibilityManager?.isEnabled == true && accessibilityManager.isTouchExplorationEnabled
+    }
+
+    private fun speakAccountInfo() {
+        if (!isTalkBackEnabled()) return
+
+        val fullText = binding.accountInfoContainer.contentDescription.toString()
         tts.speak(fullText, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        tts.shutdown()
+        if (::tts.isInitialized) {
+            tts.shutdown()
+        }
     }
 
 }

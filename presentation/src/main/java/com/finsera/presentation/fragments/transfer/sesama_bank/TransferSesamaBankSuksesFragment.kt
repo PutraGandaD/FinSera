@@ -95,6 +95,8 @@ class TransferSesamaBankSuksesFragment : Fragment() {
         shareButton.setOnClickListener {
             safeShareImageTo()
         }
+
+        setAccessibilityDescriptions()
     }
 
     fun getBitmapFromUiView(context: Context, myView: View) : Bitmap {
@@ -170,6 +172,26 @@ class TransferSesamaBankSuksesFragment : Fragment() {
 
         normalMode()
         return uri
+    }
+
+    private fun formatDigitNumberAccessibility(digitNumberTalkback: String): String {
+        return digitNumberTalkback.map { it.toString() }.joinToString(" ")
+    }
+
+    private fun setAccessibilityDescriptions() {
+        binding.cardTransaksiBerhasil.apply {
+            val formattedDigitNumberBankRecipient = formatDigitNumberAccessibility(tvRekeningTujuan.text.toString())
+            val formattedDigitNumberTransaction = formatDigitNumberAccessibility(tvNomorTransaksi.text.toString())
+            tvDate.contentDescription = getString(R.string.tanggal_transaksi_desc, tvDate.text)
+            tvNominal.contentDescription = getString(R.string.nominal_transfer_desc, tvNominal.text)
+            tvBiayaAdmin.contentDescription = getString(R.string.biaya_admin_desc, tvBiayaAdmin.text)
+            tvNomorTransaksi.contentDescription = getString(R.string.nomor_transaksi_desc, formattedDigitNumberTransaction)
+            tvFinSera.contentDescription = getString(R.string.akun_finsera_desc, tvFinSera.text)
+            tvBankTujuan.contentDescription = getString(R.string.bank_tujuan_desc, tvBankTujuan.text)
+            tvNamaPenerima.contentDescription = getString(R.string.nama_penerima_desc, tvNamaPenerima.text)
+            tvRekeningTujuan.contentDescription = getString(R.string.rekening_tujuan_desc, formattedDigitNumberBankRecipient)
+            tvCatatan.contentDescription = getString(R.string.catatan_desc, tvCatatan.text)
+        }
     }
 
     private fun saveToGallery() {

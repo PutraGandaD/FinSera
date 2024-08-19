@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.finsera.common.utils.Resource
 import com.finsera.common.utils.dialog.DatePickerFragment
 import com.finsera.common.utils.network.ConnectivityManager
+import com.finsera.presentation.R
 import com.finsera.presentation.adapters.MutasiAdapter
 import com.finsera.presentation.databinding.FragmentMutasiBinding
 import com.finsera.presentation.databinding.ViewMutasiFilterBinding
@@ -53,6 +54,7 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
     private val mutasiAdapter = MutasiAdapter()
     private var isResultMutasiShowed = false
 
+    private var hasAnnouncedScreen = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -76,6 +78,11 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
 
         binding.btnDownload.setOnClickListener {
             requestStoragePermission()
+        }
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_mutasi_transaksi))
+            hasAnnouncedScreen = true
         }
 
     }

@@ -30,6 +30,7 @@ class CekRekeningSesamaBankFormFragment : Fragment() {
 
     private val cekRekeningSesamaViewModel : CekRekeningSesamaViewModel by inject()
 
+    private var hasAnnouncedScreen = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,6 +57,11 @@ class CekRekeningSesamaBankFormFragment : Fragment() {
             } else {
                 Snackbar.make(requireView(), "Mohon isi kolom No Rekening terlebih dahulu!", Snackbar.LENGTH_SHORT).show()
             }
+        }
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_cek_rekening))
+            hasAnnouncedScreen = true
         }
     }
 

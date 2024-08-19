@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class MutasiAdapter() : ListAdapter<Mutasi, MutasiAdapter.MutasiViewHolder>(DIFF_CALLBACK) {
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -27,8 +26,11 @@ class MutasiAdapter() : ListAdapter<Mutasi, MutasiAdapter.MutasiViewHolder>(DIFF
         fun bind(data: Mutasi) {
             binding.tvNominalUang.text = amountConverter(data)
             binding.tvDate.text = formatDateString(data.transactionDate)
-            binding.tvWaktuTransaksi.text =formatTimeString(data.transactionDate)
+            val formattedTime = formatTimeString(data.transactionDate)
+            binding.tvWaktuTransaksi.text = formattedTime
             binding.tvDetailMutasi.text = mutasiDescription(data)
+
+            binding.tvWaktuTransaksi.contentDescription = formatTimeForAccessibility(formattedTime)
 
             when (data.transactionInformation) {
                 "UANG_MASUK" -> {
@@ -60,6 +62,11 @@ class MutasiAdapter() : ListAdapter<Mutasi, MutasiAdapter.MutasiViewHolder>(DIFF
 
             val date = inputFormatter.parse(dateString)
             return outputFormatter.format(date!!)
+        }
+
+        private fun formatTimeForAccessibility(timeString: String): String {
+            val parts = timeString.split(":")
+            return "Jam ${parts[0]} ${parts[1]} W I B"
         }
 
         private fun formatDateString(dateString: String): String {
