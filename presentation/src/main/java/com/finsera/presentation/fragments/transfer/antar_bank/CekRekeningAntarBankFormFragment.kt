@@ -65,7 +65,7 @@ class CekRekeningAntarBankFormFragment : Fragment() {
         }
 
         if (!hasAnnouncedScreen) {
-            view.announceForAccessibility(getString(R.string.screen_pilih_bank))
+            view?.announceForAccessibility(getString(R.string.screen_pilih_bank))
             hasAnnouncedScreen = true
         }
     }

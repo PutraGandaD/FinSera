@@ -6,6 +6,7 @@ import com.finsera.di.DataModule.dataModule
 import com.finsera.di.DataModule.databaseDaoModule
 import com.finsera.di.DataModule.databaseInitModule
 import com.finsera.di.DataModule.repositoryModule
+import com.finsera.di.DomainModule.useCaseModule
 import com.finsera.di.NetworkModule.networkModule
 import com.finsera.di.PresentationModule.viewModelModule
 import org.koin.android.ext.koin.androidContext

@@ -12,10 +12,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
-import com.finsera.domain.model.DaftarTersimpan
+import com.finsera.domain.model.DaftarTersimpanSesama
+import com.finsera.domain.model.DaftarTersimpanVa
 import com.finsera.presentation.R
 import com.finsera.presentation.adapters.DaftarTersimpanSesamaAdapter
-import com.finsera.presentation.adapters.OnSavedItemClickListener
+import com.finsera.presentation.adapters.DaftarTersimpanVaAdapter
+import com.finsera.presentation.adapters.OnSavedItemSesamaClickListener
+import com.finsera.presentation.adapters.OnSavedItemVaClickListener
 import com.finsera.presentation.databinding.FragmentTransferVirtualAccountHomeBinding
 import com.finsera.presentation.fragments.transfer.va.bundle.CekVaBundle
 import com.finsera.presentation.fragments.transfer.va.viewmodel.TransferVaViewModel
@@ -23,12 +26,12 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class TransferVirtualAccountHome : Fragment(), OnSavedItemClickListener {
+class TransferVirtualAccountHome : Fragment(), OnSavedItemVaClickListener {
     private var _binding: FragmentTransferVirtualAccountHomeBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: TransferVaViewModel by viewModel()
-    private val adapter = DaftarTersimpanSesamaAdapter(this)
+    private val adapter = DaftarTersimpanVaAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,7 +80,7 @@ class TransferVirtualAccountHome : Fragment(), OnSavedItemClickListener {
         _binding = null
     }
 
-    override fun onSavedItemClicked(daftarTersimpan: DaftarTersimpan) {
+    override fun onSavedItemVaClicked(daftarTersimpan: DaftarTersimpanVa) {
         val dataVa = daftarTersimpan.noRekening
 
         val bundle = Bundle().apply {

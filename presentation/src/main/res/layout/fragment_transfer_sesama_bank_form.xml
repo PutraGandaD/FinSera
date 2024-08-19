@@ -25,7 +25,6 @@
             android:contentDescription="@string/back"
             android:importantForAccessibility="yes"
             android:background="@android:color/white"
-            android:contentDescription="@string/back"
             android:src="@drawable/ic_back_button"
             android:layout_marginStart="12dp"
             android:layout_centerVertical="true"/>
