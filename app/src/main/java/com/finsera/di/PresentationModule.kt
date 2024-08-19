@@ -5,6 +5,7 @@ import com.finsera.presentation.fragments.auth.viewmodels.LoginViewModel
 import com.finsera.presentation.fragments.home.viewmodel.HomeViewModel
 import com.finsera.presentation.fragments.info.mutasi.viewmodel.MutasiViewModel
 import com.finsera.presentation.fragments.info.saldo.viewmodel.InfoSaldoViewModel
+import com.finsera.presentation.fragments.qris.viewmodel.CameraXViewModel
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.CekRekeningAntarViewModel
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.TransferAntarBankFormViewModel
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.TransferAntarBankHomeViewModel
@@ -35,5 +36,6 @@ object PresentationModule {
         viewModel { TransferAntarBankHomeViewModel(get(), get()) }
         viewModel { CheckVaViewModel(get(), get()) }
         viewModel { TransferVaViewModel(get(), get(),get(),get(),get()) }
+        viewModel { CameraXViewModel(get()) }
     }
 }

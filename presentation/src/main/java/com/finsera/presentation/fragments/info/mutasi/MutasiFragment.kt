@@ -99,8 +99,8 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
                         binding.btnBack.isEnabled = true
                     }
 
-                    if (uiState.message != null) {
-                        Snackbar.make(requireView(), uiState.message, Snackbar.LENGTH_SHORT).show()
+                    uiState.message?.let {
+                        Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
                         mutasiViewModel.messageShown()
                     }
 
@@ -117,16 +117,19 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if(isResultMutasiShowed) {
                 mutasiAdapter.submitList(emptyList())
+                startDate = "" // reset startdate and enddate
+                endDate = ""
                 showFilter()
             } else {
                 findNavController().popBackStack()
             }
         }
 
-
         binding.btnBack.setOnClickListener {
             if(isResultMutasiShowed) {
                 mutasiAdapter.submitList(emptyList())
+                startDate = "" // reset startdate and enddate
+                endDate = ""
                 showFilter()
             } else {
                 findNavController().popBackStack()
