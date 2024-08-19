@@ -23,5 +23,4 @@ interface IDaftarTersimpanRepository {
     suspend fun insertDaftarTersimpanVa(daftarTersimpan: DaftarTersimpanVa)
     suspend fun updateDaftarTersimpanVa(daftarTersimpan: DaftarTersimpanVa)
     suspend fun deleteDaftarTersimpanVa(daftarTersimpan: DaftarTersimpanVa)
-
 }

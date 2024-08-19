@@ -130,7 +130,6 @@ class DaftarTersimpanRepositoryImpl(
         )
     }
 
-
     override suspend fun updateDaftarTersimpanVa(daftarTersimpan: DaftarTersimpanVa) {
         daftarTersimpanVaDao.updateDaftarVirtualAccount(
             TransferVaTersimpanEntity(

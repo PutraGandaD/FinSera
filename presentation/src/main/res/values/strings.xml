@@ -252,6 +252,7 @@
     <string name="cari_bank">Cari Bank</string>
     <string name="rekening_pengirim">Rekening Pengirim</string>
     <string name="nama_pengirim">Nama Pengirim</string>
+
     <string name="recipient">Penerima</string>
     <string name="tv_talkback_sembunyikan_saldo">Sembunyikan Saldo Rekening Anda</string>
     <string name="account_number_prefix">Nomor Rekening Anda Adalah</string>

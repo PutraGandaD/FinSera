@@ -39,13 +39,13 @@ object DomainModule {
         factory { TransferSesamaBankUseCase(get(), get()) }
         factory { CekRekeningSesamaUseCase(get(), get()) }
         factory { DownloadMutasiUseCase(get()) }
+        factory { GetDaftarTersimpanSesamaUseCase(get()) }
+        factory { TambahDaftarTersimpanSesamaUseCase(get()) }
+        factory { CariDaftarTersimpanSesamaUseCase(get()) }
+        factory { CekRekeningAntarUseCase(get(), get()) }
         factory { CekVirtualAccountUseCase(get()) }
         factory { TransferVaUseCase(get()) }
 
-            factory { GetDaftarTersimpanSesamaUseCase(get()) }
-            factory { TambahDaftarTersimpanSesamaUseCase(get()) }
-            factory { CariDaftarTersimpanSesamaUseCase(get()) }
-            factory { CekRekeningAntarUseCase(get(), get()) }
 
         factory { GetDaftarTersimpanVaUseCase(get()) }
         factory { TambahDaftarTersimpanVaUseCase(get()) }

@@ -30,6 +30,7 @@ class TransferAntarBankHomeFragment : Fragment(), OnSavedItemAntarClickListener 
 
     private val transferAntarBankHomeViewModel: TransferAntarBankHomeViewModel by inject()
     private val daftarTersimpanAntarAdapter = DaftarTersimpanAntarAdapter(this)
+
     private var hasAnnouncedScreen = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
