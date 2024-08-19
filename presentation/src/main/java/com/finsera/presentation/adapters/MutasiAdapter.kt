@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class MutasiAdapter() : ListAdapter<Mutasi, MutasiAdapter.MutasiViewHolder>(DIFF_CALLBACK) {
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

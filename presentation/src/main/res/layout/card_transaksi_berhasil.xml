@@ -29,11 +29,11 @@
             android:textColor="@color/neutral_01"
             android:textSize="24sp" />
 
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,14 +42,14 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:text="@string/example_date"
                 android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
                 android:textFontWeight="700"
-                android:textSize="16sp" />
+                android:id="@+id/tv_date"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -64,14 +64,14 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_nominal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:text="@string/example_nominal"
                 android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
                 android:textFontWeight="700"
-                android:textSize="16sp" />
+                android:id="@+id/tv_nominal"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -86,14 +86,14 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_biaya_admin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:text="@string/example_biaya_admin"
                 android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
                 android:textFontWeight="700"
-                android:textSize="16sp" />
+                android:id="@+id/tv_biaya_admin"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -108,14 +108,14 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_nomor_transaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:text="@string/example_nomor_transaksi"
                 android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
                 android:textFontWeight="700"
-                android:textSize="16sp" />
+                android:id="@+id/tv_nomor_transaksi"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -157,19 +157,21 @@
                 android:id="@+id/tv_rekening_pengirim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:text="@string/account_number_value"
                 android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
                 android:textFontWeight="700"
-                android:textSize="16sp" />
+                android:id="@+id/tv_FinSera"/>
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_bank_tujuan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
-
             <TextView
+                android:id="@+id/tv_bank_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/bank_tujuan"
@@ -177,22 +179,22 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_bank_tujuan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:text="@string/example_bank"
                 android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
                 android:textFontWeight="700"
-                android:textSize="16sp" />
+                android:id="@+id/tv_bank_tujuan"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
-
             <TextView
+                android:id="@+id/tv_penerima_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nama_penerima"
@@ -200,14 +202,14 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_nama_penerima"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:text="@string/example_nama_penerima"
                 android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
                 android:textFontWeight="700"
-                android:textSize="16sp" />
+                android:id="@+id/tv_nama_penerima"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -215,6 +217,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
             <TextView
+                android:id="@+id/tv_rekening_tujuan_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/rekening_tujuan"
@@ -222,17 +225,18 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_rekening_tujuan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:text="@string/example_rekening_tujuan"
                 android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
                 android:textFontWeight="700"
-                android:textSize="16sp" />
+                android:id="@+id/tv_rekening_tujuan"/>
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_catatan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
@@ -244,33 +248,32 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/tv_catatan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
                 android:text="@string/example_catatan"
                 android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
                 android:textFontWeight="700"
-                android:textSize="16sp" />
+                android:id="@+id/tv_catatan"/>
         </RelativeLayout>
 
         <LinearLayout
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:orientation="horizontal">
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_download"
                 android:layout_width="wrap_content"
-                android:layout_height="42dp"
                 android:layout_marginEnd="12dp"
+                android:layout_height="42dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/neutral_01"
-                android:contentDescription="@string/download"
                 android:text="@string/download"
-                android:textColor="@color/neutral_09"
+                android:contentDescription="@string/download"
                 android:textSize="@dimen/button_2"
+                android:textColor="@color/neutral_09"
                 app:cornerRadius="8dp" />
 
             <com.google.android.material.button.MaterialButton
@@ -290,16 +293,16 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
             android:id="@+id/btn_back_to_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="20dp"
             android:backgroundTint="@color/neutral_01"
-            android:contentDescription="@string/kembali_ke_menu"
             android:text="@string/kembali_ke_menu"
-            android:textColor="@color/neutral_09"
+            android:contentDescription="@string/kembali_ke_menu"
             android:textSize="20sp"
+            android:textColor="@color/neutral_09"
             app:cornerRadius="8dp" />
     </LinearLayout>
 

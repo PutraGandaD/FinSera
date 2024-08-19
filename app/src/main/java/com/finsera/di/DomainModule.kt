@@ -1,5 +1,6 @@
 package com.finsera.di
 
+import com.finsera.domain.model.TransferVa
 import com.finsera.domain.usecase.auth.CheckAppPinCreatedUseCase
 import com.finsera.domain.usecase.auth.CheckLoggedInUseCase
 import com.finsera.domain.usecase.auth.CreateAppPinUseCase
@@ -20,6 +21,11 @@ import com.finsera.domain.usecase.transfer.sesama_bank.CekRekeningSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.GetDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TambahDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TransferSesamaBankUseCase
+import com.finsera.domain.usecase.transfer.virtual_account.CariDaftarVaTersimpanUseCase
+import com.finsera.domain.usecase.transfer.virtual_account.CekVirtualAccountUseCase
+import com.finsera.domain.usecase.transfer.virtual_account.GetDaftarTersimpanVaUseCase
+import com.finsera.domain.usecase.transfer.virtual_account.TambahDaftarTersimpanVaUseCase
+import com.finsera.domain.usecase.transfer.virtual_account.TransferVaUseCase
 import org.koin.dsl.module
 
 object DomainModule {
@@ -33,10 +39,18 @@ object DomainModule {
         factory { TransferSesamaBankUseCase(get(), get()) }
         factory { CekRekeningSesamaUseCase(get(), get()) }
         factory { DownloadMutasiUseCase(get()) }
-        factory { GetDaftarTersimpanSesamaUseCase(get()) }
-        factory { TambahDaftarTersimpanSesamaUseCase(get()) }
-        factory { CariDaftarTersimpanSesamaUseCase(get()) }
-        factory { CekRekeningAntarUseCase(get(), get()) }
+        factory { CekVirtualAccountUseCase(get()) }
+        factory { TransferVaUseCase(get()) }
+
+            factory { GetDaftarTersimpanSesamaUseCase(get()) }
+            factory { TambahDaftarTersimpanSesamaUseCase(get()) }
+            factory { CariDaftarTersimpanSesamaUseCase(get()) }
+            factory { CekRekeningAntarUseCase(get(), get()) }
+
+        factory { GetDaftarTersimpanVaUseCase(get()) }
+        factory { TambahDaftarTersimpanVaUseCase(get()) }
+        factory { CariDaftarVaTersimpanUseCase(get()) }
+
         factory { GetListBankUseCase(get()) }
         factory { TransferAntarBankUseCase(get(), get()) }
         factory { GetDaftarTersimpanAntarUseCase(get()) }
