@@ -25,7 +25,7 @@ object PresentationModule {
         viewModel { LoginPinViewModel(get(), get(),get()) }
         viewModel { HomeViewModel(get(), get()) }
         viewModel { InfoSaldoViewModel(get(), get()) }
-        viewModel { MutasiViewModel(get(), get(), get()) }
+        viewModel { MutasiViewModel(get(), get(), get(), get()) }
         viewModel { TransferSesamaBankFormViewModel(get(), get()) }
         viewModel { TransferSesamaBankViewModel(get(), get(), get(), get()) }
         viewModel { TransferSesamaBankHomeViewModel(get(), get()) }
