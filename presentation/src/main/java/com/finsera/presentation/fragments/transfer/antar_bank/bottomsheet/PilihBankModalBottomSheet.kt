@@ -17,6 +17,7 @@ import com.finsera.presentation.databinding.FragmentCekRekeningAntarBankFormBind
 import com.finsera.presentation.databinding.FragmentPilihBankModalBottomSheetBinding
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.CekRekeningAntarViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.navigation.koinNavGraphViewModel
@@ -62,6 +63,11 @@ class PilihBankModalBottomSheet : BottomSheetDialogFragment(), OnBankItemClickLi
                 cekRekeningAntarViewModel.listBankModalSheetUiState.collectLatest { uiState ->
                     if(uiState.isSuccess) {
                         listBankRVAdapter.submitList(uiState.data)
+                    }
+
+                    uiState.message?.let {
+                        Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                        cekRekeningAntarViewModel.bottomSheetMessageShown()
                     }
                 }
             }

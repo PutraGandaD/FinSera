@@ -1,23 +1,27 @@
-package com.finsera.domain.usecase.auth
+package com.finsera.domain.usecase.transfer.antar_bank
 
 import com.finsera.common.utils.Resource
+import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.repository.IAuthRepository
+import com.finsera.domain.repository.ITransferRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
-import java.net.SocketTimeoutException
 
-class LoginPinUserUseCase(private val repository: IAuthRepository) {
-    suspend operator fun invoke(mpin: String) : Flow<Resource<String>> = flow {
+class TransferAntarBankUseCase(
+    private val authRepository: IAuthRepository,
+    private val transferRepository: ITransferRepository
+) {
+    suspend operator fun invoke(idBank: Int, noRekTujuan: String, nominal: Double, note: String, mpin: String) : Flow<Resource<TransferAntar>> = flow {
         emit(Resource.Loading())
         try {
-            repository.relogin(mpin)
-            val getRefreshToken = repository.getRefreshToken()
-            repository.refreshAccessToken(getRefreshToken) // refresh access token if login pin success
-            emit(Resource.Success("Berhasil Login"))
+            val response = transferRepository.transferAntarBank(
+                idBank, noRekTujuan, nominal, note, mpin
+            )
+            emit(Resource.Success(response))
         } catch (t: Throwable) {
             when (t) {
                 is HttpException -> {
@@ -28,18 +32,19 @@ class LoginPinUserUseCase(private val repository: IAuthRepository) {
                             val jsonObject = JSONObject(response)
                             val error = jsonObject.getString("message")
 
-                            when(error) {
-                                "Pin is invalid" -> emit(Resource.Error("PIN Anda invalid. Silahkan coba lagi."))
+                            when (error) {
+                                "Nomor Rekening Tidak Ditemukan" -> emit(Resource.Error("Nomor Rekening Tidak Ditemukan"))
                                 "JWT Token has expired" -> {
-                                    val getRefreshToken = repository.getRefreshToken()
-                                    repository.refreshAccessToken(getRefreshToken)
-                                    repository.relogin(mpin)
-                                    emit(Resource.Success("Berhasil Login"))
+                                    val response = transferRepository.transferAntarBank(
+                                        idBank, noRekTujuan, nominal, note, mpin
+                                    )
+                                    emit(Resource.Success(response))
                                 }
+                                "Pin Anda Salah" -> emit(Resource.Error("PIN Anda Salah. Silahkan input ulang PIN anda."))
                                 else -> emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
                             }
                         } catch (e: Exception) {
-                            when(e) {
+                            when (e) {
                                 is JSONException -> {
                                     emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
                                 }
@@ -52,10 +57,6 @@ class LoginPinUserUseCase(private val repository: IAuthRepository) {
 
                 is IOException -> {
                     emit(Resource.Error("Ada masalah pada koneksi internet anda. Silahkan coba lagi."))
-                }
-
-                is SocketTimeoutException -> {
-
                 }
             }
         }

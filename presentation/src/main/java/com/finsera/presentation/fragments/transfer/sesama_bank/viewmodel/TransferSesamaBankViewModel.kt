@@ -4,15 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.finsera.common.utils.Resource
 import com.finsera.common.utils.network.ConnectivityManager
-import com.finsera.domain.model.DaftarTersimpan
-import com.finsera.domain.usecase.infosaldo.InfoSaldoUseCase
-import com.finsera.domain.usecase.transfer.sesama_bank.CariDaftarTersimpanSesamaUseCase
-import com.finsera.domain.usecase.transfer.sesama_bank.GetDaftarTersimpanSesamaUseCase
+import com.finsera.domain.model.DaftarTersimpanSesama
+import com.finsera.domain.usecase.auth.GetUserInfoUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TambahDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.TransferSesamaBankUseCase
 import com.finsera.presentation.fragments.transfer.sesama_bank.uistate.TransferSesamaFormKonfirmasiUiState
-import com.finsera.presentation.fragments.transfer.sesama_bank.uistate.TransferSesamaFormUiState
-import com.finsera.presentation.fragments.transfer.sesama_bank.uistate.TransferSesamaHomeUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -23,18 +19,17 @@ class TransferSesamaBankViewModel(
     private val connectivityManager: ConnectivityManager,
     private val transferSesamaBankUseCase: TransferSesamaBankUseCase,
     private val tambahDaftarTersimpanSesamaUseCase: TambahDaftarTersimpanSesamaUseCase,
-    private val getDaftarTersimpanSesamaUseCase: GetDaftarTersimpanSesamaUseCase,
-    private val cariDaftarTersimpanSesamaUseCase: CariDaftarTersimpanSesamaUseCase,
-    private val getInfoSaldoUseCase: InfoSaldoUseCase
+    private val getUserInfoUseCase: GetUserInfoUseCase
 ) : ViewModel() {
-    private val _transferSesamaHomeUiState = MutableStateFlow(TransferSesamaHomeUiState())
-    val transferSesamaHomeUiState = _transferSesamaHomeUiState.asStateFlow()
-
     private val _transferSesamaFormKonfirmasiUiState = MutableStateFlow(TransferSesamaFormKonfirmasiUiState())
     val transferSesamaFormKonfirmasiUiState = _transferSesamaFormKonfirmasiUiState.asStateFlow()
 
+    private var _userInfo : Pair<String, String>? = null
+    val userInfo : Pair<String, String>?
+        get() = _userInfo
+
     init {
-        getDaftarTersimpanSesama()
+        getUserInfo()
     }
 
     fun transferSesama(norek: String, nominal: Double, note: String, mpin: String) {
@@ -73,24 +68,9 @@ class TransferSesamaBankViewModel(
         }
     }
 
-    fun getDaftarTersimpanSesama() = viewModelScope.launch {
-        val data = getDaftarTersimpanSesamaUseCase.invoke()
-        _transferSesamaHomeUiState.update { uiState ->
-            uiState.copy(data = data)
-        }
-    }
-
-    fun cariDaftarTersimpanSesama(keyword: String) = viewModelScope.launch {
-        cariDaftarTersimpanSesamaUseCase.invoke(keyword).collectLatest { data ->
-            _transferSesamaHomeUiState.update { uiState ->
-                uiState.copy(data = data)
-            }
-        }
-    }
-
     fun simpanKeDaftarTersimpanSesama(namaPemilik: String, norek: String) {
         viewModelScope.launch {
-            val data = DaftarTersimpan(0, namaPemilik, norek)
+            val data = DaftarTersimpanSesama(0, namaPemilik, norek)
             tambahDaftarTersimpanSesamaUseCase.invoke(data)
         }
     }
@@ -101,10 +81,13 @@ class TransferSesamaBankViewModel(
         }
     }
 
-
     fun transferSesamaBerhasil() {
         _transferSesamaFormKonfirmasiUiState.update { currentUiState ->
             currentUiState.copy(isLoading = false, isSuccess = false, message = null, data = null)
         }
+    }
+
+    private fun getUserInfo() {
+        _userInfo = getUserInfoUseCase.invoke()
     }
 }

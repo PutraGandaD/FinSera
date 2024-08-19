@@ -11,6 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
+import com.finsera.common.utils.DisableTouchEvent
+import com.finsera.common.utils.format.CurrencyFormatter
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentTransferSesamaBankFormKonfirmasiBinding
 import com.finsera.presentation.fragments.transfer.sesama_bank.bundle.CekRekeningSesamaBundle
@@ -54,13 +56,15 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
             binding.tvNamaPemilikRekeningTujuan.setText(namaPemilikRekening)
             binding.tvRekeningTujuan.setText(nomorRekening)
             binding.tvCatatanTf.setText(catatanTransfer ?: "-")
-            binding.tvNominalAwal.setText("Rp $nominalTransfer")
+            binding.tvNominalAwal.setText("Rp ${CurrencyFormatter.formatCurrency(nominalTransfer.toInt().toDouble())}")
             binding.tvBiayaAdmin.setText("Gratis")
-            binding.tvNominalTotal.setText("Rp $nominalTransfer")
+            binding.tvNominalTotal.setText("Rp ${CurrencyFormatter.formatCurrency(nominalTransfer.toInt().toDouble())}")
 
             binding.btnNext.setOnClickListener {
-                if(binding.etPin != null) {
+                if(binding.etPinTransaksi.editText?.text.toString().isNotEmpty()) {
                     transferSesamaBankViewModel.transferSesama(nomorRekening!!, nominalTransfer.toDouble()!!, catatanTransfer!!, binding.etPinTransaksi.editText?.text.toString())
+                } else {
+                    Snackbar.make(requireView(), "PIN Transaksi harus diisi!", Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
@@ -77,13 +81,17 @@ class TransferSesamaBankFormKonfirmasiFragment : Fragment() {
 
                     if (uiState.isLoading) {
                         binding.progressBar.visibility = View.VISIBLE
+                        DisableTouchEvent.setInteractionDisabled(requireActivity(), true)
                     } else {
                         binding.progressBar.visibility = View.GONE
+                        DisableTouchEvent.setInteractionDisabled(requireActivity(), false)
                     }
 
                     if (uiState.isSuccess) {
                         if (findNavController().currentDestination?.id == R.id.transferSesamaBankFormKonfirmasiFragment) {
                             val bundle = Bundle().apply {
+                                putString(Constant.NAMA_NASABAH, transferSesamaBankViewModel.userInfo?.first)
+                                putString(Constant.NOMOR_REKENING_NASABAH, transferSesamaBankViewModel.userInfo?.second)
                                 putParcelable(Constant.TRANSFER_SESAMA_BERHASIL_BUNDLE, uiState.data)
                             }
 

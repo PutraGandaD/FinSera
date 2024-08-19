@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
+import com.finsera.common.utils.DisableTouchEvent
 import com.finsera.common.utils.format.CurrencyFormatter
 import com.finsera.common.utils.network.ConnectivityManager
 import com.finsera.presentation.R
@@ -49,11 +50,9 @@ class TransferSesamaBankFormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         transferSesamaBankFormViewModel.getInfoSaldoSaya()
-
         observeDataSaldo()
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
-
         binding.checkboxDaftarTersimpanSesama.setOnCheckedChangeListener { _, isChecked ->
             addToDaftarTersimpan = isChecked
         }
@@ -100,11 +99,15 @@ class TransferSesamaBankFormFragment : Fragment() {
                         binding.cardInfoSaldo.tvSaldoRekeningLoading.visibility = View.VISIBLE
                         binding.cardInfoSaldo.tvSaldoRekeningLoading.startShimmer()
                         binding.progressBar.visibility = View.VISIBLE
+
+                        DisableTouchEvent.setInteractionDisabled(requireActivity(), true)
                     } else {
                         binding.cardInfoSaldo.tvSaldoRekeningLoading.visibility = View.INVISIBLE
                         binding.cardInfoSaldo.tvSaldoRekening.visibility = View.VISIBLE
                         binding.cardInfoSaldo.tvSaldoRekeningLoading.stopShimmer()
                         binding.progressBar.visibility = View.GONE
+
+                        DisableTouchEvent.setInteractionDisabled(requireActivity(), false)
                     }
 
                     if(uiState.isDataSaldoReady) {
@@ -144,10 +147,14 @@ class TransferSesamaBankFormFragment : Fragment() {
                                 putBoolean(Constant.DAFTAR_TERSIMPAN_CHECKED_EXTRA, addToDaftarTersimpan)
                             }
 
-                            if(nominalTransfer.toDouble() < saldoRekening!!) {
-                                findNavController().navigate(R.id.action_transferSesamaBankFormFragment_to_transferSesamaBankFormKonfirmasiFragment, bundle)
+                            if(nominalTransfer.toDouble() > 10000.00) {
+                                if(nominalTransfer.toDouble() < saldoRekening!!) {
+                                    findNavController().navigate(R.id.action_transferSesamaBankFormFragment_to_transferSesamaBankFormKonfirmasiFragment, bundle)
+                                } else {
+                                    Snackbar.make(requireView(), "Saldo anda tidak mencukupi. Nominal harus lebih kecil atau sama dengan saldo di rekening anda.", Snackbar.LENGTH_SHORT).show()
+                                }
                             } else {
-                                Snackbar.make(requireView(), "Saldo anda tidak mencukupi. Nominal harus lebih kecil atau sama dengan saldo di rekening anda.", Snackbar.LENGTH_SHORT).show()
+                                Snackbar.make(requireView(), "Nominal transfer harus lebih dari Rp10.000", Snackbar.LENGTH_SHORT).show()
                             }
                         }
                     }

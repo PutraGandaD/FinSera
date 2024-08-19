@@ -2,6 +2,7 @@ package com.finsera.domain.repository
 
 import com.finsera.domain.model.Bank
 import com.finsera.domain.model.CekRekening
+import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.TransferSesama
 
 interface ITransferRepository {
@@ -17,4 +18,17 @@ interface ITransferRepository {
     ): TransferSesama
 
     suspend fun getListBank() : List<Bank>
+
+    suspend fun cekDataRekeningAntar(
+        idBank: Int,
+        accountNumRecipient: String
+    ) : CekRekening
+
+    suspend fun transferAntarBank(
+        idBank: Int,
+        accountNumRecipient: String,
+        nominal: Double,
+        note: String,
+        pin: String
+    ): TransferAntar
 }

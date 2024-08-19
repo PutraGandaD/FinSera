@@ -1,8 +1,9 @@
 package com.finsera.common.utils
 
 import android.app.Activity
-import android.content.Context
 import android.view.WindowManager
+import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.FragmentActivity
 
 object DisableTouchEvent {
      fun setInteractionDisabled(activity: Activity, disabled : Boolean) {

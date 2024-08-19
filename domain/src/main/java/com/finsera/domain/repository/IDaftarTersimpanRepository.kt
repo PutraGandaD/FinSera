@@ -1,15 +1,19 @@
 package com.finsera.domain.repository
 
-import com.finsera.domain.model.DaftarTersimpan
-import kotlinx.coroutines.flow.Flow
+import com.finsera.domain.model.DaftarTersimpanAntar
+import com.finsera.domain.model.DaftarTersimpanSesama
 
 interface IDaftarTersimpanRepository {
-    suspend fun getDaftarTersimpanSesama() : List<DaftarTersimpan>
-    suspend fun getDaftarTersimpanAntar() : List<DaftarTersimpan>
+    suspend fun getDaftarTersimpanSesama() : List<DaftarTersimpanSesama>
+    suspend fun getDaftarTersimpanAntar() : List<DaftarTersimpanAntar>
 
-    suspend fun searchDaftarTersimpanSesama(keyword: String) : List<DaftarTersimpan>
+    suspend fun searchDaftarTersimpanSesama(keyword: String) : List<DaftarTersimpanSesama>
+    suspend fun insertDaftarTersimpanSesama(daftarTersimpan: DaftarTersimpanSesama)
+    suspend fun updateDaftarTersimpanSesama(daftarTersimpan: DaftarTersimpanSesama)
+    suspend fun deleteDaftarTersimpanSesama(daftarTersimpan: DaftarTersimpanSesama)
 
-    suspend fun insertDaftarTersimpanSesama(daftarTersimpan: DaftarTersimpan)
-    suspend fun updateDaftarTersimpanSesama(daftarTersimpan: DaftarTersimpan)
-    suspend fun deleteDaftarTersimpanSesama(daftarTersimpan: DaftarTersimpan)
+    suspend fun searchDaftarTersimpanAntar(keyword: String) : List<DaftarTersimpanAntar>
+    suspend fun insertDaftarTersimpanAntar(daftarTersimpan: DaftarTersimpanAntar)
+    suspend fun updateDaftarTersimpanAntar(daftarTersimpan: DaftarTersimpanAntar)
+    suspend fun deleteDaftarTersimpanAntar(daftarTersimpan: DaftarTersimpanAntar)
 }

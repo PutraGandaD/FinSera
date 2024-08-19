@@ -5,6 +5,7 @@ import com.finsera.data.source.remote.RemoteDataSource
 import com.finsera.data.utils.DataMapper
 import com.finsera.domain.model.Bank
 import com.finsera.domain.model.CekRekening
+import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.TransferSesama
 import com.finsera.domain.repository.ITransferRepository
 
@@ -16,7 +17,7 @@ class TransferRepositoryImpl(
         val accessToken = localDataSource.getAccessToken()
         val request = remoteDataSource.cekRekeningSesamaBank(accessToken, accountNumRecipient)
 
-        return DataMapper.cekRekeningResponseToDomain(request)
+        return DataMapper.cekRekeningSesamaResponseToDomain(request)
     }
 
     override suspend fun transferSesamaBank(
@@ -41,5 +42,36 @@ class TransferRepositoryImpl(
         val request = remoteDataSource.getListBank(accessToken)
 
         return DataMapper.listBankToDomain(request)
+    }
+
+    override suspend fun cekDataRekeningAntar(
+        idBank: Int,
+        accountNumRecipient: String
+    ): CekRekening {
+        val accessToken = localDataSource.getAccessToken()
+        val request = remoteDataSource.cekRekeningAntarBank(accessToken, idBank, accountNumRecipient)
+
+        return DataMapper.cekRekeningAntarResponseToDomain(request)
+    }
+
+    override suspend fun transferAntarBank(
+        idBank: Int,
+        accountNumRecipient: String,
+        nominal: Double,
+        note: String,
+        pin: String
+    ): TransferAntar {
+        //TODO("Not yet implemented")
+        val accessToken = localDataSource.getAccessToken()
+        val request = remoteDataSource.transferAntarBank(
+            accessToken,
+            idBank,
+            accountNumRecipient,
+            nominal,
+            note,
+            pin
+        )
+
+        return DataMapper.transferAntarResponseToDomain(request)
     }
 }

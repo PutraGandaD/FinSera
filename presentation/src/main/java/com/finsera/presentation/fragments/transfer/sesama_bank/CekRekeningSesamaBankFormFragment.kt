@@ -6,15 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
+import com.finsera.common.utils.DisableTouchEvent
+import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentCekRekeningSesamaBankBinding
 import com.finsera.presentation.fragments.transfer.sesama_bank.bundle.CekRekeningSesamaBundle
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.CekRekeningSesamaViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -55,6 +59,8 @@ class CekRekeningSesamaBankFormFragment : Fragment() {
         }
     }
 
+
+
     private fun observer() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -66,8 +72,12 @@ class CekRekeningSesamaBankFormFragment : Fragment() {
 
                     if(uiState.isLoading) {
                         binding.progressBar.visibility = View.VISIBLE
+                        DisableTouchEvent.setInteractionDisabled(requireActivity(), true)
+//                        disableBackButton(true)
                     } else {
                         binding.progressBar.visibility = View.GONE
+                        DisableTouchEvent.setInteractionDisabled(requireActivity(), false)
+//                        disableBackButton(false)
                     }
 
                     if(uiState.isValid) {

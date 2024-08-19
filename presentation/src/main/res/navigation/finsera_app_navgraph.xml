@@ -89,6 +89,9 @@
         <action
             android:id="@+id/action_transferAntarBankHome_to_cekRekeningAntarBankFormFragment"
             app:destination="@id/cekRekeningAntarBankFormFragment" />
+        <action
+            android:id="@+id/action_transferAntarBankHome_to_transferAntarBankForm"
+            app:destination="@id/transferAntarBankForm" />
     </fragment>
     <fragment
         android:id="@+id/transferSesamaBankHome"
@@ -115,7 +118,13 @@
         android:id="@+id/transferAntarBankFormKonfirmasi"
         android:name="com.finsera.presentation.fragments.transfer.antar_bank.TransferAntarBankFormKonfirmasiFragment"
         android:label="fragment_transfer_antar_bank_form_konfirmasi"
-        tools:layout="@layout/fragment_transfer_antar_bank_form_konfirmasi" />
+        tools:layout="@layout/fragment_transfer_antar_bank_form_konfirmasi" >
+        <action
+            android:id="@+id/action_transferAntarBankFormKonfirmasi_to_transferAntarBankSuksesFragment"
+            app:destination="@id/transferAntarBankSuksesFragment"
+            app:popUpTo="@id/transferAntarBankHome"
+            app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
         android:id="@+id/transferEWalletHomeFragment"
         android:name="com.finsera.presentation.fragments.topup.ewallet.TransferEWalletHomeFragment"
@@ -224,4 +233,9 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true"/>
     </fragment>
+    <fragment
+        android:id="@+id/transferAntarBankSuksesFragment"
+        android:name="com.finsera.presentation.fragments.transfer.antar_bank.TransferAntarBankSuksesFragment"
+        android:label="fragment_transfer_antar_bank_sukses"
+        tools:layout="@layout/fragment_transfer_antar_bank_sukses" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.finsera.data.source.local
 
+import com.finsera.common.utils.Constant
 import com.finsera.common.utils.Constant.Companion.USER_ACCESS_TOKEN_KEY
 import com.finsera.common.utils.Constant.Companion.USER_APPLICATION_PIN
 import com.finsera.common.utils.Constant.Companion.USER_LOGGED_IN_STATUS
@@ -39,5 +40,17 @@ class LocalDataSource(
 
     fun getApplicationPin() : String {
         return sharedPreferencesManager.getString(USER_APPLICATION_PIN, "")
+    }
+
+    fun saveUserInfo(name: String, accountNum: String) {
+        sharedPreferencesManager.saveString(Constant.NAMA_NASABAH, name)
+        sharedPreferencesManager.saveString(Constant.NOMOR_REKENING_NASABAH, accountNum)
+    }
+
+    fun getUserInfo() : Pair<String, String> {
+        val userName = sharedPreferencesManager.getString(Constant.NAMA_NASABAH, "")
+        val userAccountNum = sharedPreferencesManager.getString(Constant.NOMOR_REKENING_NASABAH, "")
+
+        return Pair(first = userName, second = userAccountNum)
     }
 }
