@@ -137,7 +137,6 @@
     <string name="kembali_ke_aplikasi">Kembali ke Aplikasi</string>
     <string name="silakan_login_dengan_pin_yang_baru">Silakan login dengan PIN yang baru!</string>
     <string name="pin_berhasil_diubah">PIN Berhasil Diubah</string>
-
     <string name="transaksi_berhasil">Transaksi Berhasil</string>
     <string name="tanggal">Tanggal</string>
     <string name="biaya_admin">Biaya Admin</string>
@@ -172,7 +171,6 @@
     <string name="notifikasi">Notifikasi</string>
     <string name="accessibilitas">Accessibilitas</string>
     <string name="ramadhan_adi">Ramadhan Adi</string>
-
     <string name="tv_title_isi_e_wallet">Isi E-Wallet</string>
     <string name="tv_no_handphone_atau_nama">Masukkan no.handphone/nama</string>
     <string name="desc_input_no_hp_atau_nama">Masukkan nomor handphone atau nama di bawah</string>
@@ -199,7 +197,6 @@
     <string name="screen_virtual_account">Halaman Virtual Account</string>
     <string name="screen_e_wallet">Halaman E-Wallet</string>
     <string name="screen_informasi_saldo">Halaman Informasi Saldo</string>
-
     <string name="semua">Semua</string>
     <string name="promo">Promo</string>
     <string name="transaksi">Transaksi</string>
@@ -208,13 +205,12 @@
     <string name="monolog_promo">Hadiah Berlimpah TopUp Paket Data di Finsera!</string>
     <string name="time_date_promo">11 Juli 2024 14:04</string>
     <string name="caption_promo">Dapatkan Iphone dan tabungan emas dengan topup paket data Telkomsel atau XL</string>
-    <string name="desc_recipient_info">Penerima: %1$s, Bank: %2$s, Account number: %3$s</string>
+    <string name="desc_recipient_info">Penerima: %1$s, Bank: %2$s, Nomor rekening: %3$s</string>
     <string name="desc_all_notif">Pilih filter notifikasi tipe semua</string>
     <string name="desc_promo">Pilih filter notifikasi tipe promo</string>
     <string name="desc_transaction">Pilih filter notifikasi tipe transaksi</string>
     <string name="desc_info">Pilih filter notifikasi tipe info</string>
-
-    <string name="account_info_speech">Saldo rekening anda adalah %1$s dengan nomor rekening %2$s</string>
+    <string name="account_info_speech">Saldo rekening anda adalah %s dengan nomor rekening %s</string>
     <string name="transfer_antar_bank">Transfer Antar Bank</string>
     <string name="screen_e_wallet_list">Pilih tipe E-Wallet</string>
     <string name="screen_confirm_transaction">Konfirmasi Transaksi Anda</string>
@@ -234,6 +230,8 @@
     <string name="biaya_admin_desc">Biaya admin %s</string>
     <string name="nominal_total_desc">Nominal total transfer %s</string>
     <string name="nomor_transaksi_desc">Nomor Transaksi: %s</string>
+    <string name="nama_pengirim_desc">Pengirim: %s</string>
+    <string name="rekening_pengirim_desc">Rekening Pengirim: %s</string>
     <string name="akun_finsera_desc">Nomor Akun Finsera %s</string>
     <string name="bank_tujuan_desc">Bank Tujuan %s</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -252,7 +250,6 @@
     <string name="cari_bank">Cari Bank</string>
     <string name="rekening_pengirim">Rekening Pengirim</string>
     <string name="nama_pengirim">Nama Pengirim</string>
-
     <string name="recipient">Penerima</string>
     <string name="tv_talkback_sembunyikan_saldo">Sembunyikan Saldo Rekening Anda</string>
     <string name="account_number_prefix">Nomor Rekening Anda Adalah</string>
@@ -262,5 +259,9 @@
     <string name="bagikan">Bagikan</string>
     <string name="desc_input_bank_tujuan">Pilih bank tujuan di bawah</string>
     <string name="screen_pilih_bank">Halaman memilih bank tujuan</string>
+    <string name="desc_create_pin">Buat PIN Anda</string>
+    <string name="tv_create_pin">Create PIN</string>
+    <string name="desc_bank_option">Pilih Opsi Bank di bawah</string>
+    <string name="desc_close_bottom_sheet">Tutup Bottom Sheet</string>
     <string name="scan_qr">Scan QR</string>
 </resources>
