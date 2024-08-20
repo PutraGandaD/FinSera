@@ -2,16 +2,26 @@ package com.finsera.presentation.fragments.qris
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
-import androidx.fragment.app.Fragment
+import android.util.Size
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.finsera.common.utils.Constant
+import com.finsera.presentation.fragments.qris.viewmodel.QrisScanQRViewModel
+import com.finsera.presentation.fragments.transfer.sesama_bank.bundle.CekRekeningSesamaBundle
 import androidx.annotation.OptIn
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraSelector
@@ -27,7 +37,6 @@ import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSet
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentCekRekeningAntarBankFormBinding
 import com.finsera.presentation.databinding.FragmentQrisScanQRBinding
-import com.finsera.presentation.fragments.qris.viewmodel.CameraXViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.barcode.Barcode
@@ -36,155 +45,194 @@ import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
 import com.phanna.emv_qr_code.MerchantPresentedDecoder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONException
 import org.json.JSONObject
 import org.koin.android.ext.android.inject
-import java.lang.reflect.InvocationTargetException
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class QrisScanQRFragment : Fragment() {
     private var _binding: FragmentQrisScanQRBinding? = null
     private val binding get() = _binding!!
 
-    private val cameraXViewModel : CameraXViewModel by inject()
+    private lateinit var cameraExecutor: ExecutorService
+    private val qrisScanQRViewModel : QrisScanQRViewModel by inject()
 
-    private var previewView: PreviewView? = null
-    private var cameraProvider: ProcessCameraProvider? = null
-    private var cameraSelector: CameraSelector? = null
-    private var previewUseCase: Preview? = null
-    private var analysisUseCase: ImageAnalysis? = null
-    private var screenAspectRatio = AspectRatio.RATIO_16_9
-
+    private var noRekening = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentQrisScanQRBinding.inflate(inflater, container, false)
+        cameraExecutor = Executors.newSingleThreadExecutor()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requestCameraPermission()
-        configureCameraPreview()
+        observer()
     }
 
-    private fun configureCameraPreview() {
-        previewView = binding.previewViewCamera
-        var lensFacing = CameraSelector.LENS_FACING_BACK
-        cameraSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+        cameraExecutor.shutdown()
+    }
 
-        cameraXViewModel.processCameraProvider.observe(viewLifecycleOwner) { provider: ProcessCameraProvider?->
-            cameraProvider = provider
-            if (isCameraPermissionGranted()) {
-                bindPreviewUseCase()
-                bindAnalyseUseCase()
-            } else {
-                requestCameraPermission()
+    private fun startCamera() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireActivity())
+
+        cameraProviderFuture.addListener({
+            val cameraProvider = cameraProviderFuture.get()
+
+            // Preview
+            val preview = Preview.Builder()
+                .build()
+                .also {
+                    it.setSurfaceProvider(binding.previewViewCamera.surfaceProvider)
+                }
+
+            // Image analyzer
+            val imageAnalyzer = ImageAnalysis.Builder()
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .setTargetResolution(Size(1280, 720))
+                .build()
+                .also {
+                    it.setAnalyzer(cameraExecutor) { imageProxy ->
+                        processImageProxy(imageProxy)
+                    }
+                }
+
+            // Select back camera as a default
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+            try {
+                // Unbind use cases before rebinding
+                cameraProvider.unbindAll()
+
+                // Bind use cases to camera
+                cameraProvider.bindToLifecycle(
+                    viewLifecycleOwner, cameraSelector, preview, imageAnalyzer
+                )
+
+            } catch (exc: Exception) {
+                exc.printStackTrace()
             }
+        }, ContextCompat.getMainExecutor(requireActivity()))
+    }
+
+    @SuppressLint("UnsafeOptInUsageError")
+    private fun processImageProxy(imageProxy: ImageProxy) {
+        val img = imageProxy.image
+        if (img != null) {
+            val inputImage = InputImage.fromMediaImage(img, imageProxy.imageInfo.rotationDegrees)
+
+            // Process image searching for barcodes
+            val options = BarcodeScannerOptions.Builder()
+                .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+                .build()
+
+            val scanner = BarcodeScanning.getClient(options)
+
+            scanner.process(inputImage)
+                .addOnSuccessListener { barcodes ->
+                    processBarcode(barcodes, scanner)
+                }
+                .addOnFailureListener {
+                    it.printStackTrace()
+                }
+                .addOnCompleteListener {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        delay(3000)
+                        imageProxy.close()
+                    }
+                }
         }
     }
 
-    private fun bindPreviewUseCase() {
-        if (cameraProvider == null) {
-            return
-        }
-        if (previewUseCase != null) {
-            cameraProvider!!.unbind(previewUseCase)
-        }
+    private fun processBarcode(barcodeList: List<Barcode>, scanner: BarcodeScanner) {
+        if (barcodeList.isNotEmpty()) {
+            with (barcodeList.first()) { // take only first item from the barcodeList
+                val rawValue = this.rawValue.toString()
 
-        previewUseCase = Preview.Builder()
-            .setTargetAspectRatio(screenAspectRatio)
-            .setTargetRotation(previewView!!.display.rotation)
-            .build()
-        previewUseCase!!.setSurfaceProvider(previewView!!.surfaceProvider)
-
-        try {
-            cameraProvider!!.bindToLifecycle(this,
-                cameraSelector!!,
-                previewUseCase
-            )
-        } catch (illegalStateException: IllegalStateException) {
-            Log.e(TAG, illegalStateException.message!!)
-        } catch (illegalArgumentException: IllegalArgumentException) {
-            Log.e(TAG, illegalArgumentException.message!!)
-        }
-    }
-
-    private fun bindAnalyseUseCase() {
-        // Note that if you know which format of barcode your app is dealing with,
-        // detection will be faster
-        val options = BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(Barcode.FORMAT_ALL_FORMATS).build()
-
-        val barcodeScanner: BarcodeScanner = BarcodeScanning.getClient(options)
-
-        analysisUseCase = ImageAnalysis.Builder()
-            .setTargetRotation(previewView!!.display.rotation)
-            .build()
-
-        // Initialize our background executor
-        val cameraExecutor = Executors.newSingleThreadExecutor()
-
-        analysisUseCase?.setAnalyzer(
-            cameraExecutor,
-            ImageAnalysis.Analyzer { imageProxy ->
-                processImageProxy(barcodeScanner, imageProxy)
-            }
-        )
-
-        try {
-            cameraProvider!!.bindToLifecycle(
-                this,
-                cameraSelector!!,
-                analysisUseCase
-            )
-        } catch (illegalStateException: IllegalStateException) {
-            Log.e(TAG, illegalStateException.message ?: "IllegalStateException")
-        } catch (illegalArgumentException: IllegalArgumentException) {
-            Log.e(TAG, illegalArgumentException.message ?: "IllegalArgumentException")
-        }
-    }
-
-    @OptIn(ExperimentalGetImage::class)
-    private fun processImageProxy(
-        barcodeScanner: BarcodeScanner,
-        imageProxy: ImageProxy
-    ) {
-        val inputImage =
-            InputImage.fromMediaImage(imageProxy.image!!, imageProxy.imageInfo.rotationDegrees)
-
-        barcodeScanner.process(inputImage)
-            .addOnSuccessListener { barcodes ->
-                barcodes.forEach { barcode ->
-//                    val bounds = barcode.boundingBox
-//                    val corners = barcode.cornerPoints
-
-                    val rawValue = barcode.rawValue
-
+                CoroutineScope(Dispatchers.IO).launch {
                     try {
                         val jsonObject = JSONObject(rawValue)
-                        val accountNumber = jsonObject.getString("accountNumber")
-
-                        binding.tvScannedQris.text = accountNumber
-                    } catch (e: Exception) {
-                        when(e) {
-                            is JSONException -> {
-                                binding.tvScannedQris.text = MerchantPresentedDecoder.decode(rawValue, false).merchantAccountInformation
+                        val accountNum = jsonObject.getString("accountNumber")
+                        withContext(Dispatchers.Main) {
+                            if(!accountNum.isNullOrEmpty()) {
+                                noRekening = accountNum
+                                qrisScanQRViewModel.cekRekeningSesama(noRekening)
                             }
                         }
+                    } catch(e: JSONException) { // catch if qr code isn't json
+                        val merchantname = MerchantPresentedDecoder.decode(rawValue, false).merchantName
+                        val merchantAccountNo = MerchantPresentedDecoder.decode(rawValue, false).merchantAccountInformation
+
+                        withContext(Dispatchers.Main) {
+                            if(!merchantname.isNullOrEmpty()) {
+                                Toast.makeText(requireActivity(), "QRIS Ditemukan", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+                    } catch(e: Exception) {
+                        Log.d("Exception", e.message.toString())
+//                        withContext(Dispatchers.Main) {
+//                            Toast.makeText(requireActivity(), rawValue, Toast.LENGTH_SHORT).show()
+//                        }
+                    } catch(t: Throwable) {
+                        Log.d("Throwable", t.message.toString())
+//                        withContext(Dispatchers.Main) {
+//                            Toast.makeText(requireActivity(), rawValue, Toast.LENGTH_SHORT).show()
+//                        }
+                    } finally {
+                        scanner.close()
                     }
                 }
             }
-            .addOnFailureListener {
-                Log.e(TAG, it.message ?: it.toString())
+        }
+    }
+
+    private fun observer() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                qrisScanQRViewModel.qrisScanQRUiState.collectLatest { uiState ->
+                    uiState.message?.let {
+                        Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                        qrisScanQRViewModel.messageShown()
+                    }
+
+                    if(uiState.isValidFinsera) {
+                        Toast.makeText(requireActivity(), "QRIS Ditemukan", Toast.LENGTH_LONG).show()
+                        if(findNavController().currentDestination?.id == R.id.qrisScanQRFragment) {
+                            val bundle = Bundle().apply {
+                                val dataRekening = CekRekeningSesamaBundle(uiState.dataRekeningFinsera?.recipientName!!, uiState.dataRekeningFinsera?.accountnumRecipient!!)
+                                val bundle = Bundle().apply {
+                                    putParcelable(Constant.DATA_REKENING_SESAMA_BUNDLE, dataRekening)
+                                }
+
+                                findNavController().navigate(R.id.action_qrisScanQRFragment_to_transferSesamaBankFormFragment, bundle)
+                                qrisScanQRViewModel.resetUiState()
+                            }
+                        }
+                    }
+
+                    if(uiState.isLoading) {
+                        binding.progressBar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressBar.visibility = View.GONE
+                    }
+                }
             }
-            .addOnCompleteListener {
-                //Once the image being analyzed
-                //closed it by calling ImageProxy.close()
-                imageProxy.close()
-            }
+        }
     }
 
     private fun requestCameraPermission() {
@@ -193,10 +241,8 @@ class QrisScanQRFragment : Fragment() {
                 requireContext(),
                 Manifest.permission.CAMERA
             ) == PackageManager.PERMISSION_GRANTED -> {
-                // do action here
-
+                startCamera()
             }
-
             shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {
                 // Provide an additional rationale to the user if the permission was not granted
                 // and the user would benefit from additional context for the use of the permission.
@@ -214,19 +260,12 @@ class QrisScanQRFragment : Fragment() {
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
-            // do action
+            startCamera()
         } else {
             // Explain to the user that the feature is unavailable because the
             // features require a permission that the user has denied.
             permissionCameraDialog()
         }
-    }
-
-    private fun isCameraPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireActivity(),
-            Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun permissionCameraDialog() {

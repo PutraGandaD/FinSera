@@ -30,17 +30,25 @@ class TransferAntarBankUseCase(
                     if (response != null) {
                         try {
                             val jsonObject = JSONObject(response)
-                            val error = jsonObject.getString("message")
+                            val error = jsonObject.getInt("code")
+                            val message = jsonObject.getString("message")
 
                             when (error) {
-                                "Nomor Rekening Tidak Ditemukan" -> emit(Resource.Error("Nomor Rekening Tidak Ditemukan"))
-                                "JWT Token has expired" -> {
-                                    val response = transferRepository.transferAntarBank(
-                                        idBank, noRekTujuan, nominal, note, mpin
-                                    )
-                                    emit(Resource.Success(response))
+                                400 -> emit(Resource.Error(message))
+                                401 -> {
+                                    if(message == "JWT Token sudah kedaluwarsa") {
+                                        val getRefreshToken = authRepository.getRefreshToken()
+                                        authRepository.refreshAccessToken(getRefreshToken)
+                                        val response = transferRepository.transferAntarBank(
+                                            idBank, noRekTujuan, nominal, note, mpin
+                                        )
+                                        emit(Resource.Success(response))
+                                    } else {
+                                        emit(Resource.Error(message))
+                                    }
                                 }
-                                "Pin Anda Salah" -> emit(Resource.Error("PIN Anda Salah. Silahkan input ulang PIN anda."))
+                                402 -> emit(Resource.Error(message))
+                                404 -> emit(Resource.Error(message))
                                 else -> emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
                             }
                         } catch (e: Exception) {

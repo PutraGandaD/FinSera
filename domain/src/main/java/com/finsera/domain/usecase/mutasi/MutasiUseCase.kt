@@ -28,17 +28,22 @@ class MutasiUseCase (
                     if (response != null) {
                         try {
                             val jsonObject = JSONObject(response)
-                            val error = jsonObject.getString("message")
+                            val message = jsonObject.getString("message")
+                            val error = jsonObject.getInt("code")
 
-                            when (error) {
-                                "Transaction not found" -> emit(Resource.Error("Riwayat transaksi tidak ditemukan."))
-                                "JWT Token has expired" -> {
+                            when(error) {
+                                401 -> {
                                     val getRefreshToken = authRepository.getRefreshToken()
                                     authRepository.refreshAccessToken(getRefreshToken)
                                     val response = mutasiRepository.getMutasi(startDate, endDate)
                                     emit(Resource.Success(response))
                                 }
-                                else -> emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
+                                404 -> {
+                                    emit(Resource.Error(message))
+                                }
+                                else -> {
+                                    emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
+                                }
                             }
                         } catch (e: Exception) {
                             when (e) {
@@ -48,7 +53,7 @@ class MutasiUseCase (
                             }
                         }
                     } else {
-                        emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
+
                     }
                 }
 

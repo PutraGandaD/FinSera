@@ -9,7 +9,7 @@ data class ListBankData(
     @SerializedName("bank_id")
     val bankId: Int,
     @SerializedName("bank_image")
-    val bankImage: Any,
+    val bankImage: String?,
     @SerializedName("bank_name")
     val bankName: String
 )
