@@ -37,7 +37,7 @@ data class DataSaldo(
 	@field:SerializedName("accountNumber")
 	val accountNumber: String,
 
-	@field:SerializedName("username")
+	@field:SerializedName("name")
 	val username: String
 )
 

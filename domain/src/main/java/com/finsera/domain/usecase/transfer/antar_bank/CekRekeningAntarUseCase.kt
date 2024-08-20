@@ -27,11 +27,12 @@ class CekRekeningAntarUseCase(
                     if(response != null) {
                         try {
                             val jsonObject = JSONObject(response)
-                            val error = jsonObject.getString("message")
+                            val message = jsonObject.getString("message")
+                            val error = jsonObject.getInt("code")
 
                             when (error) {
-                                "Nomor Rekening Tidak Ditemukan" -> emit(Resource.Error("Nomor Rekening Tidak Ditemukan"))
-                                "JWT Token has expired" -> {
+                                404 -> emit(Resource.Error(message))
+                                401 -> {
                                     val getRefreshToken = authRepository.getRefreshToken()
                                     authRepository.refreshAccessToken(getRefreshToken)
                                     val response = transferRepository.cekDataRekeningAntar(

@@ -260,5 +260,9 @@
         android:id="@+id/qrisScanQRFragment"
         android:name="com.finsera.presentation.fragments.qris.QrisScanQRFragment"
         android:label="fragment_qris_scan_q_r"
-        tools:layout="@layout/fragment_qris_scan_q_r" />
+        tools:layout="@layout/fragment_qris_scan_q_r" >
+        <action
+            android:id="@+id/action_qrisScanQRFragment_to_transferSesamaBankFormFragment"
+            app:destination="@id/transferSesamaBankFormFragment" />
+    </fragment>
 </navigation>

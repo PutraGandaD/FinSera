@@ -33,12 +33,19 @@ class LoginUserUseCase(private val repository: IAuthRepository) {
                     if (response != null) {
                         try {
                             val jsonObject = JSONObject(response)
-                            val error = jsonObject.getString("message")
+                            val message = jsonObject.getString("message")
+                            val error = jsonObject.getInt("code")
 
-                            if (error == "username or password invalid") {
-                                emit(Resource.Error("Username atau Password Anda Salah"))
-                            } else {
-                                emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
+                            when(error) {
+                                401 -> {
+                                    emit(Resource.Error(message))
+                                }
+                                404 -> {
+                                    emit(Resource.Error(message))
+                                }
+                                else -> {
+                                    emit(Resource.Error("Kesalahan pada server. Silahkan coba beberapa saat lagi."))
+                                }
                             }
                         } catch (e: Exception) {
                             when(e) {

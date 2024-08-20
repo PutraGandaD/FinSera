@@ -17,8 +17,16 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.finsera.common.utils.Constant
 import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
+import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentQrisScanQRBinding
+import com.finsera.presentation.fragments.qris.viewmodel.QrisScanQRViewModel
+import com.finsera.presentation.fragments.transfer.sesama_bank.bundle.CekRekeningSesamaBundle
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.barcode.Barcode
@@ -30,10 +38,12 @@ import com.phanna.emv_qr_code.MerchantPresentedDecoder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONException
 import org.json.JSONObject
+import org.koin.android.ext.android.inject
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -42,6 +52,9 @@ class QrisScanQRFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var cameraExecutor: ExecutorService
+    private val qrisScanQRViewModel : QrisScanQRViewModel by inject()
+
+    private var noRekening = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +68,7 @@ class QrisScanQRFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requestCameraPermission()
+        observer()
     }
 
     override fun onDestroy() {
@@ -145,11 +159,13 @@ class QrisScanQRFragment : Fragment() {
                         val accountNum = jsonObject.getString("accountNumber")
                         withContext(Dispatchers.Main) {
                             if(!accountNum.isNullOrEmpty()) {
-                                Toast.makeText (requireActivity(), "QRIS Ditemukan", Toast.LENGTH_SHORT).show()
+                                noRekening = accountNum
+                                qrisScanQRViewModel.cekRekeningSesama(noRekening)
                             }
                         }
-                    } catch(e: JSONException) {
+                    } catch(e: JSONException) { // catch if qr code isn't json
                         val merchantname = MerchantPresentedDecoder.decode(rawValue, false).merchantName
+                        val merchantAccountNo = MerchantPresentedDecoder.decode(rawValue, false).merchantAccountInformation
 
                         withContext(Dispatchers.Main) {
                             if(!merchantname.isNullOrEmpty()) {
@@ -169,6 +185,40 @@ class QrisScanQRFragment : Fragment() {
 //                        }
                     } finally {
                         scanner.close()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observer() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                qrisScanQRViewModel.qrisScanQRUiState.collectLatest { uiState ->
+                    uiState.message?.let {
+                        Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                        qrisScanQRViewModel.messageShown()
+                    }
+
+                    if(uiState.isValidFinsera) {
+                        Toast.makeText(requireActivity(), "QRIS Ditemukan", Toast.LENGTH_LONG).show()
+                        if(findNavController().currentDestination?.id == R.id.qrisScanQRFragment) {
+                            val bundle = Bundle().apply {
+                                val dataRekening = CekRekeningSesamaBundle(uiState.dataRekeningFinsera?.recipientName!!, uiState.dataRekeningFinsera?.accountnumRecipient!!)
+                                val bundle = Bundle().apply {
+                                    putParcelable(Constant.DATA_REKENING_SESAMA_BUNDLE, dataRekening)
+                                }
+
+                                findNavController().navigate(R.id.action_qrisScanQRFragment_to_transferSesamaBankFormFragment, bundle)
+                                qrisScanQRViewModel.resetUiState()
+                            }
+                        }
+                    }
+
+                    if(uiState.isLoading) {
+                        binding.progressBar.visibility = View.VISIBLE
+                    } else {
+                        binding.progressBar.visibility = View.GONE
                     }
                 }
             }

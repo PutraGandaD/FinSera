@@ -52,7 +52,6 @@ class TransferRepositoryImpl(
                         it.data!!
                     )
                 )
-
                 is Resource.Error -> Resource.Error(it.message.toString())
                 is Resource.Loading -> Resource.Loading()
             }
