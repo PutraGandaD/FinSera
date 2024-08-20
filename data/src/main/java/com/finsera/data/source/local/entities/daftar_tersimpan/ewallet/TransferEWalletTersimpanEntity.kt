@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 
-@Parcelize
 @Entity(tableName = "transfer_ewallet")
 data class TransferEWalletTersimpanEntity(
     @PrimaryKey(autoGenerate = true)
@@ -24,5 +23,4 @@ data class TransferEWalletTersimpanEntity(
 
     @ColumnInfo(name = "nama_akun_ewallet")
     val namaAkunEWallet: String,
-
-    ) : Parcelable
+    )

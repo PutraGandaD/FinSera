@@ -256,10 +256,13 @@ class RemoteDataSource(private val apiService: ApiService) {
                                 emit(Resource.Error("Kesalahan pada server"))
                             }
 
+                            404->{
+                                emit(Resource.Error("Nomor e-wallet tidak ditemukkan"))
+                            }
+
                             500 -> {
                                 emit(Resource.Error("Terjadi Kesalahan pada server"))
                             }
-
                             else -> {
                                 emit(Resource.Error(e.message()))
                             }

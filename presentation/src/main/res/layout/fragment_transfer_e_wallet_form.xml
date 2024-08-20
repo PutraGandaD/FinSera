@@ -73,16 +73,32 @@
 
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_lanjut"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background_primary"
-        app:backgroundTint="@color/primary_blue"
-        android:text="@string/lanjut"
-        android:textSize="20sp"
+
+
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="0dp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:contentDescription="@string/lanjut"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_lanjut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background_primary"
+            app:backgroundTint="@color/primary_blue"
+            android:text="@string/lanjut"
+            android:textSize="20sp"
+            android:contentDescription="@string/lanjut"/>
+
+        <ProgressBar
+            style="?android:progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </ViewFlipper>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

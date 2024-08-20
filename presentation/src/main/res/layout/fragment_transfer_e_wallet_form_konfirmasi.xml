@@ -197,15 +197,31 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_background_primary"
-        app:backgroundTint="@color/primary_blue"
-        android:text="@string/lanjut"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="0dp"
         android:layout_marginBottom="40dp"
-        android:contentDescription="@string/lanjut"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background_primary"
+            app:backgroundTint="@color/primary_blue"
+            android:text="@string/lanjut"
+            android:textSize="20sp"
+            android:contentDescription="@string/lanjut"/>
+        <ProgressBar
+            style="?android:progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </ViewFlipper>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

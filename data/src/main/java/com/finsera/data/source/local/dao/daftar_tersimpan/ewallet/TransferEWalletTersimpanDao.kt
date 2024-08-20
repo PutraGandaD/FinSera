@@ -7,12 +7,10 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.finsera.data.source.local.entities.daftar_tersimpan.ewallet.TransferEWalletTersimpanEntity
-import com.finsera.data.source.local.entities.daftar_tersimpan.virtual_account.TransferVaTersimpanEntity
 
 @Dao
 interface TransferEWalletTersimpanDao {
-
-    @Query("SELECT * FROM virtual_account")
+    @Query("SELECT * FROM transfer_ewallet")
     suspend fun getDaftarEWallet() : List<TransferEWalletTersimpanEntity>
 
     @Query("SELECT * FROM transfer_ewallet WHERE nama_akun_ewallet LIKE '%' || :keyword || '%' OR nomor_ewallet LIKE '%' || :keyword || '%'")

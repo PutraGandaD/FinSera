@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/transfer_e_wallet_success"
     android:layout_height="match_parent"
-    android:id="@+id/transfer_va_success"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.transfer.va.TransferVirtualAccountSuccessFragment">
+    tools:context=".fragments.topup.ewallet.TransferEWalletSuccessFragment">
 
     <ImageView
         android:importantForAccessibility="no"

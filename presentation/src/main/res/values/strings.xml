@@ -262,4 +262,6 @@
     <string name="bagikan">Bagikan</string>
     <string name="desc_input_bank_tujuan">Pilih bank tujuan di bawah</string>
     <string name="screen_pilih_bank">Halaman memilih bank tujuan</string>
+    <string name="empty_ewallet_text">Nomor %1$s tidak boleh kosong</string>
+    <string name="transfer_e_wallet_text">Transfer E-Wallet %1$s</string>
 </resources>
