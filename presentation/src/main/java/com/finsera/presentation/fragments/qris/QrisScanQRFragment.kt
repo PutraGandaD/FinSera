@@ -14,19 +14,29 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.*
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
-import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
-import com.finsera.presentation.R
-import com.finsera.presentation.databinding.FragmentQrisScanQRBinding
 import com.finsera.presentation.fragments.qris.viewmodel.QrisScanQRViewModel
 import com.finsera.presentation.fragments.transfer.sesama_bank.bundle.CekRekeningSesamaBundle
+import androidx.annotation.OptIn
+import androidx.camera.core.AspectRatio
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ExperimentalGetImage
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageProxy
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
+import com.finsera.presentation.R
+import com.finsera.presentation.databinding.FragmentCekRekeningAntarBankFormBinding
+import com.finsera.presentation.databinding.FragmentQrisScanQRBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.barcode.Barcode
@@ -238,6 +248,7 @@ class QrisScanQRFragment : Fragment() {
                 // and the user would benefit from additional context for the use of the permission.
                 permissionCameraDialog()
             }
+
             else -> {
                 // Request the permission
                 requestPermissionCameraResult.launch(Manifest.permission.CAMERA)
@@ -261,11 +272,11 @@ class QrisScanQRFragment : Fragment() {
         MaterialAlertDialogBuilder(requireActivity())
             .setTitle("Izin Aplikasi FinSera")
             .setMessage("Akses Kamera")
-            .setNegativeButton("Tidak") { dialog, _ ->
+            .setNegativeButton("Tidak") { dialog, which ->
                 dialog.dismiss()
                 Snackbar.make(requireView(), "Fitur tidak dapat dijalankan karena izin penyimpanan file pada aplikasi FinSera tidak diizinkan", Snackbar.LENGTH_SHORT).show()
             }
-            .setPositiveButton("Ya") { dialog, _ ->
+            .setPositiveButton("Ya") { dialog, which ->
                 requireActivity().openAppPermissionSettings()
             }
             .show()
