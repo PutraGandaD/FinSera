@@ -127,8 +127,7 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if(isResultMutasiShowed) {
                 mutasiAdapter.submitList(emptyList())
-                startDate = "" // reset startdate and enddate
-                endDate = ""
+                resetAllInput()
                 showFilter()
             } else {
                 findNavController().popBackStack()
@@ -138,13 +137,19 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
         binding.btnBack.setOnClickListener {
             if(isResultMutasiShowed) {
                 mutasiAdapter.submitList(emptyList())
-                startDate = "" // reset startdate and enddate
-                endDate = ""
+                resetAllInput()
                 showFilter()
             } else {
                 findNavController().popBackStack()
             }
         }
+    }
+
+    private fun resetAllInput() {
+        startDate = "" // reset startdate and enddate
+        endDate = ""
+        binding.viewFilter.tvStartDateValue.text = "DD-MM-YYYY"
+        binding.viewFilter.tvEndDateValue.text = "DD-MM-YYYY"
     }
 
     private fun showResultOfFilter() {
