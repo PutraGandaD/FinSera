@@ -166,7 +166,7 @@ class DaftarTersimpanRepositoryImpl(
     }
 
     override suspend fun insertDaftarTersimpanEWallet(daftarTersimpan: DaftarTersimpanEWallet) {
-        daftarTersimpanEWalletDao.updateDaftarEWallet(
+        daftarTersimpanEWalletDao.insertDaftarEWallet(
             TransferEWalletTersimpanEntity(
                 id = daftarTersimpan.id,
                 namaAkunEWallet = daftarTersimpan.namaAkunEWallet,

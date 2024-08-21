@@ -86,9 +86,7 @@ class RemoteDataSource(private val apiService: ApiService) {
             addProperty("note", notes)
             addProperty("pin", mpin)
         }
-
         val accessToken = "Bearer $token"
-
         return apiService.transferSesamaBank(accessToken, param)
     }
 
@@ -209,7 +207,6 @@ class RemoteDataSource(private val apiService: ApiService) {
                                     else -> emit(Resource.Error("Sesi Anda telah diperbarui"))
                                 }
                             }
-
                             402 -> {
                                 emit(Resource.Error("Saldo Anda tidak cukup"))
                             }

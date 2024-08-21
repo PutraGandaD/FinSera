@@ -133,6 +133,9 @@
         <action
             android:id="@+id/action_transferEWalletHomeFragment_to_transferEWalletListFragment"
             app:destination="@id/transferEWalletListFragment" />
+        <action
+            android:id="@+id/action_transferEWalletHomeFragment_to_transferEWalletFormKonfirmasiFragment"
+            app:destination="@id/transferEWalletFormKonfirmasiFragment" />
     </fragment>
     <fragment
         android:id="@+id/transferEWalletListFragment"

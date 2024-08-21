@@ -26,6 +26,7 @@ class TransferEWalletForm : Fragment() {
 
     private var ewalletId: Int = 0
     private lateinit var ewalletName: String
+    private var addToDaftarTersimpan: Boolean = false
 
     private val viewModel: CheckEWalletViewModel by viewModel()
 
@@ -49,8 +50,6 @@ class TransferEWalletForm : Fragment() {
             ewalletId = bundle.ewalletId
         }
         binding.eWalletItem.tvEwalletName.text = ewalletName
-        Snackbar.make(binding.root, "ID: $ewalletId, Name: $ewalletName", Snackbar.LENGTH_SHORT)
-            .show()
         setLogoEWallet(ewalletName)
 
         viewModel.resetState()
@@ -67,6 +66,10 @@ class TransferEWalletForm : Fragment() {
                     Snackbar.LENGTH_SHORT
                 ).show()
             }
+        }
+
+        binding.cbSave.setOnCheckedChangeListener { _, isChecked ->
+            addToDaftarTersimpan = isChecked
         }
 
     }
@@ -87,19 +90,29 @@ class TransferEWalletForm : Fragment() {
                     }
 
                     if (uiState.isValid) {
-                        Snackbar.make(requireView(), uiState.data.toString(), Snackbar.LENGTH_SHORT)
+                        Snackbar.make(
+                            requireView(),
+                            getString(R.string.e_wallet_ditemukan, ewalletName),
+                            Snackbar.LENGTH_SHORT
+                        )
                             .show()
                         if (findNavController().currentDestination?.id == R.id.transferEWalletForm) {
                             val dataEWallet = CekEWalletBundle(
                                 id = ewalletId,
                                 nomorEWallet = uiState.data?.nomorAkunEwallet.toString(),
                                 namaAkunEWallet = uiState.data?.namaAkunEwallet.toString(),
-                                namaEWllet = ewalletName
+                                namaEWallet = ewalletName
                             )
+
 
                             val bundle = Bundle().apply {
                                 putParcelable(Constant.DATA_CEK_EWALLET, dataEWallet)
+                                putBoolean(
+                                    Constant.DAFTAR_TERSIMPAN_CHECKED_EXTRA,
+                                    addToDaftarTersimpan
+                                )
                             }
+
                             findNavController().navigate(
                                 R.id.action_transferEWalletForm_to_transferEWalletFormKonfirmasiFragment,
                                 bundle

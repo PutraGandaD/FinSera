@@ -10,6 +10,7 @@ import com.finsera.common.utils.Constant
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentTransferEWalletListBinding
 import com.finsera.presentation.fragments.topup.ewallet.bundle.ChooseEWalletBundle
+import com.google.android.material.snackbar.Snackbar
 
 class TransferEWalletListFragment : Fragment() {
     private var _binding: FragmentTransferEWalletListBinding? = null
@@ -66,6 +67,8 @@ class TransferEWalletListFragment : Fragment() {
             val bundle = Bundle().apply {
                 putParcelable(Constant.DATA_ID_EWALLET, data)
             }
+
+            Snackbar.make(requireView(), "Memilih E-Wallet ${data.ewalletName}", Snackbar.LENGTH_SHORT).show()
             findNavController().navigate(
                 R.id.action_transferEWalletListFragment_to_transferEWalletForm,
                 bundle

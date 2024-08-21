@@ -24,13 +24,18 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
     private var _binding: FragmentTransferEWalletFormKonfirmasiBinding? = null
     private val binding get() = _binding!!
 
+    private var addToDaftarTersimpan: Boolean = false
     private var ewalletId: Int = 0
     private lateinit var ewalletName: String
     private lateinit var ewalletAccountNum: String
     private lateinit var ewalletAccountName: String
 
     private val viewModel: TransferEWalletViewModel by viewModel()
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = FragmentTransferEWalletFormKonfirmasiBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,12 +48,21 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
         viewModel.resetState()
 
         val bundle = arguments?.getParcelable<CekEWalletBundle>(Constant.DATA_CEK_EWALLET)
+        val savedItemMode = arguments?.getBoolean(Constant.DAFTAR_TERSIMPAN_CHECKED_EXTRA)
+
         if (bundle != null) {
             ewalletId = bundle.id
-            ewalletName = bundle.namaEWllet
+            ewalletName = bundle.namaEWallet
             ewalletAccountNum = bundle.nomorEWallet
             ewalletAccountName = bundle.namaAkunEWallet
         }
+
+
+        if (savedItemMode == true) {
+            addToDaftarTersimpan = true
+        }
+
+
 
 
         binding.tvJenisEWallet.text = ewalletName
@@ -56,34 +70,38 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
         binding.tvNamaPengguna.text = ewalletAccountName
 
         binding.btnNext.setOnClickListener {
-            if(binding.etPinTransaksi.editText?.text.toString().isNotEmpty() && binding.etNominal.editText?.text.toString().isNotEmpty()){
+            if (binding.etPinTransaksi.editText?.text.toString()
+                    .isNotEmpty() && binding.etNominal.editText?.text.toString().isNotEmpty()
+            ) {
                 viewModel.transferEWallet(
                     eWalletId = ewalletId,
                     note = getString(R.string.transfer_e_wallet_text, ewalletName),
                     pin = binding.etPinTransaksi.editText?.text.toString(),
-                    nominal =binding.etNominal.editText?.text.toString().toDouble(),
+                    nominal = binding.etNominal.editText?.text.toString().toDouble(),
                     eWalletAccountNum = ewalletAccountNum
                 ).also {
                     observer()
                 }
-            }else{
-                if(binding.etPinTransaksi.editText?.text.toString().isEmpty()){
+            } else {
+                if (binding.etPinTransaksi.editText?.text.toString().isEmpty()) {
                     binding.etPinTransaksi.error = "PIN Transaksi harus diisi!"
-                }else if (binding.etNominal.editText?.text.toString().isEmpty()){
+                } else if (binding.etNominal.editText?.text.toString().isEmpty()) {
                     binding.etNominal.error = "Nominal harus diisi!"
-                }else{
+                } else {
                     binding.etPinTransaksi.error = "PIN Transaksi harus diisi!"
                     binding.etNominal.error = "Nominal harus diisi!"
                 }
             }
         }
 
+
+
     }
 
     private fun observer() {
         lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.transferEWalletUiState.collectLatest { uiState->
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.transferEWalletUiState.collectLatest { uiState ->
                     uiState.message?.let { message ->
                         Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
                         viewModel.messageShown()
@@ -95,17 +113,25 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
                         binding.viewFlipper.displayedChild = 0
                     }
 
-                    if(uiState.isSuccess){
-                        if(findNavController().currentDestination?.id == R.id.transferEWalletFormKonfirmasiFragment) {
+                    if (uiState.isSuccess) {
+                        if (addToDaftarTersimpan) {
+                            viewModel.simpanKeDaftarTersimpanEWallet(
+                                eWalletId = ewalletId,
+                                noAkunEWallet = ewalletAccountNum,
+                                namaPemilik = ewalletAccountName,
+                                eWalletName = ewalletName
+                            )
+                        }
+                        if (findNavController().currentDestination?.id == R.id.transferEWalletFormKonfirmasiFragment) {
                             val dataEWallet = SuccessEWalletBundle(
                                 accountSender = uiState.data?.accountSender!!,
-                                ewalletName = uiState.data?.ewalletName!!,
-                                note = uiState.data?.note!!,
-                                feeAdmin = uiState.data?.feeAdmin!!,
-                                nominal = uiState.data?.nominal!!,
-                                transactionDate = uiState.data?.transactionDate!!,
-                                transactionNum = uiState.data?.transactionNum!!,
-                                nameSender = uiState.data?.nameSender!!,
+                                ewalletName = uiState.data.ewalletName!!,
+                                note = uiState.data.note!!,
+                                feeAdmin = uiState.data.feeAdmin!!,
+                                nominal = uiState.data.nominal!!,
+                                transactionDate = uiState.data.transactionDate!!,
+                                transactionNum = uiState.data.transactionNum!!,
+                                nameSender = uiState.data.nameSender!!,
                                 ewalletAccountName = ewalletAccountName,
                                 ewalletAccount = ewalletAccountNum
                             )
@@ -118,6 +144,12 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
                                 R.id.action_transferEWalletFormKonfirmasiFragment_to_transferEWalletSuccessFragment,
                                 bundle
                             )
+
+                            Snackbar.make(
+                                requireView(),
+                                "Transfer E-Wallet $ewalletName berhasil ke $ewalletAccountNum",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }

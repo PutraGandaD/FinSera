@@ -264,4 +264,8 @@
     <string name="screen_pilih_bank">Halaman memilih bank tujuan</string>
     <string name="empty_ewallet_text">Nomor %1$s tidak boleh kosong</string>
     <string name="transfer_e_wallet_text">Transfer E-Wallet %1$s</string>
+    <string name="e_wallet_ditemukan">E-Wallet %1$s ditemukan</string>
+    <string name="logo">logo</string>
+    <string name="item_name">nama_item</string>
+    <string name="item_description">item description</string>
 </resources>

@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class CekEWalletBundle(
     val id: Int,
-    val namaEWllet :String,
+    val namaEWallet :String,
     val nomorEWallet: String,
     val namaAkunEWallet: String
 ):Parcelable
