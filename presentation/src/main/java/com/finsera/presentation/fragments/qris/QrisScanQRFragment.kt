@@ -305,6 +305,7 @@ class QrisScanQRFragment : Fragment() {
                 findNavController().popBackStack()
             }
             .setPositiveButton("Ya") { dialog, which ->
+                findNavController().popBackStack()
                 requireActivity().openAppPermissionSettings()
             }
             .show()
