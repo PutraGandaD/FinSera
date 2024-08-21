@@ -271,4 +271,6 @@
     <string name="nama_merchant">Nama Merchant</string>
     <string name="kota_merchant">Kota Merchant</string>
     <string name="no_merchant">No. Merchant</string>
+    <string name="qr_share">QR Share</string>
+    <string name="hint_scan_qr">Scan QR atau Barcode\nuntuk memulai transaksi</string>
 </resources>

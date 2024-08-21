@@ -87,14 +87,23 @@ class QrisScanQRFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         requestCameraPermission()
         observer()
+        handleBtn()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
         cameraExecutor.shutdown()
+    }
+
+    private fun handleBtn() {
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
+        binding.btnQrShare.setOnClickListener {
+            findNavController().navigate(R.id.action_qrisScanQRFragment_to_qrisShareFragment)
+        }
     }
 
     private fun startCamera() {
@@ -293,6 +302,7 @@ class QrisScanQRFragment : Fragment() {
             .setNegativeButton("Tidak") { dialog, which ->
                 dialog.dismiss()
                 Snackbar.make(requireView(), "Fitur tidak dapat dijalankan karena izin kamera pada aplikasi FinSera tidak diizinkan", Snackbar.LENGTH_SHORT).show()
+                findNavController().popBackStack()
             }
             .setPositiveButton("Ya") { dialog, which ->
                 requireActivity().openAppPermissionSettings()

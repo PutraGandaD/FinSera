@@ -267,6 +267,9 @@
         <action
             android:id="@+id/action_qrisScanQRFragment_to_transferQrisMerchantFormFragment"
             app:destination="@id/transferQrisMerchantFormFragment" />
+        <action
+            android:id="@+id/action_qrisScanQRFragment_to_qrisShareFragment"
+            app:destination="@id/qrisShareFragment" />
     </fragment>
     <fragment
         android:id="@+id/transferQrisMerchantFormFragment"
@@ -289,4 +292,9 @@
         android:name="com.finsera.presentation.fragments.transfer.merchant_qris.TransferQrisMerchantSuksesFragment"
         android:label="fragment_transfer_qris_merchant_sukses"
         tools:layout="@layout/fragment_transfer_qris_merchant_sukses" />
+    <fragment
+        android:id="@+id/qrisShareFragment"
+        android:name="com.finsera.presentation.fragments.qris.QrisShareFragment"
+        android:label="fragment_qris_share"
+        tools:layout="@layout/fragment_qris_share" />
 </navigation>
