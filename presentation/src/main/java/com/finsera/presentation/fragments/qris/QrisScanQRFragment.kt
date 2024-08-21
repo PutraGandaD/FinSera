@@ -2,9 +2,12 @@ package com.finsera.presentation.fragments.qris
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Base64
 import android.util.Log
 import android.util.Size
@@ -33,6 +36,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import com.finsera.common.utils.Constant.Companion.NAMA_KOTA_MERCHANT_QRIS
 import com.finsera.common.utils.Constant.Companion.NAMA_MERCHANT_QRIS
 import com.finsera.common.utils.Constant.Companion.NOMOR_TRX_MERCHANT_QRIS
@@ -69,12 +73,15 @@ class QrisScanQRFragment : Fragment() {
 
     private var noRekening = ""
 
+    private lateinit var vibrator: Vibrator
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentQrisScanQRBinding.inflate(inflater, container, false)
         cameraExecutor = Executors.newSingleThreadExecutor()
+        vibrator = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         return binding.root
     }
 
@@ -183,6 +190,7 @@ class QrisScanQRFragment : Fragment() {
 
                         withContext(Dispatchers.Main) {
                             if(!merchantName.isNullOrEmpty()) {
+                                startVibration()
                                 processQrisMerchant(merchantName, merchantCity, merchantAccountNo)
                             }
                         }
@@ -236,6 +244,7 @@ class QrisScanQRFragment : Fragment() {
                     if(uiState.isLoading) {
                         Toast.makeText(requireActivity(), "QRIS Ditemukan. Sedang memproses...", Toast.LENGTH_SHORT).show()
                         binding.progressBar.visibility = View.VISIBLE
+                        startVibration()
                     } else {
                         binding.progressBar.visibility = View.GONE
                     }
@@ -289,5 +298,16 @@ class QrisScanQRFragment : Fragment() {
                 requireActivity().openAppPermissionSettings()
             }
             .show()
+    }
+
+    private fun startVibration() {
+        val vibrationDuration = 1000L
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val vibrationEffect = VibrationEffect.createOneShot(vibrationDuration, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        } else {
+            vibrator.vibrate(vibrationDuration)
+        }
     }
 }
