@@ -8,6 +8,7 @@ import com.finsera.data.implementation.infosaldo.SaldoRepositoryImpl
 import com.finsera.data.implementation.mutasi.MutasiRepositoryImpl
 import com.finsera.data.implementation.transfer.TransferRepositoryImpl
 import com.finsera.data.source.local.LocalDataSource
+import com.finsera.data.source.local.dao.daftar_tersimpan.ewallet.TransferEWalletTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.transfer_antar.TransferAntarTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.virutal_account.TransferVaTersimpanDao
@@ -55,6 +56,10 @@ object DataModule {
             val database = get<DaftarTersimpanDatabase>()
             database.transferVaTersimpanDao()
         }
+        single <TransferEWalletTersimpanDao>{
+            val database = get<DaftarTersimpanDatabase>()
+            database.transferEWalletTersimpanDao()
+        }
     }
 
     val repositoryModule = module {
@@ -62,6 +67,6 @@ object DataModule {
         factory<ISaldoRepository> { SaldoRepositoryImpl(get(), get()) }
         factory<IMutasiRepository>{ MutasiRepositoryImpl(get(), get()) }
         factory<ITransferRepository> { TransferRepositoryImpl(get(), get()) }
-        factory<IDaftarTersimpanRepository> { DaftarTersimpanRepositoryImpl(get(), get(),get()) }
+        factory<IDaftarTersimpanRepository> { DaftarTersimpanRepositoryImpl(get(), get(),get(),get()) }
     }
 }

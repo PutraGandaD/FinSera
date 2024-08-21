@@ -1,88 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.topup.ewallet.TransferEWalletForm"
-    android:padding="20dp"
     android:background="@color/neutral_01"
-    android:contentDescription="@string/screen_isi_ewallet">
+    android:contentDescription="@string/screen_isi_ewallet"
+    android:padding="20dp"
+    tools:context=".fragments.topup.ewallet.TransferEWalletForm">
+
 
     <RelativeLayout
+        android:id="@+id/topmenu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/topmenu"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-        <ImageView
+        android:layout_marginTop="@dimen/_12sdp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:contentDescription="@string/back"
+            android:importantForAccessibility="yes"
             android:src="@drawable/ic_back_button"
-            android:layout_centerVertical="true"
-            android:contentDescription="@string/btn_back"/>
+            android:layout_marginStart="12dp"
+            android:layout_centerVertical="true"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Isi E-Wallet"
-            android:textSize="24sp"
-            android:textColor="@android:color/black"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/tv_title_isi_e_wallet"/>
+            android:contentDescription="@string/e_wallet"
+            android:text="@string/tv_title_isi_e_wallet"
+            android:importantForAccessibility="yes"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold"/>
     </RelativeLayout>
+
+    <View
+        android:id="@+id/anchor_shadow_topmenu"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shadow_bottom_navbar"
+        app:layout_constraintTop_toBottomOf="@id/topmenu"/>
+
 
     <include
         android:id="@+id/e_wallet_item"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         layout="@layout/ewallet_form_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/topmenu"
+        android:contentDescription="@string/gopay"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="@string/gopay"/>
+        app:layout_constraintTop_toBottomOf="@id/anchor_shadow_topmenu" />
 
     <LinearLayout
+        android:id="@+id/layoutbanktujuan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="6dp"
-        android:id="@+id/layoutbanktujuan"
-        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/e_wallet_item">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/desc_input_no_hp_atau_nama"
             android:text="@string/tv_no_handphone_atau_nama"
-            android:textSize="16sp"
             android:textColor="@color/neutral_09"
-            android:contentDescription="@string/desc_input_no_hp_atau_nama"/>
+            android:textSize="16sp" />
+
         <EditText
             android:id="@+id/banktujuanEditText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/edit_text_background_neutral5"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="16dp"
             android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background_neutral5"
+            android:contentDescription="@string/input_nomor_handphone_atau_nama"
+            android:gravity="center_vertical"
             android:hint="@string/no_handphone_nama"
-            android:singleLine="true"
-            android:contentDescription="@string/input_nomor_handphone_atau_nama"/>
+            android:paddingHorizontal="16dp"
+            android:singleLine="true" />
+
+        <LinearLayout
+            android:id="@+id/ll_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/desc_simpan_ke_daftar_tersimpan"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_save"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/simpan_ke_daftar_tersimpan" />
+        </LinearLayout>
 
     </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_lanjut"
-        android:layout_width="match_parent"
+
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_background_primary"
-        app:backgroundTint="@color/primary_blue"
-        android:text="@string/lanjut"
-        android:textSize="20sp"
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:contentDescription="@string/lanjut"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_lanjut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background_primary"
+            android:contentDescription="@string/lanjut"
+            android:text="@string/lanjut"
+            android:textSize="20sp"
+            app:backgroundTint="@color/primary_blue" />
+
+        <ProgressBar
+            style="?android:progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </ViewFlipper>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.finsera.domain.model.DaftarTersimpanSesama
 import com.finsera.domain.model.DaftarTersimpanVa
+import com.finsera.presentation.adapters.DaftarTersimpanEWalletAdapter.DaftarTersimpanEWalletViewHolder
+import com.finsera.presentation.databinding.DaftarTersimpanEwalletItemBinding
 import com.finsera.presentation.databinding.DaftarTersimpanItemBinding
 
 class DaftarTersimpanVaAdapter(val itemClickListener: OnSavedItemVaClickListener) : ListAdapter<DaftarTersimpanVa, DaftarTersimpanVaAdapter.DaftarTersimpanVaViewHolder>(DIFF_CALLBACK) {
@@ -14,14 +16,14 @@ class DaftarTersimpanVaAdapter(val itemClickListener: OnSavedItemVaClickListener
         parent: ViewGroup,
         viewType: Int
     ): DaftarTersimpanVaViewHolder {
-        val binding = DaftarTersimpanItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = DaftarTersimpanEwalletItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DaftarTersimpanVaViewHolder(binding)
     }
 
-    class DaftarTersimpanVaViewHolder(private val binding: DaftarTersimpanItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class DaftarTersimpanVaViewHolder(private val binding: DaftarTersimpanEwalletItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DaftarTersimpanVa) {
-            binding.tvDaftartersimpanNamapemilik.text = data.namaPemilikRekening
-            binding.tvDaftartersimpanNorekening.text = data.noRekening
+            binding.tvItemName.text = data.namaPemilikRekening
+            binding.tvItemDescription.text = data.noRekening
         }
     }
 

@@ -171,6 +171,7 @@
     <string name="notifikasi">Notifikasi</string>
     <string name="accessibilitas">Accessibilitas</string>
     <string name="ramadhan_adi">Ramadhan Adi</string>
+
     <string name="tv_title_isi_e_wallet">Isi E-Wallet</string>
     <string name="tv_no_handphone_atau_nama">Masukkan no.handphone/nama</string>
     <string name="desc_input_no_hp_atau_nama">Masukkan nomor handphone atau nama di bawah</string>
@@ -250,6 +251,7 @@
     <string name="cari_bank">Cari Bank</string>
     <string name="rekening_pengirim">Rekening Pengirim</string>
     <string name="nama_pengirim">Nama Pengirim</string>
+
     <string name="recipient">Penerima</string>
     <string name="tv_talkback_sembunyikan_saldo">Sembunyikan Saldo Rekening Anda</string>
     <string name="account_number_prefix">Nomor Rekening Anda Adalah</string>
@@ -259,6 +261,12 @@
     <string name="bagikan">Bagikan</string>
     <string name="desc_input_bank_tujuan">Pilih bank tujuan di bawah</string>
     <string name="screen_pilih_bank">Halaman memilih bank tujuan</string>
+    <string name="empty_ewallet_text">Nomor %1$s tidak boleh kosong</string>
+    <string name="transfer_e_wallet_text">Transfer E-Wallet %1$s</string>
+    <string name="e_wallet_ditemukan">E-Wallet %1$s ditemukan</string>
+    <string name="logo">logo</string>
+    <string name="item_name">nama_item</string>
+    <string name="item_description">item description</string>
     <string name="desc_create_pin">Buat PIN Anda</string>
     <string name="tv_create_pin">Create PIN</string>
     <string name="desc_bank_option">Pilih Opsi Bank di bawah</string>

@@ -6,6 +6,8 @@ import com.finsera.presentation.fragments.home.viewmodel.HomeViewModel
 import com.finsera.presentation.fragments.info.mutasi.viewmodel.MutasiViewModel
 import com.finsera.presentation.fragments.info.saldo.viewmodel.InfoSaldoViewModel
 import com.finsera.presentation.fragments.qris.viewmodel.QrisScanQRViewModel
+import com.finsera.presentation.fragments.topup.ewallet.viewmodel.CheckEWalletViewModel
+import com.finsera.presentation.fragments.topup.ewallet.viewmodel.TransferEWalletViewModel
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.CekRekeningAntarViewModel
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.TransferAntarBankFormViewModel
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.TransferAntarBankHomeViewModel
@@ -25,7 +27,7 @@ object PresentationModule {
         viewModel { LoginPinViewModel(get(), get(),get()) }
         viewModel { HomeViewModel(get(), get()) }
         viewModel { InfoSaldoViewModel(get(), get()) }
-        viewModel { MutasiViewModel(get(), get(), get(), get()) }
+        viewModel { MutasiViewModel(get(), get(), get(),get()) }
         viewModel { TransferSesamaBankFormViewModel(get(), get()) }
         viewModel { TransferSesamaBankViewModel(get(), get(), get(), get()) }
         viewModel { TransferSesamaBankHomeViewModel(get(), get()) }
@@ -36,6 +38,8 @@ object PresentationModule {
         viewModel { TransferAntarBankHomeViewModel(get(), get()) }
         viewModel { CheckVaViewModel(get(), get()) }
         viewModel { TransferVaViewModel(get(), get(),get(),get(),get()) }
+        viewModel { CheckEWalletViewModel(get(),get())}
+        viewModel { TransferEWalletViewModel(get(),get(),get(),get(),get())}
         viewModel { QrisScanQRViewModel(get(), get()) }
     }
 }

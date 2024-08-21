@@ -72,7 +72,9 @@ class TransferVirtualAccountForm : Fragment() {
 
 
 
-
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
 
         binding.cbSave.setOnCheckedChangeListener { _, isChecked ->

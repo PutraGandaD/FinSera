@@ -8,5 +8,4 @@ import java.util.concurrent.Flow
 class TransferVaUseCase(private val transferRepository: ITransferRepository) {
     suspend fun invoke(vaAccountNum: String, pin: String) =
         transferRepository.transferVirtualAccount(vaAccountNum, pin)
-
 }
