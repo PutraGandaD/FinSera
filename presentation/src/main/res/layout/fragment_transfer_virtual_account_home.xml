@@ -5,33 +5,50 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
-    tools:context=".ui.fragments.transfer.va.TransferVirtualAccountHome"
+    tools:context=".fragments.transfer.va.TransferVirtualAccountHome"
     android:contentDescription="@string/screen_virtual_account">
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_back_button"
+
+    <RelativeLayout
+        android:id="@+id/topmenu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_title_label"
-        app:layout_constraintBottom_toBottomOf="@id/tv_title_label"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/btn_back" />
-
-
-    <TextView
-        android:id="@+id/tv_title_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/virtual_account"
-        android:text="@string/virtual_account"
-        android:textSize="@dimen/heading_3"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:contentDescription="@string/back"
+            android:importantForAccessibility="yes"
+            android:src="@drawable/ic_back_button"
+            android:layout_marginStart="12dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/virtual_account"
+            android:text="@string/virtual_account"
+            android:importantForAccessibility="yes"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/anchor_shadow_topmenu"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shadow_bottom_navbar"
+        app:layout_constraintTop_toBottomOf="@id/topmenu"/>
+
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_saved_list"
@@ -46,7 +63,7 @@
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toStartOf="@id/btn_input"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_label" />
+        app:layout_constraintTop_toBottomOf="@id/anchor_shadow_topmenu" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_input"
@@ -130,7 +147,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:itemCount="4"
-                tools:listitem="@layout/daftar_tersimpan_item" />
+                tools:listitem="@layout/daftar_tersimpan_ewallet_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

@@ -16,6 +16,11 @@ import com.finsera.domain.usecase.transfer.antar_bank.GetDaftarTersimpanAntarUse
 import com.finsera.domain.usecase.transfer.antar_bank.GetListBankUseCase
 import com.finsera.domain.usecase.transfer.antar_bank.TambahDaftarTersimpanAntarUseCase
 import com.finsera.domain.usecase.transfer.antar_bank.TransferAntarBankUseCase
+import com.finsera.domain.usecase.transfer.ewallet.CariDaftarEWalletTersimpanUseCase
+import com.finsera.domain.usecase.transfer.ewallet.CekEWalletUseCase
+import com.finsera.domain.usecase.transfer.ewallet.GetDaftarTersimpanEWalletUseCase
+import com.finsera.domain.usecase.transfer.ewallet.TambahDaftarTersimpanEWalletUseCase
+import com.finsera.domain.usecase.transfer.ewallet.TransferEWalletUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.CariDaftarTersimpanSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.CekRekeningSesamaUseCase
 import com.finsera.domain.usecase.transfer.sesama_bank.GetDaftarTersimpanSesamaUseCase
@@ -45,11 +50,17 @@ object DomainModule {
         factory { CekRekeningAntarUseCase(get(), get()) }
         factory { CekVirtualAccountUseCase(get()) }
         factory { TransferVaUseCase(get()) }
+        factory { CekEWalletUseCase(get()) }
+        factory { TransferEWalletUseCase(get()) }
 
 
         factory { GetDaftarTersimpanVaUseCase(get()) }
         factory { TambahDaftarTersimpanVaUseCase(get()) }
         factory { CariDaftarVaTersimpanUseCase(get()) }
+
+        factory { GetDaftarTersimpanEWalletUseCase(get()) }
+        factory { TambahDaftarTersimpanEWalletUseCase(get()) }
+        factory { CariDaftarEWalletTersimpanUseCase(get()) }
 
         factory { GetListBankUseCase(get()) }
         factory { TransferAntarBankUseCase(get(), get()) }

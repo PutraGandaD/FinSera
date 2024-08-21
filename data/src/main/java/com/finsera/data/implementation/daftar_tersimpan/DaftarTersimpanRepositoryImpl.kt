@@ -1,13 +1,16 @@
 package com.finsera.data.implementation.daftar_tersimpan
 
+import com.finsera.data.source.local.dao.daftar_tersimpan.ewallet.TransferEWalletTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.transfer_antar.TransferAntarTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanDao
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_antar.TransferAntarTersimpanEntity
 import com.finsera.data.source.local.dao.daftar_tersimpan.virutal_account.TransferVaTersimpanDao
+import com.finsera.data.source.local.entities.daftar_tersimpan.ewallet.TransferEWalletTersimpanEntity
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanEntity
 import com.finsera.data.source.local.entities.daftar_tersimpan.virtual_account.TransferVaTersimpanEntity
 import com.finsera.data.utils.DataMapper
 import com.finsera.domain.model.DaftarTersimpanAntar
+import com.finsera.domain.model.DaftarTersimpanEWallet
 import com.finsera.domain.model.DaftarTersimpanSesama
 import com.finsera.domain.model.DaftarTersimpanVa
 import com.finsera.domain.repository.IDaftarTersimpanRepository
@@ -15,7 +18,8 @@ import com.finsera.domain.repository.IDaftarTersimpanRepository
 class DaftarTersimpanRepositoryImpl(
     private val daftarTersimpanSesamaDao: TransferSesamaTersimpanDao,
     private val daftarTersimpanAntarDao: TransferAntarTersimpanDao,
-    private val daftarTersimpanVaDao: TransferVaTersimpanDao
+    private val daftarTersimpanVaDao: TransferVaTersimpanDao,
+    private val daftarTersimpanEWalletDao: TransferEWalletTersimpanDao
 ) : IDaftarTersimpanRepository{
     override suspend fun getDaftarTersimpanSesama(): List<DaftarTersimpanSesama> {
         val data = daftarTersimpanSesamaDao.getDaftarTersimpanSesama()
@@ -33,6 +37,12 @@ class DaftarTersimpanRepositoryImpl(
         val data = daftarTersimpanVaDao.getDaftarVirtualAccount()
 
         return DataMapper.daftarTersimpanVaToDomain(data)
+    }
+
+    override suspend fun getDaftarTersimpanEWallet(): List<DaftarTersimpanEWallet> {
+        val data = daftarTersimpanEWalletDao.getDaftarEWallet()
+
+        return DataMapper.daftarTersimpanEWalletToDomain(data)
     }
 
     override suspend fun searchDaftarTersimpanSesama(keyword: String): List<DaftarTersimpanSesama> {
@@ -113,7 +123,6 @@ class DaftarTersimpanRepositoryImpl(
                 id = daftarTersimpan.id,
                 namaVa = daftarTersimpan.namaPemilikRekening,
                 nomorVa = daftarTersimpan.noRekening,
-                nominalVa = daftarTersimpan.nominal!!
             )
         )
     }
@@ -135,8 +144,7 @@ class DaftarTersimpanRepositoryImpl(
             TransferVaTersimpanEntity(
                 id = daftarTersimpan.id,
                 namaVa = daftarTersimpan.namaPemilikRekening,
-                nomorVa = daftarTersimpan.noRekening,
-                nominalVa = daftarTersimpan.nominal!!
+                nomorVa = daftarTersimpan.noRekening
             )
         )
     }
@@ -146,8 +154,50 @@ class DaftarTersimpanRepositoryImpl(
             TransferVaTersimpanEntity(
                 id = daftarTersimpan.id,
                 namaVa = daftarTersimpan.namaPemilikRekening,
-                nomorVa = daftarTersimpan.noRekening,
-                nominalVa = daftarTersimpan.nominal!!
+                nomorVa = daftarTersimpan.noRekening
+            )
+        )
+    }
+
+    override suspend fun searchDaftarTersimpanEWallet(keyword: String): List<DaftarTersimpanEWallet> {
+        val data = daftarTersimpanEWalletDao.searchDaftarEWallet(keyword)
+
+        return DataMapper.daftarTersimpanEWalletToDomain(data)
+    }
+
+    override suspend fun insertDaftarTersimpanEWallet(daftarTersimpan: DaftarTersimpanEWallet) {
+        daftarTersimpanEWalletDao.insertDaftarEWallet(
+            TransferEWalletTersimpanEntity(
+                id = daftarTersimpan.id,
+                namaAkunEWallet = daftarTersimpan.namaAkunEWallet,
+                nomorEWallet = daftarTersimpan.nomorEWallet,
+                idAkunEWallet = daftarTersimpan.idAkunEWallet,
+                namaEWallet = daftarTersimpan.namaEWallet
+
+            )
+        )
+    }
+
+    override suspend fun updateDaftarTersimpanEWallet(daftarTersimpan: DaftarTersimpanEWallet) {
+        daftarTersimpanEWalletDao.updateDaftarEWallet(
+            TransferEWalletTersimpanEntity(
+                id = daftarTersimpan.id,
+                namaAkunEWallet = daftarTersimpan.namaAkunEWallet,
+                nomorEWallet = daftarTersimpan.nomorEWallet,
+                idAkunEWallet = daftarTersimpan.idAkunEWallet,
+                namaEWallet = daftarTersimpan.namaEWallet
+            )
+        )
+    }
+
+    override suspend fun deleteDaftarTersimpanEWallet(daftarTersimpan: DaftarTersimpanEWallet) {
+        daftarTersimpanEWalletDao.deleteDaftarEWallet(
+            TransferEWalletTersimpanEntity(
+                id = daftarTersimpan.id,
+                namaAkunEWallet = daftarTersimpan.namaAkunEWallet,
+                nomorEWallet = daftarTersimpan.nomorEWallet,
+                idAkunEWallet = daftarTersimpan.idAkunEWallet,
+                namaEWallet = daftarTersimpan.namaEWallet
             )
         )
     }
