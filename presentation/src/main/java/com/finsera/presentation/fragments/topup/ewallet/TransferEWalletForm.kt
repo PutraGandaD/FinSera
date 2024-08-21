@@ -72,6 +72,10 @@ class TransferEWalletForm : Fragment() {
             addToDaftarTersimpan = isChecked
         }
 
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
     }
 
     private fun observer() {

@@ -82,6 +82,10 @@ class TransferVirtualAccountFormKonfirmasi : Fragment() {
             }
         }
 
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
     }
 
 
@@ -102,14 +106,7 @@ class TransferVirtualAccountFormKonfirmasi : Fragment() {
                     }
 
                     if (uiState.isSuccess) {
-                        if (addToDaftarTersimpan) {
-                            viewModel.simpanKeDaftarTersimpanVa(
-                                namaPemilik = accountName,
-                                noRek = accountNum,
-                            )
-                        }
                         if (findNavController().currentDestination?.id == R.id.transferVirtualAccountFormKonfirmasi) {
-
                             val dataTransferVa = SuccesVaBundle(
                                 transactionDate = uiState.data?.transactionDate!!,
                                 recipientVirtualAccountNum = uiState.data.recipientVirtualAccountNum!!,
@@ -124,7 +121,14 @@ class TransferVirtualAccountFormKonfirmasi : Fragment() {
                             findNavController().navigate(
                                 R.id.action_transferVirtualAccountFormKonfirmasi_to_transferVirtualAccountSuccessFragment,
                                 bundle
-                            )
+                            ).apply {
+                                if (addToDaftarTersimpan) {
+                                    viewModel.simpanKeDaftarTersimpanVa(
+                                        namaPemilik = accountName,
+                                        noRek = accountNum,
+                                    )
+                                }
+                            }
                         }
                     }
 

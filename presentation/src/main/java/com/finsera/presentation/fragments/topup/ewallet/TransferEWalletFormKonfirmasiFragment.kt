@@ -62,6 +62,10 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
             addToDaftarTersimpan = true
         }
 
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
 
 
 
@@ -114,14 +118,6 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
                     }
 
                     if (uiState.isSuccess) {
-                        if (addToDaftarTersimpan) {
-                            viewModel.simpanKeDaftarTersimpanEWallet(
-                                eWalletId = ewalletId,
-                                noAkunEWallet = ewalletAccountNum,
-                                namaPemilik = ewalletAccountName,
-                                eWalletName = ewalletName
-                            )
-                        }
                         if (findNavController().currentDestination?.id == R.id.transferEWalletFormKonfirmasiFragment) {
                             val dataEWallet = SuccessEWalletBundle(
                                 accountSender = uiState.data?.accountSender!!,
@@ -143,7 +139,16 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
                             findNavController().navigate(
                                 R.id.action_transferEWalletFormKonfirmasiFragment_to_transferEWalletSuccessFragment,
                                 bundle
-                            )
+                            ).apply {
+                                if (addToDaftarTersimpan) {
+                                    viewModel.simpanKeDaftarTersimpanEWallet(
+                                        eWalletId = ewalletId,
+                                        noAkunEWallet = ewalletAccountNum,
+                                        namaPemilik = ewalletAccountName,
+                                        eWalletName = ewalletName
+                                    )
+                                }
+                            }
 
                             Snackbar.make(
                                 requireView(),
