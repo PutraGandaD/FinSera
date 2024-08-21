@@ -63,7 +63,7 @@ class RemoteDataSource(private val apiService: ApiService) {
         return apiService.getMutasi(accessToken, startDate, endDate)
     }
 
-    suspend fun cekRekeningSesamaBank(token: String, norek: String) : CekRekeningSesamaResponse {
+    suspend fun cekRekeningSesamaBank(token: String, norek: String): CekRekeningSesamaResponse {
         val param = JsonObject().apply {
             addProperty("accountnum_recipient", norek)
         }
@@ -115,6 +115,7 @@ class RemoteDataSource(private val apiService: ApiService) {
                         "JWT Token has expired" -> {
                             emit(Resource.Error("JWT Token has expired"))
                         }
+
                         else -> emit(Resource.Error("Error"))
                     }
                 }
@@ -125,8 +126,9 @@ class RemoteDataSource(private val apiService: ApiService) {
                             404 -> {
                                 emit(Resource.Error("Virtual Account tidak ditemukan"))
                             }
+
                             401 -> {
-                                val params= JsonObject().apply {
+                                val params = JsonObject().apply {
                                     addProperty("virtualAccountNumber", vaAccountNum)
                                 }
                                 val getRefreshToken = refreshAccessToken(token)
@@ -134,6 +136,7 @@ class RemoteDataSource(private val apiService: ApiService) {
                                 val response = apiService.cekVirtualAccount(newToken, params)
                                 emit(Resource.Success(response))
                             }
+
                             else -> {
                                 emit(Resource.Error(e.message()))
                             }
@@ -188,6 +191,7 @@ class RemoteDataSource(private val apiService: ApiService) {
                                     errorMessage?.contains("Pin yang anda masukkan salah") == true -> {
                                         emit(Resource.Error("Pin yang dimasukkan salah"))
                                     }
+
                                     errorMessage?.contains("JWT Token has expired") == true -> {
                                         val param = JsonObject().apply {
                                             addProperty("virtualAccountNumber", vaAccountNum)
@@ -195,13 +199,18 @@ class RemoteDataSource(private val apiService: ApiService) {
                                         }
                                         val getRefreshToken = refreshAccessToken(token)
                                         val newToken = getRefreshToken.data.accessToken
-                                        val newResponse = apiService.transferVirtualAccount("Bearer $newToken", param)
+                                        val newResponse = apiService.transferVirtualAccount(
+                                            "Bearer $newToken",
+                                            param
+                                        )
                                         emit(Resource.Success(newResponse))
                                     }
+
                                     else -> emit(Resource.Error("Sesi Anda telah diperbarui"))
                                 }
                             }
-                            402->{
+
+                            402 -> {
                                 emit(Resource.Error("Saldo Anda tidak cukup"))
                             }
 
@@ -242,41 +251,53 @@ class RemoteDataSource(private val apiService: ApiService) {
                     when (message) {
                         "Nomor e-wallet tidak ditemukkan" -> emit(Resource.Error("Virtual Account Tidak Ditemukan"))
                         "JWT Token has expired" -> {
-                            emit(Resource.Error("JWT Token has expired"))
+                            val getRefreshToken = refreshAccessToken(token)
+                            val newToken = getRefreshToken.data.accessToken
+                            val newResponse = apiService.cekEWallet("Bearer $newToken", param)
+                            emit(Resource.Success(newResponse))
                         }
+
                         else -> emit(Resource.Error("Error"))
                     }
                 }
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
+                        val errorMessage = e.response()?.errorBody()?.string()
                         when (e.code()) {
-                            400 -> {
-                                emit(Resource.Error("Nomor e-wallet tidak ditemukkan"))
-                            }
                             401 -> {
-                                emit(Resource.Error("Sesi telah habis"))
+                                when {
+                                    errorMessage?.contains("Nomor e-wallet tidak ditemukkan") == true -> {
+                                        emit(Resource.Error("Nomor e-wallet tidak ditemukkan"))
+                                    }
+
+                                    errorMessage?.contains("JWT Token has expired") == true -> {
+                                        val param = JsonObject().apply {
+                                            addProperty("ewalletId", eWalletId)
+                                            addProperty("ewalletAccount", eWalletAccountName)
+                                        }
+                                        val getRefreshToken = refreshAccessToken(token)
+                                        val newToken = getRefreshToken.data.accessToken
+                                        val newResponse = apiService.cekEWallet("Bearer $newToken", param)
+                                        emit(Resource.Success(newResponse))
+                                    }
+
+                                    else -> emit(Resource.Error("Sesi Anda telah diperbarui"))
+                                }
                             }
 
-                            403 -> {
-                                emit(Resource.Error("Kesalahan pada server"))
-                            }
-
-                            404->{
+                            404 -> {
                                 emit(Resource.Error("Nomor e-wallet tidak ditemukkan"))
                             }
 
-                            500 -> {
-                                emit(Resource.Error("Terjadi Kesalahan pada server"))
-                            }
                             else -> {
-                                emit(Resource.Error(e.message()))
+                                emit(Resource.Error("Terjadi kesalahan pada server"))
                             }
                         }
                     }
 
                     is IOException -> {
-                        emit(Resource.Error(e.message.toString()))
+                        emit(Resource.Error("Terjadi kesalahan pada server"))
                     }
                 }
             }
@@ -321,38 +342,50 @@ class RemoteDataSource(private val apiService: ApiService) {
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
+                        val errorMessage = e.response()?.errorBody()?.string()
                         when (e.code()) {
-                            400 -> {
-                                emit(Resource.Error("Pin yang dimasukkan salah"))
-                            }
 
                             401 -> {
-                                emit(Resource.Error("Sesi telah habis"))
-                            }
+                                when {
+                                    errorMessage?.contains("Pin yang anda masukkan salah") == true -> {
+                                        emit(Resource.Error("Pin yang dimasukkan salah"))
+                                    }
 
-                            403 -> {
-                                emit(Resource.Error("Virtual Account tidak ditemukan"))
-                            }
+                                    errorMessage?.contains("JWT Token has expired") == true -> {
+                                        val param = JsonObject().apply {
+                                            addProperty("ewalletId", eWalletId)
+                                            addProperty("ewalletAccount", eWalletAccountName)
+                                            addProperty("nominal", nominal)
+                                            addProperty("note", note)
+                                            addProperty("pin", pin)
+                                        }
+                                        val getRefreshToken = refreshAccessToken(token)
+                                        val newToken = getRefreshToken.data.accessToken
+                                        val newResponse = apiService.transferEWallet("Bearer $newToken", param)
+                                        emit(Resource.Success(newResponse))
+                                    }
 
-                            500 -> {
-                                emit(Resource.Error("Terjadi Kesalahan pada server"))
+                                    else -> emit(Resource.Error("Sesi Anda telah habis"))
+                                }
+                            }
+                            402 ->{
+                                emit(Resource.Error("Saldo Anda tidak cukup"))
                             }
 
                             else -> {
-                                emit(Resource.Error(e.message()))
+                                emit(Resource.Error("Terjadi kesalahan pada server"))
                             }
                         }
                     }
 
                     is IOException -> {
-                        emit(Resource.Error(e.message.toString()))
+                        emit(Resource.Error("Terjadi kesalahan pada server"))
                     }
                 }
             }
 
         }.flowOn(Dispatchers.IO)
     }
-
 
 
     suspend fun downloadMutasi(token: String, startDate: String, endDate: String): ResponseBody {
@@ -366,12 +399,16 @@ class RemoteDataSource(private val apiService: ApiService) {
         }
     }
 
-    suspend fun getListBank(token: String) : ListBankResponse {
+    suspend fun getListBank(token: String): ListBankResponse {
         val accessToken = "Bearer $token"
         return apiService.getListBank(accessToken)
     }
 
-    suspend fun cekRekeningAntarBank(token: String, idBank: Int, norek: String) : CekRekeningAntarResponse {
+    suspend fun cekRekeningAntarBank(
+        token: String,
+        idBank: Int,
+        norek: String
+    ): CekRekeningAntarResponse {
         val param = JsonObject().apply {
             addProperty("bank_id", idBank)
             addProperty("accountnum_recipient", norek)
@@ -382,7 +419,14 @@ class RemoteDataSource(private val apiService: ApiService) {
         return apiService.cekRekeningAntarBank(accessToken, param)
     }
 
-    suspend fun transferAntarBank(token: String, idBank: Int, noRek: String, nominal: Double, note: String, pin: String) : TransferAntarResponse {
+    suspend fun transferAntarBank(
+        token: String,
+        idBank: Int,
+        noRek: String,
+        nominal: Double,
+        note: String,
+        pin: String
+    ): TransferAntarResponse {
         val param = JsonObject().apply {
             addProperty("bank_id", idBank)
             addProperty("accountnum_recipient", noRek)
