@@ -47,6 +47,9 @@ class TransferQrisMerchantFormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         transferQrisMerchantFormViewModel.getInfoSaldoSaya() // init get info saldo
+
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
+
         getBundle()
         handleNextBtn()
         observeDataSaldo()

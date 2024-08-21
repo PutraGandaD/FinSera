@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityManager
 import android.view.accessibility.AccessibilityNodeInfo
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -165,8 +166,8 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
                     cardNumberLabel,
                     cardNumber
                 ))
-            Snackbar.make(requireView(),
-                getString(R.string.succes_clipboard_card_number), Snackbar.LENGTH_SHORT).show()
+            Toast.makeText(requireActivity(),
+                getString(R.string.succes_clipboard_card_number), Toast.LENGTH_SHORT).show()
         }
     }
 
