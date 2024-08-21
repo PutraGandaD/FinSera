@@ -136,6 +136,9 @@
         <action
             android:id="@+id/action_transferEWalletHomeFragment_to_transferEWalletListFragment"
             app:destination="@id/transferEWalletListFragment" />
+        <action
+            android:id="@+id/action_transferEWalletHomeFragment_to_transferEWalletFormKonfirmasiFragment"
+            app:destination="@id/transferEWalletFormKonfirmasiFragment" />
     </fragment>
     <fragment
         android:id="@+id/transferEWalletListFragment"
@@ -159,7 +162,14 @@
         android:id="@+id/transferEWalletFormKonfirmasiFragment"
         android:name="com.finsera.presentation.fragments.topup.ewallet.TransferEWalletFormKonfirmasiFragment"
         android:label="fragment_transfer_e_wallet_form_konfirmasi"
-        tools:layout="@layout/fragment_transfer_e_wallet_form_konfirmasi" />
+        tools:layout="@layout/fragment_transfer_e_wallet_form_konfirmasi" >
+        <action
+            android:id="@+id/action_transferEWalletFormKonfirmasiFragment_to_transferEWalletSuccessFragment"
+            app:destination="@id/transferEWalletSuccessFragment"
+            app:popUpTo="@id/transferEWalletHomeFragment"
+            app:popUpToInclusive="true"
+            />
+    </fragment>
     <fragment
         android:id="@+id/transferVirtualAccountHome"
         android:name="com.finsera.presentation.fragments.transfer.va.TransferVirtualAccountHome"
@@ -256,6 +266,11 @@
         android:name="com.finsera.presentation.fragments.transfer.va.TransferVirtualAccountSuccessFragment"
         android:label="fragment_transfer_virtual_account_success"
         tools:layout="@layout/fragment_transfer_virtual_account_success" />
+    <fragment
+        android:id="@+id/transferEWalletSuccessFragment"
+        android:name="com.finsera.presentation.fragments.topup.ewallet.TransferEWalletSuccessFragment"
+        android:label="fragment_transfer_e_wallet_success"
+        tools:layout="@layout/fragment_transfer_e_wallet_success" />
     <fragment
         android:id="@+id/qrisScanQRFragment"
         android:name="com.finsera.presentation.fragments.qris.QrisScanQRFragment"

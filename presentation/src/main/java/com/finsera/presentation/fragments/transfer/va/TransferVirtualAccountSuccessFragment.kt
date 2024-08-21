@@ -142,8 +142,12 @@ class TransferVirtualAccountSuccessFragment : Fragment() {
 
         binding.cardTransaksiBerhasilScreenshot.rlBankTujuan.visibility = View.GONE
         binding.cardTransaksiBerhasilScreenshot.rlCatatan.visibility = View.GONE
+        binding.cardTransaksiBerhasilScreenshot.rlNamaPengirim.visibility = View.GONE
+        binding.cardTransaksiBerhasilScreenshot.rlRekeningPengirim.visibility = View.GONE
         binding.cardTransaksiBerhasil.rlBankTujuan.visibility = View.GONE
         binding.cardTransaksiBerhasil.rlCatatan.visibility = View.GONE
+        binding.cardTransaksiBerhasil.rlNamaPengirim.visibility = View.GONE
+        binding.cardTransaksiBerhasil.rlRekeningPengirim.visibility = View.GONE
     }
 
     private fun saveToGalleryMode() {

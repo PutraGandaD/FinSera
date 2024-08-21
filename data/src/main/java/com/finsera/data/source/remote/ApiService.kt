@@ -2,6 +2,8 @@ package com.finsera.data.source.remote
 
 import com.finsera.data.source.remote.response.cek_rekening_antar_bank.CekRekeningAntarResponse
 import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningSesamaResponse
+import com.finsera.data.source.remote.response.ewallet.CheckEWalletResponse
+import com.finsera.data.source.remote.response.ewallet.TransferEWalletResponse
 import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
@@ -73,6 +75,20 @@ interface ApiService {
         @Header("Authorization") accessToken: String,
         @Body raw: JsonObject
     ) : TransferVaResponse
+
+    @POST("transaction/ewallet/check")
+    suspend fun cekEWallet(
+        @Header("Authorization") accessToken: String,
+        @Body raw: JsonObject
+    ) : CheckEWalletResponse
+
+    @POST("transaction/ewallet/create")
+    suspend fun transferEWallet(
+        @Header("Authorization") accessToken: String,
+        @Body raw: JsonObject
+    ) : TransferEWalletResponse
+
+
 
     @GET("mutasi/download")
     suspend fun getDownloadMutasi(

@@ -5,31 +5,50 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
-    tools:context=".ui.fragments.transfer.va.TransferVirtualAccountForm"
+    tools:context=".fragments.transfer.va.TransferVirtualAccountForm"
     android:contentDescription="@string/screen_transfer_ke_va">
 
+
+
     <RelativeLayout
+        android:id="@+id/topmenu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/topmenu"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-        <ImageView
+        android:layout_marginTop="@dimen/_12sdp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:contentDescription="@string/back"
+            android:importantForAccessibility="yes"
             android:src="@drawable/ic_back_button"
+            android:layout_marginStart="12dp"
             android:layout_centerVertical="true"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:contentDescription="@string/transfer_virtual_account"
             android:text="@string/transfer_virtual_account"
-            android:textSize="24sp"
+            android:importantForAccessibility="yes"
             android:textColor="@android:color/black"
-            android:layout_centerInParent="true"/>
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold"/>
     </RelativeLayout>
+
+    <View
+        android:id="@+id/anchor_shadow_topmenu"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shadow_bottom_navbar"
+        app:layout_constraintTop_toBottomOf="@id/topmenu"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -38,8 +57,7 @@
         android:layout_marginBottom="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topmenu"
-        app:layout_constraintBottom_toTopOf="@id/btn_lanjut">
+        app:layout_constraintTop_toBottomOf="@id/anchor_shadow_topmenu">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -47,6 +47,10 @@ class TransferVirtualAccountHome : Fragment(), OnSavedItemVaClickListener {
         binding.rvDaftarTersimpan.adapter = adapter
         observer()
         setupListeners()
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     private fun observer() {
