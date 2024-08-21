@@ -33,6 +33,9 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.finsera.common.utils.Constant.Companion.NAMA_KOTA_MERCHANT_QRIS
+import com.finsera.common.utils.Constant.Companion.NAMA_MERCHANT_QRIS
+import com.finsera.common.utils.Constant.Companion.NOMOR_TRX_MERCHANT_QRIS
 import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentCekRekeningAntarBankFormBinding
@@ -174,30 +177,37 @@ class QrisScanQRFragment : Fragment() {
                             }
                         }
                     } catch(e: JSONException) { // catch if qr code isn't json
-                        val merchantname = MerchantPresentedDecoder.decode(rawValue, false).merchantName
-                        val merchantAccountNo = MerchantPresentedDecoder.decode(rawValue, false).merchantAccountInformation
+                        val merchantName = MerchantPresentedDecoder.decode(rawValue, false).merchantName.replace("+", " ")
+                        val merchantCity = MerchantPresentedDecoder.decode(rawValue, false).merchantCity.replace("+", " ")
+                        val merchantAccountNo = MerchantPresentedDecoder.decode(rawValue, false).merchantAccountInformation.replace("+", " ")
 
                         withContext(Dispatchers.Main) {
-                            if(!merchantname.isNullOrEmpty()) {
-                                Toast.makeText(requireActivity(), "QRIS Ditemukan", Toast.LENGTH_SHORT)
-                                    .show()
+                            if(!merchantName.isNullOrEmpty()) {
+                                processQrisMerchant(merchantName, merchantCity, merchantAccountNo)
                             }
                         }
                     } catch(e: Exception) {
                         Log.d("Exception", e.message.toString())
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(requireActivity(), rawValue, Toast.LENGTH_SHORT).show()
-//                        }
                     } catch(t: Throwable) {
                         Log.d("Throwable", t.message.toString())
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(requireActivity(), rawValue, Toast.LENGTH_SHORT).show()
-//                        }
                     } finally {
                         scanner.close()
                     }
                 }
             }
+        }
+    }
+
+    private fun processQrisMerchant(merchantName: String, merchantCity: String, merchantAccountNo: String) {
+        if(findNavController().currentDestination?.id == R.id.qrisScanQRFragment) {
+            Toast.makeText(requireActivity(), "Merchant QRIS Ditemukan", Toast.LENGTH_SHORT)
+                .show()
+            val bundle = Bundle().apply {
+                putString(NAMA_MERCHANT_QRIS, merchantName)
+                putString(NAMA_KOTA_MERCHANT_QRIS, merchantCity)
+                putString(NOMOR_TRX_MERCHANT_QRIS, merchantAccountNo)
+            }
+            findNavController().navigate(R.id.action_qrisScanQRFragment_to_transferQrisMerchantFormFragment, bundle)
         }
     }
 
@@ -211,21 +221,20 @@ class QrisScanQRFragment : Fragment() {
                     }
 
                     if(uiState.isValidFinsera) {
-                        Toast.makeText(requireActivity(), "QRIS Ditemukan", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireActivity(), "Rekening Ditemukan", Toast.LENGTH_LONG).show()
                         if(findNavController().currentDestination?.id == R.id.qrisScanQRFragment) {
+                            val dataRekening = CekRekeningSesamaBundle(uiState.dataRekeningFinsera?.recipientName!!, uiState.dataRekeningFinsera?.accountnumRecipient!!)
                             val bundle = Bundle().apply {
-                                val dataRekening = CekRekeningSesamaBundle(uiState.dataRekeningFinsera?.recipientName!!, uiState.dataRekeningFinsera?.accountnumRecipient!!)
-                                val bundle = Bundle().apply {
-                                    putParcelable(Constant.DATA_REKENING_SESAMA_BUNDLE, dataRekening)
-                                }
-
-                                findNavController().navigate(R.id.action_qrisScanQRFragment_to_transferSesamaBankFormFragment, bundle)
-                                qrisScanQRViewModel.resetUiState()
+                                putParcelable(Constant.DATA_REKENING_SESAMA_BUNDLE, dataRekening)
                             }
+
+                            findNavController().navigate(R.id.action_qrisScanQRFragment_to_transferSesamaBankFormFragment, bundle)
+                            qrisScanQRViewModel.resetUiState()
                         }
                     }
 
                     if(uiState.isLoading) {
+                        Toast.makeText(requireActivity(), "QRIS Ditemukan. Sedang memproses...", Toast.LENGTH_SHORT).show()
                         binding.progressBar.visibility = View.VISIBLE
                     } else {
                         binding.progressBar.visibility = View.GONE
@@ -271,10 +280,10 @@ class QrisScanQRFragment : Fragment() {
     private fun permissionCameraDialog() {
         MaterialAlertDialogBuilder(requireActivity())
             .setTitle("Izin Aplikasi FinSera")
-            .setMessage("Akses Kamera")
+            .setMessage(resources.getString(R.string.izin_kamera_aplikasi_finsera_desc))
             .setNegativeButton("Tidak") { dialog, which ->
                 dialog.dismiss()
-                Snackbar.make(requireView(), "Fitur tidak dapat dijalankan karena izin penyimpanan file pada aplikasi FinSera tidak diizinkan", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), "Fitur tidak dapat dijalankan karena izin kamera pada aplikasi FinSera tidak diizinkan", Snackbar.LENGTH_SHORT).show()
             }
             .setPositiveButton("Ya") { dialog, which ->
                 requireActivity().openAppPermissionSettings()

@@ -90,8 +90,15 @@ class MutasiAdapter() : ListAdapter<Mutasi, MutasiAdapter.MutasiViewHolder>(DIFF
 
         private fun mutasiDescription(data: Mutasi) : String {
             val finalDesc = when(data.transactionInformation) {
-                "UANG_MASUK" -> "Terima Uang dari ${data.destinationName}"
-                "UANG_KELUAR" -> "Transfer Uang ke ${data.destinationName}"
+                "UANG_MASUK" -> {
+                    "Terima Uang dari ${data.destinationName}"
+                }
+                "UANG_KELUAR" -> {
+                    if(data.destinationBankName == "Qris") {
+
+                    }
+                    "Transfer Uang ke ${data.destinationName}"
+                }
                 else -> "${data.destinationName}"
             }
             return finalDesc

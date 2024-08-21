@@ -8,6 +8,7 @@ import com.finsera.domain.model.Bank
 import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.CekVa
+import com.finsera.domain.model.TransferQrisMerchant
 import com.finsera.domain.model.TransferSesama
 import com.finsera.domain.model.TransferVa
 import com.finsera.domain.repository.ITransferRepository
@@ -78,6 +79,24 @@ class TransferRepositoryImpl(
         }
     }
 
+    override suspend fun transferQrisMerchant(
+        merchantNo: String,
+        merchantName: String,
+        nominal: Double,
+        pin: String
+    ): TransferQrisMerchant {
+        val accessToken = localDataSource.getAccessToken()
+
+        val request = remoteDataSource.transferQrisMerchant(
+            accessToken,
+            merchantNo,
+            merchantName,
+            nominal,
+            pin
+        )
+
+        return DataMapper.transferQrisToDomain(request)
+    }
 
 
     override suspend fun getListBank(): List<Bank> {

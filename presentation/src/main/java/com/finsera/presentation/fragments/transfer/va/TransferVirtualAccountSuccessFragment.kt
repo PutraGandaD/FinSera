@@ -27,7 +27,6 @@ import com.finsera.common.utils.Constant
 import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentTransferVirtualAccountSuccessBinding
-import com.finsera.presentation.fragments.transfer.va.bundle.CekVaBundle
 import com.finsera.presentation.fragments.transfer.va.bundle.SuccesVaBundle
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -298,7 +297,7 @@ class TransferVirtualAccountSuccessFragment : Fragment() {
     private fun permissionStorageDialog() {
         MaterialAlertDialogBuilder(requireActivity())
             .setTitle("Izin Aplikasi FinSera")
-            .setMessage(resources.getString(R.string.izin_aplikasi_finsera_desc))
+            .setMessage(resources.getString(R.string.izin_penyimpanan_aplikasi_finsera_desc))
             .setNegativeButton("Tidak") { dialog, which ->
                 dialog.dismiss()
                 Snackbar.make(

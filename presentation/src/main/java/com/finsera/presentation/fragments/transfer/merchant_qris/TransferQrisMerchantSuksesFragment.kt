@@ -1,4 +1,4 @@
-package com.finsera.presentation.fragments.transfer.antar_bank
+package com.finsera.presentation.fragments.transfer.merchant_qris
 
 import android.Manifest
 import android.content.ContentValues
@@ -25,17 +25,20 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
 import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
-import com.finsera.domain.model.TransferAntar
+import com.finsera.domain.model.TransferQrisMerchant
+import com.finsera.domain.model.TransferSesama
 import com.finsera.presentation.R
-import com.finsera.presentation.databinding.FragmentTransferAntarBankSuksesBinding
+import com.finsera.presentation.databinding.FragmentTransferQrisMerchantFormBinding
+import com.finsera.presentation.databinding.FragmentTransferQrisMerchantSuksesBinding
+import com.finsera.presentation.databinding.FragmentTransferSesamaBankSuksesBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
-class TransferAntarBankSuksesFragment : Fragment() {
-    private var _binding: FragmentTransferAntarBankSuksesBinding? = null
+class TransferQrisMerchantSuksesFragment : Fragment() {
+    private var _binding: FragmentTransferQrisMerchantSuksesBinding? = null
     private val binding get() = _binding!!
 
     private var imageUri: Uri? = null
@@ -44,43 +47,49 @@ class TransferAntarBankSuksesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentTransferAntarBankSuksesBinding.inflate(inflater, container, false)
+        _binding = FragmentTransferQrisMerchantSuksesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        getBundle()
+        handleBtn()
+    }
+
+    private fun getBundle() {
         val namaPengirim = arguments?.getString(Constant.NAMA_NASABAH)
         val rekeningPengirim = arguments?.getString(Constant.NOMOR_REKENING_NASABAH)
-
-        val dataTransferBerhasil = arguments?.getParcelable<TransferAntar>(Constant.TRANSFER_ANTAR_BERHASIL_BUNDLE)?.let {
+        val noTrxMerchant = arguments?.getString(Constant.NOMOR_TRX_MERCHANT_QRIS)
+        arguments?.getParcelable<TransferQrisMerchant>(Constant.TRANSFER_QRIS_MERCHANT_BERHASIL_BUNDLE)?.let {
             binding.cardTransaksiBerhasil.tvDate.text = it.transactionDate
             binding.cardTransaksiBerhasil.tvNominal.text = it.nominal
-            binding.cardTransaksiBerhasil.tvBiayaAdmin.text = it.adminFee
+            binding.cardTransaksiBerhasil.tvBiayaAdmin.text = "Gratis"
             binding.cardTransaksiBerhasil.tvNomorTransaksi.text = it.transactionNum
 
-            binding.cardTransaksiBerhasil.tvBankTujuan.text = "Bank ${it.bankName}"
-            binding.cardTransaksiBerhasil.tvNamaPenerima.text = it.nameRecipient
-            binding.cardTransaksiBerhasil.tvRekeningTujuan.text = it.accountnumRecipient
-            binding.cardTransaksiBerhasil.tvCatatan.text = it.note
+            binding.cardTransaksiBerhasil.tvJenisTransaksi.text = "QRIS"
+            binding.cardTransaksiBerhasil.tvNamaMerchant.text = it.nameRecipient
+            binding.cardTransaksiBerhasil.tvNoMerchant.text = noTrxMerchant
 
             binding.cardTransaksiBerhasil.tvNamaPengirim.text = namaPengirim
             binding.cardTransaksiBerhasil.tvRekeningPengirim.text = rekeningPengirim
 
             binding.cardTransaksiBerhasilScreenshot.tvDate.text = it.transactionDate
             binding.cardTransaksiBerhasilScreenshot.tvNominal.text = it.nominal
-            binding.cardTransaksiBerhasilScreenshot.tvBiayaAdmin.text = it.adminFee
+            binding.cardTransaksiBerhasilScreenshot.tvBiayaAdmin.text = "Gratis"
             binding.cardTransaksiBerhasilScreenshot.tvNomorTransaksi.text = it.transactionNum
 
-            binding.cardTransaksiBerhasilScreenshot.tvBankTujuan.text = "Bank ${it.bankName}"
-            binding.cardTransaksiBerhasilScreenshot.tvNamaPenerima.text = it.nameRecipient
-            binding.cardTransaksiBerhasilScreenshot.tvRekeningTujuan.text = it.accountnumRecipient
-            binding.cardTransaksiBerhasilScreenshot.tvCatatan.text = it.note
+            binding.cardTransaksiBerhasilScreenshot.tvJenisTransaksi.text = "QRIS"
+            binding.cardTransaksiBerhasilScreenshot.tvNamaMerchant.text = it.nameRecipient
+            binding.cardTransaksiBerhasilScreenshot.tvNoMerchant.text = noTrxMerchant
 
             binding.cardTransaksiBerhasilScreenshot.tvNamaPengirim.text = namaPengirim
             binding.cardTransaksiBerhasilScreenshot.tvRekeningPengirim.text = rekeningPengirim
         }
+    }
 
+    private fun handleBtn() {
         binding.cardTransaksiBerhasil.btnBackToMenu.setOnClickListener {
             findNavController().popBackStack(R.id.homeFragment, false)
         }
@@ -94,11 +103,92 @@ class TransferAntarBankSuksesFragment : Fragment() {
         shareButton.setOnClickListener {
             safeShareImageTo()
         }
-
-        setAccessibilityDescriptions()
     }
 
-    fun getBitmapFromUiView(context: Context, myView: View) : Bitmap {
+    private fun safeSaveToGallery() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                saveToGallery()
+            }
+
+            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                // Provide an additional rationale to the user if the permission was not granted
+                // and the user would benefit from additional context for the use of the permission.
+                permissionStorageDialog()
+            }
+
+            else -> {
+                // Request the permission
+                requestPermissionSafeSaveToGallery.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }
+    }
+
+    private fun saveToGallery() {
+        saveToGalleryMode()
+        val bitmap = getBitmapFromUiView(requireActivity(), binding.transferQrisMerchantBerhasil)
+        imageUri = saveBitmapImage(bitmap)
+    }
+
+    private val requestPermissionSafeSaveToGallery = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            saveToGallery()
+        } else {
+            permissionStorageDialog()
+        }
+    }
+
+    private fun safeShareImageTo() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                shareImageTo()
+            }
+
+            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                // Provide an additional rationale to the user if the permission was not granted
+                // and the user would benefit from additional context for the use of the permission.
+                permissionStorageDialog()
+            }
+
+            else -> {
+                // Request the permission
+                requestPermissionSafeShareImageTo.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }
+    }
+
+    private fun shareImageTo() {
+        safeSaveToGallery()
+        val shareIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            // Example: content://com.google.android.apps.photos.contentprovider/...
+            putExtra(Intent.EXTRA_STREAM, imageUri)
+            type = "image/jpeg"
+        }
+        startActivity(Intent.createChooser(shareIntent, null))
+    }
+
+    private val requestPermissionSafeShareImageTo = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            shareImageTo()
+        } else {
+            // Explain to the user that the feature is unavailable because the
+            // features require a permission that the user has denied.
+            permissionStorageDialog()
+        }
+    }
+
+    private fun getBitmapFromUiView(context: Context, myView: View) : Bitmap {
         val bitmap = Bitmap.createBitmap(
             myView.width,
             myView.height,
@@ -173,122 +263,17 @@ class TransferAntarBankSuksesFragment : Fragment() {
         return uri
     }
 
-    private fun saveToGallery() {
-        saveToGalleryMode()
-        val bitmap = getBitmapFromUiView(requireActivity(), binding.transferAntarBankBerhasil)
-        imageUri = saveBitmapImage(bitmap)
-    }
-
-    private fun shareImageTo() {
-        safeSaveToGallery()
-        val shareIntent: Intent = Intent().apply {
-            action = Intent.ACTION_SEND
-            // Example: content://com.google.android.apps.photos.contentprovider/...
-            putExtra(Intent.EXTRA_STREAM, imageUri)
-            type = "image/jpeg"
-        }
-        startActivity(Intent.createChooser(shareIntent, null))
-    }
-
     private fun saveToGalleryMode() {
-        binding.transferAntarBankBerhasil.apply {
+        binding.transferQrisMerchantBerhasil.apply {
             binding.cardTransaksiBerhasil.root.visibility = View.INVISIBLE
             binding.cardTransaksiBerhasilScreenshot.root.visibility = View.VISIBLE
         }
     }
 
     private fun normalMode() {
-        binding.transferAntarBankBerhasil.apply {
+        binding.transferQrisMerchantBerhasil.apply {
             binding.cardTransaksiBerhasil.root.visibility = View.VISIBLE
             binding.cardTransaksiBerhasilScreenshot.root.visibility = View.INVISIBLE
-        }
-    }
-
-    private fun formatDigitNumberAccessibility(digitNumberTalkback: String): String {
-        return digitNumberTalkback.map { it.toString() }.joinToString(" ")
-    }
-
-    private fun setAccessibilityDescriptions() {
-        binding.cardTransaksiBerhasil.apply {
-            val formattedDigitNumberBankRecipient = formatDigitNumberAccessibility(tvRekeningTujuan.text.toString())
-            val formattedDigitNumberBankAccount = formatDigitNumberAccessibility(tvRekeningPengirim.text.toString())
-            val formattedDigitNumberTransaction = formatDigitNumberAccessibility(tvNomorTransaksi.text.toString())
-            tvDate.contentDescription = getString(R.string.tanggal_transaksi_desc, tvDate.text)
-            tvNominal.contentDescription = getString(R.string.nominal_transfer_desc, tvNominal.text)
-            tvBiayaAdmin.contentDescription = getString(R.string.biaya_admin_desc, tvBiayaAdmin.text)
-            tvNomorTransaksi.contentDescription = getString(R.string.nomor_transaksi_desc, formattedDigitNumberTransaction)
-            tvNamaPengirim.contentDescription = getString(R.string.nama_pengirim_desc, tvNamaPengirim.text)
-            tvRekeningPengirim.contentDescription = getString(R.string.rekening_pengirim_desc, formattedDigitNumberBankAccount)
-            tvBankTujuan.contentDescription = getString(R.string.bank_tujuan_desc, tvBankTujuan.text)
-            tvNamaPenerima.contentDescription = getString(R.string.nama_penerima_desc, tvNamaPenerima.text)
-            tvRekeningTujuan.contentDescription = getString(R.string.rekening_tujuan_desc, formattedDigitNumberBankRecipient)
-            tvCatatan.contentDescription = getString(R.string.catatan_desc, tvCatatan.text)
-        }
-    }
-
-    private fun safeSaveToGallery() {
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                saveToGallery()
-            }
-
-            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
-                // Provide an additional rationale to the user if the permission was not granted
-                // and the user would benefit from additional context for the use of the permission.
-                permissionStorageDialog()
-            }
-
-            else -> {
-                // Request the permission
-                requestPermissionSafeSaveToGallery.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            }
-        }
-    }
-
-    private fun safeShareImageTo() {
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                shareImageTo()
-            }
-
-            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
-                // Provide an additional rationale to the user if the permission was not granted
-                // and the user would benefit from additional context for the use of the permission.
-                permissionStorageDialog()
-            }
-
-            else -> {
-                // Request the permission
-                requestPermissionSafeShareImageTo.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            }
-        }
-    }
-
-    private val requestPermissionSafeSaveToGallery = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            saveToGallery()
-        } else {
-            permissionStorageDialog()
-        }
-    }
-
-    private val requestPermissionSafeShareImageTo = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            shareImageTo()
-        } else {
-            // Explain to the user that the feature is unavailable because the
-            // features require a permission that the user has denied.
-            permissionStorageDialog()
         }
     }
 
@@ -305,5 +290,4 @@ class TransferAntarBankSuksesFragment : Fragment() {
             }
             .show()
     }
-
 }

@@ -5,6 +5,7 @@ import com.finsera.common.utils.Resource
 import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.CekVa
+import com.finsera.domain.model.TransferQrisMerchant
 import com.finsera.domain.model.TransferSesama
 import com.finsera.domain.model.TransferVa
 import kotlinx.coroutines.flow.Flow
@@ -44,4 +45,11 @@ interface ITransferRepository {
         vaAccountNum: String,
         pin: String
     ): Flow<Resource<TransferVa>>
+
+    suspend fun transferQrisMerchant(
+        merchantNo: String,
+        merchantName: String,
+        nominal: Double,
+        pin: String
+    ) : TransferQrisMerchant
 }

@@ -81,6 +81,7 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
         observer()
         handleBackButton()
         filterButtonOnClick()
+        setUpRvMutasi()
 
         binding.tvAccountNumberValue.text = mutasiViewModel.userInfo?.second
 
@@ -98,6 +99,10 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
         val formattedAccountNumber = formatAccountNumberForTalkBack(accountNumber)
         binding.tvAccountNumberValue.contentDescription = getString(R.string.account_number_label) + " " + formattedAccountNumber
 
+    }
+
+    private fun setUpRvMutasi() {
+        binding.rvMutasi.adapter = mutasiAdapter
     }
 
     private fun observer() {
@@ -158,22 +163,16 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
     }
 
     private fun showResultOfFilter() {
-        binding.rvMutasi.visibility = View.VISIBLE
+        binding.layoutRvMutasi.visibility = View.VISIBLE
         binding.btnDownload.visibility = View.VISIBLE
         binding.viewFilter.clMutasiFilter.visibility = View.INVISIBLE
-
-        with(binding.rvMutasi) {
-            layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
-            adapter = mutasiAdapter
-        }
 
         isResultMutasiShowed = true
     }
 
     private fun showFilter() {
         binding.viewFilter.clMutasiFilter.visibility = View.VISIBLE
-        binding.rvMutasi.visibility = View.INVISIBLE
+        binding.layoutRvMutasi.visibility = View.INVISIBLE
         binding.btnDownload.visibility = View.INVISIBLE
         isResultMutasiShowed = false
     }

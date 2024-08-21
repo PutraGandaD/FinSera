@@ -10,6 +10,7 @@ import com.finsera.domain.usecase.auth.LoginUserUseCase
 import com.finsera.domain.usecase.infosaldo.InfoSaldoUseCase
 import com.finsera.domain.usecase.mutasi.DownloadMutasiUseCase
 import com.finsera.domain.usecase.mutasi.MutasiUseCase
+import com.finsera.domain.usecase.qris.TransferQrisMerchantUseCase
 import com.finsera.domain.usecase.transfer.antar_bank.CariDaftarTersimpanAntarUseCase
 import com.finsera.domain.usecase.transfer.antar_bank.CekRekeningAntarUseCase
 import com.finsera.domain.usecase.transfer.antar_bank.GetDaftarTersimpanAntarUseCase
@@ -45,12 +46,9 @@ object DomainModule {
         factory { CekRekeningAntarUseCase(get(), get()) }
         factory { CekVirtualAccountUseCase(get()) }
         factory { TransferVaUseCase(get()) }
-
-
         factory { GetDaftarTersimpanVaUseCase(get()) }
         factory { TambahDaftarTersimpanVaUseCase(get()) }
         factory { CariDaftarVaTersimpanUseCase(get()) }
-
         factory { GetListBankUseCase(get()) }
         factory { TransferAntarBankUseCase(get(), get()) }
         factory { GetDaftarTersimpanAntarUseCase(get()) }
@@ -58,5 +56,6 @@ object DomainModule {
         factory { CariDaftarTersimpanAntarUseCase(get()) }
         factory { CheckAppPinCreatedUseCase(get()) }
         factory { CreateAppPinUseCase(get()) }
+        factory { TransferQrisMerchantUseCase(get(), get()) }
     }
 }
