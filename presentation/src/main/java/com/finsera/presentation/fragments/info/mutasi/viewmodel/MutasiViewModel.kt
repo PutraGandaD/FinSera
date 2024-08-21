@@ -1,8 +1,5 @@
 package com.finsera.presentation.fragments.info.mutasi.viewmodel
 
-import android.os.Build
-import android.provider.ContactsContract.CommonDataKinds.Email.TYPE_MOBILE
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,10 +34,10 @@ class MutasiViewModel(
         getUserInfo()
     }
 
-    fun getMutasi(startDate: String?, endDate: String?) {
+    fun getMutasi(startDate: String?, endDate: String?, page: Int) {
         viewModelScope.launch {
             if(connectivityManager.hasInternetConnection()) {
-                mutasiUseCase.invoke(startDate, endDate).collectLatest { result ->
+                mutasiUseCase.invoke(startDate, endDate, page).collectLatest { result ->
                     when (result) {
                         is Resource.Loading -> {
                             _mutasiUiState.update { uiState ->
@@ -90,9 +87,13 @@ class MutasiViewModel(
         }
     }
 
-    fun dataSubmittedToAdapter() {
+    fun resetUiState() {
         _mutasiUiState.update { currentUiState ->
-            currentUiState.copy(mutasi = emptyList())
+            currentUiState.copy(
+                isLoading = false,
+                mutasi = emptyList(),
+                message = null
+            )
         }
     }
 

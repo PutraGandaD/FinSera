@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -23,15 +24,17 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.finsera.common.utils.Resource
 import com.finsera.common.utils.dialog.DatePickerFragment
 import com.finsera.common.utils.network.ConnectivityManager
+import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
+import com.finsera.domain.model.Mutasi
 import com.finsera.presentation.R
 import com.finsera.presentation.adapters.MutasiAdapter
 import com.finsera.presentation.databinding.FragmentMutasiBinding
 import com.finsera.presentation.databinding.ViewMutasiFilterBinding
 import com.finsera.presentation.fragments.info.mutasi.viewmodel.MutasiViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -61,6 +64,9 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
     private val mutasiAdapter = MutasiAdapter()
     private var isResultMutasiShowed = false
 
+    private var PAGE_COUNT_REQUEST = 1
+    private var reachedLastPage = false
+
     private var hasAnnouncedScreen = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,8 +88,8 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
         handleBackButton()
         filterButtonOnClick()
         setUpRvMutasi()
-
-        binding.tvAccountNumberValue.text = mutasiViewModel.userInfo?.second
+        setUserInfo()
+        handleScrollPagination()
 
         binding.btnDownload.setOnClickListener {
             requestStoragePermission()
@@ -93,52 +99,89 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
             view.announceForAccessibility(getString(R.string.screen_mutasi_transaksi))
             hasAnnouncedScreen = true
         }
-
-        val accountNumber = mutasiViewModel.userInfo?.second ?: ""
-        binding.tvAccountNumberValue.text = accountNumber
-        val formattedAccountNumber = formatAccountNumberForTalkBack(accountNumber)
-        binding.tvAccountNumberValue.contentDescription = getString(R.string.account_number_label) + " " + formattedAccountNumber
-
     }
 
     private fun setUpRvMutasi() {
         binding.rvMutasi.adapter = mutasiAdapter
     }
 
+    private fun handleScrollPagination() {
+        binding.nestedRvMutasi.viewTreeObserver.addOnScrollChangedListener(object : ViewTreeObserver.OnScrollChangedListener {
+            override fun onScrollChanged() {
+                if (binding.nestedRvMutasi != null) {
+                    if (binding.nestedRvMutasi.getChildAt(0).getBottom() <= (binding.nestedRvMutasi.getHeight() + binding.nestedRvMutasi.getScrollY())) {
+                        if(!reachedLastPage) {
+                            PAGE_COUNT_REQUEST++
+                            mutasiViewModel.getMutasi(startDate, endDate, PAGE_COUNT_REQUEST)
+                        } else {
+                            Snackbar.make(requireView(), "Anda sudah mencapai mutasi terakhir di tanggal ini", Snackbar.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        })
+    }
+
+    private fun setUserInfo() {
+        binding.tvAccountNumberValue.text = mutasiViewModel.userInfo?.second
+        val accountNumber = mutasiViewModel.userInfo?.second ?: ""
+        binding.tvAccountNumberValue.text = accountNumber
+        val formattedAccountNumber = formatAccountNumberForTalkBack(accountNumber)
+        binding.tvAccountNumberValue.contentDescription = getString(R.string.account_number_label) + " " + formattedAccountNumber
+    }
+
     private fun observer() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mutasiViewModel.mutasiUiState.collectLatest { uiState ->
-                    if (uiState.isLoading) {
-                        binding.progressBar.visibility = View.VISIBLE
-                        binding.btnBack.isEnabled = false
-                        binding.btnDownload.isEnabled = false
-                    } else {
-                        binding.progressBar.visibility = View.GONE
-                        binding.btnBack.isEnabled = true
-                        binding.btnDownload.isEnabled = true
+                    if(uiState.isLoading) {
+                        binding.progressBarMutasiItem.visibility = View.VISIBLE
                     }
 
-                    uiState.message?.let {
-                        Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                    uiState.message?.let { message ->
+                        when {
+                            PAGE_COUNT_REQUEST == 1 && message == "Transaksi tidak ditemukan" -> {
+                                Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+                            }
+                            PAGE_COUNT_REQUEST == 1 && message != "Transaksi tidak ditemukan" -> {
+                                Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+                            }
+                            PAGE_COUNT_REQUEST > 1 && message == "Transaksi tidak ditemukan" -> {
+                                reachedLastPage = true
+                                binding.progressBarMutasiItem.visibility = View.GONE
+                                Snackbar.make(requireView(), "Anda sudah mencapai mutasi terakhir di tanggal ini", Snackbar.LENGTH_SHORT).show()
+                            }
+                        }
                         mutasiViewModel.messageShown()
                     }
 
-                    if (uiState.mutasi.isNotEmpty()) {
+                    if (uiState.mutasi.isNotEmpty() && PAGE_COUNT_REQUEST == 1) {
                         mutasiAdapter.submitList(uiState.mutasi)
-                        mutasiViewModel.dataSubmittedToAdapter()
+                        mutasiViewModel.resetUiState()
+                    }
+
+                    if (uiState.mutasi.isNotEmpty() && PAGE_COUNT_REQUEST > 1) {
+                        addNewDataToRv(uiState.mutasi)
+                        mutasiViewModel.resetUiState()
                     }
                 }
             }
         }
     }
 
+    private fun addNewDataToRv(newUsers: List<Mutasi>?) {
+        val currentList = mutasiAdapter.currentList.toMutableList() // copy current data from rv
+        currentList.addAll(newUsers ?: emptyList()) // add data
+        mutasiAdapter.submitList(currentList) // submit latest data
+    }
+
     private fun handleBackButton() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if(isResultMutasiShowed) {
-                mutasiAdapter.submitList(emptyList())
                 resetAllInput()
                 showFilter()
+                mutasiAdapter.submitList(emptyList())
+                mutasiViewModel.resetUiState()
             } else {
                 findNavController().popBackStack()
             }
@@ -146,9 +189,10 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
 
         binding.btnBack.setOnClickListener {
             if(isResultMutasiShowed) {
-                mutasiAdapter.submitList(emptyList())
                 resetAllInput()
                 showFilter()
+                mutasiAdapter.submitList(emptyList())
+                mutasiViewModel.resetUiState()
             } else {
                 findNavController().popBackStack()
             }
@@ -158,6 +202,8 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
     private fun resetAllInput() {
         startDate = "" // reset startdate and enddate
         endDate = ""
+        PAGE_COUNT_REQUEST = 1
+        reachedLastPage = false
         binding.viewFilter.tvStartDateValue.text = "DD-MM-YYYY"
         binding.viewFilter.tvEndDateValue.text = "DD-MM-YYYY"
     }
@@ -187,7 +233,7 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
 
                 startDate = date
                 endDate = date
-                mutasiViewModel.getMutasi(date, date)
+                mutasiViewModel.getMutasi(date, date, PAGE_COUNT_REQUEST)
                 showResultOfFilter()
             } else {
                 Snackbar.make(requireView(), "Tidak ada koneksi internet", Snackbar.LENGTH_SHORT).show()
@@ -206,7 +252,7 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
                 calendar.add(Calendar.DAY_OF_YEAR, 7) // reset to today's date (current date + 7 days)
                 endDate = dateFormat.format(calendar.time)
 
-                mutasiViewModel.getMutasi(startDate, endDate)
+                mutasiViewModel.getMutasi(startDate, endDate, PAGE_COUNT_REQUEST)
                 showResultOfFilter()
             } else {
                 Snackbar.make(requireView(), "Tidak ada koneksi internet", Snackbar.LENGTH_SHORT).show()
@@ -218,7 +264,7 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
                 val calendar = Calendar.getInstance()
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
 
-                calendar.set(Calendar.DAY_OF_MONTH, 1)
+                calendar.set(Calendar.DAY_OF_MONTH, PAGE_COUNT_REQUEST)
                 val firstDayOfMonth = dateFormat.format(calendar.time)
 
                 calendar.set(
@@ -230,7 +276,7 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
                 startDate = firstDayOfMonth
                 endDate = lastDayOfMonth
 
-                mutasiViewModel.getMutasi(firstDayOfMonth, lastDayOfMonth)
+                mutasiViewModel.getMutasi(firstDayOfMonth, lastDayOfMonth, PAGE_COUNT_REQUEST)
                 showResultOfFilter()
             } else {
                 Snackbar.make(requireView(), "Tidak ada koneksi internet", Snackbar.LENGTH_SHORT).show()
@@ -264,12 +310,12 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
                     return@setOnClickListener
                 } else if (startDate.isNotEmpty() && endDate.isNotEmpty()) {
                     mutasiViewModel.getMutasi(
-                        formatDateString(startDate), formatDateString(endDate)
+                        formatDateString(startDate), formatDateString(endDate), PAGE_COUNT_REQUEST
                     )
                     showResultOfFilter()
                 } else {
                     mutasiViewModel.getMutasi(
-                        "", ""
+                        "", "", PAGE_COUNT_REQUEST
                     )
                     showResultOfFilter()
                 }
@@ -303,19 +349,6 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
         }
     }
 
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            // Permission is granted. Continue with the operation
-            downloadFile()
-        } else {
-            // Explain to the user that the feature is unavailable because the
-            // features require a permission that the user has denied.
-            Snackbar.make(requireView(), "Izin penyimpanan file pada aplikasi FinSera belum diizinkan. Silahkan hidupkan izin penyimpanan file pada aplikasi FinSera di pengaturan handphone anda.", Snackbar.LENGTH_SHORT).show()
-        }
-    }
-
     private fun requestStoragePermission() {
         when {
             ContextCompat.checkSelfPermission(
@@ -329,13 +362,26 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
             shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
                 // Provide an additional rationale to the user if the permission was not granted
                 // and the user would benefit from additional context for the use of the permission.
-                Toast.makeText(requireContext(), "Storage permission is required to save files.", Toast.LENGTH_LONG).show()
+                permissionStorageDialog()
             }
 
             else -> {
                 // Request the permission
                 requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
+        }
+    }
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // Permission is granted. Continue with the operation
+            downloadFile()
+        } else {
+            // Explain to the user that the feature is unavailable because the
+            // features require a permission that the user has denied.
+            permissionStorageDialog()
         }
     }
 
@@ -361,6 +407,7 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
             }
         }
     }
+
 
     private fun saveFileToDisk(body: ResponseBody?) {
         if (body == null) return
@@ -459,6 +506,20 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
 
     private fun formatAccountNumberForTalkBack(accountNumber: String): String {
         return accountNumber.map { it.toString() }.joinToString(" ")
+    }
+
+    private fun permissionStorageDialog() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Izin Aplikasi FinSera")
+            .setMessage(resources.getString(R.string.izin_penyimpanan_aplikasi_finsera_desc))
+            .setNegativeButton("Tidak") { dialog, which ->
+                dialog.dismiss()
+                Snackbar.make(requireView(), "Fitur tidak dapat dijalankan karena izin penyimpanan file pada aplikasi FinSera tidak diizinkan", Snackbar.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("Ya") { dialog, which ->
+                requireActivity().openAppPermissionSettings()
+            }
+            .show()
     }
 
 }

@@ -15,10 +15,10 @@ import java.io.IOException
 class MutasiUseCase (
     private val authRepository: IAuthRepository,
     private val mutasiRepository: IMutasiRepository) {
-    suspend operator fun invoke(startDate: String?, endDate: String?) : Flow<Resource<List<Mutasi>?>> = flow {
+    suspend operator fun invoke(startDate: String?, endDate: String?, page: Int) : Flow<Resource<List<Mutasi>?>> = flow {
         emit(Resource.Loading())
         try {
-            val response = mutasiRepository.getMutasi(startDate, endDate)
+            val response = mutasiRepository.getMutasi(startDate, endDate, page)
             emit(Resource.Success(response))
         } catch (t: Throwable) {
             when (t) {
@@ -35,7 +35,7 @@ class MutasiUseCase (
                                 401 -> {
                                     val getRefreshToken = authRepository.getRefreshToken()
                                     authRepository.refreshAccessToken(getRefreshToken)
-                                    val response = mutasiRepository.getMutasi(startDate, endDate)
+                                    val response = mutasiRepository.getMutasi(startDate, endDate, page)
                                     emit(Resource.Success(response))
                                 }
                                 404 -> {

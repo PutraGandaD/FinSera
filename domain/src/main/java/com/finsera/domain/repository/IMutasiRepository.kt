@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 import okhttp3.ResponseBody
 
 interface IMutasiRepository {
-    suspend fun getMutasi(startDate: String?, endDate: String?) : List<Mutasi>?
+    suspend fun getMutasi(startDate: String?, endDate: String?, page: Int) : List<Mutasi>?
     suspend fun downloadMutasiFile(startDate: String, endDate: String): ResponseBody
 }

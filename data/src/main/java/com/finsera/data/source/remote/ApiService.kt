@@ -51,6 +51,7 @@ interface ApiService {
         @Header("Authorization") accessToken: String,
         @Query("startDate") startDate: String?,
         @Query("endDate") endDate: String?,
+        @Query("page") page: Int
     ): MutasiResponse
 
     @POST("transaction/transaction-intra/check")
@@ -88,8 +89,6 @@ interface ApiService {
         @Header("Authorization") accessToken: String,
         @Body raw: JsonObject
     ) : TransferEWalletResponse
-
-
 
     @GET("mutasi/download")
     suspend fun getDownloadMutasi(
