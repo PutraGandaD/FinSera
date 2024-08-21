@@ -2,9 +2,12 @@ package com.finsera.presentation.fragments.qris
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Base64
 import android.util.Log
 import android.util.Size
@@ -33,6 +36,10 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import com.finsera.common.utils.Constant.Companion.NAMA_KOTA_MERCHANT_QRIS
+import com.finsera.common.utils.Constant.Companion.NAMA_MERCHANT_QRIS
+import com.finsera.common.utils.Constant.Companion.NOMOR_TRX_MERCHANT_QRIS
 import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentCekRekeningAntarBankFormBinding
@@ -66,25 +73,37 @@ class QrisScanQRFragment : Fragment() {
 
     private var noRekening = ""
 
+    private lateinit var vibrator: Vibrator
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentQrisScanQRBinding.inflate(inflater, container, false)
         cameraExecutor = Executors.newSingleThreadExecutor()
+        vibrator = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         requestCameraPermission()
         observer()
+        handleBtn()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
         cameraExecutor.shutdown()
+    }
+
+    private fun handleBtn() {
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
+        binding.btnQrShare.setOnClickListener {
+            findNavController().navigate(R.id.action_qrisScanQRFragment_to_qrisShareFragment)
+        }
     }
 
     private fun startCamera() {
@@ -174,30 +193,38 @@ class QrisScanQRFragment : Fragment() {
                             }
                         }
                     } catch(e: JSONException) { // catch if qr code isn't json
-                        val merchantname = MerchantPresentedDecoder.decode(rawValue, false).merchantName
-                        val merchantAccountNo = MerchantPresentedDecoder.decode(rawValue, false).merchantAccountInformation
+                        val merchantName = MerchantPresentedDecoder.decode(rawValue, false).merchantName.replace("+", " ")
+                        val merchantCity = MerchantPresentedDecoder.decode(rawValue, false).merchantCity.replace("+", " ")
+                        val merchantAccountNo = MerchantPresentedDecoder.decode(rawValue, false).merchantAccountInformation.replace("+", " ")
 
                         withContext(Dispatchers.Main) {
-                            if(!merchantname.isNullOrEmpty()) {
-                                Toast.makeText(requireActivity(), "QRIS Ditemukan", Toast.LENGTH_SHORT)
-                                    .show()
+                            if(!merchantName.isNullOrEmpty()) {
+                                startVibration()
+                                processQrisMerchant(merchantName, merchantCity, merchantAccountNo)
                             }
                         }
                     } catch(e: Exception) {
                         Log.d("Exception", e.message.toString())
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(requireActivity(), rawValue, Toast.LENGTH_SHORT).show()
-//                        }
                     } catch(t: Throwable) {
                         Log.d("Throwable", t.message.toString())
-//                        withContext(Dispatchers.Main) {
-//                            Toast.makeText(requireActivity(), rawValue, Toast.LENGTH_SHORT).show()
-//                        }
                     } finally {
                         scanner.close()
                     }
                 }
             }
+        }
+    }
+
+    private fun processQrisMerchant(merchantName: String, merchantCity: String, merchantAccountNo: String) {
+        if(findNavController().currentDestination?.id == R.id.qrisScanQRFragment) {
+            Toast.makeText(requireActivity(), "Merchant QRIS Ditemukan", Toast.LENGTH_SHORT)
+                .show()
+            val bundle = Bundle().apply {
+                putString(NAMA_MERCHANT_QRIS, merchantName)
+                putString(NAMA_KOTA_MERCHANT_QRIS, merchantCity)
+                putString(NOMOR_TRX_MERCHANT_QRIS, merchantAccountNo)
+            }
+            findNavController().navigate(R.id.action_qrisScanQRFragment_to_transferQrisMerchantFormFragment, bundle)
         }
     }
 
@@ -211,22 +238,22 @@ class QrisScanQRFragment : Fragment() {
                     }
 
                     if(uiState.isValidFinsera) {
-                        Toast.makeText(requireActivity(), "QRIS Ditemukan", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireActivity(), "Rekening Ditemukan", Toast.LENGTH_LONG).show()
                         if(findNavController().currentDestination?.id == R.id.qrisScanQRFragment) {
+                            val dataRekening = CekRekeningSesamaBundle(uiState.dataRekeningFinsera?.recipientName!!, uiState.dataRekeningFinsera?.accountnumRecipient!!)
                             val bundle = Bundle().apply {
-                                val dataRekening = CekRekeningSesamaBundle(uiState.dataRekeningFinsera?.recipientName!!, uiState.dataRekeningFinsera?.accountnumRecipient!!)
-                                val bundle = Bundle().apply {
-                                    putParcelable(Constant.DATA_REKENING_SESAMA_BUNDLE, dataRekening)
-                                }
-
-                                findNavController().navigate(R.id.action_qrisScanQRFragment_to_transferSesamaBankFormFragment, bundle)
-                                qrisScanQRViewModel.resetUiState()
+                                putParcelable(Constant.DATA_REKENING_SESAMA_BUNDLE, dataRekening)
                             }
+
+                            findNavController().navigate(R.id.action_qrisScanQRFragment_to_transferSesamaBankFormFragment, bundle)
+                            qrisScanQRViewModel.resetUiState()
                         }
                     }
 
                     if(uiState.isLoading) {
+                        Toast.makeText(requireActivity(), "QRIS Ditemukan. Sedang memproses...", Toast.LENGTH_SHORT).show()
                         binding.progressBar.visibility = View.VISIBLE
+                        startVibration()
                     } else {
                         binding.progressBar.visibility = View.GONE
                     }
@@ -271,14 +298,26 @@ class QrisScanQRFragment : Fragment() {
     private fun permissionCameraDialog() {
         MaterialAlertDialogBuilder(requireActivity())
             .setTitle("Izin Aplikasi FinSera")
-            .setMessage("Akses Kamera")
+            .setMessage(resources.getString(R.string.izin_kamera_aplikasi_finsera_desc))
             .setNegativeButton("Tidak") { dialog, which ->
                 dialog.dismiss()
-                Snackbar.make(requireView(), "Fitur tidak dapat dijalankan karena izin penyimpanan file pada aplikasi FinSera tidak diizinkan", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), "Fitur tidak dapat dijalankan karena izin kamera pada aplikasi FinSera tidak diizinkan", Snackbar.LENGTH_SHORT).show()
+                findNavController().popBackStack()
             }
             .setPositiveButton("Ya") { dialog, which ->
                 requireActivity().openAppPermissionSettings()
             }
             .show()
+    }
+
+    private fun startVibration() {
+        val vibrationDuration = 1000L
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val vibrationEffect = VibrationEffect.createOneShot(vibrationDuration, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        } else {
+            vibrator.vibrate(vibrationDuration)
+        }
     }
 }

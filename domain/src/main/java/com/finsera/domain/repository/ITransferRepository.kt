@@ -6,6 +6,7 @@ import com.finsera.domain.model.CekEWallet
 import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.CekVa
+import com.finsera.domain.model.TransferQrisMerchant
 import com.finsera.domain.model.TransferEWallet
 import com.finsera.domain.model.TransferSesama
 import com.finsera.domain.model.TransferVa
@@ -46,6 +47,13 @@ interface ITransferRepository {
         vaAccountNum: String,
         pin: String
     ): Flow<Resource<TransferVa>>
+
+    suspend fun transferQrisMerchant(
+        merchantNo: String,
+        merchantName: String,
+        nominal: Double,
+        pin: String
+    ) : TransferQrisMerchant
 
     suspend fun cekDataEWallet(
         eWalletId: Int,

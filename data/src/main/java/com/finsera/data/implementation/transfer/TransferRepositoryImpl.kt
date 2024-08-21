@@ -9,6 +9,7 @@ import com.finsera.domain.model.CekEWallet
 import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.CekVa
+import com.finsera.domain.model.TransferQrisMerchant
 import com.finsera.domain.model.TransferEWallet
 import com.finsera.domain.model.TransferSesama
 import com.finsera.domain.model.TransferVa
@@ -79,6 +80,25 @@ class TransferRepositoryImpl(
             }
         }
     }
+    override suspend fun transferQrisMerchant(
+        merchantNo: String,
+        merchantName: String,
+        nominal: Double,
+        pin: String
+    ): TransferQrisMerchant {
+        val accessToken = localDataSource.getAccessToken()
+
+        val request = remoteDataSource.transferQrisMerchant(
+            accessToken,
+            merchantNo,
+            merchantName,
+            nominal,
+            pin
+        )
+
+        return DataMapper.transferQrisToDomain(request)
+    }
+
 
     override suspend fun cekDataEWallet(
         eWalletId: Int,

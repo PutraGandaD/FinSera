@@ -12,6 +12,8 @@ import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.CekReken
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.TransferAntarBankFormViewModel
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.TransferAntarBankHomeViewModel
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.TransferAntarBankViewModel
+import com.finsera.presentation.fragments.transfer.merchant_qris.viewmodel.TransferQrisMerchantFormViewModel
+import com.finsera.presentation.fragments.transfer.merchant_qris.viewmodel.TransferQrisMerchantViewModel
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.CekRekeningSesamaViewModel
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.TransferSesamaBankFormViewModel
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.TransferSesamaBankHomeViewModel
@@ -41,5 +43,7 @@ object PresentationModule {
         viewModel { CheckEWalletViewModel(get(),get())}
         viewModel { TransferEWalletViewModel(get(),get(),get(),get(),get())}
         viewModel { QrisScanQRViewModel(get(), get()) }
+        viewModel { TransferQrisMerchantFormViewModel(get(), get()) }
+        viewModel { TransferQrisMerchantViewModel(get(), get(), get()) }
     }
 }

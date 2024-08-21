@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:text="@string/placeholder_detail_mutasi"
         android:textSize="@dimen/_14ssp"
-        android:maxLines="3"
+        android:maxLines="2"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="12dp"
         android:textColor="@color/neutral_09"

@@ -238,8 +238,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="succes_clipboard_card_number">Nomor rekening telah di-copy</string>
     <string name="copy_to_clipboard">%1$s \n Finsera \n %2$s</string>
-    <string name="izin_aplikasi_finsera_desc">
+    <string name="izin_penyimpanan_aplikasi_finsera_desc">
         "Anda belum mengizinkan izin penyimpanan file pada aplikasi FinSera.\n\nFitur ini hanya dapat digunakan jika Anda memberikan izin penyimpanan file pada aplikasi FinSera di ponsel Anda.\n\nTekan 'Ya' untuk mengaktifkan izin penyimpanan file untuk aplikasi FinSera di pengaturan ponsel Anda (Anda akan diarahkan ke halaman pengaturan aplikasi FinSera).\n\nTekan 'Tidak' jika Anda tidak ingin memberikan izin penyimpanan file."
+    </string>
+    <string name="izin_kamera_aplikasi_finsera_desc">
+        "Anda belum mengizinkan izin kamera pada aplikasi FinSera.\n\nFitur ini hanya dapat digunakan jika Anda memberikan izin kamera pada aplikasi FinSera di ponsel Anda.\n\nTekan 'Ya' untuk mengaktifkan izin kamera untuk aplikasi FinSera di pengaturan ponsel Anda (Anda akan diarahkan ke halaman pengaturan aplikasi FinSera).\n\nTekan 'Tidak' jika Anda tidak ingin memberikan izin kamera."
     </string>
     <string name="alert_empty_va">Nomor Virtual Account tidak boleh kosong</string>
     <string name="success_va_account_message">Nomor Virtual Account ditemukan</string>
@@ -272,4 +275,10 @@
     <string name="desc_bank_option">Pilih Opsi Bank di bawah</string>
     <string name="desc_close_bottom_sheet">Tutup Bottom Sheet</string>
     <string name="scan_qr">Scan QR</string>
+    <string name="merchant_qris">Merchant QRIS</string>
+    <string name="nama_merchant">Nama Merchant</string>
+    <string name="kota_merchant">Kota Merchant</string>
+    <string name="no_merchant">No. Merchant</string>
+    <string name="qr_share">QR Share</string>
+    <string name="hint_scan_qr">Scan QR atau Barcode\nuntuk memulai transaksi</string>
 </resources>

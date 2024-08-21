@@ -51,9 +51,30 @@ class TransferSesamaBankSuksesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        getBundle()
+        handleBtn()
+        setAccessibilityDescriptions()
+    }
+
+    private fun handleBtn() {
+        binding.cardTransaksiBerhasil.btnBackToMenu.setOnClickListener {
+            findNavController().popBackStack(R.id.homeFragment, false)
+        }
+
+        val captureButton = binding.cardTransaksiBerhasil.btnDownload
+        captureButton.setOnClickListener {
+            safeSaveToGallery()
+        }
+
+        val shareButton = binding.cardTransaksiBerhasil.btnShare
+        shareButton.setOnClickListener {
+            safeShareImageTo()
+        }
+    }
+
+    private fun getBundle() {
         val namaPengirim = arguments?.getString(Constant.NAMA_NASABAH)
         val rekeningPengirim = arguments?.getString(Constant.NOMOR_REKENING_NASABAH)
-
         val dataTransferBerhasil = arguments?.getParcelable<TransferSesama>(Constant.TRANSFER_SESAMA_BERHASIL_BUNDLE)?.let {
             binding.cardTransaksiBerhasil.tvDate.text = it.transactionDate
             binding.cardTransaksiBerhasil.tvNominal.text = it.nominal
@@ -81,25 +102,9 @@ class TransferSesamaBankSuksesFragment : Fragment() {
             binding.cardTransaksiBerhasilScreenshot.tvNamaPengirim.text = namaPengirim
             binding.cardTransaksiBerhasilScreenshot.tvRekeningPengirim.text = rekeningPengirim
         }
-
-        binding.cardTransaksiBerhasil.btnBackToMenu.setOnClickListener {
-            findNavController().popBackStack(R.id.homeFragment, false)
-        }
-
-        val captureButton = binding.cardTransaksiBerhasil.btnDownload
-        captureButton.setOnClickListener {
-            safeSaveToGallery()
-        }
-
-        val shareButton = binding.cardTransaksiBerhasil.btnShare
-        shareButton.setOnClickListener {
-            safeShareImageTo()
-        }
-
-        setAccessibilityDescriptions()
     }
 
-    fun getBitmapFromUiView(context: Context, myView: View) : Bitmap {
+    private fun getBitmapFromUiView(context: Context, myView: View) : Bitmap {
         val bitmap = Bitmap.createBitmap(
             myView.width,
             myView.height,
@@ -296,7 +301,7 @@ class TransferSesamaBankSuksesFragment : Fragment() {
     private fun permissionStorageDialog() {
         MaterialAlertDialogBuilder(requireActivity())
             .setTitle("Izin Aplikasi FinSera")
-            .setMessage(resources.getString(R.string.izin_aplikasi_finsera_desc))
+            .setMessage(resources.getString(R.string.izin_penyimpanan_aplikasi_finsera_desc))
             .setNegativeButton("Tidak") { dialog, which ->
                 dialog.dismiss()
                 Snackbar.make(requireView(), "Fitur tidak dapat dijalankan karena izin penyimpanan file pada aplikasi FinSera tidak diizinkan", Snackbar.LENGTH_SHORT).show()
