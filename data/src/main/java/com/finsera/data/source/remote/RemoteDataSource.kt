@@ -1,5 +1,6 @@
 package com.finsera.data.source.remote
 
+import android.util.Log
 import com.finsera.data.source.remote.response.cek_rekening_antar_bank.CekRekeningAntarResponse
 import com.finsera.data.source.remote.response.cek_rekening_sesama_bank.CekRekeningSesamaResponse
 import com.finsera.common.utils.Resource
@@ -110,7 +111,7 @@ class RemoteDataSource(private val apiService: ApiService) {
                     emit(Resource.Success(response))
                 } else {
                     when (message) {
-                        "Virtual Account not found" -> emit(Resource.Error("Virtual Account Tidak Ditemukan"))
+                        "Virtual Account tidak ditemukan" -> emit(Resource.Error("Virtual Account Tidak Ditemukan"))
                         "JWT Token has expired" -> {
                             emit(Resource.Error("JWT Token has expired"))
                         }
@@ -121,21 +122,18 @@ class RemoteDataSource(private val apiService: ApiService) {
                 when (e) {
                     is HttpException -> {
                         when (e.code()) {
-                            400 -> {
+                            404 -> {
                                 emit(Resource.Error("Virtual Account tidak ditemukan"))
                             }
                             401 -> {
-                                emit(Resource.Error("Sesi telah habis"))
+                                val params= JsonObject().apply {
+                                    addProperty("virtualAccountNumber", vaAccountNum)
+                                }
+                                val getRefreshToken = refreshAccessToken(token)
+                                val newToken = getRefreshToken.data.accessToken
+                                val response = apiService.cekVirtualAccount(newToken, params)
+                                emit(Resource.Success(response))
                             }
-
-                            403 -> {
-                                emit(Resource.Error("Kesalahan pada server"))
-                            }
-
-                            500 -> {
-                                emit(Resource.Error("Terjadi Kesalahan pada server"))
-                            }
-
                             else -> {
                                 emit(Resource.Error(e.message()))
                             }
@@ -182,31 +180,39 @@ class RemoteDataSource(private val apiService: ApiService) {
             } catch (e: Exception) {
                 when (e) {
                     is HttpException -> {
+                        val errorMessage = e.response()?.errorBody()?.string()
+                        Log.d("error pada remote", errorMessage.toString())
                         when (e.code()) {
-                            400 -> {
-                                emit(Resource.Error("Pin yang dimasukkan salah"))
-                            }
-
                             401 -> {
-                                emit(Resource.Error("Sesi telah habis"))
+                                when {
+                                    errorMessage?.contains("Pin yang anda masukkan salah") == true -> {
+                                        emit(Resource.Error("Pin yang dimasukkan salah"))
+                                    }
+                                    errorMessage?.contains("JWT Token has expired") == true -> {
+                                        val param = JsonObject().apply {
+                                            addProperty("virtualAccountNumber", vaAccountNum)
+                                            addProperty("mpinAccount", pin)
+                                        }
+                                        val getRefreshToken = refreshAccessToken(token)
+                                        val newToken = getRefreshToken.data.accessToken
+                                        val newResponse = apiService.transferVirtualAccount("Bearer $newToken", param)
+                                        emit(Resource.Success(newResponse))
+                                    }
+                                    else -> emit(Resource.Error("Sesi Anda telah diperbarui"))
+                                }
                             }
-
-                            403 -> {
-                                emit(Resource.Error("Virtual Account tidak ditemukan"))
-                            }
-
-                            500 -> {
-                                emit(Resource.Error("Terjadi Kesalahan pada server"))
+                            402->{
+                                emit(Resource.Error("Saldo Anda tidak cukup"))
                             }
 
                             else -> {
-                                emit(Resource.Error(e.message()))
+                                emit(Resource.Error("Terjadi kesalahan pada server"))
                             }
                         }
                     }
 
                     is IOException -> {
-                        emit(Resource.Error(e.message.toString()))
+                        emit(Resource.Error("Terjadi kesalahan pada server"))
                     }
                 }
             }
