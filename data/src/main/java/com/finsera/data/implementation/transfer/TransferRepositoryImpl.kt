@@ -9,6 +9,7 @@ import com.finsera.domain.model.CekEWallet
 import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.CekVa
+import com.finsera.domain.model.QRShare
 import com.finsera.domain.model.TransferQrisMerchant
 import com.finsera.domain.model.TransferEWallet
 import com.finsera.domain.model.TransferSesama
@@ -141,6 +142,13 @@ class TransferRepositoryImpl(
                 is Resource.Loading -> Resource.Loading()
             }
         }
+    }
+
+    override suspend fun shareQR(): QRShare {
+        val accessToken = localDataSource.getAccessToken()
+        val request = remoteDataSource.shareQR(accessToken)
+
+        return DataMapper.qrShareToDomain(request)
     }
 
 

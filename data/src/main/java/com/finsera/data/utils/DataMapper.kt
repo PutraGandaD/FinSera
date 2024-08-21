@@ -13,6 +13,7 @@ import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.qris.ScanQrisResponse
+import com.finsera.data.source.remote.response.qris_share.QrisShareResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
 import com.finsera.data.source.remote.response.transfer_antar_bank.TransferAntarResponse
 import com.finsera.data.source.remote.response.transfer_sesama_bank.TransferSesamaResponse
@@ -28,6 +29,7 @@ import com.finsera.domain.model.DaftarTersimpanEWallet
 import com.finsera.domain.model.DaftarTersimpanVa
 import com.finsera.domain.model.Login
 import com.finsera.domain.model.Mutasi
+import com.finsera.domain.model.QRShare
 import com.finsera.domain.model.Relogin
 import com.finsera.domain.model.Saldo
 import com.finsera.domain.model.TransferQrisMerchant
@@ -35,6 +37,7 @@ import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.TransferEWallet
 import com.finsera.domain.model.TransferSesama
 import com.finsera.domain.model.TransferVa
+import com.google.gson.JsonObject
 
 object DataMapper {
     fun loginDataToDomain(response: LoginResponse): Login {
@@ -238,5 +241,14 @@ object DataMapper {
             namaEwallet = response.data?.ewalletName,
             namaAkunEwallet = response.data?.ewalletAccountName
         )
+    }
+
+    fun qrShareToDomain(response: QrisShareResponse) : QRShare {
+        val json = JsonObject().apply {
+            addProperty("username", response.data.username)
+            addProperty("accountNumber", response.data.accountNumber)
+        }
+
+        return QRShare(json)
     }
 }

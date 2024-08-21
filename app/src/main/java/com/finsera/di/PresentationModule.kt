@@ -6,6 +6,7 @@ import com.finsera.presentation.fragments.home.viewmodel.HomeViewModel
 import com.finsera.presentation.fragments.info.mutasi.viewmodel.MutasiViewModel
 import com.finsera.presentation.fragments.info.saldo.viewmodel.InfoSaldoViewModel
 import com.finsera.presentation.fragments.qris.viewmodel.QrisScanQRViewModel
+import com.finsera.presentation.fragments.qris.viewmodel.QrisShareViewModel
 import com.finsera.presentation.fragments.topup.ewallet.viewmodel.CheckEWalletViewModel
 import com.finsera.presentation.fragments.topup.ewallet.viewmodel.TransferEWalletViewModel
 import com.finsera.presentation.fragments.transfer.antar_bank.viewmodel.CekRekeningAntarViewModel
@@ -45,5 +46,6 @@ object PresentationModule {
         viewModel { QrisScanQRViewModel(get(), get()) }
         viewModel { TransferQrisMerchantFormViewModel(get(), get()) }
         viewModel { TransferQrisMerchantViewModel(get(), get(), get()) }
+        viewModel { QrisShareViewModel(get(), get()) }
     }
 }
