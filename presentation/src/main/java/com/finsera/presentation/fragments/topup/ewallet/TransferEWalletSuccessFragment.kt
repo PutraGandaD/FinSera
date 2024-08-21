@@ -307,7 +307,7 @@ class TransferEWalletSuccessFragment : Fragment() {
     private fun permissionStorageDialog() {
         MaterialAlertDialogBuilder(requireActivity())
             .setTitle("Izin Aplikasi FinSera")
-            .setMessage(resources.getString(R.string.izin_aplikasi_finsera_desc))
+            .setMessage(resources.getString(R.string.izin_penyimpanan_aplikasi_finsera_desc))
             .setNegativeButton("Tidak") { dialog, which ->
                 dialog.dismiss()
                 Snackbar.make(
