@@ -6,6 +6,7 @@ import com.finsera.domain.model.CekEWallet
 import com.finsera.domain.model.CekRekening
 import com.finsera.domain.model.TransferAntar
 import com.finsera.domain.model.CekVa
+import com.finsera.domain.model.QRShare
 import com.finsera.domain.model.TransferQrisMerchant
 import com.finsera.domain.model.TransferEWallet
 import com.finsera.domain.model.TransferSesama
@@ -67,4 +68,6 @@ interface ITransferRepository {
         note: String,
         pin: String
     ): Flow<Resource<TransferEWallet>>
+
+    suspend fun shareQR() : QRShare
 }
