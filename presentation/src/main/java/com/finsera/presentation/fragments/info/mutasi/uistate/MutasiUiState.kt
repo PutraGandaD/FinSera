@@ -4,6 +4,8 @@ import com.finsera.domain.model.Mutasi
 
 data class MutasiUiState (
     val isLoading: Boolean = false,
+    val isSuccess: Boolean = false,
+    val isError: Boolean = false,
     val message: String? = null,
-    val mutasi: List<Mutasi> = emptyList()
+    val mutasi: List<Mutasi>? = null
 )

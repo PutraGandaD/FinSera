@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +19,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -65,7 +65,8 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
     private var isResultMutasiShowed = false
 
     private var PAGE_COUNT_REQUEST = 1
-    private var reachedLastPage = false
+
+    private var isBackPressed = false
 
     private var hasAnnouncedScreen = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,14 +109,14 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
     private fun handleScrollPagination() {
         binding.nestedRvMutasi.viewTreeObserver.addOnScrollChangedListener(object : ViewTreeObserver.OnScrollChangedListener {
             override fun onScrollChanged() {
-                if (binding.nestedRvMutasi != null) {
-                    if (binding.nestedRvMutasi.getChildAt(0).getBottom() <= (binding.nestedRvMutasi.getHeight() + binding.nestedRvMutasi.getScrollY())) {
-                        if(!reachedLastPage) {
-                            PAGE_COUNT_REQUEST++
-                            mutasiViewModel.getMutasi(startDate, endDate, PAGE_COUNT_REQUEST)
-                        } else {
-                            Snackbar.make(requireView(), "Anda sudah mencapai mutasi terakhir di tanggal ini", Snackbar.LENGTH_SHORT).show()
-                        }
+                if (!isBackPressed) {
+                    val diff: Int =
+                        (binding.nestedRvMutasi.getChildAt(binding.nestedRvMutasi.getChildCount() - 1).bottom - (binding.nestedRvMutasi.getHeight() + binding.nestedRvMutasi
+                            .getScrollY()))
+
+                    if (diff == 0) {
+                        PAGE_COUNT_REQUEST++
+                        mutasiViewModel.getMutasi(startDate, endDate, PAGE_COUNT_REQUEST)
                     }
                 }
             }
@@ -138,29 +139,27 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
                         binding.progressBarMutasiItem.visibility = View.VISIBLE
                     }
 
-                    uiState.message?.let { message ->
-                        when {
-                            PAGE_COUNT_REQUEST == 1 && message == "Transaksi tidak ditemukan" -> {
-                                Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
-                            }
-                            PAGE_COUNT_REQUEST == 1 && message != "Transaksi tidak ditemukan" -> {
-                                Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
-                            }
-                            PAGE_COUNT_REQUEST > 1 && message == "Transaksi tidak ditemukan" -> {
-                                reachedLastPage = true
+
+                    if(uiState.isError) {
+                        when{
+                            PAGE_COUNT_REQUEST > 1 && uiState.message == "Transaksi tidak ditemukan" -> {
                                 binding.progressBarMutasiItem.visibility = View.GONE
                                 Snackbar.make(requireView(), "Anda sudah mencapai mutasi terakhir di tanggal ini", Snackbar.LENGTH_SHORT).show()
                             }
+                            else -> {
+                                Snackbar.make(requireView(), uiState.message.toString(), Snackbar.LENGTH_SHORT).show()
+                            }
                         }
-                        mutasiViewModel.messageShown()
-                    }
-
-                    if (uiState.mutasi.isNotEmpty() && PAGE_COUNT_REQUEST == 1) {
-                        mutasiAdapter.submitList(uiState.mutasi)
                         mutasiViewModel.resetUiState()
                     }
 
-                    if (uiState.mutasi.isNotEmpty() && PAGE_COUNT_REQUEST > 1) {
+                    if(uiState.isSuccess && PAGE_COUNT_REQUEST == 1) {
+                        mutasiAdapter.submitList(uiState.mutasi)
+                        Snackbar.make(requireView(), uiState.message.toString(), Snackbar.LENGTH_SHORT).show()
+                        mutasiViewModel.resetUiState()
+                    }
+
+                    if(uiState.isSuccess && PAGE_COUNT_REQUEST > 1) {
                         addNewDataToRv(uiState.mutasi)
                         mutasiViewModel.resetUiState()
                     }
@@ -178,10 +177,9 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
     private fun handleBackButton() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if(isResultMutasiShowed) {
+                mutasiAdapter.submitList(null)
                 resetAllInput()
                 showFilter()
-                mutasiAdapter.submitList(emptyList())
-                mutasiViewModel.resetUiState()
             } else {
                 findNavController().popBackStack()
             }
@@ -189,10 +187,9 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
 
         binding.btnBack.setOnClickListener {
             if(isResultMutasiShowed) {
+                mutasiAdapter.submitList(null)
                 resetAllInput()
                 showFilter()
-                mutasiAdapter.submitList(emptyList())
-                mutasiViewModel.resetUiState()
             } else {
                 findNavController().popBackStack()
             }
@@ -203,24 +200,26 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
         startDate = "" // reset startdate and enddate
         endDate = ""
         PAGE_COUNT_REQUEST = 1
-        reachedLastPage = false
         binding.viewFilter.tvStartDateValue.text = "DD-MM-YYYY"
         binding.viewFilter.tvEndDateValue.text = "DD-MM-YYYY"
     }
 
     private fun showResultOfFilter() {
+        isResultMutasiShowed = true
+        isBackPressed = false
+
         binding.layoutRvMutasi.visibility = View.VISIBLE
         binding.btnDownload.visibility = View.VISIBLE
         binding.viewFilter.clMutasiFilter.visibility = View.INVISIBLE
-
-        isResultMutasiShowed = true
     }
 
     private fun showFilter() {
         binding.viewFilter.clMutasiFilter.visibility = View.VISIBLE
         binding.layoutRvMutasi.visibility = View.INVISIBLE
         binding.btnDownload.visibility = View.INVISIBLE
+
         isResultMutasiShowed = false
+        isBackPressed = true
     }
 
     private fun filterButtonOnClick() {

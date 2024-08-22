@@ -41,19 +41,19 @@ class MutasiViewModel(
                     when (result) {
                         is Resource.Loading -> {
                             _mutasiUiState.update { uiState ->
-                                uiState.copy(isLoading = true, message = null, mutasi = emptyList())
+                                uiState.copy(isLoading = true, isSuccess = false, isError = false, message = null, mutasi = null)
                             }
                         }
 
                         is Resource.Success -> {
                             _mutasiUiState.update { uiState ->
-                                uiState.copy(isLoading = false, message = "Riwayat transaksi berhasil dimuat", mutasi = result.data ?: emptyList())
+                                uiState.copy(isLoading = false, isSuccess = true, isError = false, message = "Riwayat transaksi berhasil dimuat", mutasi = result.data)
                             }
                         }
 
                         is Resource.Error -> {
                             _mutasiUiState.update { uiState ->
-                                uiState.copy(isLoading = false, message = result.message, mutasi = emptyList())
+                                uiState.copy(isLoading = false, isSuccess = false, isError = true, message = result.message, mutasi = null)
                             }
                         }
                     }
@@ -62,7 +62,9 @@ class MutasiViewModel(
                 _mutasiUiState.update { uiState ->
                     uiState.copy(
                         isLoading = false,
-                        mutasi = emptyList(),
+                        isSuccess = false,
+                        isError = false,
+                        mutasi = null,
                         message = "Tidak ada koneksi Internet."
                     )
                 }
@@ -91,7 +93,9 @@ class MutasiViewModel(
         _mutasiUiState.update { currentUiState ->
             currentUiState.copy(
                 isLoading = false,
-                mutasi = emptyList(),
+                isSuccess = false,
+                isError = false,
+                mutasi = null,
                 message = null
             )
         }
