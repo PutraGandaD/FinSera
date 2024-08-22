@@ -16,6 +16,8 @@ class TransferEWalletListFragment : Fragment() {
     private var _binding: FragmentTransferEWalletListBinding? = null
     private val binding get() = _binding!!
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,6 +30,11 @@ class TransferEWalletListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_e_wallet_list))
+            hasAnnouncedScreen = true
+        }
     }
 
     private fun setupListeners() {

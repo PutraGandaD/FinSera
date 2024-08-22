@@ -42,10 +42,6 @@ class TransferVirtualAccountSuccessFragment : Fragment() {
 
     private var imageUri: Uri? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,7 +59,6 @@ class TransferVirtualAccountSuccessFragment : Fragment() {
             setupData(bundle)
         }
 
-
         binding.cardTransaksiBerhasil.btnBackToMenu.setOnClickListener {
             findNavController().popBackStack(R.id.homeFragment, false)
         }
@@ -76,7 +71,6 @@ class TransferVirtualAccountSuccessFragment : Fragment() {
         val shareButton = binding.cardTransaksiBerhasil.btnShare
         shareButton.setOnClickListener {
             safeShareImageTo()
-
         }
     }
 
@@ -148,6 +142,8 @@ class TransferVirtualAccountSuccessFragment : Fragment() {
         binding.cardTransaksiBerhasil.rlCatatan.visibility = View.GONE
         binding.cardTransaksiBerhasil.rlNamaPengirim.visibility = View.GONE
         binding.cardTransaksiBerhasil.rlRekeningPengirim.visibility = View.GONE
+
+        setAccessibilityDescriptions()
     }
 
     private fun saveToGalleryMode() {
@@ -314,6 +310,23 @@ class TransferVirtualAccountSuccessFragment : Fragment() {
                 requireActivity().openAppPermissionSettings()
             }
             .show()
+    }
+
+    private fun formatDigitNumberAccessibility(digitNumberTalkback: String): String {
+        return digitNumberTalkback.map { it.toString() }.joinToString(" ")
+    }
+
+    private fun setAccessibilityDescriptions() {
+        binding.cardTransaksiBerhasil.apply {
+            val formattedDigitNumberVirtualAccount = formatDigitNumberAccessibility(tvRekeningTujuan.text.toString())
+            val formattedDigitNumberTransaction = formatDigitNumberAccessibility(tvNomorTransaksi.text.toString())
+            rlTanggal.contentDescription = getString(R.string.tanggal_transaksi_desc, tvDate.text)
+            rlNominal.contentDescription = getString(R.string.nominal_transfer_desc, tvNominal.text)
+            rlBiayaAdmin.contentDescription = getString(R.string.biaya_admin_desc, tvBiayaAdmin.text)
+            rlNoTransaksi.contentDescription = getString(R.string.nomor_transaksi_desc, formattedDigitNumberTransaction)
+            rlNamaPenerima.contentDescription = getString(R.string.nama_penerima_desc, tvNamaPenerima.text)
+            rlRekeningTujuan.contentDescription = getString(R.string.va_number_desc, formattedDigitNumberVirtualAccount)
+        }
     }
 
     override fun onDestroyView() {

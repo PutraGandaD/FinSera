@@ -7,24 +7,27 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.finsera.domain.model.DaftarTersimpanEWallet
+import com.finsera.domain.model.DaftarTersimpanVa
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.DaftarTersimpanEwalletItemBinding
-import com.finsera.presentation.databinding.DaftarTersimpanItemBinding
 
 class DaftarTersimpanEWalletAdapter(val itemClickListener: OnSavedItemEWalletClickListener) : ListAdapter<DaftarTersimpanEWallet, DaftarTersimpanEWalletAdapter.DaftarTersimpanEWalletViewHolder>(DIFF_CALLBACK) {
+
+    private var accessibilityTextMap: MutableMap<DaftarTersimpanEWallet, String> = mutableMapOf()
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): DaftarTersimpanEWalletViewHolder {
-
-        val binding =DaftarTersimpanEwalletItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = DaftarTersimpanEwalletItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return DaftarTersimpanEWalletViewHolder(binding)
     }
 
     class DaftarTersimpanEWalletViewHolder(private val binding: DaftarTersimpanEwalletItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: DaftarTersimpanEWallet) {
+        fun bind(data: DaftarTersimpanEWallet, accessibilityText: String) {
             binding.tvItemName.text = data.namaAkunEWallet
             binding.tvItemDescription.text = data.nomorEWallet
+            binding.root.contentDescription = accessibilityText
             Glide.with(binding.root)
                 .load(
                     when (data.namaEWallet) {
@@ -42,6 +45,10 @@ class DaftarTersimpanEWalletAdapter(val itemClickListener: OnSavedItemEWalletCli
         }
     }
 
+    fun setAccessibilityText(daftarTersimpan: DaftarTersimpanEWallet, accessibilityText: String) {
+        accessibilityTextMap[daftarTersimpan] = accessibilityText
+    }
+
     companion object{
         val DIFF_CALLBACK=object : DiffUtil.ItemCallback<DaftarTersimpanEWallet>(){
             override fun areItemsTheSame(oldItem: DaftarTersimpanEWallet, newItem: DaftarTersimpanEWallet): Boolean {
@@ -55,8 +62,9 @@ class DaftarTersimpanEWalletAdapter(val itemClickListener: OnSavedItemEWalletCli
 
     override fun onBindViewHolder(holder: DaftarTersimpanEWalletViewHolder, position: Int) {
         val data = getItem(position)
+        val accessibilityText = accessibilityTextMap[data] ?: ""
 
-        holder.bind(data)
+        holder.bind(data, accessibilityText)
 
         holder.itemView.setOnClickListener {
             itemClickListener.onSavedItemVaClicked(data)

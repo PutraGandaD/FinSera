@@ -25,6 +25,8 @@ class LoginFragment : Fragment() {
 
     private val loginViewModel : LoginViewModel by inject()
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +49,11 @@ class LoginFragment : Fragment() {
             } else {
                 Snackbar.make(requireView(), "Mohon untuk mengisi kolom Username dan Password sebelum melanjutkan.", Snackbar.LENGTH_SHORT).show()
             }
+        }
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_login))
+            hasAnnouncedScreen = true
         }
 
         viewLifecycleOwner.lifecycleScope.launch {

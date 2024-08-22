@@ -1,10 +1,14 @@
 package com.finsera.presentation.fragments.topup.ewallet
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityNodeInfo
+import android.widget.EditText
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -30,6 +34,8 @@ class TransferEWalletForm : Fragment() {
 
     private val viewModel: CheckEWalletViewModel by viewModel()
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +49,6 @@ class TransferEWalletForm : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
 
-
         val bundle = arguments?.getParcelable<ChooseEWalletBundle>(Constant.DATA_ID_EWALLET)
         if (bundle != null) {
             ewalletName = bundle.ewalletName
@@ -54,7 +59,7 @@ class TransferEWalletForm : Fragment() {
 
         viewModel.resetState()
         binding.btnLanjut.setOnClickListener {
-            val ewalletNum = binding.banktujuanEditText.text.toString()
+            val ewalletNum = binding.nomorEWalletEditText.text.toString()
             if (ewalletNum.isNotEmpty()) {
                 viewModel.cekEWallet(ewalletId, ewalletNum).also {
                     observer()
@@ -75,6 +80,41 @@ class TransferEWalletForm : Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        setupAccessibility()
+
+        if (!hasAnnouncedScreen) {
+            val announcement = getString(R.string.screen_isi_ewallet, ewalletName)
+            view.announceForAccessibility(announcement)
+            hasAnnouncedScreen = true
+        }
+    }
+
+    private fun setupAccessibility() {
+        binding.nomorEWalletEditText.accessibilityDelegate = object : View.AccessibilityDelegate() {
+            override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfo) {
+                super.onInitializeAccessibilityNodeInfo(host, info)
+                val editText = host as? EditText
+                editText?.text?.let { text ->
+                    info.text = text.toString().map { it.toString() }.joinToString(" ")
+                }
+            }
+        }
+
+        binding.nomorEWalletEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                s?.let {
+                    binding.nomorEWalletEditText.announceForAccessibility(it.toString().map { char -> char.toString() }.joinToString(" "))
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+
+        val fullDescription = getString(R.string.e_wallet_desc, ewalletName)
+        binding.eWalletItem.root.contentDescription = fullDescription
 
     }
 

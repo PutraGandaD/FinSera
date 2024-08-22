@@ -13,7 +13,10 @@
 
     <item
         android:id="@+id/menu_navbar_qris"
-        android:title=""/>
+        android:title=""
+        android:importantForAccessibility="no"
+        android:focusableInTouchMode="false"
+        android:focusable="false"/>
 
     <item
         android:id="@+id/menu_navbar_favorit"

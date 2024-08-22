@@ -12,6 +12,9 @@ import com.finsera.presentation.databinding.DaftarTersimpanEwalletItemBinding
 import com.finsera.presentation.databinding.DaftarTersimpanItemBinding
 
 class DaftarTersimpanVaAdapter(val itemClickListener: OnSavedItemVaClickListener) : ListAdapter<DaftarTersimpanVa, DaftarTersimpanVaAdapter.DaftarTersimpanVaViewHolder>(DIFF_CALLBACK) {
+
+    private var accessibilityTextMap: MutableMap<DaftarTersimpanVa, String> = mutableMapOf()
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -21,10 +24,15 @@ class DaftarTersimpanVaAdapter(val itemClickListener: OnSavedItemVaClickListener
     }
 
     class DaftarTersimpanVaViewHolder(private val binding: DaftarTersimpanEwalletItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: DaftarTersimpanVa) {
+        fun bind(data: DaftarTersimpanVa, accessibilityText: String) {
             binding.tvItemName.text = data.namaPemilikRekening
             binding.tvItemDescription.text = data.noRekening
+            binding.root.contentDescription = accessibilityText
         }
+    }
+
+    fun setAccessibilityText(daftarTersimpan: DaftarTersimpanVa, accessibilityText: String) {
+        accessibilityTextMap[daftarTersimpan] = accessibilityText
     }
 
     companion object{
@@ -40,8 +48,9 @@ class DaftarTersimpanVaAdapter(val itemClickListener: OnSavedItemVaClickListener
 
     override fun onBindViewHolder(holder: DaftarTersimpanVaViewHolder, position: Int) {
         val data = getItem(position)
+        val accessibilityText = accessibilityTextMap[data] ?: ""
 
-        holder.bind(data)
+        holder.bind(data, accessibilityText)
 
         holder.itemView.setOnClickListener {
             itemClickListener.onSavedItemVaClicked(data)
