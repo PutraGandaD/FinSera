@@ -31,6 +31,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/rl_tanggal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp">
@@ -53,6 +54,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_nominal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
@@ -75,6 +77,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_biaya_admin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
@@ -97,6 +100,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_no_transaksi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
@@ -190,6 +194,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_nama_penerima"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
@@ -213,6 +218,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_rekening_tujuan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">

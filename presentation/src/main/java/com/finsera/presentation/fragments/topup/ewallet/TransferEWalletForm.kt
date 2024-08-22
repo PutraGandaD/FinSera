@@ -54,7 +54,7 @@ class TransferEWalletForm : Fragment() {
 
         viewModel.resetState()
         binding.btnLanjut.setOnClickListener {
-            val ewalletNum = binding.banktujuanEditText.text.toString()
+            val ewalletNum = binding.nomorEWalletEditText.text.toString()
             if (ewalletNum.isNotEmpty()) {
                 viewModel.cekEWallet(ewalletId, ewalletNum).also {
                     observer()

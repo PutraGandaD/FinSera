@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.finsera.common.utils.Resource
 import com.finsera.common.utils.network.ConnectivityManager
 import com.finsera.domain.usecase.transfer.virtual_account.CekVirtualAccountUseCase
-import com.finsera.presentation.fragments.transfer.va.uistate.ChcekVirtualAccountUiState
+import com.finsera.presentation.fragments.transfer.va.uistate.CheckVirtualAccountUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -19,7 +19,7 @@ class CheckVaViewModel(
 ) : ViewModel() {
 
 
-    private val _cekVaUiState = MutableStateFlow(ChcekVirtualAccountUiState())
+    private val _cekVaUiState = MutableStateFlow(CheckVirtualAccountUiState())
     val cekVaUiState = _cekVaUiState.asStateFlow()
 
 
@@ -29,7 +29,7 @@ class CheckVaViewModel(
                 cekVirtualAccountUseCase.invoke(vaAccountNum).collectLatest { result ->
                     when (result) {
                         is Resource.Loading -> {
-                            _cekVaUiState.value = ChcekVirtualAccountUiState(
+                            _cekVaUiState.value = CheckVirtualAccountUiState(
                                 isLoading = true,
                                 message = null,
                                 isValid = false,
@@ -38,7 +38,7 @@ class CheckVaViewModel(
                         }
 
                         is Resource.Success -> {
-                            _cekVaUiState.value = ChcekVirtualAccountUiState(
+                            _cekVaUiState.value = CheckVirtualAccountUiState(
                                 isLoading = false,
                                 message = result.message,
                                 isValid = true,
@@ -47,7 +47,7 @@ class CheckVaViewModel(
                         }
 
                         is Resource.Error -> {
-                            _cekVaUiState.value = ChcekVirtualAccountUiState(
+                            _cekVaUiState.value = CheckVirtualAccountUiState(
                                 isLoading = false,
                                 message = result.message,
                                 isValid = false,
@@ -70,7 +70,7 @@ class CheckVaViewModel(
     }
 
     fun resetState() {
-        _cekVaUiState.value = ChcekVirtualAccountUiState()
+        _cekVaUiState.value = CheckVirtualAccountUiState()
     }
 
 

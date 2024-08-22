@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
     tools:context=".fragments.transfer.va.TransferVirtualAccountFormKonfirmasi"
-    android:contentDescription="@string/screen_confirm_transaction">
+    android:importantForAccessibility="no">
 
     <RelativeLayout
         android:id="@+id/topmenu"
