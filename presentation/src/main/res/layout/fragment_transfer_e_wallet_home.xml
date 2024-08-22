@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.topup.ewallet.TransferEWalletHomeFragment"
     android:padding="20dp"
-    android:contentDescription="@string/screen_e_wallet">
+    android:importantForAccessibility="no">
 
     <RelativeLayout
         android:id="@+id/topmenu"

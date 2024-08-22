@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentQrisShareBinding
 import com.finsera.presentation.fragments.qris.viewmodel.QrisShareViewModel
 import com.google.android.material.snackbar.Snackbar

@@ -60,6 +60,7 @@
             android:layout_height="wrap_content"
             android:text="Nomor Virtual Account"
             android:textColor="@color/neutral_09"
+            android:importantForAccessibility="no"
             android:textSize="16sp"/>
 
         <TextView
@@ -68,6 +69,7 @@
             android:layout_alignParentEnd="true"
             android:text="1234567890"
             android:textStyle="bold"
+            android:importantForAccessibility="no"
             android:id="@+id/tvNoVA"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
@@ -86,6 +88,7 @@
             android:layout_height="wrap_content"
             android:text="Nama"
             android:textColor="@color/neutral_09"
+            android:importantForAccessibility="no"
             android:textSize="16sp"/>
 
         <TextView
@@ -94,6 +97,7 @@
             android:layout_alignParentEnd="true"
             android:text="Tokopedia Merchant"
             android:textStyle="bold"
+            android:importantForAccessibility="no"
             android:id="@+id/tvNamaVA"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>
@@ -112,7 +116,8 @@
             android:layout_height="wrap_content"
             android:text="Nominal Transfer"
             android:textColor="@color/neutral_09"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:importantForAccessibility="no"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -120,6 +125,7 @@
             android:layout_alignParentEnd="true"
             android:text="Rp100.000"
             android:textStyle="bold"
+            android:importantForAccessibility="no"
             android:id="@+id/tvNominalAwal"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"/>

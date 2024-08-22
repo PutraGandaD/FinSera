@@ -35,9 +35,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/tanggal"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp" />
@@ -45,6 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/example_date"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp"
@@ -61,6 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/nominal"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp" />
@@ -68,6 +72,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/example_nominal"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp"
@@ -84,6 +89,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/biaya_admin"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp" />
@@ -91,6 +97,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/example_biaya_admin"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp"
@@ -107,6 +114,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/nomor_transaksi"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp" />
@@ -114,6 +122,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/example_nomor_transaksi"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp"
@@ -130,6 +139,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/nama_pengirim"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp" />
@@ -139,6 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:importantForAccessibility="no"
                 android:text="@string/nama"
                 android:textColor="@color/neutral_01"
                 android:textFontWeight="700"
@@ -154,6 +165,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/rekening_pengirim"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp" />
@@ -162,6 +174,7 @@
                 android:id="@+id/tv_rekening_pengirim"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/account_number_value"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp"
@@ -178,6 +191,7 @@
                 android:id="@+id/tv_bank_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/bank_tujuan"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp" />
@@ -185,6 +199,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/example_bank"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp"
@@ -202,6 +217,7 @@
                 android:id="@+id/tv_penerima_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/nama_penerima"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp" />
@@ -209,6 +225,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/example_nama_penerima"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp"
@@ -226,6 +243,7 @@
                 android:id="@+id/tv_rekening_tujuan_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/rekening_tujuan"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp" />
@@ -233,6 +251,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/example_rekening_tujuan"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp"
@@ -249,6 +268,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/catatan"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp" />
@@ -256,6 +276,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
                 android:text="@string/example_catatan"
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp"
