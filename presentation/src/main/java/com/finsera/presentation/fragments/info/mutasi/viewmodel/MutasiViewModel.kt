@@ -1,8 +1,5 @@
 package com.finsera.presentation.fragments.info.mutasi.viewmodel
 
-import android.os.Build
-import android.provider.ContactsContract.CommonDataKinds.Email.TYPE_MOBILE
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,26 +34,26 @@ class MutasiViewModel(
         getUserInfo()
     }
 
-    fun getMutasi(startDate: String?, endDate: String?) {
+    fun getMutasi(startDate: String?, endDate: String?, page: Int) {
         viewModelScope.launch {
             if(connectivityManager.hasInternetConnection()) {
-                mutasiUseCase.invoke(startDate, endDate).collectLatest { result ->
+                mutasiUseCase.invoke(startDate, endDate, page).collectLatest { result ->
                     when (result) {
                         is Resource.Loading -> {
                             _mutasiUiState.update { uiState ->
-                                uiState.copy(isLoading = true, message = null, mutasi = emptyList())
+                                uiState.copy(isLoading = true, isSuccess = false, isError = false, message = null, mutasi = null)
                             }
                         }
 
                         is Resource.Success -> {
                             _mutasiUiState.update { uiState ->
-                                uiState.copy(isLoading = false, message = "Riwayat transaksi berhasil dimuat", mutasi = result.data ?: emptyList())
+                                uiState.copy(isLoading = false, isSuccess = true, isError = false, message = "Riwayat transaksi berhasil dimuat", mutasi = result.data)
                             }
                         }
 
                         is Resource.Error -> {
                             _mutasiUiState.update { uiState ->
-                                uiState.copy(isLoading = false, message = result.message, mutasi = emptyList())
+                                uiState.copy(isLoading = false, isSuccess = false, isError = true, message = result.message, mutasi = null)
                             }
                         }
                     }
@@ -65,7 +62,9 @@ class MutasiViewModel(
                 _mutasiUiState.update { uiState ->
                     uiState.copy(
                         isLoading = false,
-                        mutasi = emptyList(),
+                        isSuccess = false,
+                        isError = false,
+                        mutasi = null,
                         message = "Tidak ada koneksi Internet."
                     )
                 }
@@ -90,9 +89,15 @@ class MutasiViewModel(
         }
     }
 
-    fun dataSubmittedToAdapter() {
+    fun resetUiState() {
         _mutasiUiState.update { currentUiState ->
-            currentUiState.copy(mutasi = emptyList())
+            currentUiState.copy(
+                isLoading = false,
+                isSuccess = false,
+                isError = false,
+                mutasi = null,
+                message = null
+            )
         }
     }
 

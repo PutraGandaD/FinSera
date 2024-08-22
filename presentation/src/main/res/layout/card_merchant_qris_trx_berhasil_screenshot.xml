@@ -230,6 +230,10 @@
                 android:textColor="@color/neutral_01"
                 android:textSize="16sp"
                 android:layout_alignParentEnd="true"
+                android:textAlignment="textEnd"
+                android:maxLines="2"
+                android:layout_marginStart="80dp"
+                android:layout_toEndOf="@id/tv_no_merhant_header"
                 android:textFontWeight="700"
                 android:id="@+id/tv_no_merchant"/>
         </RelativeLayout>

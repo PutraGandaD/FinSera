@@ -14,9 +14,10 @@ class MutasiRepositoryImpl(
     override suspend fun getMutasi(
         startDate: String?,
         endDate: String?,
+        page: Int
     ): List<Mutasi>? {
         val accessToken = localDataSource.getAccessToken()
-        val response = remoteDataSource.getMutasi(accessToken,startDate, endDate)
+        val response = remoteDataSource.getMutasi(accessToken,startDate, endDate, page)
         val data = DataMapper.mutasiResponseToDomain(response)
         return data
     }

@@ -60,9 +60,9 @@ class RemoteDataSource(private val apiService: ApiService) {
         return apiService.getSaldo(accessToken)
     }
 
-    suspend fun getMutasi(token: String, startDate: String?, endDate: String?): MutasiResponse {
+    suspend fun getMutasi(token: String, startDate: String?, endDate: String?, page: Int): MutasiResponse {
         val accessToken = "Bearer $token"
-        return apiService.getMutasi(accessToken, startDate, endDate)
+        return apiService.getMutasi(accessToken, startDate, endDate, page)
     }
 
     suspend fun cekRekeningSesamaBank(token: String, norek: String): CekRekeningSesamaResponse {
