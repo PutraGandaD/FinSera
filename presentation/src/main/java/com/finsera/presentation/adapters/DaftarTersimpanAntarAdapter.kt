@@ -5,8 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.finsera.domain.model.DaftarTersimpanAntar
 import com.finsera.domain.model.DaftarTersimpanSesama
+import com.finsera.presentation.R
 import com.finsera.presentation.databinding.DaftarTersimpanItemBinding
 
 class DaftarTersimpanAntarAdapter(val itemClickListener: OnSavedItemAntarClickListener) : ListAdapter<DaftarTersimpanAntar, DaftarTersimpanAntarAdapter.DaftarTersimpanAntarViewHolder>(DIFF_CALLBACK) {
@@ -25,6 +27,15 @@ class DaftarTersimpanAntarAdapter(val itemClickListener: OnSavedItemAntarClickLi
         fun bind(data: DaftarTersimpanAntar) {
             binding.tvDaftartersimpanNamapemilik.text = data.namaPemilikRekening
             binding.tvDaftartersimpanNorekening.text = data.noRekening
+            Glide.with(binding.root)
+                .load(
+                    when (data.namaBank) {
+                        "BCA" -> R.drawable.ic_bank_bni
+                        "BRI" -> R.drawable.ic_bank_bri
+                        else -> R.drawable.ic_avatar
+                    }
+                )
+                .into(binding.imgItemLogo)
         }
     }
 
