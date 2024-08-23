@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/neutral_01"
     tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankFormKonfirmasiFragment"
     android:importantForAccessibility="no"
     android:padding="@dimen/_16sdp"
@@ -34,7 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/konfirmasi_transaksi"
             android:text="@string/konfirmasi_transaksi"
             android:textColor="@android:color/black"
             android:textSize="@dimen/_18ssp"
@@ -75,6 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/nama_merchant"
+                    android:importantForAccessibility="no"
                     android:layout_marginEnd="12dp"
                     android:textColor="@color/neutral_09"
                     android:textSize="16sp"/>
@@ -87,6 +86,7 @@
                     android:text="1234567890"
                     android:textStyle="bold"
                     android:textAlignment="textEnd"
+                    android:importantForAccessibility="no"
                     android:id="@+id/tvNamaMerchant"
                     android:textColor="@color/neutral_09"
                     android:textSize="16sp"/>
@@ -103,6 +103,7 @@
                     android:id="@+id/tvKotaMerchantHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
                     android:text="@string/kota_merchant"
                     android:layout_marginEnd="12dp"
                     android:textColor="@color/neutral_09"
@@ -112,6 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:importantForAccessibility="no"
                     android:text="Palembang"
                     android:layout_toRightOf="@id/tvKotaMerchantHeader"
                     android:textAlignment="textEnd"
@@ -132,6 +134,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
                     android:text="Nominal Transfer"
                     android:textColor="@color/neutral_09"
                     android:textSize="16sp"/>
@@ -140,6 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:importantForAccessibility="no"
                     android:text="Rp100.000"
                     android:textStyle="bold"
                     android:id="@+id/tvNominalAwal"
@@ -158,6 +162,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
                     android:text="Biaya Admin"
                     android:textColor="@color/neutral_09"
                     android:textSize="16sp"/>
@@ -166,6 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:importantForAccessibility="no"
                     android:text="Rp100.000"
                     android:textStyle="bold"
                     android:id="@+id/tvBiayaAdmin"
@@ -184,6 +190,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:importantForAccessibility="no"
                     android:text="Nominal Total Transfer"
                     android:textColor="@color/neutral_09"
                     android:textSize="16sp"/>
@@ -192,6 +199,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:importantForAccessibility="no"
                     android:text="Rp100.000"
                     android:textStyle="bold"
                     android:id="@+id/tvNominalTotal"

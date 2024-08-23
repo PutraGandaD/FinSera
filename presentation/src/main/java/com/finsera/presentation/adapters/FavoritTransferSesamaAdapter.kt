@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.finsera.domain.model.DaftarTersimpanSesama
+import com.finsera.presentation.R
 import com.finsera.presentation.databinding.DaftarTersimpanItemBinding
 import com.finsera.presentation.databinding.FavoritItemBinding
 
@@ -25,10 +26,18 @@ class FavoritTransferSesamaAdapter(val itemClickListener: OnFavoriteItemSesamaCl
         fun bind(data: DaftarTersimpanSesama) {
             binding.tvDaftartersimpanNamapemilik.text = data.namaPemilikRekening
             binding.tvDaftartersimpanNorekening.text = data.noRekening
-
+            binding.imgItemLogo.setImageResource(R.drawable.ic_bca_labeled_colored_logo)
             binding.btnDeleteFavorititem.setOnClickListener {
                 itemClickListener.onDeleteItemSesamaClicked(data)
             }
+
+            val accountNumberWithSpaces = data.noRekening.replace("", " ").trim()
+            val accessibilityText = itemView.context.getString(
+                R.string.desc_daftar_tersimpan,
+                data.namaPemilikRekening,
+                accountNumberWithSpaces
+            )
+            itemView.contentDescription = accessibilityText
         }
     }
 

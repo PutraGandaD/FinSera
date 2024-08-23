@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/_16sdp"
-    android:background="@color/neutral_01"
     android:importantForAccessibility="no"
     tools:context=".ui.fragments.transfer.sesama_bank.TransferSesamaBankHomeFragment"
     android:contentDescription="@string/screen_transfer_sesama_bank">

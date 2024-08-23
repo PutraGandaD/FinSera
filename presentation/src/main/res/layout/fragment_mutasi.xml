@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:padding="@dimen/_16sdp"
     android:importantForAccessibility="no"
-    android:background="@android:color/white"
     tools:context=".ui.fragments.info.mutasi.MutasiFragment"
     android:contentDescription="@string/screen_mutasi_transaksi">
 

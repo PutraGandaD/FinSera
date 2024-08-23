@@ -58,7 +58,8 @@ class TransferAntarBankFormFragment : Fragment() {
         binding.checkboxDaftarTersimpanSesama.setOnCheckedChangeListener { _, isChecked ->
             addToDaftarTersimpan = isChecked
         }
-        binding.cardInfoRekening.icBank.setImageResource(R.drawable.ic_bank_selain_bca_form_transfer) // set icon to non bca
+
+        binding.cardInfoRekening.icBank.setImageResource(R.drawable.ic_bank_selain_bca_form_transfer)
 
         getBundleDataRekening()
         observeDataSaldo()
@@ -214,4 +215,5 @@ class TransferAntarBankFormFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

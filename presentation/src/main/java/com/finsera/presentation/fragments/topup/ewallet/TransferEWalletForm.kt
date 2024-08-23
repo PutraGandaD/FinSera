@@ -2,6 +2,7 @@ package com.finsera.presentation.fragments.topup.ewallet
 
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -82,6 +83,7 @@ class TransferEWalletForm : Fragment() {
         }
 
         setupAccessibility()
+        binding.nomorEWalletEditText.inputType = InputType.TYPE_CLASS_NUMBER
 
         if (!hasAnnouncedScreen) {
             val announcement = getString(R.string.screen_isi_ewallet, ewalletName)

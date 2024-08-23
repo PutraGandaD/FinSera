@@ -35,6 +35,8 @@ class TransferQrisMerchantFormFragment : Fragment() {
     private val transferQrisMerchantFormViewModel : TransferQrisMerchantFormViewModel by inject()
     private val connectivityManager : ConnectivityManager by inject()
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,6 +55,12 @@ class TransferQrisMerchantFormFragment : Fragment() {
         getBundle()
         handleNextBtn()
         observeDataSaldo()
+
+        if (!hasAnnouncedScreen) {
+            val announcement = getString(R.string.screen_form_transfer, namaMerchant)
+            view.announceForAccessibility(announcement)
+            hasAnnouncedScreen = true
+        }
     }
 
     private fun handleNextBtn() {
@@ -128,6 +136,8 @@ class TransferQrisMerchantFormFragment : Fragment() {
 
         binding.cardInfoMerchant.tvKotaMerchant.text = namaKotaMerchant
         binding.cardInfoMerchant.tvNamaMerchant.text = namaMerchant
+
+        updateRecipientInfoAccessibility()
     }
 
     private fun observeDataSaldo() {
@@ -155,6 +165,7 @@ class TransferQrisMerchantFormFragment : Fragment() {
                         saldoRekening = uiState.dataSaldo?.amount
                         val formattedSaldo = "Rp" + CurrencyFormatter.formatCurrency(saldoRekening!!)
                         binding.cardInfoSaldo.tvSaldoRekening.text = formattedSaldo
+                        updateSaldoAndaAccessibility(formattedSaldo)
                     }
 
                     if(!uiState.hasInternet) {
@@ -170,5 +181,19 @@ class TransferQrisMerchantFormFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun updateSaldoAndaAccessibility(formattedSaldo: String) {
+        val fullDescription = getString(R.string.desc_saldo_anda, formattedSaldo)
+        binding.cardInfoSaldo.saldoAndaContainer.contentDescription = fullDescription
+    }
+
+    private fun updateRecipientInfoAccessibility() {
+        val fullDescription = getString(
+            R.string.desc_recipient_info_qris,
+            namaMerchant ?: "",
+            namaKotaMerchant ?: "",
+        )
+        binding.cardInfoMerchant.root.contentDescription = fullDescription
     }
 }
