@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.finsera.presentation.R
 import com.finsera.presentation.adapters.MutasiAdapter
 import com.finsera.presentation.adapters.NotifAdapter
@@ -39,10 +40,11 @@ class NotificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
+
         notifViewModel.getNotifikasi()
         observer()
         setUpRvMutasi()
-
     }
 
     private fun setUpRvMutasi() {

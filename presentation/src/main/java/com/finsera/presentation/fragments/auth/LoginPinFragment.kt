@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -197,6 +198,7 @@ class   LoginPinFragment : Fragment() {
 
                     if(uiState.isPinCorrect) {
                         if(findNavController().currentDestination?.id == R.id.loginPinFragment) {
+                            Toast.makeText(requireActivity(), "Berhasil Login", Toast.LENGTH_SHORT).show()
                             findNavController().navigate(R.id.action_loginPinFragment_to_homeFragment)
                         }
                     } else {
