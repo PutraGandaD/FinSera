@@ -69,6 +69,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:importantForAccessibility="yes"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_marginBottom="12dp"
                 layout="@layout/card_info_rekening_transfer" />
 
@@ -95,7 +98,11 @@
 
             <include
                 android:id="@+id/card_info_saldo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:importantForAccessibility="no"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 layout="@layout/card_info_saldo_transfer"/>
 
             <LinearLayout

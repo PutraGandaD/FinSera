@@ -5,13 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.finsera.common.utils.extension.copyToClipboard
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentAccountBinding
+import com.finsera.presentation.fragments.akun.viewmodel.AccountViewModel
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.koin.android.ext.android.inject
 
 class AccountFragment : Fragment() {
     private var _binding: FragmentAccountBinding? = null
     private val binding get() = _binding!!
+
+    private val accountViewModel: AccountViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,6 +34,38 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpBottomNavBar()
+        setUpProfileInfo()
+        clipBoardCardNumber()
+
+        val cardAkun = view.findViewById<MaterialCardView>(R.id.card_akun)
+        cardAkun.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_profileFragment)
+        }
+
+        val logout = view.findViewById<LinearLayout>(R.id.logout)
+        logout.setOnClickListener {
+            logoutUser()
+        }
+
+        val notifikasi = view.findViewById<LinearLayout>(R.id.notifikasi)
+        notifikasi.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_notificationFragment)
+        }
+    }
+
+    private fun clipBoardCardNumber(){
+        binding.cardAkun.btnCopy.setOnClickListener {
+            val cardNumber = binding.cardAkun.tvRekening.text.toString()
+
+            requireContext().copyToClipboard(cardNumber)
+            Toast.makeText(requireActivity(),
+                getString(R.string.succes_clipboard_card_number), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setUpProfileInfo() {
+        binding.cardAkun.tvNama.text = accountViewModel.userInfo?.first
+        binding.cardAkun.tvRekening.text = accountViewModel.userInfo?.second
     }
 
     private fun setUpBottomNavBar() {
@@ -45,7 +86,7 @@ class AccountFragment : Fragment() {
                 }
 
                 R.id.menu_navbar_mutasi -> {
-                    findNavController().navigate(R.id.action_favoritFragment_to_mutasiFragment)
+                    findNavController().navigate(R.id.action_accountFragment_to_mutasiFragment)
                     false
                 }
 
@@ -54,6 +95,7 @@ class AccountFragment : Fragment() {
                 }
 
                 R.id.menu_navbar_favorit -> {
+                    findNavController().navigate(R.id.action_accountFragment_to_favoritFragment)
                     true
                 }
 
@@ -70,5 +112,21 @@ class AccountFragment : Fragment() {
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_favoritFragment_to_qrisScanQRFragment)
         }
+    }
+
+    private fun logoutUser() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Logout dari Akun")
+            .setMessage(getString(R.string.finsera_app_logout_desc))
+            .setNegativeButton("Tidak") { dialog, which ->
+                dialog.dismiss()
+                Toast.makeText(requireActivity(), "Anda membatalkan untuk logout dari akun.", Toast.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("Ya") { dialog, which ->
+                accountViewModel.logout()
+                Toast.makeText(requireActivity(), "Logout berhasil", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
+            }
+            .show()
     }
 }

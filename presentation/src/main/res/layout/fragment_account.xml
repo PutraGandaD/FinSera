@@ -8,24 +8,13 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="80dp"
-        android:clipToPadding="false">
+        android:layout_marginBottom="80dp"
+        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/_16sdp">
-
-            <ImageButton
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_back_button"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_title_label"
-                app:layout_constraintBottom_toBottomOf="@id/tv_title_label"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/back_button" />
 
             <TextView
                 android:id="@+id/tv_title_label"
@@ -48,7 +37,7 @@
                 android:layout_height="wrap_content"
                 layout="@layout/card_account"
                 app:layout_constraintTop_toBottomOf="@id/tv_title_label"
-                android:layout_marginTop="16dp"/>
+                android:layout_marginTop="18dp"/>
 
             <LinearLayout
                 android:id="@+id/kelola_akun"
@@ -76,7 +65,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ubah_mpin"
+                android:id="@+id/ubah_pin_app"
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@id/kelola_akun"
                 app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
-                    android:text="@string/ubah_mpin"/>
+                    android:text="Ubah PIN Aplikasi"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -111,7 +100,7 @@
             <LinearLayout
                 android:id="@+id/preferensi"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ubah_mpin"
+                app:layout_constraintTop_toBottomOf="@id/ubah_pin_app"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -139,6 +128,7 @@
                 app:layout_constraintTop_toBottomOf="@id/preferensi"
                 app:layout_constraintStart_toStartOf="parent"
                 android:orientation="horizontal"
+                android:focusable="true"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="38dp">
@@ -308,6 +298,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
+                android:focusable="true"
                 android:layout_height="38dp">
 
                 <ImageView

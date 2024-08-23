@@ -362,5 +362,27 @@
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.finsera.presentation.fragments.akun.AccountFragment"
-        android:label="AccountFragment" />
+        android:label="AccountFragment" >
+        <action
+            android:id="@+id/action_accountFragment_to_favoritFragment"
+            app:destination="@id/favoritFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_mutasiFragment"
+            app:destination="@id/mutasiFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/finsera_app_navgraph"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_accountFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.finsera.presentation.fragments.profil.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

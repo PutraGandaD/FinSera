@@ -11,6 +11,7 @@ import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.notifikasi.NotificationResponse
+import com.finsera.data.source.remote.response.profiling.ProfilingResponse
 import com.finsera.data.source.remote.response.qris.ScanQrisResponse
 import com.finsera.data.source.remote.response.qris_share.QrisShareResponse
 import com.finsera.data.source.remote.response.refresh_token.RefreshTokenResponse
@@ -507,5 +508,11 @@ class RemoteDataSource(private val apiService: ApiService) {
         val accessToken = "Bearer $token"
 
         return apiService.shareQR(accessToken)
+    }
+
+    suspend fun profiling(token: String) : ProfilingResponse {
+        val accessToken = "Bearer $token"
+
+        return apiService.getProfiling(accessToken)
     }
 }
