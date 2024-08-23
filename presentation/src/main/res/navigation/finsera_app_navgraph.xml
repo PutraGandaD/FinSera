@@ -43,8 +43,16 @@
             android:id="@+id/action_homeFragment_to_qrisScanQRFragment"
             app:destination="@id/qrisScanQRFragment" />
         <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
             android:id="@+id/action_homeFragment_to_favoritFragment"
             app:destination="@id/favoritFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -75,7 +83,9 @@
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_loginFragment_to_createPinFragment"
-            app:destination="@id/createPinFragment" />
+            app:destination="@id/createPinFragment"
+            app:popUpTo="@id/finsera_app_navgraph"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/mutasiFragment"
@@ -315,6 +325,11 @@
         android:name="com.finsera.presentation.fragments.qris.QrisShareFragment"
         android:label="fragment_qris_share"
         tools:layout="@layout/fragment_qris_share" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.finsera.presentation.fragments.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/favoritFragment"
         android:name="com.finsera.presentation.fragments.favorit.FavoritFragment"

@@ -53,4 +53,16 @@ class LocalDataSource(
 
         return Pair(first = userName, second = userAccountNum)
     }
+
+    fun clearTokenFromSharedPreferences() {
+        sharedPreferencesManager.clearSharedPreferences(Constant.USER_ACCESS_TOKEN_KEY)
+        sharedPreferencesManager.clearSharedPreferences(Constant.USER_REFRESH_TOKEN_KEY)
+    }
+
+    fun clearLoginInfo() {
+        sharedPreferencesManager.clearSharedPreferences(Constant.USER_LOGGED_IN_STATUS)
+        sharedPreferencesManager.clearSharedPreferences(Constant.USER_APPLICATION_PIN)
+        sharedPreferencesManager.clearSharedPreferences(Constant.NOMOR_REKENING_NASABAH)
+        sharedPreferencesManager.clearSharedPreferences(Constant.NAMA_NASABAH)
+    }
 }

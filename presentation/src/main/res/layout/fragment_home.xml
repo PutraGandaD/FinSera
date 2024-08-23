@@ -111,8 +111,8 @@
 
             <ImageButton
                 android:id="@+id/btn_notification"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="26dp"
+                android:layout_height="23dp"
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:background="@color/primary_darkblue"
                 android:contentDescription="@string/tv_talkback_notifikasi_btn"

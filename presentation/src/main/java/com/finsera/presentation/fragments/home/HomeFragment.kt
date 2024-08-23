@@ -19,9 +19,11 @@ import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.extension.copyToClipboard
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.finsera.common.utils.format.CurrencyFormatter
+import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentHomeBinding
 import com.finsera.presentation.fragments.home.viewmodel.HomeViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -92,10 +94,17 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
             findNavController().navigate(R.id.action_homeFragment_to_transferAntarBankHome)
         }
 
+        binding.btnNotification.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_notificationFragment)
+        }
+
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_qrisScanQRFragment)
         }
 
+        binding.btnLogout.setOnClickListener {
+            logoutUser()
+        }
 
         setUpBottomNavBar()
         getInfoSaldo()
@@ -312,6 +321,22 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
                 }
             }
         }
+    }
+
+    private fun logoutUser() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Logout dari Akun")
+            .setMessage(getString(R.string.finsera_app_logout_desc))
+            .setNegativeButton("Tidak") { dialog, which ->
+                dialog.dismiss()
+                Toast.makeText(requireActivity(), "Anda membatalkan untuk logout dari akun.", Toast.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("Ya") { dialog, which ->
+                homeViewModel.logoutFromAccount()
+                Toast.makeText(requireActivity(), "Logout berhasil", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_homeFragment_to_loginFragment)
+            }
+            .show()
     }
 
     override fun onDestroy() {

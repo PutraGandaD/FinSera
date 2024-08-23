@@ -272,7 +272,7 @@
     <string name="item_name">nama_item</string>
     <string name="item_description">item description</string>
     <string name="desc_create_pin">Buat PIN Anda</string>
-    <string name="tv_create_pin">Create PIN</string>
+    <string name="tv_create_pin">Buat PIN Aplikasi</string>
     <string name="desc_bank_option">Pilih Opsi Bank di bawah</string>
     <string name="desc_close_bottom_sheet">Tutup Bottom Sheet</string>
     <string name="scan_qr">Scan QR</string>
@@ -282,6 +282,9 @@
     <string name="no_merchant">No. Merchant</string>
     <string name="qr_share">QR Share</string>
     <string name="hint_scan_qr">Scan QR atau Barcode\nuntuk memulai transaksi</string>
+    <string name="empty_notification">Notifikasi kosong</string>
+    <string name="empty_notification_text">Sepertinya belum ada notifikasi</string>
+    <string name="terjadi_kesalahan_pada_server">Terjadi kesalahan pada server</string>
     <string name="daftar_favorit">Daftar Favorit</string>
     <string name="tidak_ada_daftar_tersimpan">Tidak Ada Daftar Tersimpan</string>
     <string name="screen_create_pin">Halaman Membuat PIN</string>
@@ -306,4 +309,6 @@
     <string name="kategori_transfer_antar_bank_desc">Kategori Transfer Antar Bank</string>
     <string name="kategori_e_wallet_desc">Kategori E-Wallet</string>
     <string name="kategori_virtual_account_desc">Kategori Virtual Account</string>
+    <string name="finsera_app_logout_desc">Anda menekan tombol Logout.\n\nApabila anda menekan \'Ya\' anda akan keluar dari akun dan akan diarahkan secara otomatis ke halaman login.\n\nApabila anda ingin melakukan transaksi pada akun anda setelah Logout, anda perlu login kembali pada aplikasi FinSera.</string>
+
 </resources>
