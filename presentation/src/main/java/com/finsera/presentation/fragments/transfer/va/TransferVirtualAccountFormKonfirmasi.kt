@@ -5,12 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
+import com.finsera.common.utils.DisableTouchEvent
 import com.finsera.common.utils.format.CurrencyFormatter
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentTransferVirtualAccountFormKonfirmasiBinding
@@ -26,74 +26,74 @@ class TransferVirtualAccountFormKonfirmasi : Fragment() {
     private var _binding: FragmentTransferVirtualAccountFormKonfirmasiBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var accountNum: String
-    private lateinit var accountName: String
+    private val viewModel: TransferVaViewModel by viewModel()
+
+    private var accountNum: String? = null
+    private var accountName: String? = null
     private var nominal: Int = 0
     private var addToDaftarTersimpan: Boolean = false
 
-    private val viewModel: TransferVaViewModel by viewModel()
+    private var hasAnnouncedScreen = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding =
-            FragmentTransferVirtualAccountFormKonfirmasiBinding.inflate(inflater, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentTransferVirtualAccountFormKonfirmasiBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupListeners()
 
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
 
-        viewModel.resetState()
+        observer()
 
-
-        //bundle
         val bundle = arguments?.getParcelable<CekVaBundle>(Constant.DATA_VA_BUNDLE)
-        addToDaftarTersimpan =
-            requireArguments().getBoolean(Constant.DAFTAR_TERSIMPAN_CHECKED_EXTRA)
+        addToDaftarTersimpan = requireArguments().getBoolean(Constant.DAFTAR_TERSIMPAN_CHECKED_EXTRA)
+
         if (bundle != null) {
             accountNum = bundle.vaAccountNum
             accountName = bundle.vaAccountName
             nominal = bundle.vaTransferNominal
-        }
 
-        binding.tvNoVA.text = accountNum
-        binding.tvNamaVA.text = accountName
-        binding.tvNominalAwal.text = StringBuilder().append("Rp ")
-            .append(CurrencyFormatter.formatCurrency(nominal.toDouble()))
+            binding.tvNoVA.text = accountNum
+            binding.tvNamaVA.text = accountName
+            binding.tvNominalAwal.text = "Rp ${CurrencyFormatter.formatCurrency(nominal.toDouble())}"
 
+            setAccessibilityDescriptions()
 
-        binding.btnLanjut.setOnClickListener {
-            val mPin = binding.tiePin.text.toString()
-            if (mPin.isNotEmpty()) {
-                viewModel.transferVa(accountNum, mPin).also {
-                    observer()
+            binding.btnLanjut.setOnClickListener {
+                val mPin = binding.tiePin.text.toString()
+                if (mPin.isNotEmpty()) {
+                    viewModel.transferVa(accountNum!!, mPin)
+                } else {
+                    Snackbar.make(requireView(), getString(R.string.pin_empty), Snackbar.LENGTH_SHORT).show()
                 }
-            } else {
-                Snackbar.make(
-                    requireView(),
-                    getString(R.string.pin_empty),
-                    Snackbar.LENGTH_SHORT
-                ).show()
             }
         }
 
-        binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_confirm_transaction))
+            hasAnnouncedScreen = true
         }
-
     }
 
+    private fun formatAccountNumberForAccessibility(accountNumber: String): String {
+        return accountNumber.map { it.toString() }.joinToString(" ")
+    }
+
+    private fun setAccessibilityDescriptions() {
+        binding.apply {
+            val formattedAccountNumber = formatAccountNumberForAccessibility(tvNoVA.text.toString())
+            layoutnomorva.contentDescription = getString(R.string.va_number_desc, formattedAccountNumber)
+            layoutnamava.contentDescription = getString(R.string.nama_penerima_desc, tvNamaVA.text)
+            layoutnominal.contentDescription = getString(R.string.nominal_transfer_desc, tvNominalAwal.text)
+        }
+    }
 
     private fun observer() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.transferVaUiState.collectLatest { uiState ->
-
                     uiState.message?.let { message ->
                         Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
                         viewModel.messageShown()
@@ -101,8 +101,10 @@ class TransferVirtualAccountFormKonfirmasi : Fragment() {
 
                     if (uiState.isLoading) {
                         binding.viewFlipper.displayedChild = 1
+                        DisableTouchEvent.setInteractionDisabled(requireActivity(), true)
                     } else {
                         binding.viewFlipper.displayedChild = 0
+                        DisableTouchEvent.setInteractionDisabled(requireActivity(), false)
                     }
 
                     if (uiState.isSuccess) {
@@ -118,28 +120,23 @@ class TransferVirtualAccountFormKonfirmasi : Fragment() {
                             val bundle = Bundle().apply {
                                 putParcelable(Constant.DATA_TF_VA_BUNDLE, dataTransferVa)
                             }
+
+                            if (addToDaftarTersimpan) {
+                                viewModel.simpanKeDaftarTersimpanVa(namaPemilik = accountName!!, noRek = accountNum!!)
+                                Snackbar.make(requireView(), "Transfer Berhasil dan VA berhasil ditambahkan ke Daftar Tersimpan.", Snackbar.LENGTH_SHORT).show()
+                            } else {
+                                Snackbar.make(requireView(), "Transfer Berhasil.", Snackbar.LENGTH_SHORT).show()
+                            }
+
                             findNavController().navigate(
                                 R.id.action_transferVirtualAccountFormKonfirmasi_to_transferVirtualAccountSuccessFragment,
                                 bundle
-                            ).apply {
-                                if (addToDaftarTersimpan) {
-                                    viewModel.simpanKeDaftarTersimpanVa(
-                                        namaPemilik = accountName,
-                                        noRek = accountNum,
-                                    )
-                                }
-                            }
+                            )
                         }
                     }
-
                 }
             }
         }
-    }
-
-
-    private fun setupListeners() {
-        // TODO
     }
 
     override fun onDestroyView() {

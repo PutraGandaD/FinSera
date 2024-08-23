@@ -1,39 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/saved_list"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp">
 
-    <TextView
-        android:id="@+id/tv_daftartersimpan_namapemilik"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nama Pemilik Rekening"
-        android:textColor="@color/neutral_09"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/tv_daftartersimpan_norekening"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="1234567890"
-        android:textColor="@color/neutral_09"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/shadow_navbar"
-        app:layout_constraintTop_toBottomOf="@id/tv_daftartersimpan_namapemilik"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <ImageView
+            android:id="@+id/img_item_logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:alpha="0.5"
+            android:src="@drawable/ic_bca_labeled_colored_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/shadow_navbar"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/shadow_bottom_navbar"
-        app:layout_constraintTop_toBottomOf="@id/tv_daftartersimpan_norekening"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:id="@+id/tv_daftartersimpan_namapemilik"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/calibri_font_family"
+            android:text="Nama Pemilik Rekening"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_item_logo"
+            app:layout_constraintTop_toTopOf="@+id/img_item_logo" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_daftartersimpan_norekening"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="1234567890"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_daftartersimpan_namapemilik"
+            app:layout_constraintStart_toStartOf="@+id/tv_daftartersimpan_namapemilik"
+            app:layout_constraintTop_toBottomOf="@+id/tv_daftartersimpan_namapemilik" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

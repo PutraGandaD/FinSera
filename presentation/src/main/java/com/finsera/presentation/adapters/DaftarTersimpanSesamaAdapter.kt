@@ -9,6 +9,9 @@ import com.finsera.domain.model.DaftarTersimpanSesama
 import com.finsera.presentation.databinding.DaftarTersimpanItemBinding
 
 class DaftarTersimpanSesamaAdapter(val itemClickListener: OnSavedItemSesamaClickListener) : ListAdapter<DaftarTersimpanSesama, DaftarTersimpanSesamaAdapter.DaftarTersimpanSesamaViewHolder>(DIFF_CALLBACK) {
+
+    private var accessibilityTextMap: MutableMap<DaftarTersimpanSesama, String> = mutableMapOf()
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -22,6 +25,10 @@ class DaftarTersimpanSesamaAdapter(val itemClickListener: OnSavedItemSesamaClick
             binding.tvDaftartersimpanNamapemilik.text = data.namaPemilikRekening
             binding.tvDaftartersimpanNorekening.text = data.noRekening
         }
+    }
+
+    fun setAccessibilityText(daftarTersimpan: DaftarTersimpanSesama, accessibilityText: String) {
+        accessibilityTextMap[daftarTersimpan] = accessibilityText
     }
 
     companion object{
@@ -39,6 +46,9 @@ class DaftarTersimpanSesamaAdapter(val itemClickListener: OnSavedItemSesamaClick
         val data = getItem(position)
 
         holder.bind(data)
+
+        val accessibilityText = accessibilityTextMap[data]
+        holder.itemView.contentDescription = accessibilityText
 
         holder.itemView.setOnClickListener {
             itemClickListener.onSavedItemSesamaClicked(data)

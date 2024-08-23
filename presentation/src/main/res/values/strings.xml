@@ -171,13 +171,14 @@
     <string name="notifikasi">Notifikasi</string>
     <string name="accessibilitas">Accessibilitas</string>
     <string name="ramadhan_adi">Ramadhan Adi</string>
-
     <string name="tv_title_isi_e_wallet">Isi E-Wallet</string>
-    <string name="tv_no_handphone_atau_nama">Masukkan no.handphone/nama</string>
-    <string name="desc_input_no_hp_atau_nama">Masukkan nomor handphone atau nama di bawah</string>
+    <string name="tv_no_handphone">Masukkan Nomor Handphone</string>
+    <string name="desc_input_no_hp">Masukkan nomor handphone di bawah</string>
     <string name="desc_empty_list">Belum ada daftar tersimpan. tambah penerima ke daftar tersimpan agar transaksi ke orang terdekat lebih mudah</string>
-    <string name="no_handphone_nama">No. Handphone / Nama</string>
-    <string name="input_nomor_handphone_atau_nama">Input Nomor Handphone atau Nama</string>
+    <string name="desc_daftar_tersimpan">dalam daftar %1$s, dengan nomor rekening: %2$s</string>
+    <string name="desc_daftar_tersimpan_va">dalam daftar %1$s, dengan nomor virtual account: %2$s</string>
+    <string name="no_handphone">No. Handphone</string>
+    <string name="input_nomor_handphone">Input Nomor Handphone</string>
     <string name="nama_pengguna">Nama Pengguna</string>
     <string name="username">Putra Ganda Dewata</string>
     <string name="saldo_disembunyikan">Saldo Disembunyikan</string>
@@ -215,8 +216,8 @@
     <string name="transfer_antar_bank">Transfer Antar Bank</string>
     <string name="screen_e_wallet_list">Pilih tipe E-Wallet</string>
     <string name="screen_confirm_transaction">Konfirmasi Transaksi Anda</string>
-    <string name="screen_isi_ewallet">Isi E-Wallet yang Anda Inginkan</string>
-    <string name="screen_transfer_ke_va">Transfer ke Virtual Account</string>
+    <string name="screen_isi_ewallet">Isi E-Wallet %s</string>
+    <string name="screen_transfer_ke_va">Halaman Entri Nomor Virtual Account</string>
     <string name="screen_transfer_bank_sama">Transfer ke Bank yang Sama</string>
     <string name="desc_input_nomor_rekening">Masukkan nomor rekening tujuan di bawah</string>
     <string name="desc_input_catatan">Masukkan Catatan Opsional di bawah</string>
@@ -254,7 +255,6 @@
     <string name="cari_bank">Cari Bank</string>
     <string name="rekening_pengirim">Rekening Pengirim</string>
     <string name="nama_pengirim">Nama Pengirim</string>
-
     <string name="recipient">Penerima</string>
     <string name="tv_talkback_sembunyikan_saldo">Sembunyikan Saldo Rekening Anda</string>
     <string name="account_number_prefix">Nomor Rekening Anda Adalah</string>
@@ -283,4 +283,15 @@
     <string name="hint_scan_qr">Scan QR atau Barcode\nuntuk memulai transaksi</string>
     <string name="daftar_favorit">Daftar Favorit</string>
     <string name="tidak_ada_daftar_tersimpan">Tidak Ada Daftar Tersimpan</string>
+    <string name="screen_create_pin">Halaman Membuat PIN</string>
+    <string name="va_number_desc">Nomor virtual account %s</string>
+    <string name="desc_daftar_tersimpan_ewallet">Dalam daftar: E-Wallet %1$s, Nama: %2$s, Nomor E-Wallet: %3$s</string>
+    <string name="e_wallet_desc">E-Wallet %s</string>
+    <string name="tipe_e_wallet_desc">Tipe E-Wallet: %s</string>
+    <string name="nama_pengguna_desc">Nama pengguna: %s</string>
+    <string name="nomor_e_wallet_desc">Nomor E-Wallet: %s</string>
+    <string name="e_wallet_tujuan_desc">Tipe E-Wallet: %s</string>
+    <string name="screen_qris">Scan QR atau Barcode untuk memulai transaksi</string>
+    <string name="screen_qris_share">Tunjukkan kode QRIS yang ada di halaman ini untuk memulai transaksi</string>
+    <string name="qris_share_desc">Tunjukkan kode QRIS Anda, biarkan mereka memindai dan terima pembayaran secara cepat dan efisien.</string>
 </resources>

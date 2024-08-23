@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
 import com.finsera.domain.model.DaftarTersimpanEWallet
+import com.finsera.domain.model.DaftarTersimpanVa
 import com.finsera.presentation.R
 import com.finsera.presentation.adapters.DaftarTersimpanEWalletAdapter
 import com.finsera.presentation.adapters.OnSavedItemEWalletClickListener
@@ -29,6 +30,8 @@ class TransferEWalletHomeFragment : Fragment(), OnSavedItemEWalletClickListener 
 
     private val daftarTersimpanEWalletAdapter = DaftarTersimpanEWalletAdapter(this)
     private val viewModel: TransferEWalletViewModel by viewModel()
+
+    private var hasAnnouncedScreen = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +54,10 @@ class TransferEWalletHomeFragment : Fragment(), OnSavedItemEWalletClickListener 
             findNavController().popBackStack()
         }
 
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_e_wallet))
+            hasAnnouncedScreen = true
+        }
     }
 
     private fun observer() {
@@ -60,6 +67,9 @@ class TransferEWalletHomeFragment : Fragment(), OnSavedItemEWalletClickListener 
                     if (uiState.data.isNotEmpty()) {
                         binding.viewDaftarTersimpanEmpty.root.visibility = View.GONE
                         daftarTersimpanEWalletAdapter.submitList(uiState.data)
+                        uiState.data.forEach { item ->
+                            updateAccessibilityInfo(item)
+                        }
                     } else {
                         daftarTersimpanEWalletAdapter.submitList(emptyList())
                         binding.viewDaftarTersimpanEmpty.root.visibility = View.VISIBLE
@@ -80,17 +90,16 @@ class TransferEWalletHomeFragment : Fragment(), OnSavedItemEWalletClickListener 
         }
     }
 
-//    private fun setupSavedEWalletList() {
-//        // TODO
-//    }
-//
-//    private fun loadSavedEWallets(): List<SavedEWallet> {
-//        // TODO
-//    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun updateAccessibilityInfo(daftarTersimpan: DaftarTersimpanEWallet) {
+        val accountNumber = daftarTersimpan.nomorEWallet
+        val accountNumberWithSpaces = accountNumber.replace("", " ").trim()
+        val accessibilityText = getString(R.string.desc_daftar_tersimpan_ewallet, daftarTersimpan.namaEWallet, daftarTersimpan.namaAkunEWallet, accountNumberWithSpaces)
+        daftarTersimpanEWalletAdapter.setAccessibilityText(daftarTersimpan, accessibilityText)
     }
 
     override fun onSavedItemEWalletClicked(daftarTersimpan: DaftarTersimpanEWallet) {

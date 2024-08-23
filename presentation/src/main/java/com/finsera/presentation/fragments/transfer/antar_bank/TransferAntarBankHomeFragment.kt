@@ -13,6 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
 import com.finsera.domain.model.DaftarTersimpanAntar
+import com.finsera.domain.model.DaftarTersimpanSesama
 import com.finsera.presentation.R
 import com.finsera.presentation.adapters.DaftarTersimpanAntarAdapter
 import com.finsera.presentation.adapters.OnSavedItemAntarClickListener
@@ -67,12 +68,15 @@ class TransferAntarBankHomeFragment : Fragment(), OnSavedItemAntarClickListener 
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 transferAntarBankHomeViewModel.transferAntarHomeUiState.collectLatest { uiState ->
-                    uiState.data?.let {
-                        daftarTersimpanAntarAdapter.submitList(uiState.data)
+                    uiState.data?.let { daftarTersimpan ->
+                        daftarTersimpanAntarAdapter.submitList(daftarTersimpan)
+                        daftarTersimpan.forEach { item ->
+                            updateAccessibilityInfo(item)
+                        }
                         binding.viewDaftarTersimpanEmpty.root.visibility = View.GONE
                     }
 
-                    if(uiState.data.isNullOrEmpty()) {
+                    if (uiState.data.isNullOrEmpty()) {
                         daftarTersimpanAntarAdapter.submitList(null)
                         binding.viewDaftarTersimpanEmpty.root.visibility = View.VISIBLE
                     }
@@ -101,5 +105,12 @@ class TransferAntarBankHomeFragment : Fragment(), OnSavedItemAntarClickListener 
         if(findNavController().currentDestination?.id == R.id.transferAntarBankHome) {
             findNavController().navigate(R.id.action_transferAntarBankHome_to_transferAntarBankForm, bundle)
         }
+    }
+
+    private fun updateAccessibilityInfo(daftarTersimpan: DaftarTersimpanAntar) {
+        val accountNumber = daftarTersimpan.noRekening
+        val accountNumberWithSpaces = accountNumber.replace("", " ").trim()
+        val accessibilityText = getString(R.string.desc_daftar_tersimpan, daftarTersimpan.namaPemilikRekening, accountNumberWithSpaces)
+        daftarTersimpanAntarAdapter.setAccessibilityText(daftarTersimpan, accessibilityText)
     }
 }

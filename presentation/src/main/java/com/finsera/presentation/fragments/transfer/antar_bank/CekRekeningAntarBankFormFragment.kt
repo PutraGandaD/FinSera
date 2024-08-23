@@ -55,6 +55,8 @@ class CekRekeningAntarBankFormFragment : Fragment() {
         handleNextBtn()
         setupAccountNumberAccessibility()
 
+        binding.etNomorRekening.inputType = InputType.TYPE_CLASS_NUMBER
+
         if (!hasAnnouncedScreen) {
             view?.announceForAccessibility(getString(R.string.screen_pilih_bank))
             hasAnnouncedScreen = true

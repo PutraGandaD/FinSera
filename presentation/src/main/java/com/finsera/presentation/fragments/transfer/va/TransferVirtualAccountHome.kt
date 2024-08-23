@@ -33,6 +33,8 @@ class TransferVirtualAccountHome : Fragment(), OnSavedItemVaClickListener {
     private val viewModel: TransferVaViewModel by viewModel()
     private val adapter = DaftarTersimpanVaAdapter(this)
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,6 +53,11 @@ class TransferVirtualAccountHome : Fragment(), OnSavedItemVaClickListener {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_virtual_account))
+            hasAnnouncedScreen = true
+        }
     }
 
     private fun observer() {
@@ -60,6 +67,9 @@ class TransferVirtualAccountHome : Fragment(), OnSavedItemVaClickListener {
                     if (uiState.data.isNotEmpty()) {
                         binding.viewDaftarTersimpanEmpty.root.visibility = View.GONE
                         adapter.submitList(uiState.data)
+                        uiState.data.forEach { item ->
+                            updateAccessibilityInfo(item)
+                        }
                     } else {
                         adapter.submitList(emptyList())
                         binding.viewDaftarTersimpanEmpty.root.visibility = View.VISIBLE
@@ -99,4 +109,12 @@ class TransferVirtualAccountHome : Fragment(), OnSavedItemVaClickListener {
             )
         }
     }
+
+    private fun updateAccessibilityInfo(daftarTersimpan: DaftarTersimpanVa) {
+        val accountNumber = daftarTersimpan.noRekening
+        val accountNumberWithSpaces = accountNumber.replace("", " ").trim()
+        val accessibilityText = getString(R.string.desc_daftar_tersimpan_va, daftarTersimpan.namaPemilikRekening, accountNumberWithSpaces)
+        adapter.setAccessibilityText(daftarTersimpan, accessibilityText)
+    }
+
 }

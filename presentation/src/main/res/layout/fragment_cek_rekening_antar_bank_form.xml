@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/transfer_sesama_bank"
+            android:contentDescription="@string/transfer_antar_bank"
             android:text="@string/transfer_antar_bank"
             android:importantForAccessibility="yes"
             android:textSize="@dimen/_18ssp"

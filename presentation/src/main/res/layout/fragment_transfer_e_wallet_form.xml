@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/neutral_01"
-    android:contentDescription="@string/screen_isi_ewallet"
+    android:importantForAccessibility="no"
     android:padding="20dp"
     tools:context=".fragments.topup.ewallet.TransferEWalletForm">
 
@@ -34,7 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/e_wallet"
             android:text="@string/tv_title_isi_e_wallet"
             android:importantForAccessibility="yes"
             android:textColor="@android:color/black"
@@ -54,18 +53,19 @@
     <include
         android:id="@+id/e_wallet_item"
         layout="@layout/ewallet_form_item"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:contentDescription="@string/gopay"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/anchor_shadow_topmenu" />
 
     <LinearLayout
         android:id="@+id/layoutbanktujuan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,20 +74,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/desc_input_no_hp_atau_nama"
-            android:text="@string/tv_no_handphone_atau_nama"
+            android:contentDescription="@string/desc_input_no_hp"
+            android:text="@string/tv_no_handphone"
             android:textColor="@color/neutral_09"
             android:textSize="16sp" />
 
         <EditText
-            android:id="@+id/banktujuanEditText"
+            android:id="@+id/nomorEWalletEditText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/edit_text_background_neutral5"
-            android:contentDescription="@string/input_nomor_handphone_atau_nama"
+            android:contentDescription="@string/input_nomor_handphone"
             android:gravity="center_vertical"
-            android:hint="@string/no_handphone_nama"
+            android:hint="@string/no_handphone"
             android:paddingHorizontal="16dp"
             android:singleLine="true" />
 
@@ -109,7 +109,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/simpan_ke_daftar_tersimpan" />
+                android:text="@string/simpan_ke_daftar_tersimpan"
+                android:importantForAccessibility="no"/>
         </LinearLayout>
 
     </LinearLayout>

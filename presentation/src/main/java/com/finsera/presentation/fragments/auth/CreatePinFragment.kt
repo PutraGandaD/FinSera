@@ -18,6 +18,8 @@ class CreatePinFragment : Fragment() {
 
     private val loginPinViewModel by koinNavGraphViewModel<LoginPinViewModel>(R.id.finsera_app_navgraph)
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,6 +32,11 @@ class CreatePinFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Snackbar.make(requireView(), "Silahkan buat PIN Aplikasi terlebih dahulu untuk melanjutkan!", Snackbar.LENGTH_SHORT).show()
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_create_pin))
+            hasAnnouncedScreen = true
+        }
 
         binding.btnBuatPin.setOnClickListener {
             val newPinEt = binding.etPinBaru

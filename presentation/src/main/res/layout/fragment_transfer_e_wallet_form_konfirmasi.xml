@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.topup.ewallet.TransferEWalletFormKonfirmasiFragment"
     android:padding="20dp"
-    android:contentDescription="@string/screen_confirm_transaction">
+    android:importantForAccessibility="no">
 
     <RelativeLayout
         android:id="@+id/topmenu"
@@ -32,7 +32,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/e_wallet"
             android:text="@string/konfirmasi_transaksi"
             android:importantForAccessibility="yes"
             android:textColor="@android:color/black"
@@ -62,7 +61,7 @@
             android:text="E-Wallet"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"
-            android:contentDescription="@string/e_wallet"/>
+            android:importantForAccessibility="no"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -70,10 +69,10 @@
             android:layout_alignParentEnd="true"
             android:text="@string/gopay"
             android:textStyle="bold"
+            android:importantForAccessibility="no"
             android:id="@+id/tvJenisEWallet"
             android:textColor="@color/neutral_09"
-            android:textSize="16sp"
-            android:contentDescription="@string/gopay"/>
+            android:textSize="16sp"/>
 
     </RelativeLayout>
 
@@ -90,18 +89,18 @@
             android:text="@string/nama_pengguna"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"
-            android:contentDescription="@string/nama_pengguna"/>
+            android:importantForAccessibility="no"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="Putra Ganda Dewata"
+            android:text="@string/nama"
             android:textStyle="bold"
+            android:importantForAccessibility="no"
             android:id="@+id/tvNamaPengguna"
             android:textColor="@color/neutral_09"
-            android:textSize="16sp"
-            android:contentDescription="@string/username"/>
+            android:textSize="16sp"/>
 
     </RelativeLayout>
 
@@ -118,7 +117,7 @@
             android:text="@string/nomor_e_wallet"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"
-            android:contentDescription="@string/nomor_e_wallet"/>
+            android:importantForAccessibility="no"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -129,7 +128,7 @@
             android:id="@+id/tvNomorEWallet"
             android:textColor="@color/neutral_09"
             android:textSize="16sp"
-            android:contentDescription="@string/nomor_e_wallet_user"/>
+            android:importantForAccessibility="no"/>
 
     </RelativeLayout>
 
