@@ -4,7 +4,7 @@ import com.finsera.data.source.local.dao.daftar_tersimpan.ewallet.TransferEWalle
 import com.finsera.data.source.local.dao.daftar_tersimpan.transfer_antar.TransferAntarTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanDao
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_antar.TransferAntarTersimpanEntity
-import com.finsera.data.source.local.dao.daftar_tersimpan.virutal_account.TransferVaTersimpanDao
+import com.finsera.data.source.local.dao.daftar_tersimpan.virtual_account.TransferVaTersimpanDao
 import com.finsera.data.source.local.entities.daftar_tersimpan.ewallet.TransferEWalletTersimpanEntity
 import com.finsera.data.source.local.entities.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanEntity
 import com.finsera.data.source.local.entities.daftar_tersimpan.virtual_account.TransferVaTersimpanEntity

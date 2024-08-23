@@ -102,7 +102,7 @@ class TransferEWalletHomeFragment : Fragment(), OnSavedItemEWalletClickListener 
         daftarTersimpanEWalletAdapter.setAccessibilityText(daftarTersimpan, accessibilityText)
     }
 
-    override fun onSavedItemVaClicked(daftarTersimpan: DaftarTersimpanEWallet) {
+    override fun onSavedItemEWalletClicked(daftarTersimpan: DaftarTersimpanEWallet) {
         val dataEWallet = CekEWalletBundle(
             namaEWallet = daftarTersimpan.namaEWallet,
             id = daftarTersimpan.idAkunEWallet,

@@ -67,11 +67,11 @@ class DaftarTersimpanEWalletAdapter(val itemClickListener: OnSavedItemEWalletCli
         holder.bind(data, accessibilityText)
 
         holder.itemView.setOnClickListener {
-            itemClickListener.onSavedItemVaClicked(data)
+            itemClickListener.onSavedItemEWalletClicked(data)
         }
     }
 }
 
 interface OnSavedItemEWalletClickListener {
-    fun onSavedItemVaClicked(daftarTersimpan: DaftarTersimpanEWallet)
+    fun onSavedItemEWalletClicked(daftarTersimpan: DaftarTersimpanEWallet)
 }

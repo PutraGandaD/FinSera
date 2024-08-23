@@ -295,11 +295,11 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
                 }
 
                 R.id.menu_navbar_qris -> {
-
                     false
                 }
 
                 R.id.menu_navbar_favorit -> {
+                    findNavController().navigate(R.id.action_homeFragment_to_favoritFragment)
                     false
                 }
 

@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_homeFragment_to_qrisScanQRFragment"
             app:destination="@id/qrisScanQRFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoritFragment"
+            app:destination="@id/favoritFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -312,4 +315,27 @@
         android:name="com.finsera.presentation.fragments.qris.QrisShareFragment"
         android:label="fragment_qris_share"
         tools:layout="@layout/fragment_qris_share" />
+    <fragment
+        android:id="@+id/favoritFragment"
+        android:name="com.finsera.presentation.fragments.favorit.FavoritFragment"
+        android:label="FavoritFragment" >
+        <action
+            android:id="@+id/action_favoritFragment_to_qrisScanQRFragment"
+            app:destination="@id/qrisScanQRFragment" />
+        <action
+            android:id="@+id/action_favoritFragment_to_mutasiFragment"
+            app:destination="@id/mutasiFragment" />
+        <action
+            android:id="@+id/action_favoritFragment_to_transferSesamaBankFormFragment"
+            app:destination="@id/transferSesamaBankFormFragment" />
+        <action
+            android:id="@+id/action_favoritFragment_to_transferAntarBankForm"
+            app:destination="@id/transferAntarBankForm" />
+        <action
+            android:id="@+id/action_favoritFragment_to_transferEWalletForm"
+            app:destination="@id/transferEWalletForm" />
+        <action
+            android:id="@+id/action_favoritFragment_to_transferVirtualAccountFormKonfirmasi"
+            app:destination="@id/transferVirtualAccountFormKonfirmasi" />
+    </fragment>
 </navigation>
