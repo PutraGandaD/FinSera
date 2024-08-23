@@ -5,6 +5,7 @@
     android:id="@+id/transfer_e_wallet_success"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:importantForAccessibility="no"
     tools:context=".fragments.topup.ewallet.TransferEWalletSuccessFragment">
 
     <ImageView

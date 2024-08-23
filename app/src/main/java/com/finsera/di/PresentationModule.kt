@@ -2,6 +2,7 @@ package com.finsera.di
 
 import com.finsera.presentation.fragments.auth.viewmodels.LoginPinViewModel
 import com.finsera.presentation.fragments.auth.viewmodels.LoginViewModel
+import com.finsera.presentation.fragments.favorit.viewmodel.FavoritViewModel
 import com.finsera.presentation.fragments.home.viewmodel.HomeViewModel
 import com.finsera.presentation.fragments.info.mutasi.viewmodel.MutasiViewModel
 import com.finsera.presentation.fragments.info.saldo.viewmodel.InfoSaldoViewModel
@@ -49,5 +50,6 @@ object PresentationModule {
         viewModel { TransferQrisMerchantViewModel(get(), get(), get()) }
         viewModel { QrisShareViewModel(get(), get()) }
         viewModel { NotificationViewModel(get(),get()) }
+        viewModel { FavoritViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
     }
 }

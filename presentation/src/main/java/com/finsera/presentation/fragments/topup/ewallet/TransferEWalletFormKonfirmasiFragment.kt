@@ -31,6 +31,9 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
     private lateinit var ewalletAccountName: String
 
     private val viewModel: TransferEWalletViewModel by viewModel()
+
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,6 +47,10 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
 
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_confirm_transaction))
+            hasAnnouncedScreen = true
+        }
 
         viewModel.resetState()
 
@@ -65,9 +72,6 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
-
-
-
 
         binding.tvJenisEWallet.text = ewalletName
         binding.tvNomorEWallet.text = ewalletAccountNum
@@ -98,8 +102,20 @@ class TransferEWalletFormKonfirmasiFragment : Fragment() {
             }
         }
 
+        setAccessibilityDescriptions()
 
+    }
 
+    private fun formatAccountNumberForAccessibility(accountNumber: String): String {
+        return accountNumber.map { it.toString() }.joinToString(" ")
+    }
+    private fun setAccessibilityDescriptions() {
+        binding.apply {
+            val formattedAccountNumber = formatAccountNumberForAccessibility(tvNomorEWallet.text.toString())
+            layoutjenisewallet.contentDescription = getString(R.string.tipe_e_wallet_desc, tvJenisEWallet.text)
+            layoutnamapengguna.contentDescription = getString(R.string.nama_pengguna_desc, tvNamaPengguna.text)
+            layoutnomorewallet.contentDescription = getString(R.string.nomor_e_wallet_desc, formattedAccountNumber)
+        }
     }
 
     private fun observer() {

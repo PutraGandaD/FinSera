@@ -6,9 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="20dp"
     tools:context=".fragments.transfer.va.TransferVirtualAccountForm"
-    android:contentDescription="@string/screen_transfer_ke_va">
-
-
+    android:importantForAccessibility="no">
 
     <RelativeLayout
         android:id="@+id/topmenu"
@@ -31,15 +29,20 @@
             android:layout_centerVertical="true"/>
 
         <TextView
+            android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/transfer_virtual_account"
+            android:contentDescription="@string/screen_transfer_ke_va"
             android:text="@string/transfer_virtual_account"
             android:importantForAccessibility="yes"
             android:textColor="@android:color/black"
             android:textSize="@dimen/_18ssp"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:nextFocusDown="@id/btnBack"
+            android:accessibilityTraversalBefore="@id/btnBack"/>
     </RelativeLayout>
 
     <View
@@ -78,7 +81,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/neutral_09" />
                 <EditText
-                    android:id="@+id/banktujuanEditText"
+                    android:id="@+id/nomorVAEditText"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/edit_text_background_neutral5"

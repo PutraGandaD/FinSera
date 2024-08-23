@@ -42,11 +42,6 @@ class TransferEWalletSuccessFragment : Fragment() {
 
     private var imageUri: Uri? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -79,6 +74,7 @@ class TransferEWalletSuccessFragment : Fragment() {
             safeShareImageTo()
         }
 
+        setAccessibilityDescriptions()
     }
 
     private fun setupData(bundle: SuccessEWalletBundle) {
@@ -117,6 +113,27 @@ class TransferEWalletSuccessFragment : Fragment() {
 
         binding.cardTransaksiBerhasil.rlCatatan.visibility = View.GONE
         binding.cardTransaksiBerhasilScreenshot.rlCatatan.visibility = View.GONE
+    }
+
+    private fun formatDigitNumberAccessibility(digitNumberTalkback: String): String {
+        return digitNumberTalkback.map { it.toString() }.joinToString(" ")
+    }
+
+    private fun setAccessibilityDescriptions() {
+        binding.cardTransaksiBerhasil.apply {
+            val formattedDigitNumberBankRecipient = formatDigitNumberAccessibility(tvRekeningTujuan.text.toString())
+            val formattedDigitNumberBankAccount = formatDigitNumberAccessibility(tvRekeningPengirim.text.toString())
+            val formattedDigitNumberTransaction = formatDigitNumberAccessibility(tvNomorTransaksi.text.toString())
+            rlTanggal.contentDescription = getString(R.string.tanggal_transaksi_desc, tvDate.text)
+            rlNominal.contentDescription = getString(R.string.nominal_transfer_desc, tvNominal.text)
+            rlBiayaAdmin.contentDescription = getString(R.string.biaya_admin_desc, tvBiayaAdmin.text)
+            rlNoTransaksi.contentDescription = getString(R.string.nomor_transaksi_desc, formattedDigitNumberTransaction)
+            rlNamaPengirim.contentDescription = getString(R.string.nama_pengirim_desc, tvNamaPengirim.text)
+            rlRekeningPengirim.contentDescription = getString(R.string.rekening_pengirim_desc, formattedDigitNumberBankAccount)
+            rlBankTujuan.contentDescription = getString(R.string.e_wallet_tujuan_desc, tvBankTujuan.text)
+            rlNamaPenerima.contentDescription = getString(R.string.nama_penerima_desc, tvNamaPenerima.text)
+            rlRekeningTujuan.contentDescription = getString(R.string.nomor_e_wallet_desc, formattedDigitNumberBankRecipient)
+        }
     }
 
     private fun saveToGalleryMode() {
@@ -242,7 +259,6 @@ class TransferEWalletSuccessFragment : Fragment() {
         startActivity(Intent.createChooser(shareIntent, null))
     }
 
-
     private fun safeShareImageTo() {
         when {
             ContextCompat.checkSelfPermission(
@@ -281,6 +297,7 @@ class TransferEWalletSuccessFragment : Fragment() {
             permissionStorageDialog()
         }
     }
+
     private fun safeSaveToGallery() {
         when {
             ContextCompat.checkSelfPermission(

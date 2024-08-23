@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/neutral_01"
     android:padding="16dp"
+    android:importantForAccessibility="no"
     tools:context=".ui.presentation.auth.LoginFragment"
     android:contentDescription="@string/screen_login">
 

@@ -12,7 +12,7 @@ import com.finsera.data.source.local.LocalDataSource
 import com.finsera.data.source.local.dao.daftar_tersimpan.ewallet.TransferEWalletTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.transfer_antar.TransferAntarTersimpanDao
 import com.finsera.data.source.local.dao.daftar_tersimpan.transfer_sesama.TransferSesamaTersimpanDao
-import com.finsera.data.source.local.dao.daftar_tersimpan.virutal_account.TransferVaTersimpanDao
+import com.finsera.data.source.local.dao.daftar_tersimpan.virtual_account.TransferVaTersimpanDao
 import com.finsera.data.source.local.db.daftar_tersimpan.DaftarTersimpanDatabase
 import com.finsera.data.source.remote.RemoteDataSource
 import com.finsera.domain.repository.IAuthRepository

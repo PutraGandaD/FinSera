@@ -62,12 +62,15 @@ class TransferSesamaBankHomeFragment : Fragment(), OnSavedItemSesamaClickListene
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 transferSesamaBankHomeViewModel.transferSesamaHomeUiState.collectLatest { uiState ->
-                    uiState.data?.let {
-                        daftarTersimpanSesamaAdapter.submitList(uiState.data)
+                    uiState.data?.let { daftarTersimpan ->
+                        daftarTersimpanSesamaAdapter.submitList(daftarTersimpan)
+                        daftarTersimpan.forEach { item ->
+                            updateAccessibilityInfo(item)
+                        }
                         binding.viewDaftarTersimpanEmpty.root.visibility = View.GONE
                     }
 
-                    if(uiState.data.isNullOrEmpty()) {
+                    if (uiState.data.isNullOrEmpty()) {
                         daftarTersimpanSesamaAdapter.submitList(null)
                         binding.viewDaftarTersimpanEmpty.root.visibility = View.VISIBLE
                     }
@@ -91,5 +94,12 @@ class TransferSesamaBankHomeFragment : Fragment(), OnSavedItemSesamaClickListene
         if(findNavController().currentDestination?.id == R.id.transferSesamaBankHome) {
             findNavController().navigate(R.id.action_transferSesamaBankHome_to_transferSesamaBankFormFragment, bundle)
         }
+    }
+
+    private fun updateAccessibilityInfo(daftarTersimpan: DaftarTersimpanSesama) {
+        val accountNumber = daftarTersimpan.noRekening
+        val accountNumberWithSpaces = accountNumber.replace("", " ").trim()
+        val accessibilityText = getString(R.string.desc_daftar_tersimpan, daftarTersimpan.namaPemilikRekening, accountNumberWithSpaces)
+        daftarTersimpanSesamaAdapter.setAccessibilityText(daftarTersimpan, accessibilityText)
     }
 }
