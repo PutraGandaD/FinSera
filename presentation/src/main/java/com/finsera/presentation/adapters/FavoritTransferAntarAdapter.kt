@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.finsera.domain.model.DaftarTersimpanAntar
 import com.finsera.domain.model.DaftarTersimpanSesama
+import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FavoritItemBinding
 
 class FavoritTransferAntarAdapter(val itemClickListener: OnFavoriteItemAntarClickListener) : ListAdapter<DaftarTersimpanAntar, FavoritTransferAntarAdapter.FavoritTransferAntarViewHolder>(DIFF_CALLBACK) {
@@ -22,6 +23,22 @@ class FavoritTransferAntarAdapter(val itemClickListener: OnFavoriteItemAntarClic
         fun bind(data: DaftarTersimpanAntar) {
             binding.tvDaftartersimpanNamapemilik.text = data.namaPemilikRekening
             binding.tvDaftartersimpanNorekening.text = data.noRekening
+
+            val iconBank = when (data.namaBank) {
+                "BRI" -> R.drawable.ic_bank_bri
+                "BNI" -> R.drawable.ic_bank_bni
+                else -> R.drawable.ic_bank_selain_bca_form_transfer
+            }
+            binding.imgItemLogo.setImageResource(iconBank)
+
+            val accountNumberWithSpaces = data.noRekening.replace("", " ").trim()
+            val accessibilityText = itemView.context.getString(
+                R.string.desc_daftar_tersimpan_antar_bank,
+                data.namaPemilikRekening,
+                data.namaBank,
+                accountNumberWithSpaces
+            )
+            itemView.contentDescription = accessibilityText
         }
     }
 

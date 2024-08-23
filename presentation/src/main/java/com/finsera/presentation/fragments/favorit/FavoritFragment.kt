@@ -45,6 +45,8 @@ class FavoritFragment : Fragment(), OnFavoriteItemSesamaClickListener, OnFavorit
     private val favoritEWalletAdapter = FavoritEWalletAdapter(this)
     private val favoritVirtualAccountAdapter = FavoritVirtualAccountAdapter(this)
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +61,18 @@ class FavoritFragment : Fragment(), OnFavoriteItemSesamaClickListener, OnFavorit
         setUpBottomNavBar()
         setUpRv()
         observer()
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_favorit))
+            hasAnnouncedScreen = true
+        }
+
+        binding.rvTersimpanTfSesama.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        binding.rvTersimpanTfAntar.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        binding.rvTersimpanEwallet.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+        binding.rvTersimpanVa.importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_YES
+
+
     }
 
     private fun setUpRv() {

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.finsera.domain.model.DaftarTersimpanEWallet
 import com.finsera.domain.model.DaftarTersimpanSesama
+import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FavoritItemBinding
 
 class FavoritEWalletAdapter(val itemClickListener: OnFavoriteItemEWalletClickListener) : ListAdapter<DaftarTersimpanEWallet, FavoritEWalletAdapter.FavoritEWalletViewHolder>(DIFF_CALLBACK) {
@@ -22,6 +23,24 @@ class FavoritEWalletAdapter(val itemClickListener: OnFavoriteItemEWalletClickLis
         fun bind(data: DaftarTersimpanEWallet) {
             binding.tvDaftartersimpanNamapemilik.text = data.namaAkunEWallet
             binding.tvDaftartersimpanNorekening.text = data.nomorEWallet
+            val iconEWallet = when (data.namaEWallet) {
+                "GoPay" -> R.drawable.ic_gopay
+                "Dana" -> R.drawable.ic_dana
+                "OVO" -> R.drawable.ic_ovo
+                "ShopeePay" -> R.drawable.ic_shopeepay
+                "Paypal" -> R.drawable.ic_paypal
+                else -> R.drawable.ic_avatar
+            }
+            binding.imgItemLogo.setImageResource(iconEWallet)
+
+            val accountNumberWithSpaces = data.nomorEWallet.replace("", " ").trim()
+            val accessibilityText = itemView.context.getString(
+                R.string.desc_daftar_tersimpan_ewallet,
+                data.namaEWallet,
+                data.namaAkunEWallet,
+                accountNumberWithSpaces
+            )
+            itemView.contentDescription = accessibilityText
         }
     }
 
