@@ -29,7 +29,7 @@ object PresentationModule {
     val viewModelModule = module {
         viewModel { LoginViewModel(get(), get(), get(),get()) }
         viewModel { LoginPinViewModel(get(), get(),get()) }
-        viewModel { HomeViewModel(get(), get()) }
+        viewModel { HomeViewModel(get(), get(), get()) }
         viewModel { InfoSaldoViewModel(get(), get()) }
         viewModel { MutasiViewModel(get(), get(), get(),get()) }
         viewModel { TransferSesamaBankFormViewModel(get(), get()) }

@@ -77,4 +77,9 @@ class AuthRepositoryImpl(
     override fun getUserInfo(): Pair<String, String> {
         return localDataSource.getUserInfo()
     }
+
+    override fun clearSharedPreferences() {
+        localDataSource.clearTokenFromSharedPreferences()
+        localDataSource.clearLoginInfo()
+    }
 }
