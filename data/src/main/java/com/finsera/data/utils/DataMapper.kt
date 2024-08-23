@@ -12,6 +12,7 @@ import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
+import com.finsera.data.source.remote.response.notifikasi.NotificationResponse
 import com.finsera.data.source.remote.response.qris.ScanQrisResponse
 import com.finsera.data.source.remote.response.qris_share.QrisShareResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
@@ -29,6 +30,7 @@ import com.finsera.domain.model.DaftarTersimpanEWallet
 import com.finsera.domain.model.DaftarTersimpanVa
 import com.finsera.domain.model.Login
 import com.finsera.domain.model.Mutasi
+import com.finsera.domain.model.Notifikasi
 import com.finsera.domain.model.QRShare
 import com.finsera.domain.model.Relogin
 import com.finsera.domain.model.Saldo
@@ -241,6 +243,18 @@ object DataMapper {
             namaEwallet = response.data?.ewalletName,
             namaAkunEwallet = response.data?.ewalletAccountName
         )
+    }
+
+    fun notifResponseToDomain(response: NotificationResponse): List<Notifikasi>{
+        return response.data?.map {
+            Notifikasi(
+                message = response.message,
+                typeNotification = it.typeNotification,
+                createdDate = it.createdDate,
+                description = it.description,
+                tittle = it.tittle
+            )
+        } ?: emptyList()
     }
 
     fun qrShareToDomain(response: QrisShareResponse) : QRShare {

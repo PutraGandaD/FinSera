@@ -8,6 +8,7 @@ import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
+import com.finsera.data.source.remote.response.notifikasi.NotificationResponse
 import com.finsera.data.source.remote.response.qris.ScanQrisResponse
 import com.finsera.data.source.remote.response.qris_share.QrisShareResponse
 import com.finsera.data.source.remote.response.refresh_token.RefreshTokenResponse
@@ -124,5 +125,10 @@ interface ApiService {
     suspend fun shareQR(
         @Header("Authorization") accessToken: String
     ) : QrisShareResponse
+
+    @GET("notif")
+    suspend fun getNotif(
+        @Header("Authorization") accessToken: String
+    ): NotificationResponse
 
 }

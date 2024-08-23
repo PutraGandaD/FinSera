@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_homeFragment_to_qrisScanQRFragment"
             app:destination="@id/qrisScanQRFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -312,4 +315,9 @@
         android:name="com.finsera.presentation.fragments.qris.QrisShareFragment"
         android:label="fragment_qris_share"
         tools:layout="@layout/fragment_qris_share" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.finsera.presentation.fragments.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>

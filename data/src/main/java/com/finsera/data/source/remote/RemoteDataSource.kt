@@ -10,6 +10,7 @@ import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
+import com.finsera.data.source.remote.response.notifikasi.NotificationResponse
 import com.finsera.data.source.remote.response.qris.ScanQrisResponse
 import com.finsera.data.source.remote.response.qris_share.QrisShareResponse
 import com.finsera.data.source.remote.response.refresh_token.RefreshTokenResponse
@@ -384,6 +385,56 @@ class RemoteDataSource(private val apiService: ApiService) {
             }
 
         }.flowOn(Dispatchers.IO)
+    }
+
+
+    suspend fun getNotifikasi(token: String) :Flow<Resource<NotificationResponse>>{
+        return flow{
+            emit(Resource.Loading())
+            try{
+                val accessToken = "Bearer $token"
+                val response = apiService.getNotif(accessToken)
+                val message = response.message
+                if (response.data != null) {
+                    emit(Resource.Success(response))
+                }else{
+                    when(message){
+                        "JWT Token has expired" -> {
+                            val getRefreshToken = refreshAccessToken(token)
+                            val newToken = getRefreshToken.data.accessToken
+                            val newResponse = apiService.getNotif("Bearer $newToken")
+                            emit(Resource.Success(newResponse))
+                        }
+                        else -> emit(Resource.Error("Error"))
+                    }
+                }
+            }catch (e: Exception){
+                when(e){
+                    is HttpException -> {
+                        val errorMessage = e.response()?.errorBody()?.string()
+                        when(e.code()){
+                            401 -> {
+                                when{
+                                    errorMessage?.contains("JWT Token has expired") == true -> {
+                                        val getRefreshToken = refreshAccessToken(token)
+                                        val newToken = getRefreshToken.data.accessToken
+                                        val newResponse = apiService.getNotif("Bearer $newToken")
+                                        emit(Resource.Success(newResponse))
+                                    }
+                                    else -> emit(Resource.Error("Sesi Anda telah diperbarui"))
+                                }
+                            }
+                            else -> {
+                                emit(Resource.Error("Terjadi kesalahan pada server"))
+                            }
+                        }
+                    }
+                    is IOException -> {
+                        emit(Resource.Error("Terjadi kesalahan pada server"))
+                    }
+                }
+            }
+        }
     }
 
 
