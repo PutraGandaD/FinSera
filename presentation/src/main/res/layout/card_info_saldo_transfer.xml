@@ -1,45 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/saldo_anda_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/saldo_anda_container"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:elevation="0dp"
+    android:elevation="4dp"
     android:focusable="true"
     android:clickable="true"
     android:importantForAccessibility="yes"
-    app:strokeWidth="2dp">
+    app:strokeWidth="2dp"
+    app:cardCornerRadius="@dimen/_8sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="14dp">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/iv_finsera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_finsera_biru"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_heading_saldo_rekening"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="Saldo Anda"
-            android:textColor="@color/neutral_09"
-            android:textStyle="bold"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iv_finsera"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_saldo_rekening"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/tv_saldo_rekening"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:text="Rp18.000.000"
             android:visibility="invisible"
             android:importantForAccessibility="no"
             android:textSize="16sp"
-            android:textColor="@color/neutral_09"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_heading_saldo_rekening"/>
-        
+            app:layout_constraintStart_toEndOf="@id/iv_finsera"
+            app:layout_constraintTop_toBottomOf="@id/tv_heading_saldo_rekening"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/tv_saldo_rekening_loading"
             android:layout_width="120dp"
@@ -53,10 +64,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/neutral_09"/>
+                android:background="@color/neutral_09" />
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</com.google.android.material.card.MaterialCardView>
+</androidx.cardview.widget.CardView>

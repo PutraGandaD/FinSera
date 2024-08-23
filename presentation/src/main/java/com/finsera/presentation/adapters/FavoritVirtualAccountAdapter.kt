@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.finsera.domain.model.DaftarTersimpanSesama
 import com.finsera.domain.model.DaftarTersimpanVa
+import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FavoritItemBinding
 
 class FavoritVirtualAccountAdapter(val itemClickListener: OnFavoriteItemVaClickListener) : ListAdapter<DaftarTersimpanVa, FavoritVirtualAccountAdapter.FavoritVirtualAccountViewHolder>(DIFF_CALLBACK) {
@@ -29,6 +30,15 @@ class FavoritVirtualAccountAdapter(val itemClickListener: OnFavoriteItemVaClickL
             binding.btnDeleteFavorititem.setOnClickListener {
                 itemClickListener.onDeleteItemVaClicked(data)
             }
+            binding.imgItemLogo.setImageResource(R.drawable.ic_avatar)
+
+            val accountNumberWithSpaces = data.noRekening.replace("", " ").trim()
+            val accessibilityText = itemView.context.getString(
+                R.string.desc_daftar_tersimpan_va,
+                data.namaPemilikRekening,
+                accountNumberWithSpaces
+            )
+            itemView.contentDescription = accessibilityText
         }
     }
 

@@ -30,7 +30,7 @@ class DaftarTersimpanAntarAdapter(val itemClickListener: OnSavedItemAntarClickLi
             Glide.with(binding.root)
                 .load(
                     when (data.namaBank) {
-                        "BCA" -> R.drawable.ic_bank_bni
+                        "BNI" -> R.drawable.ic_bank_bni
                         "BRI" -> R.drawable.ic_bank_bri
                         else -> R.drawable.ic_avatar
                     }

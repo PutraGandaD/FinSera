@@ -31,6 +31,8 @@ class TransferQrisMerchantFormKonfirmasiFragment : Fragment() {
     private var noTrxMerchant: String? = null
     private var nominalTransfer: String? = null
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,6 +49,11 @@ class TransferQrisMerchantFormKonfirmasiFragment : Fragment() {
         observer()
         getBundle()
         handleNextBtn()
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_confirm_transaction))
+            hasAnnouncedScreen = true
+        }
     }
 
     private fun observer() {
@@ -95,6 +102,8 @@ class TransferQrisMerchantFormKonfirmasiFragment : Fragment() {
         binding.tvNominalAwal.text = "Rp ${CurrencyFormatter.formatCurrency(nominalTransfer!!.toInt().toDouble())}"
         binding.tvBiayaAdmin.text = "Gratis"
         binding.tvNominalTotal.text = "Rp ${CurrencyFormatter.formatCurrency(nominalTransfer!!.toInt().toDouble())}"
+
+        setAccessibilityDescriptions()
     }
 
     private fun handleNextBtn() {
@@ -104,6 +113,16 @@ class TransferQrisMerchantFormKonfirmasiFragment : Fragment() {
             } else {
                 Snackbar.make(requireView(), "PIN Transaksi harus diisi!", Snackbar.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun setAccessibilityDescriptions() {
+        binding.apply {
+            layoutnamamerchant.contentDescription = getString(R.string.merchant_tujuan_desc, tvNamaMerchant.text)
+            layoutkotamerchant.contentDescription = getString(R.string.kota_tujuan_desc, tvKotaMerchant.text)
+            layoutnominal.contentDescription = getString(R.string.nominal_transfer_desc, tvNominalAwal.text)
+            layoutbiayaadmin.contentDescription = getString(R.string.biaya_admin_desc, tvBiayaAdmin.text)
+            layoutnominaltotal.contentDescription = getString(R.string.nominal_total_desc, tvNominalTotal.text)
         }
     }
 }

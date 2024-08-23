@@ -208,6 +208,7 @@
     <string name="time_date_promo">11 Juli 2024 14:04</string>
     <string name="caption_promo">Dapatkan Iphone dan tabungan emas dengan topup paket data Telkomsel atau XL</string>
     <string name="desc_recipient_info">Penerima: %1$s, Bank: %2$s, Nomor rekening: %3$s</string>
+    <string name="desc_daftar_tersimpan_antar_bank">Dalam daftar: %1$s, Bank: %2$s, Nomor rekening: %3$s</string>
     <string name="desc_all_notif">Pilih filter notifikasi tipe semua</string>
     <string name="desc_promo">Pilih filter notifikasi tipe promo</string>
     <string name="desc_transaction">Pilih filter notifikasi tipe transaksi</string>
@@ -297,5 +298,17 @@
     <string name="screen_qris">Scan QR atau Barcode untuk memulai transaksi</string>
     <string name="screen_qris_share">Tunjukkan kode QRIS yang ada di halaman ini untuk memulai transaksi</string>
     <string name="qris_share_desc">Tunjukkan kode QRIS Anda, biarkan mereka memindai dan terima pembayaran secara cepat dan efisien.</string>
+    <string name="desc_recipient_info_qris">Transfer ke %1$s di kota %2$s</string>
+    <string name="merchant_tujuan_desc">Nama Merchant %s</string>
+    <string name="kota_tujuan_desc">Kota Merchant: %s</string>
+    <string name="jenis_transaksi_desc">Jenis Transaksi: %s</string>
+    <string name="nama_merchant_desc">Nama Merchant Penerima: %s</string>
+    <string name="no_merchant_desc">Nomor Merchant Penerima: %s</string>
+    <string name="screen_favorit">Daftar Favorit yang disimpan</string>
+    <string name="kategori_transfer_sesama_desc">Kategori Transfer Sesama</string>
+    <string name="kategori_transfer_antar_bank_desc">Kategori Transfer Antar Bank</string>
+    <string name="kategori_e_wallet_desc">Kategori E-Wallet</string>
+    <string name="kategori_virtual_account_desc">Kategori Virtual Account</string>
     <string name="finsera_app_logout_desc">Anda menekan tombol Logout.\n\nApabila anda menekan \'Ya\' anda akan keluar dari akun dan akan diarahkan secara otomatis ke halaman login.\n\nApabila anda ingin melakukan transaksi pada akun anda setelah Logout, anda perlu login kembali pada aplikasi FinSera.</string>
+
 </resources>

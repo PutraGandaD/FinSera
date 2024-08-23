@@ -55,7 +55,9 @@ class TransferQrisMerchantSuksesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getBundle()
+        setAccessibilityDescriptions()
         handleBtn()
+
     }
 
     private fun getBundle() {
@@ -86,6 +88,27 @@ class TransferQrisMerchantSuksesFragment : Fragment() {
 
             binding.cardTransaksiBerhasilScreenshot.tvNamaPengirim.text = namaPengirim
             binding.cardTransaksiBerhasilScreenshot.tvRekeningPengirim.text = rekeningPengirim
+        }
+    }
+
+    private fun formatDigitNumberAccessibility(digitNumberTalkback: String): String {
+        return digitNumberTalkback.map { it.toString() }.joinToString(" ")
+    }
+
+    private fun setAccessibilityDescriptions() {
+        binding.cardTransaksiBerhasil.apply {
+            val formattedDigitNumberBankAccount = formatDigitNumberAccessibility(tvRekeningPengirim.text.toString())
+            val formattedDigitNumberTransaction = formatDigitNumberAccessibility(tvNomorTransaksi.text.toString())
+            val formattedDigitNumberMerchant = formatDigitNumberAccessibility(tvNoMerchant.text.toString())
+            rlTanggal.contentDescription = getString(R.string.tanggal_transaksi_desc, tvDate.text)
+            rlNominal.contentDescription = getString(R.string.nominal_transfer_desc, tvNominal.text)
+            rlBiayaAdmin.contentDescription = getString(R.string.biaya_admin_desc, tvBiayaAdmin.text)
+            rlNoTransaksi.contentDescription = getString(R.string.nomor_transaksi_desc, formattedDigitNumberTransaction)
+            rlNamaPengirim.contentDescription = getString(R.string.nama_pengirim_desc, tvNamaPengirim.text)
+            rlRekeningPengirim.contentDescription = getString(R.string.rekening_pengirim_desc, formattedDigitNumberBankAccount)
+            rlJenisTransaksi.contentDescription = getString(R.string.jenis_transaksi_desc, tvJenisTransaksi.text)
+            rlNamaMerchant.contentDescription = getString(R.string.nama_merchant_desc, tvNamaMerchant.text)
+            rlNoMerchant.contentDescription = getString(R.string.no_merchant_desc, formattedDigitNumberMerchant)
         }
     }
 

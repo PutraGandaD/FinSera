@@ -165,7 +165,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_jenis_transaksi"
+            android:id="@+id/rlJenisTransaksi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
