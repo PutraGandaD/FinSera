@@ -1,4 +1,4 @@
-package com.finsera.data.source.local.dao.daftar_tersimpan.virutal_account
+package com.finsera.data.source.local.dao.daftar_tersimpan.virtual_account
 
 import androidx.room.Dao
 import androidx.room.Delete

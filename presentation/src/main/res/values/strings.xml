@@ -281,4 +281,6 @@
     <string name="no_merchant">No. Merchant</string>
     <string name="qr_share">QR Share</string>
     <string name="hint_scan_qr">Scan QR atau Barcode\nuntuk memulai transaksi</string>
+    <string name="daftar_favorit">Daftar Favorit</string>
+    <string name="tidak_ada_daftar_tersimpan">Tidak Ada Daftar Tersimpan</string>
 </resources>

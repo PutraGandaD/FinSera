@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.finsera.domain.model.DaftarTersimpanEWallet
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.DaftarTersimpanEwalletItemBinding
-import com.finsera.presentation.databinding.DaftarTersimpanItemBinding
 
 class DaftarTersimpanEWalletAdapter(val itemClickListener: OnSavedItemEWalletClickListener) : ListAdapter<DaftarTersimpanEWallet, DaftarTersimpanEWalletAdapter.DaftarTersimpanEWalletViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(
@@ -59,11 +58,11 @@ class DaftarTersimpanEWalletAdapter(val itemClickListener: OnSavedItemEWalletCli
         holder.bind(data)
 
         holder.itemView.setOnClickListener {
-            itemClickListener.onSavedItemVaClicked(data)
+            itemClickListener.onSavedItemEWalletClicked(data)
         }
     }
 }
 
 interface OnSavedItemEWalletClickListener {
-    fun onSavedItemVaClicked(daftarTersimpan: DaftarTersimpanEWallet)
+    fun onSavedItemEWalletClicked(daftarTersimpan: DaftarTersimpanEWallet)
 }
