@@ -15,13 +15,20 @@ class FavoritVirtualAccountAdapter(val itemClickListener: OnFavoriteItemVaClickL
         viewType: Int
     ): FavoritVirtualAccountViewHolder {
         val binding = FavoritItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FavoritVirtualAccountViewHolder(binding)
+        return FavoritVirtualAccountViewHolder(binding, itemClickListener)
     }
 
-    class FavoritVirtualAccountViewHolder(private val binding: FavoritItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class FavoritVirtualAccountViewHolder(
+        private val binding: FavoritItemBinding,
+        private val itemClickListener: OnFavoriteItemVaClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DaftarTersimpanVa) {
             binding.tvDaftartersimpanNamapemilik.text = data.namaPemilikRekening
             binding.tvDaftartersimpanNorekening.text = data.noRekening
+
+            binding.btnDeleteFavorititem.setOnClickListener {
+                itemClickListener.onDeleteItemVaClicked(data)
+            }
         }
     }
 

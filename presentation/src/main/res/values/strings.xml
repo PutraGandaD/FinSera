@@ -64,7 +64,7 @@
     <string name="tv_hint_username_login">Username</string>
     <string name="tv_hint_password_login">Password</string>
     <string name="tv_btn_forget_password">Lupa Password ?</string>
-    <string name="tv_btn_login">Login</string>
+    <string name="tv_btn_login">Log In</string>
     <string name="tv_topbg_hello_placeholder">Halo,</string>
     <string name="tv_topbg_account_name">Putra Ganda</string>
     <string name="tv_saldo_card_rekening_home">Rp ********</string>

@@ -313,6 +313,7 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
                 }
 
                 R.id.menu_navbar_akun -> {
+                    findNavController().navigate(R.id.action_homeFragment_to_accountFragment)
                     false
                 }
 

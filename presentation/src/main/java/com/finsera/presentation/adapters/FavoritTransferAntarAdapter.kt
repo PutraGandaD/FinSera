@@ -15,13 +15,20 @@ class FavoritTransferAntarAdapter(val itemClickListener: OnFavoriteItemAntarClic
         viewType: Int
     ): FavoritTransferAntarViewHolder {
         val binding = FavoritItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FavoritTransferAntarViewHolder(binding)
+        return FavoritTransferAntarViewHolder(binding, itemClickListener)
     }
 
-    class FavoritTransferAntarViewHolder(private val binding: FavoritItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class FavoritTransferAntarViewHolder(
+        private val binding: FavoritItemBinding,
+        private val itemClickListener: OnFavoriteItemAntarClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DaftarTersimpanAntar) {
             binding.tvDaftartersimpanNamapemilik.text = data.namaPemilikRekening
             binding.tvDaftartersimpanNorekening.text = data.noRekening
+
+            binding.btnDeleteFavorititem.setOnClickListener {
+                itemClickListener.onDeleteItemAntarClicked(data)
+            }
         }
     }
 

@@ -139,7 +139,6 @@ class FavoritFragment : Fragment(), OnFavoriteItemSesamaClickListener, OnFavorit
                 }
 
                 R.id.menu_navbar_qris -> {
-                    findNavController().navigate(R.id.action_favoritFragment_to_qrisScanQRFragment)
                     false
                 }
 
@@ -148,6 +147,7 @@ class FavoritFragment : Fragment(), OnFavoriteItemSesamaClickListener, OnFavorit
                 }
 
                 R.id.menu_navbar_akun -> {
+                    findNavController().navigate(R.id.action_favoritFragment_to_accountFragment)
                     false
                 }
 
@@ -155,6 +155,10 @@ class FavoritFragment : Fragment(), OnFavoriteItemSesamaClickListener, OnFavorit
                     false
                 }
             }
+        }
+
+        binding.fab.setOnClickListener {
+            findNavController().navigate(R.id.action_favoritFragment_to_qrisScanQRFragment)
         }
     }
 

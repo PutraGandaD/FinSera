@@ -53,6 +53,9 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -352,5 +355,12 @@
         <action
             android:id="@+id/action_favoritFragment_to_transferVirtualAccountFormKonfirmasi"
             app:destination="@id/transferVirtualAccountFormKonfirmasi" />
+        <action
+            android:id="@+id/action_favoritFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.finsera.presentation.fragments.akun.AccountFragment"
+        android:label="AccountFragment" />
 </navigation>

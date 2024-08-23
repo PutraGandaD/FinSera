@@ -15,13 +15,20 @@ class FavoritEWalletAdapter(val itemClickListener: OnFavoriteItemEWalletClickLis
         viewType: Int
     ): FavoritEWalletViewHolder {
         val binding = FavoritItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FavoritEWalletViewHolder(binding)
+        return FavoritEWalletViewHolder(binding, itemClickListener)
     }
 
-    class FavoritEWalletViewHolder(private val binding: FavoritItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class FavoritEWalletViewHolder(
+        private val binding: FavoritItemBinding,
+        private val itemClickListener: OnFavoriteItemEWalletClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(data: DaftarTersimpanEWallet) {
             binding.tvDaftartersimpanNamapemilik.text = data.namaAkunEWallet
             binding.tvDaftartersimpanNorekening.text = data.nomorEWallet
+
+            binding.btnDeleteFavorititem.setOnClickListener {
+                itemClickListener.onDeleteItemEWalletClicked(data)
+            }
         }
     }
 
