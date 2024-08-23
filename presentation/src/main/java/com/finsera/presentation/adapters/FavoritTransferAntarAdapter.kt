@@ -34,8 +34,8 @@ class FavoritTransferAntarAdapter(val itemClickListener: OnFavoriteItemAntarClic
             val accountNumberWithSpaces = data.noRekening.replace("", " ").trim()
             val accessibilityText = itemView.context.getString(
                 R.string.desc_daftar_tersimpan_antar_bank,
-                data.namaBank,
                 data.namaPemilikRekening,
+                data.namaBank,
                 accountNumberWithSpaces
             )
             itemView.contentDescription = accessibilityText
