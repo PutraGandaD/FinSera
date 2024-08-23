@@ -287,7 +287,7 @@ class RemoteDataSource(private val apiService: ApiService) {
                             }
 
                             404 -> {
-                                emit(Resource.Error("Nomor e-wallet tidak ditemukkan"))
+                                emit(Resource.Error("Nomor e-wallet tidak ditemukan"))
                             }
 
                             else -> {
