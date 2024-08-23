@@ -6,6 +6,7 @@ import com.finsera.presentation.fragments.favorit.viewmodel.FavoritViewModel
 import com.finsera.presentation.fragments.home.viewmodel.HomeViewModel
 import com.finsera.presentation.fragments.info.mutasi.viewmodel.MutasiViewModel
 import com.finsera.presentation.fragments.info.saldo.viewmodel.InfoSaldoViewModel
+import com.finsera.presentation.fragments.notification.viewmodel.NotificationViewModel
 import com.finsera.presentation.fragments.qris.viewmodel.QrisScanQRViewModel
 import com.finsera.presentation.fragments.qris.viewmodel.QrisShareViewModel
 import com.finsera.presentation.fragments.topup.ewallet.viewmodel.CheckEWalletViewModel
@@ -48,6 +49,7 @@ object PresentationModule {
         viewModel { TransferQrisMerchantFormViewModel(get(), get()) }
         viewModel { TransferQrisMerchantViewModel(get(), get(), get()) }
         viewModel { QrisShareViewModel(get(), get()) }
+        viewModel { NotificationViewModel(get(),get()) }
         viewModel { FavoritViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
     }
 }

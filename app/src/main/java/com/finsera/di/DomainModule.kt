@@ -11,6 +11,7 @@ import com.finsera.domain.usecase.auth.LogoutUserUseCase
 import com.finsera.domain.usecase.infosaldo.InfoSaldoUseCase
 import com.finsera.domain.usecase.mutasi.DownloadMutasiUseCase
 import com.finsera.domain.usecase.mutasi.MutasiUseCase
+import com.finsera.domain.usecase.notifikasi.NotifikasiUseCase
 import com.finsera.domain.usecase.qris.QRShareUseCase
 import com.finsera.domain.usecase.qris.TransferQrisMerchantUseCase
 import com.finsera.domain.usecase.transfer.antar_bank.CariDaftarTersimpanAntarUseCase
@@ -74,6 +75,7 @@ object DomainModule {
         factory { CreateAppPinUseCase(get()) }
         factory { TransferQrisMerchantUseCase(get(), get()) }
         factory { QRShareUseCase(get(), get()) }
+        factory { NotifikasiUseCase(get()) }
         factory { DeleteDaftarTersimpanSesamaUseCase(get()) }
         factory { DeleteDaftarTersimpanAntarUseCase(get()) }
         factory { DeleteDaftarTersimpanVaUseCase(get()) }
