@@ -3,13 +3,14 @@ package com.finsera.common.utils
 class Constant {
     companion object {
         const val BASE_URL = "https://finsera-api.site/api/v1/"
-        const val USER_ACCESS_TOKEN_KEY = "USER_ACCESS_TOKEN"
-        const val USER_REFRESH_TOKEN_KEY = "USER_REFRESH_TOKEN"
-        const val USER_LOGGED_IN_STATUS = "USER_LOGGED_IN_STATUS"
-        const val USER_APPLICATION_PIN = "APP_PIN"
+        const val USER_ACCESS_TOKEN_KEY = "USER_ACCESS_TOKEN" // need to be cleanable
+        const val USER_REFRESH_TOKEN_KEY = "USER_REFRESH_TOKEN" // need to be cleanable
+        const val USER_LOGGED_IN_STATUS = "USER_LOGGED_IN_STATUS" // need to be cleanable
+        const val USER_APPLICATION_PIN = "APP_PIN" // need to be cleanable
+        const val FINSERA_SHARED_PREFERENCES = "Finsera_App_Preferences"
 
-        const val NOMOR_REKENING_NASABAH = "NO_REK"
-        const val NAMA_NASABAH = "NAMA_NASABAH"
+        const val NOMOR_REKENING_NASABAH = "NO_REK" // need to be cleanable
+        const val NAMA_NASABAH = "NAMA_NASABAH" // need to be cleanable
 
         const val DATA_REKENING_SESAMA_BUNDLE = "DATA_REKENING_SESAMA_BUNDLE"
         const val DATA_REKENING_ANTAR_BUNDLE = "DATA_REKENING_ANTAR_BUNDLE"

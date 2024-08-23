@@ -271,7 +271,7 @@
     <string name="item_name">nama_item</string>
     <string name="item_description">item description</string>
     <string name="desc_create_pin">Buat PIN Anda</string>
-    <string name="tv_create_pin">Create PIN</string>
+    <string name="tv_create_pin">Buat PIN Aplikasi</string>
     <string name="desc_bank_option">Pilih Opsi Bank di bawah</string>
     <string name="desc_close_bottom_sheet">Tutup Bottom Sheet</string>
     <string name="scan_qr">Scan QR</string>
@@ -297,4 +297,5 @@
     <string name="screen_qris">Scan QR atau Barcode untuk memulai transaksi</string>
     <string name="screen_qris_share">Tunjukkan kode QRIS yang ada di halaman ini untuk memulai transaksi</string>
     <string name="qris_share_desc">Tunjukkan kode QRIS Anda, biarkan mereka memindai dan terima pembayaran secara cepat dan efisien.</string>
+    <string name="finsera_app_logout_desc">Anda menekan tombol Logout.\n\nApabila anda menekan \'Ya\' anda akan keluar dari akun dan akan diarahkan secara otomatis ke halaman login.\n\nApabila anda ingin melakukan transaksi pada akun anda setelah Logout, anda perlu login kembali pada aplikasi FinSera.</string>
 </resources>

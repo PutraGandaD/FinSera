@@ -7,6 +7,7 @@ import com.finsera.domain.usecase.auth.CreateAppPinUseCase
 import com.finsera.domain.usecase.auth.GetUserInfoUseCase
 import com.finsera.domain.usecase.auth.LoginAppPinUserUseCase
 import com.finsera.domain.usecase.auth.LoginUserUseCase
+import com.finsera.domain.usecase.auth.LogoutUserUseCase
 import com.finsera.domain.usecase.infosaldo.InfoSaldoUseCase
 import com.finsera.domain.usecase.mutasi.DownloadMutasiUseCase
 import com.finsera.domain.usecase.mutasi.MutasiUseCase
@@ -79,5 +80,6 @@ object DomainModule {
         factory { DeleteDaftarTersimpanAntarUseCase(get()) }
         factory { DeleteDaftarTersimpanVaUseCase(get()) }
         factory { DeleteDaftarTersimpanEWalletUseCase(get()) }
+        factory { LogoutUserUseCase(get()) }
     }
 }

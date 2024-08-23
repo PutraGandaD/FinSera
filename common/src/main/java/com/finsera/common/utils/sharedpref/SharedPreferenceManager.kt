@@ -26,4 +26,8 @@ object SharedPreferenceManager {
     fun getBoolean(key: String, defaultValue: Boolean): Boolean {
         return sharedPreferences.getBoolean(key, defaultValue)
     }
-}
+
+    fun clearSharedPreferences(key: String) {
+        sharedPreferences.edit().remove(key).commit()
+    }
+ }

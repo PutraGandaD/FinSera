@@ -17,4 +17,6 @@ interface IAuthRepository {
     fun getAppLockPin() : String
     fun saveUserInfo(name: String, accountNum: String)
     fun getUserInfo() : Pair<String, String>
+
+    fun clearSharedPreferences()
 }
