@@ -75,6 +75,8 @@ class QrisScanQRFragment : Fragment() {
 
     private lateinit var vibrator: Vibrator
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -91,6 +93,11 @@ class QrisScanQRFragment : Fragment() {
         requestCameraPermission()
         observer()
         handleBtn()
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_qris))
+            hasAnnouncedScreen = true
+        }
     }
 
     override fun onDestroy() {

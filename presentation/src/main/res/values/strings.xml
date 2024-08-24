@@ -280,7 +280,7 @@
     <string name="nama_merchant">Nama Merchant</string>
     <string name="kota_merchant">Kota Merchant</string>
     <string name="no_merchant">No. Merchant</string>
-    <string name="qr_share">QR Share</string>
+    <string name="qr_share">Bagikan Kode QR Anda</string>
     <string name="hint_scan_qr">Scan QR atau Barcode\nuntuk memulai transaksi</string>
     <string name="empty_notification">Notifikasi kosong</string>
     <string name="empty_notification_text">Sepertinya belum ada notifikasi</string>

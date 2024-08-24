@@ -124,7 +124,7 @@
         android:padding="10dp"
         android:contentDescription="@string/qr_share"
         android:importantForAccessibility="yes"
-        android:text="@string/qr_share"
+        android:text="QR Share"
         android:textColor="@color/neutral_02"
         android:textSize="@dimen/button_1"
         app:cornerRadius="8dp"

@@ -27,6 +27,8 @@ class QrisShareFragment : Fragment() {
 
     private val qrisShareViewModel : QrisShareViewModel by inject()
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +43,11 @@ class QrisShareFragment : Fragment() {
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
 
         observer()
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(binding.tvTunjukkanKodeQris.text)
+            hasAnnouncedScreen = true
+        }
     }
 
     private fun observer() {
