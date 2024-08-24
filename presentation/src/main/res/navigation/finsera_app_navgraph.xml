@@ -391,6 +391,9 @@
         <action
             android:id="@+id/action_accountFragment_to_ubahMPINFragment"
             app:destination="@id/ubahMPINFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_qrisScanQRFragment"
+            app:destination="@id/qrisScanQRFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
