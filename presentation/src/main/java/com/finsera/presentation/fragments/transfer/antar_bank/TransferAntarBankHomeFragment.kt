@@ -110,7 +110,7 @@ class TransferAntarBankHomeFragment : Fragment(), OnSavedItemAntarClickListener 
     private fun updateAccessibilityInfo(daftarTersimpan: DaftarTersimpanAntar) {
         val accountNumber = daftarTersimpan.noRekening
         val accountNumberWithSpaces = accountNumber.replace("", " ").trim()
-        val accessibilityText = getString(R.string.desc_daftar_tersimpan_antar_bank, daftarTersimpan.namaBank, daftarTersimpan.namaPemilikRekening, accountNumberWithSpaces)
+        val accessibilityText = getString(R.string.desc_daftar_tersimpan_antar_bank, daftarTersimpan.namaPemilikRekening, daftarTersimpan.namaBank, accountNumberWithSpaces)
         daftarTersimpanAntarAdapter.setAccessibilityText(daftarTersimpan, accessibilityText)
     }
 }

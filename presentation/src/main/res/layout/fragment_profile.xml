@@ -31,6 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bg_top"
         app:layout_constraintBottom_toBottomOf="@id/bg_top"
+        android:contentDescription="@string/change_profile_pic_desc"
         android:layout_width="102dp"
         android:layout_height="105dp">
 
@@ -96,8 +97,7 @@
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
                 android:textColor="@color/neutral_06"
-                android:contentDescription="@string/example_nomor_handphone"
-                android:hint="No Telepon"
+                android:hint="@string/nomor_handphone"
                 android:singleLine="true" />
 
         </LinearLayout>
@@ -127,7 +127,6 @@
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
                 android:textColor="@color/neutral_06"
-                android:contentDescription="@string/email"
                 android:hint="Email"
                 android:singleLine="true" />
 
@@ -158,7 +157,6 @@
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
                 android:textColor="@color/neutral_06"
-                android:contentDescription="@string/example_gender"
                 android:hint="Gender"
                 android:singleLine="true" />
 
@@ -175,7 +173,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/perangkat_tertaut"
                 android:text="@string/perangkat_tertaut"
                 android:textSize="16sp"
                 android:textColor="@color/neutral_09" />
@@ -189,7 +186,6 @@
                 android:layout_marginTop="10dp"
                 android:textSize="14sp"
                 android:textColor="@color/neutral_06"
-                android:contentDescription="@string/example_perangkat"
                 android:hint="Android"
                 android:singleLine="true" />
 

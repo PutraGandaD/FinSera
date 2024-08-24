@@ -27,6 +27,27 @@ class NotifAdapter : ListAdapter<Notifikasi, NotifAdapter.NotifViewHolder>(DIFF_
             binding.tvPromoDate.text = data.createdDate
             binding.tvPromoTitle.text = data.tittle
             binding.tvPromoDescription.text = data.description
+
+            val contentDescription = buildContentDescription(data)
+            itemView.contentDescription = contentDescription
+            itemView.importantForAccessibility = ViewGroup.IMPORTANT_FOR_ACCESSIBILITY_YES
+        }
+
+        private fun buildContentDescription(data: Notifikasi): String {
+            val amount = data.description?.let { extractAmount(it) }
+            val accountNumber = data.description?.let { extractAccountNumber(it) }
+            val numberSpelled = accountNumber?.map { it.toString() }?.joinToString(" ")
+
+            return "${data.typeNotification}, tanggal ${data.createdDate}, ${data.tittle}. " +
+                    "Transfer senilai $amount Rupiah ke nomor $numberSpelled"
+        }
+
+        private fun extractAmount(description: String): String {
+            return description.substringAfter("senilai ").substringBefore(" ke")
+        }
+
+        private fun extractAccountNumber(description: String): String {
+            return description.substringAfterLast(" ")
         }
     }
 
