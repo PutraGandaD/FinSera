@@ -30,8 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:contentDescription="@string/transfer_sesama_bank"
-            android:text="Ganti PIN Aplikasi"
+            android:accessibilityTraversalBefore="@id/btn_back"
+            android:text="Ubah PIN Aplikasi"
             android:textColor="@android:color/black"
             android:textSize="@dimen/_18ssp"
             android:textStyle="bold"/>
@@ -56,7 +56,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="Password Akun Anda"
+            android:contentDescription="@string/acc_password_desc"
             android:text="Password Akun Anda"
             android:textSize="16sp"
             android:textColor="@color/neutral_09" />
@@ -98,7 +98,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/pin_baru"
+            android:contentDescription="@string/pin_new_desc"
             android:text="@string/pin_baru"
             android:textSize="16sp"
             android:textColor="@color/neutral_09" />
@@ -139,7 +139,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/konfirmasi_pin_baru"
+            android:contentDescription="@string/pin_new_confirm_desc"
             android:text="@string/konfirmasi_pin_baru"
             android:textSize="16sp"
             android:textColor="@color/neutral_09" />
@@ -175,8 +175,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/button_background_primary"
         app:backgroundTint="@color/primary_blue"
-        android:contentDescription="@string/konfirmasi"
-        android:text="Ganti PIN"
+        android:contentDescription="@string/confirm_change_pin_desc"
+        android:text="Ubah PIN"
         android:textSize="20sp"
         android:padding="14dp"
         android:layout_marginBottom="@dimen/_8sdp"
