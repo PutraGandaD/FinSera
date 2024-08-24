@@ -38,12 +38,17 @@ class NotifAdapter : ListAdapter<Notifikasi, NotifAdapter.NotifViewHolder>(DIFF_
             val accountNumber = data.description?.let { extractAccountNumber(it) }
             val numberSpelled = accountNumber?.map { it.toString() }?.joinToString(" ")
 
-            return "${data.typeNotification}, tanggal ${data.createdDate}, ${data.tittle}. " +
-                    "Transfer senilai $amount Rupiah ke nomor $numberSpelled"
+            return if (data.description?.contains("Penerimaan", ignoreCase = true) == true) {
+                "${data.typeNotification}, tanggal ${data.createdDate}, ${data.tittle}. " +
+                        "Penerimaan senilai $amount Rupiah dari nomor $numberSpelled"
+            } else {
+                "${data.typeNotification}, tanggal ${data.createdDate}, ${data.tittle}. " +
+                        "Transfer senilai $amount Rupiah ke nomor $numberSpelled"
+            }
         }
 
         private fun extractAmount(description: String): String {
-            return description.substringAfter("senilai ").substringBefore(" ke")
+            return description.substringAfter("senilai ").substringBefore(" ")
         }
 
         private fun extractAccountNumber(description: String): String {
