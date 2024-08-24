@@ -136,6 +136,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@id/ubah_pin_transaksi"
                 app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/change_password_account_desc"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
@@ -160,7 +161,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_back_button"
-                    android:contentDescription="@string/ubah_mpin"
                     android:rotation="180"/>
             </LinearLayout>
 

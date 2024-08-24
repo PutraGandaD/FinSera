@@ -331,4 +331,5 @@
     <string name="pin_new_confirm_desc">Konfirmasi PIN Baru anda di bawah</string>
     <string name="confirm_change_pin_desc">Konfirmasi Perubahan PIN Anda</string>
     <string name="acc_password_desc">Masukkan Password Akun Anda di bawah</string>
+    <string name="change_password_account_desc">Ubah Password Akun Anda</string>
 </resources>
