@@ -34,6 +34,14 @@ class LocalDataSource(
         return sharedPreferencesManager.getBoolean(USER_LOGGED_IN_STATUS, false)
     }
 
+    fun saveUsernameForRecovery(username: String) {
+        sharedPreferencesManager.saveString(Constant.USERNAME_NASABAH, username)
+    }
+
+    fun getUsernameForRecovery() : String {
+        return sharedPreferencesManager.getString(Constant.USERNAME_NASABAH, "")
+    }
+
     fun setApplicationPin(pin: String) {
         return sharedPreferencesManager.saveString(USER_APPLICATION_PIN, pin)
     }

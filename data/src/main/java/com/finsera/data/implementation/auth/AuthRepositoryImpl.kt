@@ -71,6 +71,14 @@ class AuthRepositoryImpl(
         return localDataSource.getApplicationPin()
     }
 
+    override fun saveUsernameForRecovery(username: String) {
+        localDataSource.saveUsernameForRecovery(username)
+    }
+
+    override fun getUsernameForRecovery(): String {
+        return localDataSource.getUsernameForRecovery()
+    }
+
     override fun saveUserInfo(name: String, accountNum: String) {
         localDataSource.saveUserInfo(name, accountNum)
     }

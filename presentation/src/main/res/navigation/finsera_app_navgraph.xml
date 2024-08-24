@@ -20,6 +20,9 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/finsera_app_navgraph"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_loginPinFragment_to_forgetAppPinFragment"
+            app:destination="@id/forgetAppPinFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -397,4 +400,8 @@
         android:id="@+id/ubahMPINFragment"
         android:name="com.finsera.presentation.fragments.ubahmpin.UbahMPINFragment"
         android:label="UbahMPINFragment" />
+    <fragment
+        android:id="@+id/forgetAppPinFragment"
+        android:name="com.finsera.presentation.fragments.forgetpinapp.ForgetAppPinFragment"
+        android:label="ForgetAppPinFragment" />
 </navigation>
