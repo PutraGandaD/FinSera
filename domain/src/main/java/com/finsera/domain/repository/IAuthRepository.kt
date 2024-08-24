@@ -1,6 +1,7 @@
 package com.finsera.domain.repository
 
 import com.finsera.domain.model.Login
+import com.finsera.domain.model.Profiling
 import com.finsera.domain.model.Relogin
 
 interface IAuthRepository {
@@ -17,6 +18,6 @@ interface IAuthRepository {
     fun getAppLockPin() : String
     fun saveUserInfo(name: String, accountNum: String)
     fun getUserInfo() : Pair<String, String>
-
+    suspend fun getUserProfiling(accessToken: String) : Profiling
     fun clearSharedPreferences()
 }

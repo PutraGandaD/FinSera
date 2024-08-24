@@ -13,6 +13,7 @@ import com.finsera.data.source.remote.response.list_bank.ListBankResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.notifikasi.NotificationResponse
+import com.finsera.data.source.remote.response.profiling.ProfilingResponse
 import com.finsera.data.source.remote.response.qris.ScanQrisResponse
 import com.finsera.data.source.remote.response.qris_share.QrisShareResponse
 import com.finsera.data.source.remote.response.relogin.ReloginResponse
@@ -31,6 +32,7 @@ import com.finsera.domain.model.DaftarTersimpanVa
 import com.finsera.domain.model.Login
 import com.finsera.domain.model.Mutasi
 import com.finsera.domain.model.Notifikasi
+import com.finsera.domain.model.Profiling
 import com.finsera.domain.model.QRShare
 import com.finsera.domain.model.Relogin
 import com.finsera.domain.model.Saldo
@@ -264,5 +266,14 @@ object DataMapper {
         }
 
         return QRShare(json)
+    }
+
+    fun profilingResponseToDomain(response: ProfilingResponse) : Profiling {
+        return Profiling(
+            username = response.data.name,
+            email = response.data.email,
+            gender = response.data.gender,
+            noTelp = response.data.phone
+        )
     }
 }

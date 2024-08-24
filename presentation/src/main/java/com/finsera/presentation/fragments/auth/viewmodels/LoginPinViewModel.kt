@@ -6,6 +6,7 @@ import com.finsera.common.utils.Resource
 import com.finsera.common.utils.network.ConnectivityManager
 import com.finsera.domain.usecase.auth.CreateAppPinUseCase
 import com.finsera.domain.usecase.auth.LoginAppPinUserUseCase
+import com.finsera.domain.usecase.auth.LogoutUserUseCase
 import com.finsera.presentation.fragments.auth.uistate.LoginPinUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
 class LoginPinViewModel(
     private val connectivityManager: ConnectivityManager,
     private val loginAppPinUserUseCase: LoginAppPinUserUseCase,
-    private val createAppPinUseCase: CreateAppPinUseCase
+    private val createAppPinUseCase: CreateAppPinUseCase,
+    private val logoutUserUseCase: LogoutUserUseCase
 ) : ViewModel() {
     private val _loginPinScreenUIState = MutableStateFlow(LoginPinUiState())
     val loginPinScreenUIState = _loginPinScreenUIState.asStateFlow()
@@ -65,5 +67,9 @@ class LoginPinViewModel(
 
     fun createAppPin(newPin: String, confirmNewPin: String) : Boolean {
         return createAppPinUseCase.invoke(newPin, confirmNewPin)
+    }
+
+    fun logoutFromAccount() {
+        logoutUserUseCase.invoke()
     }
 }

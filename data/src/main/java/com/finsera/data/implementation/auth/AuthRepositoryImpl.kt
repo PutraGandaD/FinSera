@@ -4,6 +4,7 @@ import com.finsera.data.source.local.LocalDataSource
 import com.finsera.data.source.remote.RemoteDataSource
 import com.finsera.data.utils.DataMapper
 import com.finsera.domain.model.Login
+import com.finsera.domain.model.Profiling
 import com.finsera.domain.model.Relogin
 import com.finsera.domain.repository.IAuthRepository
 
@@ -76,6 +77,13 @@ class AuthRepositoryImpl(
 
     override fun getUserInfo(): Pair<String, String> {
         return localDataSource.getUserInfo()
+    }
+
+    override suspend fun getUserProfiling(accessToken: String): Profiling {
+        val accessToken = localDataSource.getAccessToken()
+        val request = remoteDataSource.profiling(accessToken)
+
+        return DataMapper.profilingResponseToDomain(request)
     }
 
     override fun clearSharedPreferences() {

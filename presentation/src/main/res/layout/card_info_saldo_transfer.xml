@@ -5,12 +5,12 @@
     android:id="@+id/saldo_anda_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="4dp"
+    android:elevation="2dp"
     android:focusable="true"
     android:clickable="true"
     android:importantForAccessibility="yes"
     app:strokeWidth="2dp"
-    app:cardCornerRadius="@dimen/_8sdp">
+    app:cardCornerRadius="12dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

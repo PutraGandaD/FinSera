@@ -1,5 +1,6 @@
 package com.finsera.di
 
+import com.finsera.presentation.fragments.akun.viewmodel.AccountViewModel
 import com.finsera.presentation.fragments.auth.viewmodels.LoginPinViewModel
 import com.finsera.presentation.fragments.auth.viewmodels.LoginViewModel
 import com.finsera.presentation.fragments.favorit.viewmodel.FavoritViewModel
@@ -7,6 +8,7 @@ import com.finsera.presentation.fragments.home.viewmodel.HomeViewModel
 import com.finsera.presentation.fragments.info.mutasi.viewmodel.MutasiViewModel
 import com.finsera.presentation.fragments.info.saldo.viewmodel.InfoSaldoViewModel
 import com.finsera.presentation.fragments.notification.viewmodel.NotificationViewModel
+import com.finsera.presentation.fragments.profil.viewmodel.ProfileViewModel
 import com.finsera.presentation.fragments.qris.viewmodel.QrisScanQRViewModel
 import com.finsera.presentation.fragments.qris.viewmodel.QrisShareViewModel
 import com.finsera.presentation.fragments.topup.ewallet.viewmodel.CheckEWalletViewModel
@@ -23,13 +25,14 @@ import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.Transfe
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.TransferSesamaBankViewModel
 import com.finsera.presentation.fragments.transfer.va.viewmodel.CheckVaViewModel
 import com.finsera.presentation.fragments.transfer.va.viewmodel.TransferVaViewModel
+import com.finsera.presentation.fragments.ubahmpin.viewmodel.UbahMPINViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 object PresentationModule {
     val viewModelModule = module {
         viewModel { LoginViewModel(get(), get(), get(),get()) }
-        viewModel { LoginPinViewModel(get(), get(),get()) }
+        viewModel { LoginPinViewModel(get(), get(), get(), get()) }
         viewModel { HomeViewModel(get(), get(), get()) }
         viewModel { InfoSaldoViewModel(get(), get()) }
         viewModel { MutasiViewModel(get(), get(), get(),get()) }
@@ -51,5 +54,9 @@ object PresentationModule {
         viewModel { QrisShareViewModel(get(), get()) }
         viewModel { NotificationViewModel(get(),get()) }
         viewModel { FavoritViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
+        viewModel { AccountViewModel(get(), get()) }
+        viewModel { ProfileViewModel(get(), get()) }
+        viewModel { UbahMPINViewModel(get()) }
     }
+
 }

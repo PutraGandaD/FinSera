@@ -15,6 +15,11 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/loginPinFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_loginPinFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/finsera_app_navgraph"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -53,6 +58,9 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_homeFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
@@ -352,5 +360,41 @@
         <action
             android:id="@+id/action_favoritFragment_to_transferVirtualAccountFormKonfirmasi"
             app:destination="@id/transferVirtualAccountFormKonfirmasi" />
+        <action
+            android:id="@+id/action_favoritFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.finsera.presentation.fragments.akun.AccountFragment"
+        android:label="AccountFragment" >
+        <action
+            android:id="@+id/action_accountFragment_to_favoritFragment"
+            app:destination="@id/favoritFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_mutasiFragment"
+            app:destination="@id/mutasiFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/finsera_app_navgraph"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_accountFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_ubahMPINFragment"
+            app:destination="@id/ubahMPINFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.finsera.presentation.fragments.profil.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/ubahMPINFragment"
+        android:name="com.finsera.presentation.fragments.ubahmpin.UbahMPINFragment"
+        android:label="UbahMPINFragment" />
 </navigation>

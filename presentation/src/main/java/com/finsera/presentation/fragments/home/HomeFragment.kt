@@ -1,6 +1,7 @@
 package com.finsera.presentation.fragments.home
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
@@ -313,6 +314,7 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
                 }
 
                 R.id.menu_navbar_akun -> {
+                    findNavController().navigate(R.id.action_homeFragment_to_accountFragment)
                     false
                 }
 

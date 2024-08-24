@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentLoginBinding
 import com.finsera.presentation.fragments.auth.viewmodels.LoginViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -49,6 +50,10 @@ class LoginFragment : Fragment() {
             } else {
                 Snackbar.make(requireView(), "Mohon untuk mengisi kolom Username dan Password sebelum melanjutkan.", Snackbar.LENGTH_SHORT).show()
             }
+        }
+
+        binding.btnForgotPassword.setOnClickListener{
+            forgetPasswordAlert()
         }
 
         if (!hasAnnouncedScreen) {
@@ -98,5 +103,15 @@ class LoginFragment : Fragment() {
                 handleAppPinCreated()
             }
         }
+    }
+
+    private fun forgetPasswordAlert() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Lupa Password")
+            .setMessage(getString(R.string.finsera_lupa_password_desc))
+            .setPositiveButton("Ya") { dialog, which ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }
