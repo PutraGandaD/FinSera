@@ -229,7 +229,7 @@
         android:id="@+id/tv_masukkan_pin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Masukkan PIN kamu"
+        android:text="Masukkan PIN Aplikasi Anda"
         android:textSize="@dimen/_16ssp"
         android:textColor="@color/et_text_hint_2"
         android:textStyle="bold"
