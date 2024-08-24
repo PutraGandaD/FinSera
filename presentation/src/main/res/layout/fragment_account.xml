@@ -44,6 +44,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/card_akun"
                 android:orientation="vertical"
+                android:contentDescription="@string/manage_account_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp">
@@ -70,6 +71,7 @@
                 app:layout_constraintTop_toBottomOf="@id/kelola_akun"
                 app:layout_constraintStart_toStartOf="parent"
                 android:orientation="horizontal"
+                android:contentDescription="@string/change_pin_desc"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="38dp">
@@ -93,7 +95,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_back_button"
-                    android:contentDescription="@string/ubah_mpin"
                     android:rotation="180"/>
             </LinearLayout>
 
@@ -102,6 +103,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@id/ubah_pin_app"
                 app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/change_pin_transaction_desc"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
@@ -126,7 +128,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_back_button"
-                    android:contentDescription="@string/ubah_mpin"
                     android:rotation="180"/>
             </LinearLayout>
 
@@ -168,6 +169,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ubah_password_akun"
                 android:orientation="vertical"
+                android:contentDescription="@string/change_preference_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp">
@@ -193,6 +195,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@id/preferensi"
                 app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/notif_preference_desc"
                 android:orientation="horizontal"
                 android:focusable="true"
                 android:gravity="center_vertical"
@@ -218,7 +221,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_back_button"
-                    android:contentDescription="@string/notifikasi"
                     android:rotation="180"/>
             </LinearLayout>
 
@@ -227,6 +229,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@id/notifikasi"
                 app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/accessibility_preference_desc"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
@@ -245,13 +248,13 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textColor="@android:color/black"
-                    android:text="@string/accessibilitas"/>
+                    android:text="@string/accessibility"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_back_button"
-                    android:contentDescription="@string/accessibilitas"
+                    android:contentDescription="@string/accessibility"
                     android:rotation="180"/>
             </LinearLayout>
 
@@ -259,6 +262,7 @@
                 android:id="@+id/PRIVASI"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/accessibilitas"
+                android:contentDescription="@string/privacy_desc"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -285,6 +289,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@id/PRIVASI"
                 app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/terms_and_condition_desc"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
@@ -309,7 +314,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_back_button"
-                    android:contentDescription="@string/syarat_dan_ketentuan"
                     android:rotation="180"/>
 
             </LinearLayout>
@@ -333,6 +337,7 @@
                 android:layout_marginTop="32dp"
                 app:layout_constraintTop_toBottomOf="@id/syaratdanketentuan"
                 app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/help_center_desc"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
@@ -361,6 +366,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@id/pusatbantuan"
                 app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/tv_talkback_logout_btn"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:layout_width="match_parent"
@@ -380,8 +386,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textColor="@android:color/holo_red_dark"
-                    android:text="@string/logout"
-                    android:contentDescription="@string/logout"/>
+                    android:text="@string/logout" />
 
             </LinearLayout>
 

@@ -169,7 +169,7 @@
     <string name="logout">Logout</string>
     <string name="akun">Akun</string>
     <string name="notifikasi">Notifikasi</string>
-    <string name="accessibilitas">Accessibilitas</string>
+    <string name="accessibility">Aksesibilitas</string>
     <string name="ramadhan_adi">Ramadhan Adi</string>
     <string name="tv_title_isi_e_wallet">Isi E-Wallet</string>
     <string name="tv_no_handphone">Masukkan Nomor Handphone</string>
@@ -313,4 +313,22 @@
     <string name="finsera_app_ganti_akun_desc">Anda menekan tombol Ganti Akun.\n\nApabila anda menekan \'Ya\' anda akan keluar atau logout dari akun anda dan akan diarahkan secara otomatis ke halaman login.\n\nApabila anda ingin melakukan transaksi pada akun anda setelah Logout, anda perlu login kembali pada aplikasi FinSera.</string>
     <string name="finsera_lupa_password_desc">Demi alasan keamanan, silahkan kunjungi kantor BCA terdekat untuk melakukan reset password anda.\n\nApabila ada kendala atau pertanyaan lebih lanjut, hubungi kami melalui email di finseracc@bca.co.id.</string>
     <string name="finsera_ganti_pin_transaksi_desc">Demi alasan keamanan, silahkan kunjungi kantor BCA terdekat untuk melakukan Ganti PIN Transaksi anda.\n\nApabila ada kendala atau pertanyaan lebih lanjut, hubungi kami melalui email di finseracc@bca.co.id.</string>
+    <string name="delete_list_desc">Hapus daftar</string>
+    <string name="manage_account_desc">Kelola akun anda dengan opsi di bawah</string>
+    <string name="change_pin_desc">Ubah PIN Aplikasi anda</string>
+    <string name="change_pin_transaction_desc">Ubah PIN Transaksi anda</string>
+    <string name="change_preference_desc">Ubah Preferensi anda melalui opsi di bawah</string>
+    <string name="notif_preference_desc">Ubah preferensi notifikasi anda</string>
+    <string name="accessibility_preference_desc">Ubah pengaturan aksesibilitas anda</string>
+    <string name="privacy_desc">Kelola perlindungan privasi anda</string>
+    <string name="terms_and_condition_desc">Lihat syarat dan ketentuan aplikasi</string>
+    <string name="help_center_desc">Pusat bantuan aplikasi</string>
+    <string name="profile_card_description">Akun anda %1$s dengan nomor rekening %2$s, Edit profil anda di sini</string>
+    <string name="screen_profile">Edit Profil Anda</string>
+    <string name="change_profile_pic_desc">Ubah foto profil anda</string>
+    <string name="pin_old_desc">Masukkan PIN Lama anda di bawah</string>
+    <string name="pin_new_desc">Masukkan PIN Baru anda di bawah</string>
+    <string name="pin_new_confirm_desc">Konfirmasi PIN Baru anda di bawah</string>
+    <string name="confirm_change_pin_desc">Konfirmasi Perubahan PIN Anda</string>
+    <string name="acc_password_desc">Masukkan Password Akun Anda di bawah</string>
 </resources>

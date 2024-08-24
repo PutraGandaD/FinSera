@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:contentDescription="@string/profile_card_description"
     android:backgroundTint="@color/primary_blue"
     app:cardCornerRadius="14dp"
     android:focusable="true"
@@ -36,7 +37,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ramadhan_adi"
-                android:contentDescription="@string/ramadhan_adi"
                 android:textSize="20sp"
                 android:textFontWeight="700"
                 android:textColor="@color/neutral_01"
@@ -61,6 +61,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/tv_talkback_salin_norek"
                     android:src="@drawable/ic_copy"/>
             </LinearLayout>
 

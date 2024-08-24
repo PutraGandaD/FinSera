@@ -24,6 +24,8 @@ class ProfileFragment : Fragment() {
 
     private val profileViewModel : ProfileViewModel by inject()
 
+    private var hasAnnouncedScreen = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +38,11 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observer()
+
+        if (!hasAnnouncedScreen) {
+            view.announceForAccessibility(getString(R.string.screen_profile))
+            hasAnnouncedScreen = true
+        }
 
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
