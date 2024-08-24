@@ -1,6 +1,7 @@
 package com.finsera.di
 
 import com.finsera.domain.model.TransferVa
+import com.finsera.domain.usecase.auth.ChangeAppPinForgetUseCase
 import com.finsera.domain.usecase.auth.ChangeAppPinUseCase
 import com.finsera.domain.usecase.auth.CheckAppPinCreatedUseCase
 import com.finsera.domain.usecase.auth.CheckLoggedInUseCase
@@ -85,5 +86,6 @@ object DomainModule {
         factory { LogoutUserUseCase(get()) }
         factory { GetProfilingUserUseCase(get()) }
         factory { ChangeAppPinUseCase(get()) }
+        factory { ChangeAppPinForgetUseCase(get()) }
     }
 }

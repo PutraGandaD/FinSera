@@ -87,7 +87,6 @@ class LoginFragment : Fragment() {
 
     private fun handleAppPinCreated() {
         val userCreatedAppPinStatus = loginViewModel.userCreatedAppPin
-        //Toast.makeText(requireActivity(), userCreatedAppPinStatus.toString(), Toast.LENGTH_SHORT).show()
         if(userCreatedAppPinStatus) {
             // user login and already created pin, straight to login pin screen
             findNavController().navigate(R.id.action_loginFragment_to_loginPinFragment)

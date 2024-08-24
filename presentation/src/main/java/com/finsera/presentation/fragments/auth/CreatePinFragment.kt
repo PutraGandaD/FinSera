@@ -10,13 +10,14 @@ import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentCreatePinBinding
 import com.finsera.presentation.fragments.auth.viewmodels.LoginPinViewModel
 import com.google.android.material.snackbar.Snackbar
+import org.koin.android.ext.android.inject
 import org.koin.androidx.navigation.koinNavGraphViewModel
 
 class CreatePinFragment : Fragment() {
     private var _binding: FragmentCreatePinBinding? = null
     private val binding get() = _binding!!
 
-    private val loginPinViewModel by koinNavGraphViewModel<LoginPinViewModel>(R.id.finsera_app_navgraph)
+    private val loginPinViewModel : LoginPinViewModel by inject()
 
     private var hasAnnouncedScreen = false
 

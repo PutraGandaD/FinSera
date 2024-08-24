@@ -62,6 +62,11 @@ class AccountFragment : Fragment() {
         gantiPinTransaksi.setOnClickListener {
             gantiPinTransaksiAlert()
         }
+
+        val gantiPasswordAkun = view.findViewById<LinearLayout>(R.id.ubah_password_akun)
+        gantiPasswordAkun.setOnClickListener {
+            gantiPasswordAkunAlert()
+        }
     }
 
     private fun clipBoardCardNumber(){
@@ -146,6 +151,16 @@ class AccountFragment : Fragment() {
         MaterialAlertDialogBuilder(requireActivity())
             .setTitle("Ganti PIN Transaksi")
             .setMessage(getString(R.string.finsera_ganti_pin_transaksi_desc))
+            .setPositiveButton("Ya") { dialog, which ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun gantiPasswordAkunAlert() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Ganti Password Akun")
+            .setMessage(getString(R.string.finsera_lupa_password_desc))
             .setPositiveButton("Ya") { dialog, which ->
                 dialog.dismiss()
             }

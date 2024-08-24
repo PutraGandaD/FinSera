@@ -9,6 +9,7 @@ class Constant {
         const val USER_APPLICATION_PIN = "APP_PIN" // need to be cleanable
         const val FINSERA_SHARED_PREFERENCES = "Finsera_App_Preferences"
 
+        const val USERNAME_NASABAH = "USERNAME_NASABAH"
         const val NOMOR_REKENING_NASABAH = "NO_REK" // need to be cleanable
         const val NAMA_NASABAH = "NAMA_NASABAH" // need to be cleanable
 

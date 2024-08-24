@@ -23,13 +23,14 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.navigation.koinNavGraphViewModel
 
 class   LoginPinFragment : Fragment() {
     private var _binding: FragmentLoginPinBinding? = null
     private val binding get() = _binding!!
 
-    private val loginPinViewModel by koinNavGraphViewModel<LoginPinViewModel>(R.id.finsera_app_navgraph)
+    private val loginPinViewModel : LoginPinViewModel by inject()
 
     private lateinit var etPin1 : EditText
     private lateinit var etPin2 : EditText
@@ -55,9 +56,16 @@ class   LoginPinFragment : Fragment() {
         init()
         handleCustomKeyboard()
         observe()
+        attachTextWatcher()
 
         binding.btnGantiAkun.setOnClickListener {
             gantiAkun()
+        }
+
+        binding.btnLupaPin.setOnClickListener {
+            if(findNavController().currentDestination?.id == R.id.loginPinFragment) {
+                findNavController().navigate(R.id.action_loginPinFragment_to_forgetAppPinFragment)
+            }
         }
     }
 
@@ -90,14 +98,17 @@ class   LoginPinFragment : Fragment() {
         etPin5 = binding.etPin5
         etPin6 = binding.etPin6
 
+        currentFocusEditText = etPin1
+        prevFilledEditText = etPin1
+    }
+
+    private fun attachTextWatcher() {
         etPin1.addTextWatcher()
         etPin2.addTextWatcher()
         etPin3.addTextWatcher()
         etPin4.addTextWatcher()
         etPin5.addTextWatcher()
         etPin6.addTextWatcher()
-        currentFocusEditText = etPin1
-        prevFilledEditText = etPin1
     }
 
     private fun handleCustomKeyboard() {
@@ -176,7 +187,7 @@ class   LoginPinFragment : Fragment() {
     }
 
     private fun handleLastInput(current: EditText, filled: View, unfilled: View) {
-        if (current.text.isNotEmpty()) {
+        if (current.text.toString().isNotEmpty()) {
             unfilled.visibility = View.INVISIBLE
             filled.visibility = View.VISIBLE
             val getPin = etPin1.text.toString() + etPin2.text.toString() + etPin3.text.toString() +
@@ -186,12 +197,12 @@ class   LoginPinFragment : Fragment() {
     }
 
     private fun resetPinFields() {
-        etPin1.setText("")
-        etPin2.setText("")
-        etPin3.setText("")
-        etPin4.setText("")
-        etPin5.setText("")
-        etPin6.setText("")
+        etPin1.setText(null)
+        etPin2.setText(null)
+        etPin3.setText(null)
+        etPin4.setText(null)
+        etPin5.setText(null)
+        etPin6.setText(null)
         binding.ivPin1Unfilled.visibility = View.VISIBLE
         binding.ivPin1Filled.visibility = View.INVISIBLE
         binding.ivPin2Unfilled.visibility = View.VISIBLE

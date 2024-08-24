@@ -16,6 +16,8 @@ interface IAuthRepository {
     fun getLoginStatus() : Boolean
     fun setAppLockPin(newPin: String)
     fun getAppLockPin() : String
+    fun saveUsernameForRecovery(username: String)
+    fun getUsernameForRecovery() : String
     fun saveUserInfo(name: String, accountNum: String)
     fun getUserInfo() : Pair<String, String>
     suspend fun getUserProfiling(accessToken: String) : Profiling

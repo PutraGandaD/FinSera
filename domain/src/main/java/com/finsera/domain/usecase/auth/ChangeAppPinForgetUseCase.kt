@@ -9,25 +9,34 @@ import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
 
-class LoginUserUseCase(private val repository: IAuthRepository) {
-    suspend operator fun invoke(username: String, password: String) : Flow<Resource<String>> = flow {
+class ChangeAppPinForgetUseCase(
+    private val authRepository: IAuthRepository
+) {
+    operator suspend fun invoke(newPin: String, confirmPin: String, accountPassword: String) : Flow<Resource<String>> = flow {
         emit(Resource.Loading())
         try {
-            val response = repository.login(username, password)
+            if(newPin != confirmPin) {
+                emit(Resource.Error("PIN baru dan Konfirmasi PIN Baru tidak sama!"))
+                return@flow
+            } else if(newPin.length != 6) {
+                emit(Resource.Error("PIN baru harus 6 digit"))
+                return@flow
+            }
 
-            when(response.status) {
+            val getUsernameForRecovery = authRepository.getUsernameForRecovery()
+            val loginFirst = authRepository.login(getUsernameForRecovery, accountPassword)
+
+            when(loginFirst.status) {
                 "ACTIVE" -> {
-                    repository.setLoginStatus(true)
-                    repository.saveUsernameForRecovery(username)
-                    emit(Resource.Success("Login Berhasil"))
+                    authRepository.setAppLockPin(newPin)
+                    emit(Resource.Success("Ganti PIN Aplikasi berhasil! Silahkan login dengan PIN Aplikasi anda yang baru."))
                 }
                 "INACTIVE" -> {
-                    repository.setLoginStatus(false)
                     emit(Resource.Error("Akun anda nonaktif / dinonaktifkan."))
                 }
             }
         } catch (t: Throwable) {
-            when (t) {
+            when(t) {
                 is HttpException -> {
                     val response =
                         t.response()?.errorBody()?.source()?.buffer?.snapshot()?.utf8()
@@ -39,7 +48,7 @@ class LoginUserUseCase(private val repository: IAuthRepository) {
 
                             when(error) {
                                 401 -> {
-                                    emit(Resource.Error(message))
+                                    emit(Resource.Error("Password yang anda masukkan salah. Silahkan coba lagi."))
                                 }
                                 404 -> {
                                     emit(Resource.Error(message))

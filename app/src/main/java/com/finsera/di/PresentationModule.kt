@@ -4,6 +4,7 @@ import com.finsera.presentation.fragments.akun.viewmodel.AccountViewModel
 import com.finsera.presentation.fragments.auth.viewmodels.LoginPinViewModel
 import com.finsera.presentation.fragments.auth.viewmodels.LoginViewModel
 import com.finsera.presentation.fragments.favorit.viewmodel.FavoritViewModel
+import com.finsera.presentation.fragments.forgetpinapp.viewmodel.ForgetPINAppViewModel
 import com.finsera.presentation.fragments.home.viewmodel.HomeViewModel
 import com.finsera.presentation.fragments.info.mutasi.viewmodel.MutasiViewModel
 import com.finsera.presentation.fragments.info.saldo.viewmodel.InfoSaldoViewModel
@@ -57,6 +58,7 @@ object PresentationModule {
         viewModel { AccountViewModel(get(), get()) }
         viewModel { ProfileViewModel(get(), get()) }
         viewModel { UbahMPINViewModel(get()) }
+        viewModel { ForgetPINAppViewModel(get(), get()) }
     }
 
 }
