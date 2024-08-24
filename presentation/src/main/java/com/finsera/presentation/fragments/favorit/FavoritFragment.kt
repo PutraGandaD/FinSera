@@ -1,5 +1,6 @@
 package com.finsera.presentation.fragments.favorit
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -132,6 +133,7 @@ class FavoritFragment : Fragment(), OnFavoriteItemSesamaClickListener, OnFavorit
 
     private fun setUpBottomNavBar() {
         binding.bottomNavigationView.background = null
+        binding.bottomAppBar.background.setTint(Color.WHITE)
         binding.bottomNavigationView.menu.getItem(0).isChecked = false
         binding.bottomNavigationView.menu.getItem(1).isCheckable = false
         binding.bottomNavigationView.menu.getItem(2).isEnabled = false

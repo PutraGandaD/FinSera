@@ -1,5 +1,6 @@
 package com.finsera.presentation.fragments.akun
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,6 +52,16 @@ class AccountFragment : Fragment() {
         notifikasi.setOnClickListener {
             findNavController().navigate(R.id.action_accountFragment_to_notificationFragment)
         }
+
+        val gantiPin = view.findViewById<LinearLayout>(R.id.ubah_pin_app)
+        gantiPin.setOnClickListener {
+            findNavController().navigate(R.id.action_accountFragment_to_ubahMPINFragment)
+        }
+
+        val gantiPinTransaksi = view.findViewById<LinearLayout>(R.id.ubah_pin_transaksi)
+        gantiPinTransaksi.setOnClickListener {
+            gantiPinTransaksiAlert()
+        }
     }
 
     private fun clipBoardCardNumber(){
@@ -70,6 +81,7 @@ class AccountFragment : Fragment() {
 
     private fun setUpBottomNavBar() {
         binding.bottomNavigationView.background = null
+        binding.bottomAppBar.background.setTint(Color.WHITE)
         binding.bottomNavigationView.menu.getItem(0).isChecked = false
         binding.bottomNavigationView.menu.getItem(1).isCheckable = false
         binding.bottomNavigationView.menu.getItem(2).isEnabled = false
@@ -126,6 +138,16 @@ class AccountFragment : Fragment() {
                 accountViewModel.logout()
                 Toast.makeText(requireActivity(), "Logout berhasil", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(R.id.action_accountFragment_to_loginFragment)
+            }
+            .show()
+    }
+
+    private fun gantiPinTransaksiAlert() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Ganti PIN Transaksi")
+            .setMessage(getString(R.string.finsera_ganti_pin_transaksi_desc))
+            .setPositiveButton("Ya") { dialog, which ->
+                dialog.dismiss()
             }
             .show()
     }

@@ -25,13 +25,14 @@ import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.Transfe
 import com.finsera.presentation.fragments.transfer.sesama_bank.viewmodel.TransferSesamaBankViewModel
 import com.finsera.presentation.fragments.transfer.va.viewmodel.CheckVaViewModel
 import com.finsera.presentation.fragments.transfer.va.viewmodel.TransferVaViewModel
+import com.finsera.presentation.fragments.ubahmpin.viewmodel.UbahMPINViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 object PresentationModule {
     val viewModelModule = module {
         viewModel { LoginViewModel(get(), get(), get(),get()) }
-        viewModel { LoginPinViewModel(get(), get(),get()) }
+        viewModel { LoginPinViewModel(get(), get(), get(), get()) }
         viewModel { HomeViewModel(get(), get(), get()) }
         viewModel { InfoSaldoViewModel(get(), get()) }
         viewModel { MutasiViewModel(get(), get(), get(),get()) }
@@ -55,6 +56,7 @@ object PresentationModule {
         viewModel { FavoritViewModel(get(), get(), get(), get(), get(), get(), get(), get()) }
         viewModel { AccountViewModel(get(), get()) }
         viewModel { ProfileViewModel(get(), get()) }
+        viewModel { UbahMPINViewModel(get()) }
     }
 
 }

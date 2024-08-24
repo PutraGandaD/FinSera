@@ -1,6 +1,7 @@
 package com.finsera.di
 
 import com.finsera.domain.model.TransferVa
+import com.finsera.domain.usecase.auth.ChangeAppPinUseCase
 import com.finsera.domain.usecase.auth.CheckAppPinCreatedUseCase
 import com.finsera.domain.usecase.auth.CheckLoggedInUseCase
 import com.finsera.domain.usecase.auth.CreateAppPinUseCase
@@ -83,5 +84,6 @@ object DomainModule {
         factory { DeleteDaftarTersimpanEWalletUseCase(get()) }
         factory { LogoutUserUseCase(get()) }
         factory { GetProfilingUserUseCase(get()) }
+        factory { ChangeAppPinUseCase(get()) }
     }
 }

@@ -310,5 +310,7 @@
     <string name="kategori_e_wallet_desc">Kategori E-Wallet</string>
     <string name="kategori_virtual_account_desc">Kategori Virtual Account</string>
     <string name="finsera_app_logout_desc">Anda menekan tombol Logout.\n\nApabila anda menekan \'Ya\' anda akan keluar dari akun dan akan diarahkan secara otomatis ke halaman login.\n\nApabila anda ingin melakukan transaksi pada akun anda setelah Logout, anda perlu login kembali pada aplikasi FinSera.</string>
-
+    <string name="finsera_app_ganti_akun_desc">Anda menekan tombol Ganti Akun.\n\nApabila anda menekan \'Ya\' anda akan keluar atau logout dari akun anda dan akan diarahkan secara otomatis ke halaman login.\n\nApabila anda ingin melakukan transaksi pada akun anda setelah Logout, anda perlu login kembali pada aplikasi FinSera.</string>
+    <string name="finsera_lupa_password_desc">Demi alasan keamanan, silahkan kunjungi kantor BCA terdekat untuk melakukan reset password anda.\n\nApabila ada kendala atau pertanyaan lebih lanjut, hubungi kami melalui email di finseracc@bca.co.id.</string>
+    <string name="finsera_ganti_pin_transaksi_desc">Demi alasan keamanan, silahkan kunjungi kantor BCA terdekat untuk melakukan Ganti PIN Transaksi anda.\n\nApabila ada kendala atau pertanyaan lebih lanjut, hubungi kami melalui email di finseracc@bca.co.id.</string>
 </resources>

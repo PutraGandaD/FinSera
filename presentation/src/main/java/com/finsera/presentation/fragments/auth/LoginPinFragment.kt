@@ -19,6 +19,7 @@ import com.finsera.common.utils.DisableTouchEvent.setInteractionDisabled
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentLoginPinBinding
 import com.finsera.presentation.fragments.auth.viewmodels.LoginPinViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -54,11 +55,31 @@ class   LoginPinFragment : Fragment() {
         init()
         handleCustomKeyboard()
         observe()
+
+        binding.btnGantiAkun.setOnClickListener {
+            gantiAkun()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun gantiAkun() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle("Ganti Akun")
+            .setMessage(getString(R.string.finsera_app_ganti_akun_desc))
+            .setNegativeButton("Tidak") { dialog, which ->
+                dialog.dismiss()
+                Toast.makeText(requireActivity(), "Anda membatalkan untuk ganti akun.", Toast.LENGTH_SHORT).show()
+            }
+            .setPositiveButton("Ya") { dialog, which ->
+                loginPinViewModel.logoutFromAccount()
+                Toast.makeText(requireActivity(), "Logout berhasil. Silahkan login kembali.", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.action_loginPinFragment_to_loginFragment)
+            }
+            .show()
     }
 
     private fun init() {
