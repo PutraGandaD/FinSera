@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:contentDescription="@string/notifikasi"
+            android:accessibilityTraversalBefore="@id/btn_back"
             android:importantForAccessibility="yes"
             android:text="@string/notifikasi"
             android:textColor="@android:color/black"

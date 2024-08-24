@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityNodeInfo
 import android.widget.Toast
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -45,10 +46,19 @@ class NotificationFragment : Fragment() {
         notifViewModel.getNotifikasi()
         observer()
         setUpRvMutasi()
+
+        binding.rvNotification.isClickable = false
     }
 
     private fun setUpRvMutasi() {
         binding.rvNotification.adapter = notifAdapter
+        binding.rvNotification.accessibilityDelegate = object : View.AccessibilityDelegate() {
+            override fun onInitializeAccessibilityNodeInfo(host: View, info: AccessibilityNodeInfo) {
+                super.onInitializeAccessibilityNodeInfo(host, info)
+                info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_FORWARD)
+                info.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_BACKWARD)
+            }
+        }
     }
 
     private fun observer() {
@@ -86,6 +96,5 @@ class NotificationFragment : Fragment() {
             }
         }
     }
-
 
 }

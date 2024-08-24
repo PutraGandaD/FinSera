@@ -32,7 +32,7 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/calibri_font_family"
             android:text="Nama Pemilik Rekening"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
             android:id="@+id/tv_daftartersimpan_norekening"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginTop="4dp"
             android:text="1234567890"
             android:textColor="@color/neutral_09"
             android:textSize="14sp"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_delete_favorit"
             android:backgroundTint="@android:color/white"
-            app:layout_constraintBottom_toTopOf="@id/shadow_navbar"
+            android:contentDescription="@string/delete_list_desc"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

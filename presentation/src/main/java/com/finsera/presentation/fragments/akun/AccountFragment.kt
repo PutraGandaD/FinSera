@@ -80,8 +80,16 @@ class AccountFragment : Fragment() {
     }
 
     private fun setUpProfileInfo() {
-        binding.cardAkun.tvNama.text = accountViewModel.userInfo?.first
-        binding.cardAkun.tvRekening.text = accountViewModel.userInfo?.second
+        val name = accountViewModel.userInfo?.first ?: ""
+        val accountNumber = accountViewModel.userInfo?.second ?: ""
+
+        binding.cardAkun.tvNama.text = name
+        binding.cardAkun.tvRekening.text = accountNumber
+
+        val spacedAccountNumber = accountNumber.map { it.toString() }.joinToString(" ")
+
+        val description = getString(R.string.profile_card_description, name, spacedAccountNumber)
+        binding.cardAkun.root.contentDescription = description
     }
 
     private fun setUpBottomNavBar() {
