@@ -72,5 +72,6 @@ class LocalDataSource(
         sharedPreferencesManager.clearSharedPreferences(Constant.USER_APPLICATION_PIN)
         sharedPreferencesManager.clearSharedPreferences(Constant.NOMOR_REKENING_NASABAH)
         sharedPreferencesManager.clearSharedPreferences(Constant.NAMA_NASABAH)
+        sharedPreferencesManager.clearSharedPreferences(Constant.USERNAME_NASABAH)
     }
 }

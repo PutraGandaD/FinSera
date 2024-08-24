@@ -135,7 +135,7 @@ class AccountFragment : Fragment() {
         }
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_favoritFragment_to_qrisScanQRFragment)
+            findNavController().navigate(R.id.action_accountFragment_to_qrisScanQRFragment)
         }
     }
 
