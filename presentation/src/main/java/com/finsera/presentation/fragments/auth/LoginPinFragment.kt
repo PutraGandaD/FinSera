@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.navigation.koinNavGraphViewModel
 
-class   LoginPinFragment : Fragment() {
+class LoginPinFragment : Fragment() {
     private var _binding: FragmentLoginPinBinding? = null
     private val binding get() = _binding!!
 
@@ -41,6 +41,8 @@ class   LoginPinFragment : Fragment() {
 
     private lateinit var currentFocusEditText : EditText
     private lateinit var prevFilledEditText : EditText
+
+    private var hasAnnouncedScreen = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,6 +68,11 @@ class   LoginPinFragment : Fragment() {
             if(findNavController().currentDestination?.id == R.id.loginPinFragment) {
                 findNavController().navigate(R.id.action_loginPinFragment_to_forgetAppPinFragment)
             }
+        }
+
+        if(!hasAnnouncedScreen) {
+            view.announceForAccessibility(binding.tvMasukkanPin.text)
+            hasAnnouncedScreen = true
         }
     }
 
@@ -224,7 +231,7 @@ class   LoginPinFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 loginPinViewModel.loginPinScreenUIState.collectLatest { uiState ->
                     uiState.message?.let { message ->
-                        Snackbar.make(requireView(), message, Snackbar.LENGTH_SHORT).show()
+                        Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
                         loginPinViewModel.userMessageShown()
                     }
 
@@ -239,6 +246,7 @@ class   LoginPinFragment : Fragment() {
 
                     if(uiState.isLoading) {
                         binding.tvLoginStatus.text = "Sedang autentikasi PIN..."
+                        view?.announceForAccessibility(binding.tvLoginStatus.text)
                         setInteractionDisabled(requireActivity(), true)
                     } else {
                         binding.tvLoginStatus.text = "Selamat Datang Kembali"
