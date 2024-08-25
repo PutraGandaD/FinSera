@@ -1,0 +1,11 @@
+{
+  "code": 200,
+  "message": "Login sukses",
+  "status": true,
+  "data": {
+    "accessToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwidXNlcklkIjoxLCJpYXQiOjE3MjQ1NzcyODYsImV4cCI6MTcyNDU3OTA4Nn0.lyR1nDLITDk5ZPvTWAeK9WJCQkMVRmPUk8Zu_8gGUL4",
+    "refreshToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huZG9lIiwidXNlcklkIjoxLCJpYXQiOjE3MjQ1NzcyODZ9.oVq6plRhswPUvK5Kltl5o2aI4z4zCrT17ywxUGoPaJg",
+    "userId": 1,
+    "status": "ACTIVE"
+  }
+}
