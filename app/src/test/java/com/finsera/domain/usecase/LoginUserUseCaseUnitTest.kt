@@ -51,7 +51,7 @@ class LoginUserUseCaseUnitTest {
             loginUserUseCase.invoke("johndoe", "password123").collectLatest { result ->
                 when(result) {
                     is Resource.Success -> {
-                        assertThat(result.data).isEqualTo("Login Berhasil")
+                        assertThat(result).isEqualTo("Login Berhasil")
                     }
 
                     is Resource.Error -> {
