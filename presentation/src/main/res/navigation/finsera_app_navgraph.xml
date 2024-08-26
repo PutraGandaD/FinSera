@@ -358,8 +358,8 @@
             android:id="@+id/action_favoritFragment_to_transferAntarBankForm"
             app:destination="@id/transferAntarBankForm" />
         <action
-            android:id="@+id/action_favoritFragment_to_transferEWalletForm"
-            app:destination="@id/transferEWalletForm" />
+            android:id="@+id/action_favoritFragment_to_transferEWalletFormKonfirmasi"
+            app:destination="@id/transferEWalletFormKonfirmasiFragment" />
         <action
             android:id="@+id/action_favoritFragment_to_transferVirtualAccountFormKonfirmasi"
             app:destination="@id/transferVirtualAccountFormKonfirmasi" />

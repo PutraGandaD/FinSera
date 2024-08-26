@@ -226,7 +226,7 @@ class FavoritFragment : Fragment(), OnFavoriteItemSesamaClickListener, OnFavorit
             putBoolean(Constant.DAFTAR_TERSIMPAN_CHECKED_EXTRA, false)
         }
         findNavController().navigate(
-            R.id.action_favoritFragment_to_transferEWalletForm,
+            R.id.action_favoritFragment_to_transferEWalletFormKonfirmasi,
             bundle
         )
     }
