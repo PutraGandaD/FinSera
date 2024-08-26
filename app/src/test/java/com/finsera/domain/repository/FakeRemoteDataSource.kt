@@ -2,6 +2,7 @@ package com.finsera.domain.repository
 
 import com.finsera.common.utils.Resource
 import com.finsera.data.source.remote.ApiService
+import com.finsera.data.source.remote.response.info_saldo.InfoSaldoResponse
 import com.finsera.data.source.remote.response.login.LoginResponse
 import com.finsera.data.source.remote.response.mutasi.MutasiResponse
 import com.finsera.data.source.remote.response.notifikasi.NotificationResponse
@@ -37,5 +38,10 @@ class FakeRemoteDataSource(private val apiService: ApiService) {
     suspend fun getMutasi(token: String, startDate: String?, endDate: String?, page: Int): MutasiResponse {
         val accessToken = "Bearer $token"
         return apiService.getMutasi(accessToken, startDate, endDate, page)
+    }
+
+    suspend fun getSaldo(token: String): InfoSaldoResponse {
+        val accessToken = "Bearer $token"
+        return apiService.getSaldo(accessToken)
     }
 }

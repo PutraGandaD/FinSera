@@ -64,11 +64,11 @@ class FakeAuthRepository(
     }
 
     override fun saveUserInfo(name: String, accountNum: String) {
-        TODO("Not yet implemented")
+        "John Doe" to "1234567890"
     }
 
     override fun getUserInfo(): Pair<String, String> {
-        TODO("Not yet implemented")
+        return "John Doe" to "1234567890"
     }
 
     override suspend fun getUserProfiling(accessToken: String): Profiling {

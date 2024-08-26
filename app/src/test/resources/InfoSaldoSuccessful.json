@@ -1,0 +1,14 @@
+{
+  "code": 200,
+  "message": "Nomor Rekening ditemukan",
+  "status": true,
+  "data": {
+    "customerId": 1,
+    "name": "John Doe",
+    "accountNumber": "123456789",
+    "amount": {
+      "amount": 176494518,
+      "currency": "IDR"
+    }
+  }
+}
