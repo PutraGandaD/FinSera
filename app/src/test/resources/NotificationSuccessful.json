@@ -1,0 +1,67 @@
+{
+  "code": 200,
+  "message": "Data notifkasi ditemukan",
+  "status": true,
+  "data": [
+    {
+      "createdDate": "26 Agustus 2024 09:39 WIB",
+      "typeNotification": "Transaksi",
+      "tittle": "Transfer ke sesama bank telah berhasil",
+      "description": "Transfer senilai 120000.0 ke rekening 987654321"
+    },
+    {
+      "createdDate": "26 Agustus 2024 09:38 WIB",
+      "typeNotification": "Transaksi",
+      "tittle": "Topup ke PayPal telah berhasil",
+      "description": "Transfer senilai 12500.0 ke nomor 085227541234"
+    },
+    {
+      "createdDate": "26 Agustus 2024 09:37 WIB",
+      "typeNotification": "Transaksi",
+      "tittle": "Transfer ke Virtual Account telah berhasil",
+      "description": "Transfer senilai 30000.0 ke rekening 123456789"
+    },
+    {
+      "createdDate": "25 Agustus 2024 14:33 WIB",
+      "typeNotification": "Transaksi",
+      "tittle": "Topup ke Gopay telah berhasil",
+      "description": "Transfer senilai 102500.0 ke nomor 081987654321"
+    },
+    {
+      "createdDate": "25 Agustus 2024 14:30 WIB",
+      "typeNotification": "Transaksi",
+      "tittle": "Transfer ke Virtual Account telah berhasil",
+      "description": "Transfer senilai 30000.0 ke rekening 123456789"
+    },
+    {
+      "createdDate": "25 Agustus 2024 14:26 WIB",
+      "typeNotification": "Transaksi",
+      "tittle": "Transfer ke antar bank telah berhasil",
+      "description": "Transfer senilai 12500.0 ke rekening 789012345"
+    },
+    {
+      "createdDate": "25 Agustus 2024 14:15 WIB",
+      "typeNotification": "Transaksi",
+      "tittle": "Transfer ke sesama bank telah berhasil",
+      "description": "Transfer senilai 50000.0 ke rekening 987654321"
+    },
+    {
+      "createdDate": "25 Agustus 2024 12:29 WIB",
+      "typeNotification": "Transaksi",
+      "tittle": "Topup ke DANA telah berhasil",
+      "description": "Transfer senilai 42500.0 ke nomor 089123123123"
+    },
+    {
+      "createdDate": "25 Agustus 2024 12:27 WIB",
+      "typeNotification": "Transaksi",
+      "tittle": "Transfer ke Virtual Account telah berhasil",
+      "description": "Transfer senilai 30000.0 ke rekening 123456789"
+    },
+    {
+      "createdDate": "25 Agustus 2024 12:25 WIB",
+      "typeNotification": "Transaksi",
+      "tittle": "Transfer ke antar bank telah berhasil",
+      "description": "Transfer senilai 52500.0 ke rekening 789012345"
+    }
+  ]
+}
