@@ -11,11 +11,12 @@
 - UI With Views (XML) and Material Design 3 (https://m3.material.io)
 - Built with Clean Architecture
 - Implemented Dependency Injection (Koin)
-- Single Activity Approach with multiple Fragments
 - With Reactive Programming Approach (with StateFlow, Kotlin Flow, Coroutines, UI State, etc...)
+- Single Activity Approach with multiple Fragments
 - Using Android Jetpack Navigation Component for Navigation between Fragments
 - Using Shared Preferences for saving local constant data (Access/Refresh Token, Login State, etc)
 - Using Room Database for storing local database (Daftar Tersimpan)
+- Using AndroidX Biometric library for backward compability from Android M (6.0) to Android 10
 - Using Retrofit for API Connectivity in the app
 - Using Chucker for debugging API Request
 - Using JUnit4 and Mock Web Server for Unit Tests
