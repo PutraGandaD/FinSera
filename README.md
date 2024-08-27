@@ -8,7 +8,7 @@
 - Laila Dwi Latifa
 
 ## How to try this app?
-Download the application from this [Releases](https://github.com/FinSera-SYNRGY7/FinSera-Android/releases/tag/pre-release) page. <br>
+Download the latest version of application (APK) from this [Releases](https://github.com/FinSera-SYNRGY7/FinSera-Android/releases) page. <br>
 And the credential for login = <br>
 Username : johndoe <br>
 Password : password123 <br>
@@ -52,8 +52,9 @@ Transaction PIN : 123456 <br>
 This project utilize CI/CD with GitHub Actions to automatically build the APK and AAB. Please go to Actions tab above (next to Pull requests tab).
 
 ## Firebase
-This project utilize Firebase Crashlytics and Firebase Performance Monitoring.
-See this commit for details :
-https://github.com/FinSera-SYNRGY7/FinSera-Android/commit/aa9af205a2b41101f224c4b51958450b3b073df9 <br>
+This project utilize Firebase Crashlytics and Firebase Performance Monitoring. <br>
+See this commit for details : <br>
+https://github.com/FinSera-SYNRGY7/FinSera-Android/commit/aa9af205a2b41101f224c4b51958450b3b073df9
+<br>
 ![Screen Shot 2024-08-27 at 8 25 55 PM](https://github.com/user-attachments/assets/c37ab59d-ba1b-4404-ae78-4a438461c214)
 ![Screen Shot 2024-08-27 at 8 26 38 PM](https://github.com/user-attachments/assets/817472c2-9d74-4c69-babf-fc82d6e10a57)
