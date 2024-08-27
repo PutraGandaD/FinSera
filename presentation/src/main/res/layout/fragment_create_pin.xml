@@ -52,7 +52,6 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:hint="PIN Baru"
-            android:contentDescription="@string/tv_talkback_username_login"
             android:background="@drawable/et_textfield_background_1"
             android:textSize="18sp"
             android:inputType="numberDecimal" />
