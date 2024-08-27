@@ -1,7 +1,9 @@
-    plugins {
+plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     kotlin("kapt")
 }
 
@@ -117,4 +119,17 @@ dependencies {
     kapt("androidx.room:room-compiler:$room_version")
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
+
+    // mock web server
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
+    testImplementation("com.google.truth:truth:1.4.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0-RC")
+
+    // firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-perf")
+
+    // fingerprint
+    implementation("androidx.biometric:biometric:1.1.0")
 }

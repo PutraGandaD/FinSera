@@ -327,9 +327,10 @@
     <string name="screen_profile">Edit Profil Anda</string>
     <string name="change_profile_pic_desc">Ubah foto profil anda</string>
     <string name="pin_old_desc">Masukkan PIN Lama anda di bawah</string>
-    <string name="pin_new_desc">Masukkan PIN Baru anda di bawah</string>
-    <string name="pin_new_confirm_desc">Konfirmasi PIN Baru anda di bawah</string>
+    <string name="pin_new_desc">Masukkan PIN Aplikasi Baru anda di bawah</string>
+    <string name="pin_new_confirm_desc">Konfirmasi PIN Aplikasi Baru anda di bawah</string>
     <string name="confirm_change_pin_desc">Konfirmasi Perubahan PIN Anda</string>
     <string name="acc_password_desc">Masukkan Password Akun Anda di bawah</string>
     <string name="change_password_account_desc">Ubah Password Akun Anda</string>
+    <string name="tombol_sidik_jari">Tombol Sidik Jari</string>
 </resources>

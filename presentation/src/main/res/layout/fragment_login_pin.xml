@@ -377,6 +377,19 @@
             app:layout_constraintEnd_toStartOf="@id/btn_pin_8"
             app:layout_constraintBottom_toTopOf="@id/btn_pin_0"/>
 
+        <ImageButton
+            android:id="@+id/btn_fingerprint"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/neutral_01"
+            android:scaleType="centerCrop"
+            android:src="@drawable/fingerprint"
+            android:contentDescription="@string/tombol_sidik_jari"
+            app:layout_constraintTop_toBottomOf="@id/btn_pin_7"
+            app:layout_constraintStart_toStartOf="@id/btn_pin_7"
+            app:layout_constraintEnd_toEndOf="@id/btn_pin_7"
+            android:layout_marginTop="@dimen/_15sdp"/>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_pin_8"
             android:layout_width="wrap_content"

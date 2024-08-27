@@ -1,0 +1,62 @@
+name: AndroidBuild
+on:
+  pull_request:
+    branches: [ main ]
+  push :
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4.2.1
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Run Unit Tests
+        run: ./gradlew test
+
+      - name: Decode Keystore
+        env:
+          ENCODED_STRING: ${{ secrets.SIGNING_KEY_STORE_BASE64 }}
+          SIGNING_KEY_STORE_PATH: ${{ secrets.SIGNING_KEY_STORE_PATH }}
+
+        run: |
+          echo $ENCODED_STRING > keystore-b64.txt
+          base64 -d keystore-b64.txt > keystore.jks
+
+      - name: Build Unsigned APK Debug with Gradle
+        run: ./gradlew assembleDebug
+
+      - name: Build Signed Android Bundle (.aab) 
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        run: ./gradlew assembleDebug
+
+      - name: Build Android Bundle (.aab) 
+        env:
+          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
+          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        run: ./gradlew bundleDebug
+
+      - name: Upload .apk
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: finsera_debug_apk
+          path: app/build/outputs/apk/
+
+      - name: Upload .aab
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: finsera_debug_aab
+          path: app/build/outputs/bundle/
