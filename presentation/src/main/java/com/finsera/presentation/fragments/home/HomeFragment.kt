@@ -286,7 +286,7 @@ class HomeFragment : Fragment(), TextToSpeech.OnInitListener {
     }
 
     private fun setUpBottomNavBar() {
-        binding.bottomNavigationView.background = null
+        binding.bottomNavigationView.setBackgroundColor(resources.getColor(R.color.bg_bottomapp_home))
         binding.bottomNavigationView.menu.getItem(0).isChecked = true
         binding.bottomNavigationView.menu.getItem(1).isCheckable = false
         binding.bottomNavigationView.menu.getItem(2).isEnabled = false

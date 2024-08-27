@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
-import androidx.core.content.ContextCompat
 
 
 object HandlePermission {
@@ -24,5 +23,21 @@ object HandlePermission {
             }
         }
         startActivity(intent)
+    }
+
+    fun Context.openAppStoragePermissionR() {
+        try {
+            val intent = Intent().apply {
+                action = Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION
+                addCategory(Intent.CATEGORY_DEFAULT)
+                data = Uri.parse("package:" + packageName)
+            }
+            startActivity(intent)
+        } catch (e: Exception) {
+            val intent = Intent().apply {
+                setAction(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+            }
+            startActivity(intent)
+        }
     }
 }

@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.finsera.common.utils.Constant
 import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
+import com.finsera.common.utils.permission.HandlePermission.openAppStoragePermissionR
 import com.finsera.presentation.R
 import com.finsera.presentation.databinding.FragmentTransferEWalletSuccessBinding
 import com.finsera.presentation.fragments.topup.ewallet.bundle.SuccessEWalletBundle
@@ -259,21 +260,64 @@ class TransferEWalletSuccessFragment : Fragment() {
         startActivity(Intent.createChooser(shareIntent, null))
     }
 
+    private fun safeSaveToGallery() {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    saveToGallery()
+                }
+
+                shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                    // Provide an additional rationale to the user if the permission was not granted
+                    // and the user would benefit from additional context for the use of the permission.
+                    permissionStorageDialog()
+                }
+
+                else -> {
+                    // Request the permission
+                    requestPermissionSafeSaveToGallery.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                }
+            }
+        } else {
+            if(!Environment.isExternalStorageManager()) {
+                requireActivity().openAppStoragePermissionR()
+                Toast.makeText(requireActivity(), "Mohon hidupkan akses penyimpanan pada aplikasi anda di halaman ini", Toast.LENGTH_LONG).show()
+            } else {
+                saveToGallery()
+            }
+        }
+    }
+
     private fun safeShareImageTo() {
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED -> {
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    shareImageTo()
+                }
+
+                shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                    // Provide an additional rationale to the user if the permission was not granted
+                    // and the user would benefit from additional context for the use of the permission.
+                    permissionStorageDialog()
+                }
+
+                else -> {
+                    // Request the permission
+                    requestPermissionSafeShareImageTo.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                }
+            }
+        } else {
+            if(!Environment.isExternalStorageManager()) {
+                requireActivity().openAppStoragePermissionR()
+                Toast.makeText(requireActivity(), "Mohon hidupkan akses penyimpanan pada aplikasi anda di halaman ini", Toast.LENGTH_LONG).show()
+            } else {
                 shareImageTo()
-            }
-
-            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
-                permissionStorageDialog()
-            }
-
-            else -> {
-                requestPermissionSafeShareImageTo.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
         }
     }
@@ -297,29 +341,6 @@ class TransferEWalletSuccessFragment : Fragment() {
             permissionStorageDialog()
         }
     }
-
-    private fun safeSaveToGallery() {
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                saveToGallery()
-            }
-
-            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
-                // Provide an additional rationale to the user if the permission was not granted
-                // and the user would benefit from additional context for the use of the permission.
-                permissionStorageDialog()
-            }
-
-            else -> {
-                // Request the permission
-                requestPermissionSafeSaveToGallery.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            }
-        }
-    }
-
 
     private fun permissionStorageDialog() {
         MaterialAlertDialogBuilder(requireActivity())

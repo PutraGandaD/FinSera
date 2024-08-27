@@ -28,6 +28,7 @@ import com.finsera.common.utils.Resource
 import com.finsera.common.utils.dialog.DatePickerFragment
 import com.finsera.common.utils.network.ConnectivityManager
 import com.finsera.common.utils.permission.HandlePermission.openAppPermissionSettings
+import com.finsera.common.utils.permission.HandlePermission.openAppStoragePermissionR
 import com.finsera.domain.model.Mutasi
 import com.finsera.presentation.R
 import com.finsera.presentation.adapters.MutasiAdapter
@@ -349,26 +350,36 @@ class MutasiFragment() : Fragment(), DatePickerFragment.DialogDateListener {
     }
 
     private fun requestStoragePermission() {
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                // You can use the API that requires the permission.
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    // You can use the API that requires the permission.
+                    downloadFile()
+                }
+
+                shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
+                    // Provide an additional rationale to the user if the permission was not granted
+                    // and the user would benefit from additional context for the use of the permission.
+                    permissionStorageDialog()
+                }
+
+                else -> {
+                    // Request the permission
+                    requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                }
+            }
+        } else {
+            if(!Environment.isExternalStorageManager()) {
+                requireActivity().openAppStoragePermissionR()
+                Toast.makeText(requireActivity(), "Mohon hidupkan akses penyimpanan pada aplikasi anda di halaman ini", Toast.LENGTH_LONG).show()
+            } else {
                 downloadFile()
             }
-
-            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
-                // Provide an additional rationale to the user if the permission was not granted
-                // and the user would benefit from additional context for the use of the permission.
-                permissionStorageDialog()
-            }
-
-            else -> {
-                // Request the permission
-                requestPermissionLauncher.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            }
         }
+
     }
 
     private val requestPermissionLauncher = registerForActivityResult(
