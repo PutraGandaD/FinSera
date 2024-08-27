@@ -170,15 +170,7 @@ class LoginPinFragment : Fragment() {
             .setSubtitle("Tempelkan jari anda ke sensor fingerprint di Handphone anda untuk login ke aplikasi FinSera.")
             .setNegativeButtonText("Gunakan PIN Aplikasi")
             .build()
-
-        // Announce the prompt for TalkBack
-        val accessibilityManager = requireContext().getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
-        accessibilityManager.sendAccessibilityEvent(AccessibilityEvent.obtain().apply {
-            eventType = AccessibilityEvent.TYPE_ANNOUNCEMENT
-            className = "androidx.biometric.BiometricPrompt"
-            packageName = requireContext().packageName
-            text.add("Login dengan Sidik Jari Aplikasi FinSera. Tempelkan jari anda ke sensor fingerprint.")
-        })
+        
     }
 
     private fun gantiAkun() {
