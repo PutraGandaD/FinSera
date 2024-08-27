@@ -8,15 +8,15 @@
 - Laila Dwi Latifa
 
 ## How to try this app?
-Download the application from this [Releases](https://github.com/FinSera-SYNRGY7/FinSera-Android/releases/tag/pre-release) page.
-And the credential for login =
-Username : johndoe
-Password : password123
-Transaction PIN : 123456
-**Notes:**
-**Application PIN is created by user itself when user first login!**
-**Fingerprint Auth will be turned on automatically when user devices having fingerprint set.**
-**Use Transaction PIN to proceed transaction in Transfer Sesama Bank/Antar Bank/VA/E-Wallet/QRIS**
+Download the application from this [Releases](https://github.com/FinSera-SYNRGY7/FinSera-Android/releases/tag/pre-release) page. <br>
+And the credential for login = <br>
+Username : johndoe <br>
+Password : password123 <br>
+Transaction PIN : 123456 <br>
+**Notes:** <br>
+**Application PIN is created by user itself when user first login!** <br>
+**Fingerprint Auth will be turned on automatically when user devices having fingerprint set.** <br>
+**Use Transaction PIN to proceed transaction in Transfer Sesama Bank/Antar Bank/VA/E-Wallet/QRIS** <br>
 
 ## Features :
 - [x] Login + Create APP Pin + Fingerprint Authentication
@@ -54,6 +54,6 @@ This project utilize CI/CD with GitHub Actions to automatically build the APK an
 ## Firebase
 This project utilize Firebase Crashlytics and Firebase Performance Monitoring.
 See this commit for details :
-https://github.com/FinSera-SYNRGY7/FinSera-Android/commit/aa9af205a2b41101f224c4b51958450b3b073df9
+https://github.com/FinSera-SYNRGY7/FinSera-Android/commit/aa9af205a2b41101f224c4b51958450b3b073df9 <br>
 ![Screen Shot 2024-08-27 at 8 25 55 PM](https://github.com/user-attachments/assets/c37ab59d-ba1b-4404-ae78-4a438461c214)
 ![Screen Shot 2024-08-27 at 8 26 38 PM](https://github.com/user-attachments/assets/817472c2-9d74-4c69-babf-fc82d6e10a57)
