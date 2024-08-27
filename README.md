@@ -1,11 +1,34 @@
 # FinSera-Android
 ![Screen Shot 2024-08-27 at 5 26 08 PM](https://github.com/user-attachments/assets/251159b8-adb0-4175-b8c7-65d376e1ee4e)
 
-## Group Members :
+## Group Members (Android Team) :
 - Putra Ganda Dewata (Tech Lead)
 - Muhammad Ramadhan
 - Wisnu Aryo
 - Laila Dwi Latifa
+
+## How to try this app?
+Download the application from this [Releases](https://github.com/FinSera-SYNRGY7/FinSera-Android/releases/tag/pre-release) page.
+And the credential for login =
+Username : johndoe
+Password : password123
+Transaction PIN : 123456
+**Notes:**
+**Application PIN is created by user itself when user first login!**
+**Fingerprint Auth will be turned on automatically when user devices having fingerprint set.**
+**Use Transaction PIN to proceed transaction in Transfer Sesama Bank/Antar Bank/VA/E-Wallet/QRIS**
+
+## Features :
+- [x] Login + Create APP Pin + Fingerprint Authentication
+- [x] Transfer Sesama Bank
+- [x] Transfer Antar Bank
+- [x] Transaksi Virtual Account
+- [x] Transaksi E-Wallet (GoPay, OVO, ShopeePay, DANA, PayPal)
+- [x] Info Saldo
+- [x] Mutasi Rekening
+- [x] QRIS Merchant (semua merchant) dan sesama pengguna FinSera
+- [x] Daftar Tersimpan di semua transaksi (Transfer Antar/Sesama/VA/E-Wallet)
+- [x] Ganti PIN Aplikasi        
 
 ## Tech Stack
 - UI With Views (XML) and Material Design 3 (https://m3.material.io)
