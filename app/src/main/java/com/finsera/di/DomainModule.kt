@@ -8,6 +8,7 @@ import com.finsera.domain.usecase.auth.CheckLoggedInUseCase
 import com.finsera.domain.usecase.auth.CreateAppPinUseCase
 import com.finsera.domain.usecase.auth.GetProfilingUserUseCase
 import com.finsera.domain.usecase.auth.GetUserInfoUseCase
+import com.finsera.domain.usecase.auth.LoginAppFingerprintUseCase
 import com.finsera.domain.usecase.auth.LoginAppPinUserUseCase
 import com.finsera.domain.usecase.auth.LoginUserUseCase
 import com.finsera.domain.usecase.auth.LogoutUserUseCase
@@ -87,5 +88,6 @@ object DomainModule {
         factory { GetProfilingUserUseCase(get()) }
         factory { ChangeAppPinUseCase(get()) }
         factory { ChangeAppPinForgetUseCase(get()) }
+        factory { LoginAppFingerprintUseCase(get()) }
     }
 }

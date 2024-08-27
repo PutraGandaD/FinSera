@@ -80,7 +80,7 @@
                 android:id="@+id/et_password"
                 android:padding="16dp"
                 android:background="@drawable/edit_text_background_neutral5"
-                android:hint="Password Anda"
+                android:hint="Password Akun Anda"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -121,7 +121,7 @@
                 android:id="@+id/et_pin_baru"
                 android:padding="16dp"
                 android:background="@drawable/edit_text_background_neutral5"
-                android:hint="PIN Baru"
+                android:hint="PIN Aplikasi Baru"
                 android:inputType="numberPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -162,7 +162,7 @@
                 android:id="@+id/et_konfirmasi_pin_baru"
                 android:padding="16dp"
                 android:background="@drawable/edit_text_background_neutral5"
-                android:hint="Konfirmasi PIN Baru"
+                android:hint="Konfirmasi PIN Aplikasi Baru"
                 android:inputType="numberPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>

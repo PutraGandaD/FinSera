@@ -1,15 +1,24 @@
 package com.finsera.presentation.fragments.auth
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.accessibility.AccessibilityEvent
+import android.view.accessibility.AccessibilityManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -25,6 +34,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.navigation.koinNavGraphViewModel
+import java.util.concurrent.Executor
 
 class LoginPinFragment : Fragment() {
     private var _binding: FragmentLoginPinBinding? = null
@@ -44,11 +54,20 @@ class LoginPinFragment : Fragment() {
 
     private var hasAnnouncedScreen = false
 
+    // fingerprint
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
+
+    // vibrator
+    private lateinit var vibrator: Vibrator
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginPinBinding.inflate(inflater, container, false)
+        vibrator = requireActivity().getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         return binding.root
     }
 
@@ -56,9 +75,17 @@ class LoginPinFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         init()
+        initFingerprint()
         handleCustomKeyboard()
         observe()
         attachTextWatcher()
+
+        if(isBiometricSupported()) {
+            biometricPrompt.authenticate(promptInfo)
+            binding.btnFingerprint.visibility = View.VISIBLE
+        } else {
+            binding.btnFingerprint.visibility = View.INVISIBLE
+        }
 
         binding.btnGantiAkun.setOnClickListener {
             gantiAkun()
@@ -71,7 +98,7 @@ class LoginPinFragment : Fragment() {
         }
 
         if(!hasAnnouncedScreen) {
-            view.announceForAccessibility(binding.tvMasukkanPin.text)
+            view.announceForAccessibility("Login dengan PIN Aplikasi atau Sidik jari")
             hasAnnouncedScreen = true
         }
     }
@@ -79,6 +106,79 @@ class LoginPinFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initFingerprint() {
+        executor = ContextCompat.getMainExecutor(requireActivity())
+        biometricPrompt = BiometricPrompt(this, executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationError(errorCode: Int,
+                                                   errString: CharSequence) {
+                    super.onAuthenticationError(errorCode, errString)
+
+                    when(errorCode) {
+                        BiometricPrompt.ERROR_NEGATIVE_BUTTON -> {
+                            Toast.makeText(requireActivity(),
+                                "Silahkan Login dengan PIN Aplikasi anda.", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                        BiometricPrompt.ERROR_USER_CANCELED -> {
+                            Toast.makeText(requireActivity(),
+                                "Silahkan Login dengan PIN Aplikasi anda.", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                        BiometricPrompt.ERROR_CANCELED -> {
+                            Toast.makeText(requireActivity(),
+                                "Silahkan Login dengan PIN Aplikasi anda.", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                        BiometricPrompt.ERROR_LOCKOUT -> {
+                            Toast.makeText(requireActivity(),
+                                "Terlalu banyak upaya percobaan sidik jari. Silahkan login dengan PIN Aplikasi.", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                        else -> {
+                            Toast.makeText(requireActivity(),
+                                "Authentication error: $errString", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    }
+                }
+
+                override fun onAuthenticationSucceeded(
+                    result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+
+                    startVibration()
+                    loginPinViewModel.loginWithFingerprint()
+                }
+
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    Toast.makeText(requireActivity(), "Authentication failed",
+                        Toast.LENGTH_SHORT)
+                        .show()
+                }
+            })
+
+        promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Login dengan Sidik Jari Aplikasi FinSera")
+            .setSubtitle("Tempelkan jari anda ke sensor fingerprint di Handphone anda untuk login ke aplikasi FinSera.")
+            .setNegativeButtonText("Gunakan PIN Aplikasi")
+            .build()
+
+        // Announce the prompt for TalkBack
+        val accessibilityManager = requireContext().getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
+        accessibilityManager.sendAccessibilityEvent(AccessibilityEvent.obtain().apply {
+            eventType = AccessibilityEvent.TYPE_ANNOUNCEMENT
+            className = "androidx.biometric.BiometricPrompt"
+            packageName = requireContext().packageName
+            text.add("Login dengan Sidik Jari Aplikasi FinSera. Tempelkan jari anda ke sensor fingerprint.")
+        })
     }
 
     private fun gantiAkun() {
@@ -149,6 +249,14 @@ class LoginPinFragment : Fragment() {
         binding.btnPin9.setOnClickListener {
             currentFocusEditText.setText("9")
         }
+
+        binding.btnFingerprint.setOnClickListener {
+            it.announceForAccessibility(binding.btnFingerprint.contentDescription)
+            if(isBiometricSupported()) {
+                biometricPrompt.authenticate(promptInfo)
+            }
+        }
+
         binding.btnDeletePin.setOnClickListener {
             prevFilledEditText.setText("")
             it.announceForAccessibility("Hapus PIN")
@@ -237,7 +345,7 @@ class LoginPinFragment : Fragment() {
 
                     if(uiState.isPinCorrect) {
                         if(findNavController().currentDestination?.id == R.id.loginPinFragment) {
-                            Toast.makeText(requireActivity(), "Berhasil Login", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireActivity(), "Berhasil Login", Toast.LENGTH_LONG).show()
                             findNavController().navigate(R.id.action_loginPinFragment_to_homeFragment)
                         }
                     } else {
@@ -245,7 +353,7 @@ class LoginPinFragment : Fragment() {
                     }
 
                     if(uiState.isLoading) {
-                        binding.tvLoginStatus.text = "Sedang autentikasi PIN..."
+                        binding.tvLoginStatus.text = "Sedang mengautentikasi..."
                         view?.announceForAccessibility(binding.tvLoginStatus.text)
                         setInteractionDisabled(requireActivity(), true)
                     } else {
@@ -254,6 +362,38 @@ class LoginPinFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun isBiometricSupported(): Boolean {
+        val biometricManager = BiometricManager.from(requireActivity())
+        val canAuthenticate = biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)
+        when (canAuthenticate) {
+            BiometricManager.BIOMETRIC_SUCCESS -> {
+                // The user can authenticate with biometrics, continue with the authentication process
+                return true
+            }
+
+            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE, BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE, BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
+                // Handle the error cases as needed in your app
+                return false
+            }
+
+            else -> {
+                // Biometric status unknown or another error occurred
+                return false
+            }
+        }
+    }
+
+    private fun startVibration() {
+        val vibrationDuration = 1000L
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val vibrationEffect = VibrationEffect.createOneShot(vibrationDuration, VibrationEffect.DEFAULT_AMPLITUDE)
+            vibrator.vibrate(vibrationEffect)
+        } else {
+            vibrator.vibrate(vibrationDuration)
         }
     }
 
