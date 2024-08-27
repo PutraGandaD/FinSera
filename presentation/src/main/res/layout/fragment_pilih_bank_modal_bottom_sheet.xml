@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:backgroundTint="@android:color/white"
+    android:importantForAccessibility="no"
+    android:contentDescription="@string/desc_bank_option"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    tools:context=".fragments.transfer.antar_bank.bottomsheet.PilihBankModalBottomSheet">
+
+    <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+        android:id="@+id/drag_handle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp"/>
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Pilih_Bank"
+            android:textColor="@color/neutral_09"
+            android:textSize="24sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/btn_close_bottom_sheet"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_close_bottom_sheet"
+            android:contentDescription="@string/desc_close_bottom_sheet"
+            android:layout_centerInParent="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_cari_daftar_tersimpan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColorHint="@color/et_text_hint"
+        app:endIconMode="clear_text"
+        app:hintEnabled="false"
+        app:startIconDrawable="@drawable/ic_search_textfield"
+        app:startIconTint="@color/et_icon_tint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_textfield_background_2"
+            android:hint="@string/cari_bank"
+            android:inputType="text"
+            android:padding="12dp"
+            android:paddingStart="48dp"
+            android:textSize="16sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_listbank"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        tools:itemCount="4"
+        tools:listitem="@layout/daftar_tersimpan_item" />
+
+</LinearLayout>

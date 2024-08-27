@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="heading_1">32sp</dimen>
+    <dimen name="heading_2">28sp</dimen>
+    <dimen name="heading_3">26sp</dimen>
+    <dimen name="heading_4">24sp</dimen>
+    <dimen name="heading_5">20sp</dimen>
+    
+    <dimen name="body_text1">18sp</dimen>
+    <dimen name="body_text2">14sp</dimen>
+
+    <dimen name="button_1">18sp</dimen>
+    <dimen name="button_2">16sp</dimen>
+    <dimen name="button_3">14sp</dimen>
+
+    <dimen name="caption_1">14sp</dimen>
+    <dimen name="caption_2">12sp</dimen>
+    <dimen name="caption_3">10sp</dimen>
+
+    <dimen name="tv_pin_size">35sp</dimen>
+</resources>

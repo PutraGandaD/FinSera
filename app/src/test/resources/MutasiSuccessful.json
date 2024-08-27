@@ -1,0 +1,137 @@
+{
+  "code": 200,
+  "message": "Nomor Rekening ditemukan",
+  "status": true,
+  "data": [
+    {
+      "transactionId": 2837,
+      "transactionDate": "2024-08-26T02:39:51.694+00:00",
+      "noTransaction": "4297006432107953638",
+      "destinationNameAccountNumber": "Jane Smith",
+      "destinationBankName": "Bank Central Asia (BCA)",
+      "amountTransfer": {
+        "amount": 120000,
+        "currency": "IDR"
+      },
+      "transactionInformation": "UANG_KELUAR",
+      "transactionsType": "SESAMA_BANK"
+    },
+    {
+      "transactionId": 2836,
+      "transactionDate": "2024-08-26T02:38:58.212+00:00",
+      "noTransaction": "202408260938580002",
+      "destinationNameAccountNumber": "Mamat",
+      "destinationBankName": "PayPal",
+      "amountTransfer": {
+        "amount": 12500,
+        "currency": "IDR"
+      },
+      "transactionInformation": "UANG_KELUAR",
+      "transactionsType": "TOP_UP_EWALLET"
+    },
+    {
+      "transactionId": 2835,
+      "transactionDate": "2024-08-26T02:37:28.899+00:00",
+      "noTransaction": "202408260937280001",
+      "destinationNameAccountNumber": "Penyetan Jepun",
+      "destinationBankName": "Bank Central Asia (BCA)",
+      "amountTransfer": {
+        "amount": 30000,
+        "currency": "IDR"
+      },
+      "transactionInformation": "UANG_KELUAR",
+      "transactionsType": "VIRTUAL_ACCOUNT"
+    },
+    {
+      "transactionId": 2834,
+      "transactionDate": "2024-08-25T07:33:54.201+00:00",
+      "noTransaction": "202408251433540661",
+      "destinationNameAccountNumber": "Adi",
+      "destinationBankName": "Gopay",
+      "amountTransfer": {
+        "amount": 102500,
+        "currency": "IDR"
+      },
+      "transactionInformation": "UANG_KELUAR",
+      "transactionsType": "TOP_UP_EWALLET"
+    },
+    {
+      "transactionId": 2833,
+      "transactionDate": "2024-08-25T07:30:31.862+00:00",
+      "noTransaction": "202408251430310660",
+      "destinationNameAccountNumber": "Penyetan Jepun",
+      "destinationBankName": "Bank Central Asia (BCA)",
+      "amountTransfer": {
+        "amount": 30000,
+        "currency": "IDR"
+      },
+      "transactionInformation": "UANG_KELUAR",
+      "transactionsType": "VIRTUAL_ACCOUNT"
+    },
+    {
+      "transactionId": 2832,
+      "transactionDate": "2024-08-25T07:26:30.130+00:00",
+      "noTransaction": "7515056751458932472",
+      "destinationNameAccountNumber": "Ahmad",
+      "destinationBankName": "Bank Rakyat Indonesia (BRI)",
+      "amountTransfer": {
+        "amount": 12500,
+        "currency": "IDR"
+      },
+      "transactionInformation": "UANG_KELUAR",
+      "transactionsType": "ANTAR_BANK"
+    },
+    {
+      "transactionId": 2830,
+      "transactionDate": "2024-08-25T07:15:29.563+00:00",
+      "noTransaction": "206062503811311867",
+      "destinationNameAccountNumber": "Jane Smith",
+      "destinationBankName": "Bank Central Asia (BCA)",
+      "amountTransfer": {
+        "amount": 50000,
+        "currency": "IDR"
+      },
+      "transactionInformation": "UANG_KELUAR",
+      "transactionsType": "SESAMA_BANK"
+    },
+    {
+      "transactionId": 2829,
+      "transactionDate": "2024-08-25T05:29:55.021+00:00",
+      "noTransaction": "202408251229540659",
+      "destinationNameAccountNumber": "Ahmad",
+      "destinationBankName": "DANA",
+      "amountTransfer": {
+        "amount": 42500,
+        "currency": "IDR"
+      },
+      "transactionInformation": "UANG_KELUAR",
+      "transactionsType": "TOP_UP_EWALLET"
+    },
+    {
+      "transactionId": 2828,
+      "transactionDate": "2024-08-25T05:27:06.462+00:00",
+      "noTransaction": "202408251227060658",
+      "destinationNameAccountNumber": "Penyetan Jepun",
+      "destinationBankName": "Bank Central Asia (BCA)",
+      "amountTransfer": {
+        "amount": 30000,
+        "currency": "IDR"
+      },
+      "transactionInformation": "UANG_KELUAR",
+      "transactionsType": "VIRTUAL_ACCOUNT"
+    },
+    {
+      "transactionId": 2827,
+      "transactionDate": "2024-08-25T05:25:56.814+00:00",
+      "noTransaction": "8909039521126436217",
+      "destinationNameAccountNumber": "Ahmad",
+      "destinationBankName": "Bank Rakyat Indonesia (BRI)",
+      "amountTransfer": {
+        "amount": 52500,
+        "currency": "IDR"
+      },
+      "transactionInformation": "UANG_KELUAR",
+      "transactionsType": "ANTAR_BANK"
+    }
+  ]
+}

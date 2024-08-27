@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:contentDescription="@string/profile_card_description"
+    android:backgroundTint="@color/primary_blue"
+    app:cardCornerRadius="14dp"
+    android:focusable="true"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imgAkun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_profile"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            app:layout_constraintStart_toEndOf="@id/imgAkun"
+            app:layout_constraintTop_toTopOf="@id/imgAkun"
+            app:layout_constraintBottom_toBottomOf="@id/imgAkun">
+
+            <TextView
+                android:id="@+id/tv_nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ramadhan_adi"
+                android:textSize="20sp"
+                android:textFontWeight="700"
+                android:textColor="@color/neutral_01"
+                android:lineHeight="28dp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:id="@+id/tv_rekening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/account_number_value"
+                    android:textColor="@color/neutral_01"
+                    android:textSize="16sp"/>
+
+                <ImageButton
+                    android:id="@+id/btn_copy"
+                    android:layout_marginStart="16dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/tv_talkback_salin_norek"
+                    android:src="@drawable/ic_copy"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/imgAkun"
+            app:layout_constraintBottom_toBottomOf="@id/imgAkun"
+            android:src="@drawable/ic_back_button"
+            android:rotation="180"
+            app:tint="@color/neutral_01" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

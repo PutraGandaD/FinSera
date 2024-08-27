@@ -2,6 +2,8 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     kotlin("kapt")
 }
 
@@ -41,8 +43,14 @@ android {
 }
 
 dependencies {
+    implementation(project(":common"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":presentation"))
+
     val lifecycle_version = "2.7.0"
     val koin_version = "3.5.6"
+    val room_version = "2.6.1"
 
     // ViewModel
     //noinspection GradleDependency
@@ -59,6 +67,7 @@ dependencies {
     // Lifecycle utilities for Compose
     //noinspection GradleDependency
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.4")
 
     // Saved state module for ViewModel
     //noinspection GradleDependency
@@ -84,18 +93,6 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
-    // Glide
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-
-    // CircleImageView
-    implementation("de.hdodenhof:circleimageview:3.1.0")
-
-    // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
-
-    // Facebook Shimmer Loading
-    implementation("com.facebook.shimmer:shimmer:0.5.0")
-
     // Koin (Dependency Injection)
     // Declare koin-bom version
     implementation(platform("io.insert-koin:koin-bom:$koin_version"))
@@ -104,6 +101,7 @@ dependencies {
     implementation("io.insert-koin:koin-android")
     implementation("io.insert-koin:koin-core-coroutines")
     implementation("io.insert-koin:koin-androidx-workmanager")
+    implementation("io.insert-koin:koin-androidx-navigation")
 
     // Play Store Services Dependencies
     implementation("com.google.android.gms:play-services-location:21.3.0")
@@ -115,4 +113,23 @@ dependencies {
     // Chucker
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+
+    // Room Database
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
+
+    // mock web server
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
+    testImplementation("com.google.truth:truth:1.4.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0-RC")
+
+    // firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-perf")
+
+    // fingerprint
+    implementation("androidx.biometric:biometric:1.1.0")
 }

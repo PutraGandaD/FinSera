@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_info_rekening"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="18dp">
+
+        <ImageView
+            android:id="@+id/ic_bank"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_bca_labeled_colored_logo"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="@id/tv_nama_penerima"
+            app:layout_constraintBottom_toBottomOf="@id/tv_no_rekening"
+            app:layout_constraintEnd_toStartOf="@id/tv_nama_penerima"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_nama_penerima"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Budhi Darma"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_12sdp"
+            app:layout_constraintStart_toEndOf="@id/ic_bank"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_nama_bank"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Bank BCA"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tv_nama_penerima"
+            app:layout_constraintTop_toBottomOf="@id/tv_nama_penerima"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_no_rekening"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="4257618919999"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tv_nama_bank"
+            app:layout_constraintTop_toBottomOf="@id/tv_nama_bank"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/primary_blue"
+    app:cardCornerRadius="14dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_done" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@string/transaksi_berhasil"
+            android:text="@string/transaksi_berhasil"
+            android:textColor="@color/neutral_01"
+            android:textSize="24sp" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_tanggal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/tanggal"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/example_date"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:textFontWeight="700"
+                android:id="@+id/tv_date"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_nominal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/nominal"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/example_nominal"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:textFontWeight="700"
+                android:id="@+id/tv_nominal"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_biaya_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/biaya_admin"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/example_biaya_admin"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:textFontWeight="700"
+                android:id="@+id/tv_biaya_admin"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_no_transaksi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/nomor_transaksi"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/example_nomor_transaksi"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:textFontWeight="700"
+                android:id="@+id/tv_nomor_transaksi"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_nama_pengirim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="29dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/nama_pengirim"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_nama_pengirim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:importantForAccessibility="no"
+                android:text="@string/nama"
+                android:textColor="@color/neutral_01"
+                android:textFontWeight="700"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_rekening_pengirim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/rekening_pengirim"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_rekening_pengirim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/account_number_value"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:textFontWeight="700" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_bank_tujuan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <TextView
+                android:id="@+id/tv_bank_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/bank_tujuan"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/example_bank"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:textFontWeight="700"
+                android:id="@+id/tv_bank_tujuan"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_nama_penerima"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <TextView
+                android:id="@+id/tv_penerima_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/nama_penerima"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/example_nama_penerima"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:textFontWeight="700"
+                android:id="@+id/tv_nama_penerima"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_rekening_tujuan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <TextView
+                android:id="@+id/tv_rekening_tujuan_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/rekening_tujuan"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/example_rekening_tujuan"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:textFontWeight="700"
+                android:id="@+id/tv_rekening_tujuan"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_catatan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/catatan"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="@string/example_catatan"
+                android:textColor="@color/neutral_01"
+                android:textSize="16sp"
+                android:layout_alignParentEnd="true"
+                android:textFontWeight="700"
+                android:id="@+id/tv_catatan"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_download"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/neutral_01"
+                android:text="@string/download"
+                android:contentDescription="@string/download"
+                android:textSize="@dimen/button_2"
+                android:textColor="@color/neutral_09"
+                app:cornerRadius="8dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_share"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:backgroundTint="@color/neutral_01"
+                android:contentDescription="@string/bagikan"
+                android:text="@string/share"
+                android:textColor="@color/neutral_09"
+                android:textSize="@dimen/button_2"
+                app:cornerRadius="8dp"
+                app:icon="@drawable/ic_share"
+                app:iconGravity="textStart"
+                app:iconTint="@color/neutral_09" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="20dp"
+            android:id="@+id/btn_back_to_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/neutral_01"
+            android:text="@string/kembali_ke_menu"
+            android:contentDescription="@string/kembali_ke_menu"
+            android:textSize="20sp"
+            android:textColor="@color/neutral_09"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

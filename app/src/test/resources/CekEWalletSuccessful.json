@@ -1,0 +1,11 @@
+{
+  "code": 200,
+  "message": "Akun e-wallet ditemukan",
+  "status": true,
+  "data": {
+    "ewalletName": "DANA",
+    "ewalletAccountId": 1,
+    "ewalletAccount": "089123123123",
+    "ewalletAccountName": "Ahmad"
+  }
+}

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:importantForAccessibility="no"
+    android:padding="20dp"
+    tools:context=".fragments.topup.ewallet.TransferEWalletForm">
+
+
+    <RelativeLayout
+        android:id="@+id/topmenu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:contentDescription="@string/back"
+            android:importantForAccessibility="yes"
+            android:src="@drawable/ic_back_button"
+            android:layout_marginStart="12dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/tv_title_isi_e_wallet"
+            android:importantForAccessibility="yes"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_18ssp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/anchor_shadow_topmenu"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shadow_bottom_navbar"
+        app:layout_constraintTop_toBottomOf="@id/topmenu"/>
+
+
+    <include
+        android:id="@+id/e_wallet_item"
+        layout="@layout/ewallet_form_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/gopay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/anchor_shadow_topmenu" />
+
+    <LinearLayout
+        android:id="@+id/layoutbanktujuan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/e_wallet_item">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/desc_input_no_hp"
+            android:text="@string/tv_no_handphone"
+            android:textColor="@color/neutral_09"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/nomorEWalletEditText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edit_text_background_neutral5"
+            android:contentDescription="@string/input_nomor_handphone"
+            android:gravity="center_vertical"
+            android:hint="@string/no_handphone"
+            android:paddingHorizontal="16dp"
+            android:singleLine="true" />
+
+        <LinearLayout
+            android:id="@+id/ll_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/desc_simpan_ke_daftar_tersimpan"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_save"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/simpan_ke_daftar_tersimpan"
+                android:importantForAccessibility="no"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_lanjut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_background_primary"
+            android:contentDescription="@string/lanjut"
+            android:text="@string/lanjut"
+            android:textSize="20sp"
+            app:backgroundTint="@color/primary_blue" />
+
+        <ProgressBar
+            style="?android:progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </ViewFlipper>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

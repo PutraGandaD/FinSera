@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "177106170940",
+    "project_id": "finsera-a5487",
+    "storage_bucket": "finsera-a5487.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177106170940:android:a79ca459f8b9bfc73c7f39",
+        "android_client_info": {
+          "package_name": "com.finsera"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGAPBGWmmbNG6oKbSZf87YcUHJmew0tAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

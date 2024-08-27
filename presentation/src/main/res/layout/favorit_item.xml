@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp"
+    app:strokeWidth="0dp"
+    app:strokeColor="@android:color/transparent"
+    app:cardElevation="0dp"
+    android:backgroundTint="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/img_item_logo"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_bca_labeled_colored_logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_daftartersimpan_namapemilik"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/calibri_font_family"
+            android:text="Nama Pemilik Rekening"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_item_logo"
+            app:layout_constraintTop_toTopOf="@+id/img_item_logo" />
+
+        <TextView
+            android:id="@+id/tv_daftartersimpan_norekening"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="1234567890"
+            android:textColor="@color/neutral_09"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_daftartersimpan_namapemilik"
+            app:layout_constraintStart_toStartOf="@+id/tv_daftartersimpan_namapemilik"
+            app:layout_constraintTop_toBottomOf="@+id/tv_daftartersimpan_namapemilik" />
+
+        <ImageButton
+            android:id="@+id/btn_delete_favorititem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete_favorit"
+            android:backgroundTint="@android:color/white"
+            android:contentDescription="@string/delete_list_desc"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
