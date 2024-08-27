@@ -130,6 +130,9 @@ dependencies {
     implementation("com.google.guava:guava:33.3.0-android")
 
     // zxing barcode
-    implementation("com.journeyapps:zxing-android-embedded:4.3.0") 
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
+
+    // fingerprint
+    implementation("androidx.biometric:biometric:1.1.0")
 
 }
