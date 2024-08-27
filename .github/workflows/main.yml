@@ -32,17 +32,14 @@ jobs:
           echo $ENCODED_STRING > keystore-b64.txt
           base64 -d keystore-b64.txt > keystore.jks
 
-      - name: Build Unsigned APK Debug with Gradle
-        run: ./gradlew assembleDebug
-
-      - name: Build Signed Android Bundle (.aab) 
+      - name: Build Signed Android APK (.apk) 
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
           SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
         run: ./gradlew assembleDebug
 
-      - name: Build Android Bundle (.aab) 
+      - name: Build Signed Android Bundle (.aab) 
         env:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
