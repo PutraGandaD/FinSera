@@ -40,6 +40,7 @@ Transaction PIN : 123456 <br>
 - Using Shared Preferences for saving local constant data (Access/Refresh Token, Login State, etc)
 - Using Room Database for storing local database (Daftar Tersimpan)
 - Using AndroidX Biometric library for backward compability from Android M (6.0) to Android 10
+- Using CameraX and MLKit by Google for scanning QR Code (QRIS)
 - Using Retrofit for API Connectivity in the app
 - Using Chucker for debugging API Request
 - Using JUnit4 and Mock Web Server for Unit Tests
