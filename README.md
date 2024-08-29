@@ -13,6 +13,18 @@ And the credential for login = <br>
 Username : johndoe <br>
 Password : password123 <br>
 Transaction PIN : 123456 <br>
+
+Data for trying transaction : <br>
+**E-Wallet** <br>
+Dana <br>
+Account No. : 089123123123 <br>
+**Virtual Account** <br>
+Account No . : 123456789 <br>
+**Transfer Sesama Bank** <br>
+Account No. : 987654321 <br>
+**Transfer Antar Bank** <br>
+Account No. : 789012345 <br>
+<br>
 **Notes:** <br>
 **Application PIN is created by user itself when user first login!** <br>
 **Fingerprint Auth will be turned on automatically when user devices having fingerprint set.** <br>
