@@ -34,16 +34,17 @@ Account No. : 789012345 <br>
 | Login  | Buat PIN Aplikasi | Login With Fingerprint | Login with PIN |
 | ------------- | ------------- | ------------ | ------------- |
 | <img src="https://github.com/user-attachments/assets/a4e9a6a1-2cde-4007-b43a-5f0079b6d279" width="200"/> | <img src="https://github.com/user-attachments/assets/e58642c9-b372-4c47-81f5-7f5a347419bf" width="200"/> | <img src="https://github.com/user-attachments/assets/824ce54c-c805-4fb8-9b94-fec612d0744c" width="200"/> | <img src="https://github.com/user-attachments/assets/1f13ed0d-e3ed-4959-a5eb-3ee5df97fa66" width="200"/> |
-<br>
+
+| Home Screen  | Home Screen (Saldo Visible) | Notifikasi | Logout Dialog |
+| ------------- | ------------- | ------------ | ------------- |
+| <img src="![screenshot-2024-09-14_00 27 22 376](https://github.com/user-attachments/assets/36f18fcc-b8da-41c2-9fb8-ca98344234dd)" width="200"/> |  <img src="![screenshot-2024-09-14_00 31 51 47](https://github.com/user-attachments/assets/ca440430-3375-4708-bd89-c79c9a9f164a)" width="200"/>  |   <img src="![screenshot-2024-09-14_00 32 00 191](https://github.com/user-attachments/assets/01916576-49c7-457a-970a-7416f593e817)" width="200"/>
+ |<img src=" ![screenshot-2024-09-14_00 33 46 473](https://github.com/user-attachments/assets/90626c1c-bf17-4811-856e-414d648bd0a0)" width="200"/> |
+
 | First Header  | Second Header | Third Header | Fourth Header |
 | ------------- | ------------- | ------------ | ------------- |
 | Content Cell  | Content Cell  | Content Cell | Content Cell  |
-<br>
-| First Header  | Second Header | Third Header | Fourth Header |
-| ------------- | ------------- | ------------ | ------------- |
 | Content Cell  | Content Cell  | Content Cell | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell | Content Cell  |
-<br>
+
 | First Header  | Second Header | Third Header | Fourth Header |
 | ------------- | ------------- | ------------ | ------------- |
 | Content Cell  | Content Cell  | Content Cell | Content Cell  |
