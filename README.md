@@ -1,4 +1,4 @@
-# FinSera-Android
+![screenshot-2024-09-14_00 34 04 006](https://github.com/user-attachments/assets/74cb83ad-f216-42ed-8bdf-8e9667a161a3)# FinSera-Android
 ![Screen Shot 2024-08-27 at 5 26 08 PM](https://github.com/user-attachments/assets/251159b8-adb0-4175-b8c7-65d376e1ee4e)
 
 ## Group Members (Android Team) :
@@ -31,18 +31,19 @@ Account No. : 789012345 <br>
 **Use Transaction PIN to proceed transaction in Transfer Sesama Bank/Antar Bank/VA/E-Wallet/QRIS** <br>
 
 ## App Screenshot
+| Login  | Buat PIN Aplikasi | Login With Fingerprint | Login with PIN |
+| ------------- | ------------- | ------------ | ------------- |
+| ![screenshot-2024-09-14_00 34 04 006](https://github.com/user-attachments/assets/a4e9a6a1-2cde-4007-b43a-5f0079b6d279) | Content Cell  | Content Cell | Content Cell  |
+<br>
+| First Header  | Second Header | Third Header | Fourth Header |
+| ------------- | ------------- | ------------ | ------------- |
+| Content Cell  | Content Cell  | Content Cell | Content Cell  |
+<br>
 | First Header  | Second Header | Third Header | Fourth Header |
 | ------------- | ------------- | ------------ | ------------- |
 | Content Cell  | Content Cell  | Content Cell | Content Cell  |
 | Content Cell  | Content Cell  | Content Cell | Content Cell  |
-| First Header  | Second Header | Third Header | Fourth Header |
-| ------------- | ------------- | ------------ | ------------- |
-| Content Cell  | Content Cell  | Content Cell | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell | Content Cell  |
-| First Header  | Second Header | Third Header | Fourth Header |
-| ------------- | ------------- | ------------ | ------------- |
-| Content Cell  | Content Cell  | Content Cell | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell | Content Cell  |
+<br>
 | First Header  | Second Header | Third Header | Fourth Header |
 | ------------- | ------------- | ------------ | ------------- |
 | Content Cell  | Content Cell  | Content Cell | Content Cell  |
