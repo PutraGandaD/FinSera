@@ -33,7 +33,7 @@ Account No. : 789012345 <br>
 ## App Screenshot
 | Login  | Buat PIN Aplikasi | Login With Fingerprint | Login with PIN |
 | ------------- | ------------- | ------------ | ------------- |
-| <img src="https://github.com/user-attachments/assets/a4e9a6a1-2cde-4007-b43a-5f0079b6d279" width="150"/> | <img src="https://github.com/user-attachments/assets/e58642c9-b372-4c47-81f5-7f5a347419bf" width="150"/> | <img src="https://github.com/user-attachments/assets/824ce54c-c805-4fb8-9b94-fec612d0744c" width="150"/> | <img src="https://github.com/user-attachments/assets/1f13ed0d-e3ed-4959-a5eb-3ee5df97fa66" width="150"/> |
+| <img src="https://github.com/user-attachments/assets/a4e9a6a1-2cde-4007-b43a-5f0079b6d279" width="200"/> | <img src="https://github.com/user-attachments/assets/e58642c9-b372-4c47-81f5-7f5a347419bf" width="200"/> | <img src="https://github.com/user-attachments/assets/824ce54c-c805-4fb8-9b94-fec612d0744c" width="200"/> | <img src="https://github.com/user-attachments/assets/1f13ed0d-e3ed-4959-a5eb-3ee5df97fa66" width="200"/> |
 <br>
 | First Header  | Second Header | Third Header | Fourth Header |
 | ------------- | ------------- | ------------ | ------------- |
