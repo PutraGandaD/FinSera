@@ -44,24 +44,23 @@ Account No. : 789012345 <br>
 
 | Transfer Sesama Bank  | Input Transfer Sesama Bank | Transaksi Berhasil Screen | Pilih Bank Transfer Antar Bank |
 | ------------- | ------------- | ------------ | ------------- |
-| Content Cell  | Content Cell  | Content Cell | Content Cell  |
-| Content Cell  | Content Cell  | Content Cell | Content Cell  |
+| <img src="https://github.com/user-attachments/assets/42643020-b3ed-42dd-a4b3-6550917efdd0" width="200"/> | <img src="https://github.com/user-attachments/assets/e876b931-dc11-4549-8932-ee5a2891bebb" width="200"/> | <img src="https://github.com/user-attachments/assets/687bb42e-3b1e-4ff3-bfbf-e26a563b4214" width="200"/> | <img src="https://github.com/user-attachments/assets/e69cd6b7-0f1c-453a-85bb-5b18ef3f89c2" width="200"/> |
 
-| Virtual Account | Topup E Wallet Selection | Topup E Wallet Selected | Informasi Saldo Menu |
+| Virtual Account | Topup E Wallet Selection | Topup E Wallet Selected | Informasi Saldo Screen |
 | ------------- | ------------- | ------------ | ------------- |
-| Content Cell  | Content Cell  | Content Cell | Content Cell  |
+| <img src="https://github.com/user-attachments/assets/efba4189-49d7-43f4-b4e9-9e1e9c392328" width="200"/> | <img src="https://github.com/user-attachments/assets/70ca6261-3a57-4c0f-af3d-198c74de6b52" width="200"/> | <img src="https://github.com/user-attachments/assets/bf3c046e-3c4f-4bd1-9463-c519a56ed435" width="200"/> | <img src="https://github.com/user-attachments/assets/11517d03-a022-43df-894e-35c472d278f8" width="200"/> |
 
 | Mutasi Bank Initial Screen | Mutasi Bank Date Slider | Mutasi Bank Result | Scan QRIS |
 | ------------- | ------------- | ------------ | ------------- |
-| Content Cell  | Content Cell  | Content Cell | Content Cell  |
+| <img src="https://github.com/user-attachments/assets/a80bafd8-8c4f-4689-bef0-22a6997216c1" width="200"/> | <img src="https://github.com/user-attachments/assets/5cff59c9-ff4c-4311-8220-cd9df9522a3c" width="200"/> | <img src="https://github.com/user-attachments/assets/f3e62a31-6d96-4efa-874d-75f87af2dd9d" width="200"/> | <img src="https://github.com/user-attachments/assets/85eae8bc-153d-4784-9650-ee12fe4f888d" width="200"/> |
 
 | Share QRIS | Daftar Favorit | Akun Screen | Info Akun Screen |
 | ------------- | ------------- | ------------ | ------------- |
-| Content Cell  | Content Cell  | Content Cell | Content Cell  |
+| <img src="https://github.com/user-attachments/assets/1e3be37b-6e75-4327-b3f8-4acb0c73fdc1" width="200"/> | <img src="https://github.com/user-attachments/assets/4c7c512f-14ed-4656-a20f-664d593aecbf" width="200"/> | <img src="https://github.com/user-attachments/assets/f07f17f7-e587-4b20-beb2-16bdd2c6bebe" width="200"/> | <img src="https://github.com/user-attachments/assets/265e3ba7-8237-494d-93df-362f37eb6d67" width="200"/> |
 
-| Ganti PIN Aplikasi | 
-| ------------- | 
-| Content Cell  | 
+| Ganti PIN Aplikasi |
+| ------------- |
+| <img src="https://github.com/user-attachments/assets/0c9cdeae-eb26-4689-bd71-7f22240f4527" width="200"/> |
   
 </details>
 
