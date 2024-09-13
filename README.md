@@ -1,6 +1,15 @@
 # FinSera-Android
 ![Screen Shot 2024-08-27 at 5 26 08 PM](https://github.com/user-attachments/assets/251159b8-adb0-4175-b8c7-65d376e1ee4e)
 
+## Details
+This project is for Final Project SYNRGY Academy Batch 7, in collaboration from Android, FSW, Backend Java, PM, UI/UX, and QA Team, with theme of "Accessibility Banking App".
+
+## Tech Stack
+Android : https://github.com/FinSera-SYNRGY7/FinSera-Android <br>
+FSW : https://github.com/FinSera-SYNRGY7/FinSera-FSW-FE <br>
+Backend Java : https://github.com/FinSera-SYNRGY7/FinSera-BEJ <br>
+QA : https://github.com/FinSera-SYNRGY7/Finsera-QA-Android 
+
 ## Group Members (Android Team) :
 - Putra Ganda Dewata (Tech Lead)
 - Muhammad Ramadhan
@@ -82,6 +91,7 @@ Account No. : 789012345 <br>
 - Implemented Dependency Injection (Koin)
 - With Reactive Programming Approach (with StateFlow, Kotlin Flow, Coroutines, UI State, etc...)
 - Single Activity Approach with multiple Fragments
+- TalkBack implementation in layout and code for specific use cases
 - Using Android Jetpack Navigation Component for Navigation between Fragments
 - Using Shared Preferences for saving local constant data (Access/Refresh Token, Login State, etc)
 - Using Room Database for storing local database (Daftar Tersimpan)
