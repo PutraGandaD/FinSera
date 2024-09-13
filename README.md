@@ -39,15 +39,26 @@ Account No. : 789012345 <br>
 | ------------- | ------------- | ------------ | ------------- |
 | <img src="https://github.com/user-attachments/assets/36f18fcc-b8da-41c2-9fb8-ca98344234dd" width="200"/> | <img src="https://github.com/user-attachments/assets/ca440430-3375-4708-bd89-c79c9a9f164a" width="200"/>  | <img src="https://github.com/user-attachments/assets/01916576-49c7-457a-970a-7416f593e817" width="200"/> | <img src="https://github.com/user-attachments/assets/90626c1c-bf17-4811-856e-414d648bd0a0" width="200"/> |
 
-| First Header  | Second Header | Third Header | Fourth Header |
+| Transfer Sesama Bank  | Input Transfer Sesama Bank | Transaksi Berhasil Screen | Pilih Bank Transfer Antar Bank |
 | ------------- | ------------- | ------------ | ------------- |
 | Content Cell  | Content Cell  | Content Cell | Content Cell  |
 | Content Cell  | Content Cell  | Content Cell | Content Cell  |
 
-| First Header  | Second Header | Third Header | Fourth Header |
+| Virtual Account | Topup E Wallet Selection | Topup E Wallet Selected | Informasi Saldo Menu |
 | ------------- | ------------- | ------------ | ------------- |
 | Content Cell  | Content Cell  | Content Cell | Content Cell  |
+
+| Mutasi Bank Initial Screen | Mutasi Bank Date Slider | Mutasi Bank Result | Scan QRIS |
+| ------------- | ------------- | ------------ | ------------- |
 | Content Cell  | Content Cell  | Content Cell | Content Cell  |
+
+| Share QRIS | Daftar Favorit | Akun Screen | Info Akun Screen |
+| ------------- | ------------- | ------------ | ------------- |
+| Content Cell  | Content Cell  | Content Cell | Content Cell  |
+
+| Ganti PIN Aplikasi | 
+| ------------- | 
+| Content Cell  | 
 
 ## Features :
 - [x] Login + Create APP Pin + Fingerprint Authentication
