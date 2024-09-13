@@ -37,8 +37,7 @@ Account No. : 789012345 <br>
 
 | Home Screen  | Home Screen (Saldo Visible) | Notifikasi | Logout Dialog |
 | ------------- | ------------- | ------------ | ------------- |
-| <img src="https://github.com/user-attachments/assets/36f18fcc-b8da-41c2-9fb8-ca98344234dd" width="200"/> |  <img src="https://github.com/user-attachments/assets/ca440430-3375-4708-bd89-c79c9a9f164a" width="200"/>  |   <img src="https://github.com/user-attachments/assets/01916576-49c7-457a-970a-7416f593e817" width="200"/>
- |<img src="https://github.com/user-attachments/assets/90626c1c-bf17-4811-856e-414d648bd0a0" width="200"/> |
+| <img src="https://github.com/user-attachments/assets/36f18fcc-b8da-41c2-9fb8-ca98344234dd" width="200"/> | <img src="https://github.com/user-attachments/assets/ca440430-3375-4708-bd89-c79c9a9f164a" width="200"/>  | <img src="https://github.com/user-attachments/assets/01916576-49c7-457a-970a-7416f593e817" width="200"/> | <img src="https://github.com/user-attachments/assets/90626c1c-bf17-4811-856e-414d648bd0a0" width="200"/> |
 
 | First Header  | Second Header | Third Header | Fourth Header |
 | ------------- | ------------- | ------------ | ------------- |
@@ -92,6 +91,6 @@ https://github.com/FinSera-SYNRGY7/FinSera-Android/commit/aa9af205a2b41101f224c4
 ![Screen Shot 2024-08-27 at 8 25 55 PM](https://github.com/user-attachments/assets/c37ab59d-ba1b-4404-ae78-4a438461c214)
 ![Screen Shot 2024-08-27 at 8 26 38 PM](https://github.com/user-attachments/assets/817472c2-9d74-4c69-babf-fc82d6e10a57)
 
-## WIP
+## Work In Progress / Future Improvements
 - [ ] Cleanup data layer
 - [ ] Paging3 Implementation for fetching Mutasi 
