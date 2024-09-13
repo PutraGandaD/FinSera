@@ -1,5 +1,4 @@
 # FinSera-Android
-![screenshot-2024-09-14_00 34 04 006](https://github.com/user-attachments/assets/74cb83ad-f216-42ed-8bdf-8e9667a161a3)
 ![Screen Shot 2024-08-27 at 5 26 08 PM](https://github.com/user-attachments/assets/251159b8-adb0-4175-b8c7-65d376e1ee4e)
 
 ## Group Members (Android Team) :
